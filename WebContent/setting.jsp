@@ -16,6 +16,10 @@
 	<c:set var="str_title" value="글제목"/>
 	<c:set var="str_writer" value="작성자"/>
 	<c:set var="str_reviewDate" value="작성일"/>
+	<c:set var="str_writeReview" value="Reveiw 작성하기"/>
+	<c:set var="str_score" value="평점"/>
+	<c:set var="str_content" value="내용"/>
+	<c:set var="str_uploading" value="이미지 첨부"/>
 	
 	
 	
@@ -23,7 +27,9 @@
 	
 	
 	<!-- Button -->
-	
+	<c:set var="btn_write" value="작성"/>
+	<c:set var="btn_list" value="목록"/>
+	<c:set var="btn_cancel" value="취소"/>
 	
 	
 	
