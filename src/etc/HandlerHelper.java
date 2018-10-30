@@ -58,6 +58,7 @@ public class HandlerHelper {
 		map.put("end", new Integer(end).toString());
 		return map;
 	}
+
 	public String[] makeProductCode( int[] colors, int[] sizes ,int ref) {
 
 		System.out.println(colors.length);
@@ -84,6 +85,7 @@ public class HandlerHelper {
 		String[] color = { "WH", "BK", "RD", "OR", "YL", "GN", "BL", "SK", "NV", "PP", "BR", "GR", "BG", "PK" };
 		return color;
 	}
+
 	public int[] decodeColorCode(List<ProductDataBean> productList) {
 		int[] results = new int[productList.size()];
 		String[] color = colorArr();
@@ -100,6 +102,7 @@ public class HandlerHelper {
 		System.out.println("color : "+colors[i]);
 		return colors;
 	}
+
 	public int[] decodeSizeCode(List<ProductDataBean> productList) {
 		int[] results = new int[productList.size()];
 		String[] size = { "SS", "MM", "LL", "XL", "FR" };
@@ -158,7 +161,7 @@ public class HandlerHelper {
 		return sizes;
 	}
 	//////////////////////////////////////////// ### 1 FROM HERE /////////////////////////////////////////////////////
-	//리스?��?�� ?���? ?��미�? ?��?��주는 메소?��
+
 	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
 		ProductDao dao = new ProductDao();
 		int count = dao.getSearchCount(searchWord);
@@ -183,7 +186,7 @@ public class HandlerHelper {
 		map.put("searchWord", searchWord);
 		map.put("selectedColors", selectedColors);
 
-		// productList�� �� ���������? ������ �Ǹ�
+
 		List<ProductDataBean> productList = dao.getColorSearchList(map);
 		List<ImageInfoDataBean> imgList = new ArrayList<ImageInfoDataBean>();
 		for(int i = 0 ; i<productList.size(); i++) {	
@@ -196,7 +199,7 @@ public class HandlerHelper {
 	}
 
 	//////////////////////////////////////////// ### 1 TO HERE /////////////////////////////////////////////////////
-	//insert�? txt?��?�� 만들?��주는 메소?��
+
 	public void fileWriter(String sql) {
         File file = new File("C:/ExpertJava/start.txt");
 
@@ -209,6 +212,7 @@ public class HandlerHelper {
 	        pw.close();
 	        fw.close();
 	        } catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
