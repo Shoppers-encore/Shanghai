@@ -32,4 +32,3 @@ public class ChatDataBean {
 		this.chatDate = chatDate;
 	}
 }
-//dvdavsadcasdccscscscsscc

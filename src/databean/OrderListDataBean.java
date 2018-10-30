@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class OrderListDataBean {
 	private int orderCode;
 	private String productCode;
-	//jsp파일에서 productName보여주는 경우가 발생하므로 추가
 	private String productName;
 	private String id;
 	private String orderZipcode;
