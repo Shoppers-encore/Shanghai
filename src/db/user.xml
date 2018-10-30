@@ -2,6 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userOrder">
-
+<mapper namespace="User">
+	<select id="getProductCount" resultType="int">
+		SELECT count(*) FROM jk_product
+	</select>
+	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r&gt;=TO_NUMBER(#{start}) AND r&lt;=TO_NUMBER(#{end})
+	</select>
 </mapper>
