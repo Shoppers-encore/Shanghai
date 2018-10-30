@@ -17,7 +17,6 @@
 	<c:set var="str_title" value="글제목"/>
 	<c:set var="str_writer" value="작성자"/>
 	<c:set var="str_reviewDate" value="작성일"/>
- 	<c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 	
 	
 	
