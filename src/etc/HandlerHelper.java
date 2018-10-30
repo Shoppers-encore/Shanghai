@@ -16,7 +16,6 @@ import databean.ProductDataBean;
 import db.ProductDao;
 
 public class HandlerHelper {
-	//게시?�� 리스?��?�� �??��?? 카운?�� 계산?��
 	public Map<String, String> makeCount(int count, HttpServletRequest request) {
 		int pageSize = 12;
 		int pageBlock = 5;
@@ -59,7 +58,7 @@ public class HandlerHelper {
 		map.put("end", new Integer(end).toString());
 		return map;
 	}
-	//?��?���? 종류�? GoodCode ?��?��?��?�� 메소?��
+
 	public String[] makeProductCode( int[] colors, int[] sizes ,int ref) {
 
 		System.out.println(colors.length);
@@ -86,7 +85,7 @@ public class HandlerHelper {
 		String[] color = { "WH", "BK", "RD", "OR", "YL", "GN", "BL", "SK", "NV", "PP", "BR", "GR", "BG", "PK" };
 		return color;
 	}
-	//?��?�� �??�� 코드 분해 메소?��
+
 	public int[] decodeColorCode(List<ProductDataBean> productList) {
 		int[] results = new int[productList.size()];
 		String[] color = colorArr();
@@ -103,7 +102,7 @@ public class HandlerHelper {
 		System.out.println("color : "+colors[i]);
 		return colors;
 	}
-	//?��?��즈에 �??�� 코드 분해 메소?��
+
 	public int[] decodeSizeCode(List<ProductDataBean> productList) {
 		int[] results = new int[productList.size()];
 		String[] size = { "SS", "MM", "LL", "XL", "FR" };
@@ -120,7 +119,7 @@ public class HandlerHelper {
 		System.out.println("size : " +sizes[i]);
 		return sizes;
 	}
-	//중복?�� 코드?�� 중복 ?��거하?�� 메소?��
+
 	public int[] removeDuplicate(int[] numbers){
 		List<Integer> resultList = new ArrayList<Integer>();
 		for(int i=0; i<numbers.length ; i++) {
@@ -162,7 +161,7 @@ public class HandlerHelper {
 		return sizes;
 	}
 	//////////////////////////////////////////// ### 1 FROM HERE /////////////////////////////////////////////////////
-	//리스?��?�� ?���? ?��미�? ?��?��주는 메소?��
+
 	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
 		ProductDao dao = new ProductDao();
 		int count = dao.getSearchCount(searchWord);
@@ -178,7 +177,7 @@ public class HandlerHelper {
 		request.setAttribute("goods", productList);
 		request.setAttribute("imageList",imgList);
 	}
-	//�??��?�� 결과�? 리스?��?�� 결과�? ?��?��주는 메소?��
+
 	public void getGoodImage(HttpServletRequest request, String searchWord, String selectedColors) {	// OVERRIDNG METHOD FOR PRODUCT NAME + COLOR SEARCH
 		ProductDao dao = new ProductDao();
 		
@@ -187,7 +186,7 @@ public class HandlerHelper {
 		map.put("searchWord", searchWord);
 		map.put("selectedColors", selectedColors);
 
-		// productList�� �� ���������? ������ �Ǹ�
+
 		List<ProductDataBean> productList = dao.getColorSearchList(map);
 		List<ImageInfoDataBean> imgList = new ArrayList<ImageInfoDataBean>();
 		for(int i = 0 ; i<productList.size(); i++) {	
@@ -200,7 +199,7 @@ public class HandlerHelper {
 	}
 
 	//////////////////////////////////////////// ### 1 TO HERE /////////////////////////////////////////////////////
-	//insert�? txt?��?�� 만들?��주는 메소?��
+
 	public void fileWriter(String sql) {
         File file = new File("C:/ExpertJava/start.txt");
 

@@ -9,14 +9,11 @@ public class ReviewDataBean {
 	private Timestamp reviewDate;
 	private String id;
 	private String productCode;
-	//review���� productName����ϹǷ� �߰�
 	private String productName;
 	private double rating;
 	private String photo1;
 	private String photo2;
-	// reviewScore���̺��� �� ���信 ���� �հ� �� �޾ƿ�
 	private int reviewScoreSum;
-	// reviewScore���̺��� ���� �� ���信 ���� üũ�� �ߴ��� Ȯ����
 	private boolean checkedme;
 	public int getReviewScoreSum() {
 		return reviewScoreSum;
