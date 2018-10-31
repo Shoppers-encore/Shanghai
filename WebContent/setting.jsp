@@ -9,8 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
- 
-
 
 <c:set var="project" value="/Shanghai/user/"/>
  
@@ -26,6 +24,11 @@
 <c:set var="str_title" value="글제목"/>
 <c:set var="str_writer" value="작성자"/>
 <c:set var="str_reviewDate" value="작성일"/>
+<c:set var="str_writeReview" value="Reveiw 작성하기"/>
+<c:set var="str_score" value="평점"/>
+<c:set var="str_content" value="내용"/>
+<c:set var="str_uploading" value="이미지 첨부"/>
+
 <c:set var="str_id" value="아이디"/>
 <c:set var="str_passwd" value="비밀번호"/>
 
@@ -41,13 +44,17 @@
 <c:set var="str_color_gry" value="그레이"/>
 <c:set var="str_color_beg" value="베이지"/>
 <c:set var="str_color_sky" value="하늘색"/>
+
 	
 
 	
 	
 	
-	
+
 <!-- Button -->
+<c:set var="btn_write" value="작성"/>
+<c:set var="btn_list" value="목록"/>
+<c:set var="btn_cancel" value="취소"/>
 <c:set var="btn_login" value="로그인"/>	
 	
 	

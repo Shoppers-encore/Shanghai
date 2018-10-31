@@ -15,5 +15,33 @@
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) From jk_review <include refid="search"></include>
+	</select>
+	<select id="getReviewList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
+			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
 	
+	
+	<sql id="search">
+        <choose>
+           <when test="searchType=='ttl'">
+              WHERE title LIKE '%'||#{searchWord}||'%'
+           </when>
+           <when test="searchType=='ctt'">
+              WHERE content LIKE '%'||#{searchWord}||'%'
+           </when>
+           <when test="searchType=='both'">
+              WHERE title LIKE '%'||#{searchWord}||'%' OR content LIKE '%'||#{searchWord}||'%'
+           </when>
+           <when test="searchType=='writer'">
+              WHERE id LIKE '%'||#{searchWord}||'%'
+           </when>
+           <otherwise>
+               
+           </otherwise>
+        </choose>
+     </sql>
+
 </mapper>
