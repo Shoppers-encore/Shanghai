@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.ProductDataBean;
+import databean.ReviewDataBean;
+import db.BoardDao;
 import db.ProductDao;
 import etc.HandlerHelper;
+
 
 @Controller
 public class UserViewHandler {
 	@Resource
 	private ProductDao productDao;
+	private BoardDao boardDao;
 	@RequestMapping( "/userMailCheck" )
 	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView( "user/view/userMailCheck" );
@@ -34,6 +38,13 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/reviewList")
 	public ModelAndView userReviewList(HttpServletRequest request, HttpServletResponse response) {
+		int count = boardDao.getReviewCount();	
+
+		if( count > 0 ) {
+			Map<String, String> map = new HandlerHelper().makeCount( count, request );
+			List <ReviewDataBean> articles = boardDao.getReviewList( map );
+			request.setAttribute( "reviewLists", articles );
+		}
 		return new ModelAndView("user/view/reviewList");
 	}
 	@RequestMapping("/main")
