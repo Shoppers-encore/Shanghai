@@ -1,12 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
+<%@ include file="../../setting.jsp" %>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
-</head>
-<body>
-
-</body>
+	  <meta charset="utf-8">
+	  
+	  <style>
+		@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+	  * {
+	   font-family: 'Nanum Gothic';
+		}
+		html, body {
+			height:100%;
+		}
+		body {
+		  display:flex;
+		  align-items:center;
+		}
+	
+		#admlogin {
+			text-align : center;
+			float : none;
+			margin : 0 auto;
+			width : 400px;
+			height : 250px;
+			padding : 10px;
+		}
+	  </style>
+	  </head>
+	<body onload="loginfocus()">
+		<div class="container-fluid">
+		    <div class="centered col-*-4 border" id="admlogin">
+					<p>
+			      	<br> ${msg_admLogin} <br>
+					</p>
+					<form name="loginform" method="post" action="admLoginPro.jk?pgadr=main.jk" onsubmit="return logincheck()">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">${str_id}</span>
+							</div>
+							<input type="text" name="id" class="form-control" maxlength="5">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text">${str_passwd}</span>
+							</div>
+							<input type="password" name="passwd" class="form-control" maxlength="10">
+						</div>
+						<input class="btn btn-primary" type="submit" value="${btn_login}">
+					</form>
+			 </div>
+		</div>
+	</body>
 </html>
