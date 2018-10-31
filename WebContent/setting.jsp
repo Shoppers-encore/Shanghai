@@ -17,13 +17,11 @@
 	<c:set var="str_title" value="글제목"/>
 	<c:set var="str_writer" value="작성자"/>
 	<c:set var="str_reviewDate" value="작성일"/>
-<<<<<<< HEAD
 	<c:set var="str_writeReview" value="Reveiw 작성하기"/>
 	<c:set var="str_score" value="평점"/>
 	<c:set var="str_content" value="내용"/>
 	<c:set var="str_uploading" value="이미지 첨부"/>
 	
-=======
 	<!-- color -->
 	<c:set var="str_color_wht" value="하얀색"/>
 	<c:set var="str_color_blk" value="검은색"/>
@@ -36,7 +34,6 @@
 	<c:set var="str_color_gry" value="그레이"/>
 	<c:set var="str_color_beg" value="베이지"/>
 	<c:set var="str_color_sky" value="하늘색"/>
->>>>>>> master
 	
 	
 	
