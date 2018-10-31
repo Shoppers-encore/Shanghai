@@ -3,15 +3,33 @@
 
 <!DOCTYPE html>
 
-<!-- 로그인 한 페이지(이거)랑 안 한 페이지(admMain) 합쳐서 admMain 페이지  하나로 하면 될 것 같아요 -->
-
 <html>
 <head>
-  <title></title>
   <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  * {
+   font-family: 'Nanum Gothic';
+	}
+  body {
+	  display:flex;
+	}
+  div.card {
+  	text-align: center;
+   }
+  ul.nav-pills {
+      top: 20px;
+      position: fixed;
+  }
+  div.col-8 div {
+      height: 500px;
+  }
   </style>
 </head>
-<body>
+<body class="container-fluid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+
+<%@ include file="../view/admMenubar.jsp"%>
+	<div class="col-sm-10 col-8" >
+	</div>
 </body>
 </html>
 
