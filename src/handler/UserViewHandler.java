@@ -42,6 +42,7 @@ public class UserViewHandler {
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<ProductDataBean> productList = productDao.getProductList(map);
 		request.setAttribute("productList", productList);
+		request.setAttribute("productCount", count);
 		return new ModelAndView("user/view/userMain");
 	}
 	@RequestMapping ( "/userProductList" )

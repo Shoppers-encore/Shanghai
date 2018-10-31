@@ -76,6 +76,7 @@
 				<form><input type="hidden" name="id" value="${sessionScope.memid}"></form>
 			</div>
 		</c:if>
+		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
