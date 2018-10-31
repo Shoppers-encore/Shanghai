@@ -21,7 +21,7 @@ public class UserViewHandler {
 	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView( "user/view/reviewDetail" );
 	}
-	@RequestMapping("/userReviewList")
+	@RequestMapping("/reviewList")
 	public ModelAndView userReviewList(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/view/reviewList");
 	}
