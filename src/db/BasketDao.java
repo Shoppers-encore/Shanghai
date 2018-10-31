@@ -10,8 +10,17 @@ import databean.BasketDataBean;
 
 public class BasketDao {
 	private SqlSession session = SqlMapClient.getSession();
-	public List<BasketDataBean> getList(String id) {
-		System.out.println(id);
-		return session.selectList("Basket.")
+	
+	/*-----103118_HY Added-----*/
+	public List<BasketDataBean> getBasketList(String id) {
+		System.out.println("BasketDao/getBasketList: "+id);
+		return session.selectList("User.getBasketList");
 	}
+	
+	public int getBasketCount(String id) {
+		System.out.println("BasketDao/getBasketCount: "+id);
+		return session.selectOne("User.getBasketCount");
+		
+	}
+	/*----------HY_fin---------*/
 }

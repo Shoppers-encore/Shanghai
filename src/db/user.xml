@@ -9,4 +9,12 @@
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	
+	<!-- 103118_HY ADDED -->
+	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
+		SELECT * FROM jk_basket WHERE id=#{id}
+	</select>
+	<select id="getBasketCount" parameterType="String" resultType="int">
+		Select count(*) FROM jk_basket WHERE id=#{id}
+	</select> 
 </mapper>

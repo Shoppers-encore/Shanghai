@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.BasketDataBean;
 import databean.ProductDataBean;
+import db.BasketDao;
 import db.ProductDao;
 import etc.HandlerHelper;
 
@@ -20,14 +22,30 @@ import etc.HandlerHelper;
 public class UserViewHandler {
 	@Resource
 	private ProductDao productDao;
+	
+	/*-----103118_HY Added-----*/
+	@Resource
+	private BasketDao basketDao;
+	/*----------HY_fin---------*/
+	
 	@RequestMapping( "/userMailCheck" )
 	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView( "user/view/userMailCheck" );
 	}
+	
+	/*-----103118_HY Added-----*/
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
+		String id=(String)request.getSession().getAttribute("id");
+		System.out.println("MAV/basketList: "+id);
+		List<BasketDataBean> basketList=basketDao.getBasketList(id);
+		
+		request.setAttribute("basketList", basketList);
+		
 		return new ModelAndView( "/user/view/basketList" );
 	}
+	/*----------HY_fin---------*/
+	
 	@RequestMapping( "/reviewDetail" )
 	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView( "user/view/reviewDetail" );
