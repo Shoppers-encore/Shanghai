@@ -10,6 +10,7 @@ public class UserDataBean {
 	private String tel;
 	private String email;
 	private int gender;
+	private int userLevel;
 	private int height;
 	private int weight;
 	private String address;
@@ -86,6 +87,12 @@ public class UserDataBean {
 	}
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+	public int getUserLevel() {
+		return userLevel;
+	}
+	public void setUserLevel(int userLevel) {
+		this.userLevel = userLevel;
 	}
 	
 }
