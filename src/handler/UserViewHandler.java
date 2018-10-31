@@ -63,7 +63,8 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int count = productDao.getProductCount();
+		Map<String, String> map = new HashMap<String, String>();
+		int count = productDao.getProductCount(map);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<ProductDataBean> productList = productDao.getProductList(map);
 		request.setAttribute("productList", productList);
@@ -81,6 +82,10 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", request.getParameter("searchType"));
+		map.put("searchWord", request.getParameter("searchWord"));
+		int count=productDao.getProductCount(map);
 		return new ModelAndView("user/view/userSearchProduct");
 	}
 	@RequestMapping("/userMypage")

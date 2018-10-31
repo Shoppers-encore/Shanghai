@@ -11,8 +11,8 @@ import databean.ProductDataBean;
 public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
 
-	public int getProductCount() {
-		return session.selectOne("User.getProductCount");
+	public int getProductCount(Map<String, String> map) {
+		return session.selectOne("User.getProductCount", map);
 	}
 
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
