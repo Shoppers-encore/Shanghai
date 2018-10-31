@@ -14,11 +14,12 @@
 	</c:if>
 	<c:if test="${id ne null}">
 		<div class="container-fluid">
+			<div><h5>전체 아이템: 총 ${basketCount}개</h5></div>
 		
-		</div>
 		<c:forEach var="basketList" items="${basketList}">
-			<
+
 		
 		</c:forEach>
+		</div>
 	</c:if>
 </body>
