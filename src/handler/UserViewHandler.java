@@ -40,8 +40,10 @@ public class UserViewHandler {
 		String id=(String)request.getSession().getAttribute("id");
 		System.out.println("MAV/basketList: "+id);
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
+		int basketCount=basketDao.getBasketCount(id);
 		
 		request.setAttribute("basketList", basketList);
+		request.setAttribute("basketCount", basketCount);
 		
 		return new ModelAndView( "/user/view/basketList" );
 	}
