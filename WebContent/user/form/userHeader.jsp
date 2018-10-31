@@ -2,30 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../setting.jsp"%>
 <head>
-<style>
-<!-- ########################### ### 1 From here ############################ -->
-.tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #ff0000;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 11px;
-    right : 5%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-a#search:hover .tooltiptext {
-    visibility: visible;
-    opacity: 0.7;
-}
-<!-- ########################### ### 1 To here ############################ -->
-</style>
+
 </head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
 		  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -64,7 +41,7 @@ a#search:hover .tooltiptext {
 		  
 		  <!-- ############################## ### 2 From here ################################## -->
 		  
-	        	<a href="searchGood.jk" id="search">
+	        	<a href="userSearchProduct.jk" id="search">
 	        	<img src="images/red_magnifier.png" style="width:25px;">
 				<span class="tooltiptext" id="search">${str_searchGood}</span>
 	        	</a>
