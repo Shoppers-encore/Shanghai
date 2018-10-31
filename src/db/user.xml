@@ -24,6 +24,13 @@
 	</select>
 	
 	
+	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
+		SELECT * FROM jk_basket WHERE id=#{id}
+	</select>
+	<select id="getBasketCount" parameterType="String" resultType="int">
+		Select count(*) FROM jk_basket WHERE id=#{id}
+	</select>
+  
 	<sql id="search">
         <choose>
            <when test="searchType=='ttl'">
