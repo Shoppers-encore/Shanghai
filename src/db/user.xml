@@ -16,5 +16,6 @@
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}
-	</select> 
+	</select>
+	<!-- HY_fin -->
 </mapper>
