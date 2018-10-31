@@ -119,7 +119,7 @@ public class HandlerHelper {
 		System.out.println("size : " +sizes[i]);
 		return sizes;
 	}
-
+	
 	public int[] removeDuplicate(int[] numbers){
 		List<Integer> resultList = new ArrayList<Integer>();
 		for(int i=0; i<numbers.length ; i++) {
