@@ -10,36 +10,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
  
-<<<<<<< HEAD
- <c:set var="project" value="/Shanghai/user/"/>
+
+<c:set var="project" value="/Shanghai/user/"/>
  
- <c:set var="page_input" value="회원가입"/>
- 
+<!-- Page --> 
+<c:set var="page_input" value="회원가입"/> 
+<c:set var="page_login" value="로그인"/> 
+
+
+
+<!-- String -->
+<c:set var="str_review" value="Review"/>
+<c:set var="str_productName" value="상품명"/>
+<c:set var="str_title" value="글제목"/>
+<c:set var="str_writer" value="작성자"/>
+<c:set var="str_reviewDate" value="작성일"/>
  <c:set var="str_id" value="아이디"/>
  <c:set var="str_passwd" value="비밀번호"/>
- 
- <c:set var="btn_login" value="로그인"/>
-=======
+ 	
+	
+	
+	
+	
+	
+<!-- Button -->
+<c:set var="btn_login" value="로그인"/>	
+	
+	
+	
+	
+	
+<!-- Message -->
+<c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 
-	<!-- String -->
-	<c:set var="str_review" value="Review"/>
-	<c:set var="str_productName" value="상품명"/>
-	<c:set var="str_title" value="글제목"/>
-	<c:set var="str_writer" value="작성자"/>
-	<c:set var="str_reviewDate" value="작성일"/>
-	
-	
-	
-	
-	
-	
-	<!-- Button -->
-	
-	
-	
-	
-	
-	
-	<!-- Message -->
-	<c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
->>>>>>> master

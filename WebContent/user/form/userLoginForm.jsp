@@ -10,9 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${project}shanghai_style.css">
 </head>
+<!-- Status: No User-->
 <c:if test="${sessionScope.id eq null}">	
 <body class="login">
-	<form class="form-signin" method="post" action="userloginPro.go" name="loginform" onsubmit="return logincheck()" >
+	<form class="form-signin" method="post" action="userloginPro.go" name="loginform">
   		<a href="userMain.jk">
   			<img class="pt-0 mt-0 mb-4" src="" alt="logo" width="350" height="200">
   		</a>
@@ -26,6 +27,7 @@
   	</form>
 </body>
 </c:if>
+<!-- Status: User logged-in -->
  <c:if test="${sessionScope.id ne null}">
 	<c:redirect url="userMyPage.jk"/>		
 </c:if>
