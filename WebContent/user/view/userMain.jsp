@@ -6,65 +6,6 @@
 <html>
 	<head>
 		<title>메인 페이지</title>
-		<style>
-	   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-	 * {
-	   font-family: 'Nanum Gothic';
-	   }
-	 /* Make the image fully responsive */
-	 .carousel-inner img {
-	     width: 100%;
-	     height: 100%;
-	 }
-	 .nav-brand img {
-	width : 40px;
-	 }
-	
-	   body {
-	      position: relative;
-	  }
-	  ul.nav-pills {
-	      top: 20px;
-	      position: fixed;
-	  }
-	  div.card {
-	 	text-align: center;
-	
-	  }
-	 img {
-	 	width: 100%;
-	
-	  }
-	  a.goodName {
-	  	color: black;
-	  }
-	  p {
-	  	text-align: center;
-	  }
-	  div#cart {
-	    position: sticky;
-	    top: 300px;
-	    width: 120px;
-	    height: 150px;
-	    font-size: 20px;
-	    float: right;
-		}
-	  div#chat {
-	   position: sticky;
-	    top: 600px;
-	    right: 120px;
-	    float: right;
-	   }
-	  img#cartImg {
-		width: 30px;
-		height: 30px;
-		}
-	  
-	  img#chatImg {
-	   width: 40px;
-	   height: 40px;
-	   }
-	</style>
 	</head>
 	<body>
       	<c:if test="${sessionScope.memid ne null}">
