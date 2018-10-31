@@ -16,6 +16,6 @@ public class ProductDao{
 	}
 
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
-		return session.selectList("User.getProductList");
+		return session.selectList("User.getProductList", map);
 	}
 }
