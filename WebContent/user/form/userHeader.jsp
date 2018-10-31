@@ -24,7 +24,7 @@
 		      <a class="nav-link" href="userMyPage.jk">CUSTOMER</a>
 		    </li>
 		    <li class="nav-item">
-		    	<a class="nav-link" href="userReviewList.jk">Review</a>
+		    	<a class="nav-link" href="reviewList.jk">Review</a>
 		    </li>
 		    <c:if test="${sessionScope.memid eq null or sessionScope.memid eq 0}">
 			    <li class="nav-item">

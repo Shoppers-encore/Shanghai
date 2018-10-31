@@ -36,8 +36,8 @@ public class UserFormHandler {
 			//admin?
 		}else {
 			String productCode = request.getParameter("chk");
-			//String productName = new ProductDao().getProductName(productCode);
-			//request.setAttribute("productName", productName);
+			String productName = new ProductDao().getProductName(productCode);
+			request.setAttribute("productName", productName);
 			request.setAttribute("productCode", productCode);
 		}
 		int reviewNo = 0;	
@@ -45,7 +45,6 @@ public class UserFormHandler {
 		if( request.getParameter("reviewNo") != null ) {
 			reviewNo = Integer.parseInt( request.getParameter("reviewNo") );
 		}
-		
 		request.setAttribute( "reviewNo", reviewNo );
 		return new ModelAndView( "user/form/reviewWriteForm" );
 	}
