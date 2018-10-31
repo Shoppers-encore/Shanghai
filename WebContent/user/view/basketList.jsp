@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>상하이몰 - 장바구니 상세페이지</title>
+<title>${head_basketList}</title>
 </head>
 <body>
 	<%@ include file="../form/userHeader.jsp" %>
@@ -14,7 +14,7 @@
 	</c:if>
 	<c:if test="${id ne null}">
 		<div class="container-fluid">
-			<div><h5>전체 아이템: 총 ${basketCount}개</h5></div>
+			<div><h5>${totalBasketCount}${basketCount}</h5></div>
 		
 		<c:forEach var="basketList" items="${basketList}">
 
