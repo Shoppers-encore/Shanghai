@@ -11,7 +11,6 @@ import databean.BasketDataBean;
 public class BasketDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
-	/*-----103118_HY Added-----*/
 	public List<BasketDataBean> getBasketList(String id) {
 		System.out.println("BasketDao/getBasketList: "+id);
 		return session.selectList("User.getBasketList");
@@ -22,5 +21,4 @@ public class BasketDao {
 		return session.selectOne("User.getBasketCount");
 		
 	}
-	/*----------HY_fin---------*/
 }
