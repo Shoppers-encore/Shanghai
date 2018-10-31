@@ -3,6 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
+	<!-- User DB (member log-in) -->
+	<select id="checkUserId" parameterType="String" resultType="int">
+		select count(*) from jk_user where id=#{id} 
+	</select>
+	
+	<!--  -->
 	<select id="getProductCount" resultType="int">
 		SELECT count(*) FROM jk_product
 	</select>
@@ -37,4 +43,5 @@
            </otherwise>
         </choose>
      </sql>
+
 </mapper>

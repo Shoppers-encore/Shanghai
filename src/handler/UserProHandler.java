@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.UserDataBean;
+import db.UserDao;
+
 @Controller
 public class UserProHandler {
 	@RequestMapping( "/userInputPro" )
@@ -15,6 +18,10 @@ public class UserProHandler {
 	}
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		UserDataBean userDto = UserDao.getUser(id);
+		
 		return new ModelAndView("user/pro/userLoginPro");
 	}
 	@RequestMapping( "/userModifyPro" )
