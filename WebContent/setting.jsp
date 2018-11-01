@@ -51,7 +51,6 @@
 <c:set var="str_weight" value="몸무게"/>
 <c:set var="str_casual" value="캐주얼"/>
 <c:set var="str_dandy" value="댄디"/>
-<c:set var="str_productName" value="상품명"/>
 <c:set var="str_buyerCode" value="거래처"/>
 <c:set var="str_color" value="색상"/>
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -94,8 +93,10 @@
 <c:set var="str_writeReview" value="Reveiw 작성하기"/>
 <c:set var="str_score" value="평점"/>
 <c:set var="str_uploading" value="이미지 첨부"/>
-<c:set var="str_totalBasketCount" value="전체 상품: "/>
-
+<c:set var="str_productQuantity" value="수량"/>
+<c:set var="str_itemsTotal" value="전체 상품: 총 "/>
+<c:set var="str_productImage" value="상품 이미지"/>
+<c:set var="str_quantityUnit" value="개"/>
 
 <!-- color -->
 <c:set var="str_color_wht" value="하얀색"/>
@@ -136,3 +137,4 @@
 <c:set var="msg_rewritepw" value="수정 시 비밀번호 재입력이 필요합니다."/>
 <c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
+<c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>

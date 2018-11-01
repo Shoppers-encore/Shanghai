@@ -13,12 +13,12 @@ public class BasketDao {
 	
 	public List<BasketDataBean> getBasketList(String id) {
 		System.out.println("BasketDao/getBasketList: "+id);
-		return session.selectList("User.getBasketList");
+		return session.selectList("User.getBasketList", id);
 	}
 	
 	public int getBasketCount(String id) {
 		System.out.println("BasketDao/getBasketCount: "+id);
-		return session.selectOne("User.getBasketCount");
+		return session.selectOne("User.getBasketCount", id);
 		
 	}
 }
