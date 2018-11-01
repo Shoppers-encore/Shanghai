@@ -15,7 +15,6 @@
 	<article><br><br>
 	    <div id="writeForm">
 			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform" onsubmit="return Rvwritecheck()" >
-				<input type="hidden" name="num" value="${num}">
 				<table class="table" >
 					<tr>
 						<th colspan="4">${str_writeReview}</th>
