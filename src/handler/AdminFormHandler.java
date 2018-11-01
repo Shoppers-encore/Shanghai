@@ -12,8 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import databean.UserDataBean;
 import db.UserDao;
-import logon.Adm_LogonDataBean;
-import logon.LogonDBBean;
 
 @Controller
 public class AdminFormHandler {
@@ -30,6 +28,7 @@ public class AdminFormHandler {
 		}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
+	
 		return new ModelAndView("adm/form/admMain");
 	}
 	@RequestMapping("/admModifyView")

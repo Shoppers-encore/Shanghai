@@ -21,5 +21,5 @@
 </c:if>
 <c:if test="${result eq 1}">
 	${sessionScope.memid = id}
-	<c:redirect url="${pgadr}"/>	
+	<c:redirect url="admMain.jk"/>	
 </c:if>
