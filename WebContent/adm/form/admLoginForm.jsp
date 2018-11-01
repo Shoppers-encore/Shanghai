@@ -37,7 +37,7 @@
 					<p>
 			      	<br> ${msg_admLogin} <br>
 					</p>
-					<form name="loginform" method="post" onsubmit="return logincheck()">
+					<form name="loginform" method="post" action="admLoginPro.jk" onsubmit="return logincheck()">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_id}</span>
@@ -48,7 +48,7 @@
 							<div class="input-group-append">
 								<span class="input-group-text">${str_passwd}</span>
 							</div>
-							<input type="password" name="passwd" class="form-control" maxlength="10">
+							<input type="password" name="password" class="form-control" maxlength="10">
 						</div>
 						<input class="btn btn-primary" type="submit" value="${btn_login}" onclick="location='admMain.jk'">
 					</form>

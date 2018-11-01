@@ -19,7 +19,7 @@ public class AdminFormHandler {
 		}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
-	
+		
 		return new ModelAndView("adm/form/admMain");
 	}
 	@RequestMapping("/admModifyView")

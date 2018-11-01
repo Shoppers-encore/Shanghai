@@ -1,5 +1,6 @@
 package handler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,16 +13,27 @@ import db.UserDao;
 
 @Controller
 public class AdminProHandler {
-	private UserDao logon;
+	@Resource
+	private UserDao userDao;
+	private final int userLevel=9;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		UserDataBean userDto = logon.getAdm(id);  
-		
-		return new ModelAndView("adm/pro/admLoginPro");
+		String id = request.getParameter( "id" );
+		System.out.println(id);
+		String password = request.getParameter( "password" );
+		System.out.println(password);
+		UserDataBean userDto = userDao.getUser(id);
+		int result = 0;
+		if( userDto.getUserLevel() == userLevel && 
+				userDto.getPassword().equals( password ) ) {
+			result = 1; 
+		}
+		request.setAttribute( "result", result );
+		request.getSession().setAttribute("memid", id);
+		return new ModelAndView ("adm/pro/admLoginPro");
 	}
+	
 	@RequestMapping ( "/productInputPro" )
 	   public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) {
 	      return new ModelAndView ( "adm/pro/productInputPro" );

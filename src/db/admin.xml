@@ -5,9 +5,10 @@
 
 <mapper namespace="Admin">
 	<!-- admin login from jk_user -->
-	<select id="getAdm" parameterType="String" resultType="databean.UserDataBean">
-		SELECT count(*) FROM jk_user WHERE id=#{id}
+	<select id="getUser" parameterType="String" resultType="databean.UserDataBean">
+		SELECT * FROM jk_user WHERE id=#{id}
 	</select>
+	
 	
 
  
