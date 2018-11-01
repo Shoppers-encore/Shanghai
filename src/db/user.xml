@@ -7,6 +7,9 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
+	<select id="getUserId" parameterType="String" resultType="db.UserDataBean">
+		select * from jk_user where id=#{id}
+	</select>
 	
 	<!-- 상품의 갯수 불러오기 -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
