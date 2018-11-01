@@ -31,14 +31,14 @@
 <c:set var="str_userList" value="회원목록"/>
 <c:set var="str_productList" value="상품목록"/>
 <c:set var="str_boardList" value="게시판 관리"/>
-<c:set var="str_admOrderFind" value="주문관리"/>
+<c:set var="str_admOrderList" value="주문관리"/>
 <c:set var="str_admProductList" value="상품관리"/>
 <c:set var="str_chat" value="실시간 상담"/>
 <c:set var="str_mypage" value="마이 페이지"/>
 <c:set var="str_name" value="이름"/>
 <c:set var="str_tel" value="전화번호"/>
 <c:set var="str_email" value="이메일"/>
-<c:set var="str_goodInput" value="상품등록"/>
+<c:set var="str_productInput" value="상품등록"/>
 <c:set var="str_productCode" value="상품번호"/>
 <c:set var="str_size" value="사이즈"/>
 <c:set var="str_sizeS" value="SS"/>
@@ -54,21 +54,6 @@
 <c:set var="str_productName" value="상품명"/>
 <c:set var="str_buyerCode" value="거래처"/>
 <c:set var="str_color" value="색상"/>
-<c:set var="msg_color_wht" value="WHITE, IVORY"/>
-<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
-<c:set var="msg_color_red" value="RED, BURGUNDY"/>
-<c:set var="msg_color_blu" value="BLUE, DENIM"/>
-<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
-<c:set var="msg_color_ylw" value="YELLOW"/>
-<c:set var="msg_color_brn" value="BROWN"/>
-<c:set var="msg_color_nvy" value="NAVY"/>
-<c:set var="msg_color_gry" value="GRAY"/>
-<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
-<c:set var="msg_color_sky" value="SKYBLUE"/>
-<c:set var="msg_color_org" value="ORANGE"/>
-<c:set var="msg_color_ppl" value="PURPLE"/>
-<c:set var="msg_color_pnk" value="PINK"/>
-<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="str_price" value="금액"/>
 <c:set var="str_salePercent" value="할인율"/>
 <c:set var="str_category" value="카테고리"/>
@@ -100,6 +85,21 @@
 <c:set var="str_totalUser" value="총 회원수"/>
 <c:set var="str_var" value="현재수량"/>
 <c:set var="str_varPlus" value="추가할 수량"/>
+<c:set var="str_num" value="글번호"/>
+<c:set var="str_reviewList" value="리뷰 관리"/>
+<c:set var="str_searchTitle" value="제목"/>
+<c:set var="str_searchBoth" value="제목+내용"/>
+<c:set var="str_orderCode" value="주문번호"/>
+<c:set var="str_orderId" value="주문자"/>
+<c:set var="str_orderStatus" value="주문상태"/>
+<c:set var="str_totalPrice" value="합계"/>
+<c:set var="str_orderStatus0" value="입금대기중"/>
+<c:set var="str_orderStatus1" value="배송준비중"/>
+<c:set var="str_orderStatus2" value="배송중"/>
+<c:set var="str_orderStatus3" value="배송완료"/>
+<c:set var="str_chat" value="실시간 상담"/>
+<c:set var="str_orderDetail" value="주문상세"/>
+	<c:set var="str_viewRv" value="리뷰 내용"/>
 
 
 <!-- color -->
@@ -127,12 +127,17 @@
 <c:set var="btn_confirmmail" value="이메일 확인"/>
 <c:set var="btn_membermod" value="내정보 수정"/>
 <c:set var="btn_back" value="이전화면"/>
-<c:set var="btn_goodInput" value="상품등록"/>
+<c:set var="btn_productInput" value="상품등록"/>
 <c:set var="btn_cancel" value="취소"/>
 <c:set var="btn_write" value="작성"/>
 <c:set var="btn_list" value="목록"/>
 <c:set var="btn_search" value="검색"/>
 <c:set var="btn_save" value="저장"/>
+<c:set var="btn_orderCancel" value="주문취소"/>
+<c:set var="btn_modify" value="수정"/>
+<c:set var="btn_productDel" value="상품삭제"/>
+<c:set var="btn_scoreUp" value="나도 공감하기"/>
+	<c:set var="btn_delete" value="삭제"/>
 
 
 
@@ -143,6 +148,23 @@
 <c:set var="msg_rewritepw" value="수정 시 비밀번호 재입력이 필요합니다."/>
 <c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
+<c:set var="msg_color_wht" value="WHITE, IVORY"/>
+<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
+<c:set var="msg_color_red" value="RED, BURGUNDY"/>
+<c:set var="msg_color_blu" value="BLUE, DENIM"/>
+<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
+<c:set var="msg_color_ylw" value="YELLOW"/>
+<c:set var="msg_color_brn" value="BROWN"/>
+<c:set var="msg_color_nvy" value="NAVY"/>
+<c:set var="msg_color_gry" value="GRAY"/>
+<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
+<c:set var="msg_color_sky" value="SKYBLUE"/>
+<c:set var="msg_color_org" value="ORANGE"/>
+<c:set var="msg_color_ppl" value="PURPLE"/>
+<c:set var="msg_color_pnk" value="PINK"/>
+<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
+<c:set var="msg_copyright" value="Copyright &copy; 2018 삼김일정(3Kim1Jeong)"/>
+	<c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 
 
 <!-- url -->

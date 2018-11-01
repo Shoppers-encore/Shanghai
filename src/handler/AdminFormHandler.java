@@ -26,4 +26,8 @@ public class AdminFormHandler {
 	public ModelAndView tagInputForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/tagInputForm");
 	}
+	@RequestMapping("/productModifyForm")
+	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("adm/form/tagInputForm");
+	}
 }
