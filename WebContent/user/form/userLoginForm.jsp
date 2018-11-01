@@ -13,7 +13,7 @@
 <!-- Status: No User-->
 <c:if test="${sessionScope.id eq null}">	
 <body class="login">
-	<form class="form-signin" method="post" action="userloginPro.go" name="loginform">
+	<form class="form-signin" method="post" action="userLoginPro.jk" name="loginform">
   		<a href="userMain.jk">
   			<img class="pt-0 mt-0 mb-4" src="" alt="logo" width="350" height="200">
   		</a>

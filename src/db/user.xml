@@ -7,7 +7,7 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
-	<select id="getUserId" parameterType="String" resultType="db.UserDataBean">
+	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
 		select * from jk_user where id=#{id}
 	</select>
 	
