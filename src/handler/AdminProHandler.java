@@ -7,11 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import db.UserDao;
+
 @Controller
 public class AdminProHandler {
-	@RequestMapping( "/admLoginPro" )
-	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView("adm/pro/admLoginPro");
+	private UserDao logon;
+	@RequestMapping("/admLoginPro")
+	public ModelAndView loninPro(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String passwd = request.getParameter("passwd");
+		String pgadr = request.getParameter("pgadr");
+		int result = logon.check(id,passwd);
+		request.setAttribute("result", result);
+		request.setAttribute("id", id);
+		request.setAttribute("pgadr", pgadr);
+		return new ModelAndView("pro/admLoginPro");
 	}
 	@RequestMapping ( "/productInputPro" )
 	   public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) {

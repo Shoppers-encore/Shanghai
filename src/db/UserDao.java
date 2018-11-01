@@ -99,12 +99,20 @@ public class UserDao{
 	
 	
 	public UserDataBean getAdm(String id) {
-		UserDataBean admDto = session.selectOne("Admin.getAdm",id);
-		return admDto;
+		UserDataBean userDto = session.selectOne("Admin.getAdm",id);
+		return userDto;
 	}
 	
-	
-
-
+	public int check(String id, String passwd) {
+		if(id.length() <= 5) {
+			UserDataBean userDto = getAdm(id);
+			if(passwd.equals(userDto.getPassword())) {
+					return 1;
+				}else {
+					return 2;
+				}
+			}
+			return -1;
+		}
 }
 
