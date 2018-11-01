@@ -133,6 +133,8 @@
 <c:set var="btn_list" value="목록"/>
 <c:set var="btn_search" value="검색"/>
 <c:set var="btn_save" value="저장"/>
+<c:set var="btn_buy" value="구매"/>
+<c:set var="btn_inputCart" value="장바구니"/>
 
 
 

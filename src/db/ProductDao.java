@@ -21,4 +21,8 @@ public class ProductDao{
 	public String getProductName(String productCode) {
 		return session.selectOne("User.getProductName", productCode);
 	}
+
+	public List<ProductDataBean> getProductDetail(int ref) {
+		return session.selectList("User.getProductDetail",ref);
+	}
 }

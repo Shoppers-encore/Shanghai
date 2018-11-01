@@ -7,18 +7,25 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
-	<select id="getUserId" parameterType="String" resultType="db.UserDataBean">
+	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
 		select * from jk_user where id=#{id}
 	</select>
 	
-	<!-- 상품의 갯수 불러오기 -->
+	<!-- 상품 DB -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM (SELECT * FROM jk_product <include refid="colorSearch"></include>) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
+		SELECT count(*) FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> -->) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT product.* FROM (SELECT * FROM jk_product <include refid="colorSearch"></include> ) product
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT product.* FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> --> ) product
 		WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%') list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="getProductName" parameterType="String" resultType="String">
+		SELECT productName FROM jk_product WHERE productCode=#{productCode}
+	</select>
+	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
+	</select>
+	<!-- Review DB -->
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -26,17 +33,13 @@
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
 			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
-	<select id="getProductName" parameterType="String" resultType="String">
-		SELECT productName FROM jk_product WHERE productCode=#{productCode}
-	</select>
-	
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
 		SELECT * FROM jk_basket WHERE id=#{id}
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}
 	</select>
-  
+  	
 	<sql id="search">
         <choose>
            <when test="searchType=='ttl'">

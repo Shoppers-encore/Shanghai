@@ -84,6 +84,13 @@ public class UserViewHandler {
 	
 	@RequestMapping("/userProductDetail")
 	public ModelAndView userProductDetail(HttpServletRequest request, HttpServletResponse response) {
+		int ref = Integer.parseInt(request.getParameter("ref"));
+		List<ProductDataBean> list =productDao.getProductDetail(ref);
+		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
+		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		request.setAttribute("productList", list);
+		request.setAttribute("colors", colors);
+		request.setAttribute("sizes", sizes);
 		return new ModelAndView("user/view/userProductDetail");
 	}
 	@RequestMapping("/userSearchProduct")
