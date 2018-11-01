@@ -10,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminViewHandler {
-	@Resource 
-	
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/userList");

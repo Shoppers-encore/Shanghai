@@ -21,7 +21,7 @@ public class UserDao{
 	}
 	
 
-public UserDataBean getUser(String id) {
+	public UserDataBean getUser(String id) {
 	return session.selectOne("Admin.getUser", id);
 	}
 

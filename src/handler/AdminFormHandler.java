@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import databean.UserDataBean;
 import db.UserDao;
 
-
 @Controller
 public class AdminFormHandler {
 	@Resource 
@@ -27,8 +26,10 @@ public class AdminFormHandler {
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("memid");
-		UserDataBean admin = userDao.getUser(id);
-		request.setAttribute("admin", admin);
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		System.out.println( id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
 	}
 	@RequestMapping("/admModifyView")
