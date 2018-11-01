@@ -10,10 +10,11 @@
 	
 	<!-- 상품의 갯수 불러오기 -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(list.*) FROM (SELECT * FROM jk_good WHERE productCode!=TO_CHAR(ref) AND good_name LIKE '%'||#{searchWord}||'%') list <include refid="colorSearch"></include>
+		SELECT count(*) FROM (SELECT * FROM jk_product <include refid="colorSearch"></include>) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT product.* FROM (SELECT * FROM jk_product <include refid="colorSearch"></include> ) product
+		WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%') list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
@@ -56,43 +57,46 @@
 	<sql id="colorSearch">
 		WHERE
 		<if test="selectedColors.contains('WH')">
-			good_code LIKE 'WH'||'%' OR
+			productCode LIKE 'WH'||'%' OR
 		</if>
 		<if test="selectedColors.contains('BK')">
-			good_code LIKE 'BK'||'%' OR
+			productCode LIKE 'BK'||'%' OR
 		</if>
 		<if test="selectedColors.contains('RD')">
-			good_code LIKE 'RD'||'%' OR
+			productCode LIKE 'RD'||'%' OR
 		</if>
 		<if test="selectedColors.contains('BL')">
-			good_code LIKE 'BL'||'%' OR
+			productCode LIKE 'BL'||'%' OR
 		</if>
 		<if test="selectedColors.contains('GN')">
-			good_code LIKE 'GN'||'%' OR
+			productCode LIKE 'GN'||'%' OR
 		</if>
 		<if test="selectedColors.contains('YL')">
-			good_code LIKE 'YL'||'%' OR
+			productCode LIKE 'YL'||'%' OR
 		</if>
 		<if test="selectedColors.contains('BR')">
-			good_code LIKE 'BR'||'%' OR
+			productCode LIKE 'BR'||'%' OR
 		</if>
 		<if test="selectedColors.contains('NV')">
-			good_code LIKE 'NV'||'%' OR
+			productCode LIKE 'NV'||'%' OR
 		</if>
 		<if test="selectedColors.contains('GR')">
-			good_code LIKE 'GR'||'%' OR
+			productCode LIKE 'GR'||'%' OR
 		</if>
 		<if test="selectedColors.contains('BG')">
-			good_code LIKE 'BG'||'%' OR
+			productCode LIKE 'BG'||'%' OR
 		</if>
 		<if test="selectedColors.contains('SK')">
-			good_code LIKE 'SK'||'%' OR
+			productCode LIKE 'SK'||'%' OR
 		</if>
 		<if test="selectedColors.contains('ETC')">
-			good_code LIKE 'PK'||'%' OR
-			good_code LIKE 'PP'||'%' OR
-			good_code LIKE 'OR'||'%' OR
+			productCode LIKE 'PK'||'%' OR
+			productCode LIKE 'PP'||'%' OR
+			productCode LIKE 'OR'||'%' OR
 		</if>
-		good_code = '0000'
+		<if test="selectedColors==null">
+			productCode LIKE '' || '%' OR
+		</if>
+		productCode LIKE '0000'||'%'
 	</sql>
 </mapper>

@@ -66,8 +66,12 @@ public class UserViewHandler {
 	@RequestMapping("/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
 		int count = productDao.getProductCount(map);
-		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
 		List<ProductDataBean> productList = productDao.getProductList(map);
 		request.setAttribute("productList", productList);
 		request.setAttribute("productCount", count);
@@ -85,9 +89,28 @@ public class UserViewHandler {
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchType", request.getParameter("searchType"));
-		map.put("searchWord", request.getParameter("searchWord"));
-		int count=productDao.getProductCount(map);
+		StringBuffer color = new StringBuffer();
+		int count = 0;
+		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
+			map.put("searchWord", request.getParameter("searchWord"));
+			String[] colors = request.getParameterValues("color");
+			if(colors !=null) {
+				for(int i = 0 ; i<colors.length ;i++) {
+					color.append(colors[i]+" ");
+				}
+			}
+			map.put("selectedColors", color.toString());
+			count = productDao.getProductCount(map);
+		}
+		map = new HandlerHelper().makeCount(count, request);
+		List<ProductDataBean> productList = null;
+		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
+			map.put("searchWord", request.getParameter("searchWord"));
+			map.put("selectedColors",color.toString());
+			productList = productDao.getProductList(map);
+		}
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userSearchProduct");
 	}
 	@RequestMapping("/userMypage")
