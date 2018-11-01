@@ -11,13 +11,20 @@
 		select * from jk_user where id=#{id}
 	</select>
 	
-	<!--  -->
+	
+	<!-- Product -->
 	<select id="getProductCount" resultType="int">
 		SELECT count(*) FROM jk_product
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="getProductName" parameterType="String" resultType="String">
+		SELECT productName FROM jk_product WHERE productCode=#{productCode}
+	</select>
+	
+	
+	<!-- Review -->
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -25,10 +32,12 @@
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
 			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
-	<select id="getProductName" parameterType="String" resultType="String">
-		SELECT productName FROM jk_product WHERE productCode=#{productCode}
+	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
+			SELECT * FROM jk_review WHERE review_no=#{num}
 	</select>
 	
+	
+	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
 		SELECT * FROM jk_basket WHERE id=#{id}
 	</select>
@@ -36,6 +45,8 @@
 		Select count(*) FROM jk_basket WHERE id=#{id}
 	</select>
   
+  
+  	<!-- Search -->
 	<sql id="search">
         <choose>
            <when test="searchType=='ttl'">
