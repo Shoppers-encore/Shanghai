@@ -1,10 +1,14 @@
 package db;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.UserDataBean;
+
 
 
 
@@ -14,12 +18,6 @@ public class UserDao{
 	public int check(String id) {
 		return session.selectOne("db.checkUserId", id);
 	}
-
-	public UserDataBean getAdm(String id) {
-		UserDataBean userDto = session.selectOne("Admin.getAdm", id);
-		return userDto;
-	}
-	
 
 	public UserDataBean getUser(String id) {
 	return session.selectOne("Admin.getUser", id);
@@ -42,4 +40,18 @@ public class UserDao{
 		return result;
 	}
 
+	public int getUserListCount() {
+		return session.selectOne("Admin.getUserListCount");
+	}
+	
+	public List<UserDataBean> getList(int code, Map<String, String> map){
+		List<UserDataBean> userlist = null;
+		if(code==102) {
+			userlist = session.selectList("Admin.getNameuserlist", map);
+		}else {
+			userlist = session.selectList("Admin.getAlluserlist", map);
+		}
+		return userlist;
+	}
+	
 }

@@ -8,11 +8,17 @@
 	<select id="getUser" parameterType="String" resultType="databean.UserDataBean">
 		SELECT * FROM jk_user WHERE id=#{id}
 	</select>
-	<select id="getAdm" parameterType="String" resultType="databean.UserDataBean">
-		SELECT * FROM jk_admin WHERE id=#{id}
+	<select id="getUserListCount" resultType="int">
+		SELECT count(*) FROM jk_user
 	</select>
-	
-	
+	<select id="getNameuserlist" parameterType="String" resultType="databean.UserDataBean">
+		SELECT * FROM jk_user WHERE name=#{name}
+	</select>
+	<select id="getAlluserlist" parameterType="java.util.Map" resultType="databean.UserDataBean">
+		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, r FROM(
+		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, rownum r FROM 
+		(SELECT * FROM jk_user ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
 
  
  

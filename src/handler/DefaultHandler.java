@@ -13,4 +13,5 @@ public class DefaultHandler {
 	public ModelAndView defaultHandler(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("/default/default");
 	}
+	
 }

@@ -1,5 +1,8 @@
 package handler;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +11,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.UserDataBean;
+import db.UserDao;
+import etc.HandlerHelper;
+
+
 @Controller
 public class AdminViewHandler {
+	@Resource
+	private UserDao userDao;
+	
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("memid");
+		int count = userDao.getUserListCount();
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<UserDataBean> members = userDao.getList(100, map);
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute("members", members);
+		request.setAttribute("admin", userDto);
+
 		return new ModelAndView("adm/view/userList");
 	}
 	@RequestMapping("/admChatting")

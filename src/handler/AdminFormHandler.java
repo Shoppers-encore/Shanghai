@@ -22,7 +22,7 @@ public class AdminFormHandler {
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
-		}
+	}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("memid");
