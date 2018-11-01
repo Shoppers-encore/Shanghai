@@ -11,12 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.UserDataBean;
-import logon.Adm_LogonDataBean;
-import logon.LogonDBBean;
-import logon.LogonDataBean;
-import product.ProductDao;
-import product.ProductDataBean;
-
+import db.UserDao;
 
 @Controller
 public class AdminFormHandler {
@@ -24,14 +19,14 @@ public class AdminFormHandler {
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String) request.getSession().getAttribute("memid");
 		UserDataBean userDto = new UserDataBean();
-		String userLevel = userDto.getUserLevel();
+		int userLevel = userDto.getUserLevel();
 		if( id != null ) {
 			if( userLevel == 9 ) {
-				Adm_LogonDataBean admin = new LogonDBBean().getAdm(id);
+				UserDataBean admin = new UserDao().getAdm(id);
 				request.setAttribute("admin", admin);
-				return new ModelAndView("adm/form/admLoginForm");
 				}
 			}
+		return new ModelAndView("adm/form/admLoginForm");
 		}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
