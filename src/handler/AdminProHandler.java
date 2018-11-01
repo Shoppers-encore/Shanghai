@@ -15,7 +15,7 @@ import db.UserDao;
 public class AdminProHandler {
 	@Resource
 	private UserDao userDao;
-	private final int userLevel=9;
+	public static final int USERLEVEL=9;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -25,7 +25,7 @@ public class AdminProHandler {
 		System.out.println(password);
 		UserDataBean userDto = userDao.getUser(id);
 		int result = 0;
-		if( userDto.getUserLevel() == userLevel && 
+		if( userDto.getUserLevel() == USERLEVEL && 
 				userDto.getPassword().equals( password ) ) {
 			result = 1; 
 		}
