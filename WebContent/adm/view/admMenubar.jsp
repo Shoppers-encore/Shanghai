@@ -23,7 +23,7 @@
           <a class="nav-link" href="userList.jk">${str_userList}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="goodList.jk">${str_goodList}</a>
+          <a class="nav-link" href="admproductView.jk">${str_productList}</a>
         </li>
 		<li class="nav-item">
           <a class="nav-link" href="boardList.jk?type=Rv">${str_boardList}</a>
@@ -32,7 +32,7 @@
           <a class="nav-link" href="orderFind.jk">${str_admOrderFind}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="admGoodList.jk">${str_admGoodList}</a>
+          <a class="nav-link" href="admProductList.jk">${str_admProductList}</a>
         </li>
       <li class="nav-item">
           <a class="nav-link" href="admChatting.jk">${str_chat}</a>

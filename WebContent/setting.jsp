@@ -18,6 +18,8 @@
 <c:set var="head_basketList" value="장바구니 상세페이지"/>
 
 
+
+
 <!-- String -->
 <c:set var="str_review" value="Review"/>
 <c:set var="str_productName" value="상품명"/>
@@ -29,10 +31,10 @@
 <c:set var="str_nim" value=" 님"/>
 <c:set var="str_dept" value="부서"/>
 <c:set var="str_userList" value="회원목록"/>
-<c:set var="str_goodList" value="상품목록"/>
+<c:set var="str_productList" value="상품목록"/>
 <c:set var="str_boardList" value="게시판 관리"/>
 <c:set var="str_admOrderFind" value="주문관리"/>
-<c:set var="str_admGoodList" value="상품관리"/>
+<c:set var="str_admProductList" value="상품관리"/>
 <c:set var="str_chat" value="실시간 상담"/>
 <c:set var="str_mypage" value="마이 페이지"/>
 <c:set var="str_name" value="이름"/>
@@ -97,6 +99,14 @@
 <c:set var="str_itemsTotal" value="전체 상품: 총 "/>
 <c:set var="str_productImage" value="상품 이미지"/>
 <c:set var="str_quantityUnit" value="개"/>
+<c:set var="str_address" value="주소"/>
+<c:set var="str_orderList" value="주문내역"/>
+<c:set var="str_totalUser" value="총 회원수"/>
+<c:set var="str_var" value="현재수량"/>
+<c:set var="str_varPlus" value="추가할 수량"/>
+
+
+
 
 <!-- color -->
 <c:set var="str_color_wht" value="하얀색"/>
@@ -127,6 +137,9 @@
 <c:set var="btn_cancel" value="취소"/>
 <c:set var="btn_write" value="작성"/>
 <c:set var="btn_list" value="목록"/>
+<c:set var="btn_search" value="검색"/>
+<c:set var="btn_save" value="저장"/>
+
 
 
 
@@ -138,3 +151,14 @@
 <c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
+
+
+
+
+<!-- url -->
+<c:set var="url_pageNum" value="?pageNum="/>
+<c:set var="url_searchType" value="&searchType="/>
+<c:set var="url_searchWord" value="&searchWord="/>
+
+
+
