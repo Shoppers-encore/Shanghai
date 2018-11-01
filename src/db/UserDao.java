@@ -1,17 +1,20 @@
 package db;
-import java.util.List;
+
 
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.UserDataBean;
-import logon.LogonDataBean;
+
+
 
 public class UserDao{
 	private SqlSession session = SqlMapClient.getSession();
+	
 	public int check(String id) {
 		return session.selectOne("db.checkUserId", id);
 	}
+
 
 
 
@@ -104,22 +107,26 @@ public class UserDao{
 		return userDto;
 	}
 	
-	public int check(String id, String passwd) {
-		if(id.length() <= 5) {
-			UserDataBean userDto = getAdm(id);
-			if(passwd.equals(userDto.getPassword())) {
-					return 1;
-				}else {
-					return 2;
-				}
-			}
-			return -1;
-		}
-
 
 public UserDataBean getUser(String id) {
 	return session.selectOne("Admin.getUser", id);
 	}
 
-}
+	public int check(String id, String password) {
+		int result = 0;
+		if( check(id) > 0) {
+			//Yes ID
+			UserDataBean UserDto = getUser(id);
+			if( password.equals(UserDto.getPassword())) {
+				result = 1;
+			} else {
+				result = -1;
+			}
+		} else {
+			// No ID
+			result = 0;
+		}
+		return result;
+	}
 
+}
