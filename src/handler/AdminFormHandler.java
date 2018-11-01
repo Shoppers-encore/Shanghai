@@ -12,21 +12,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import databean.UserDataBean;
 import db.UserDao;
+import logon.Adm_LogonDataBean;
+import logon.LogonDBBean;
 
 @Controller
 public class AdminFormHandler {
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String) request.getSession().getAttribute("memid");
-		UserDataBean userDto = new UserDataBean();
-		int userLevel = userDto.getUserLevel();
-		if( id != null ) {
-			if( userLevel == 9 ) {
+		if(id != null) {
+			if(id.length() <= 5) {
 				UserDataBean admin = new UserDao().getAdm(id);
 				request.setAttribute("admin", admin);
-				}
+				}		
 			}
-		return new ModelAndView("adm/form/admLoginForm");
+		return new ModelAndView("admin/form/admLoginForm");
 		}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {

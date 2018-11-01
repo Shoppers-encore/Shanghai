@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.UserDataBean;
+import logon.LogonDataBean;
 
 public class UserDao{
 	private SqlSession session = SqlMapClient.getSession();
@@ -114,5 +115,11 @@ public class UserDao{
 			}
 			return -1;
 		}
+
+
+public UserDataBean getUser(String id) {
+	return session.selectOne("Admin.getUser", id);
+	}
+
 }
 
