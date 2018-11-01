@@ -10,21 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import databean.UserDataBean;
-import db.UserDao;
 
 @Controller
 public class AdminFormHandler {
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String) request.getSession().getAttribute("memid");
-		if(id != null) {
-			if(id.length() <= 5) {
-				UserDataBean admin = new UserDao().getAdm(id);
-				request.setAttribute("admin", admin);
-				}		
-			}
-		return new ModelAndView("admin/form/admLoginForm");
+		return new ModelAndView("adm/form/admLoginForm");
 		}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {

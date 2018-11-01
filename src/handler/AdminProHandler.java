@@ -18,7 +18,7 @@ public class AdminProHandler {
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		UserDataBean userDto = logon.getAdm(id);
+		UserDataBean userDto = logon.getAdm(id);  
 		
 		return new ModelAndView("adm/pro/admLoginPro");
 	}
