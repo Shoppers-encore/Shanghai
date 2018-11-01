@@ -18,4 +18,7 @@ public class ProductDao{
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
 		return session.selectList("User.getProductList", map);
 	}
+	public String getProductName(String productCode) {
+		return session.selectOne("User.getProductName", productCode);
+	}
 }
