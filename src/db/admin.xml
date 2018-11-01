@@ -3,5 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="Admin">
-  </mapper>
+<mapper namespace="Admin">
+	<!-- admin login from jk_user -->
+	<select id="checkAdmId" parameterType="String" resultType="int">
+		SELECT count(*) FROM jk_user WHERE id=#{id}
+	</select>
+
+ 
+ 
+ 
+ 
+</mapper>

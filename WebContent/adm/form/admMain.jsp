@@ -27,7 +27,7 @@
 </head>
 <body class="container-fluid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 
-<%@ include file="../view/admMenubar.jsp"%>
+<%@ include file="/admMenubar.jsp"%>
 	<div class="col-sm-10 col-8" >
 	</div>
 </body>

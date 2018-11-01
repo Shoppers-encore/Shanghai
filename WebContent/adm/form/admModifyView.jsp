@@ -33,7 +33,7 @@
   
 </head>
 <body class="container-fluid row">
-<%@ include file="../view/admMenubar.jsp"%>
+<%@ include file="/admMenubar.jsp"%>
 	<article class="col-sm-10">
 			<br><br><br><br>
 		    <div class="centered border" id="mpinput">

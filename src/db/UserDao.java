@@ -10,5 +10,44 @@ public class UserDao{
 	public int check(String id) {
 		return session.selectOne("db.checkUserId", id);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int checkAdm(String id) {
+		return session.selectOne("db.checkAdmId", id);
+	}
+
+
+
+
 }
 

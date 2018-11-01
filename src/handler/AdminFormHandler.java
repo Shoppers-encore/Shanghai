@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminFormHandler {
-	@RequestMapping("admMain")
+	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
 	}
