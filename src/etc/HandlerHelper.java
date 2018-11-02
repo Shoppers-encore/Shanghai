@@ -15,6 +15,8 @@ import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import db.ProductDao;
 
+
+
 public class HandlerHelper {
 	public Map<String, String> makeCount(int count, HttpServletRequest request) {
 		int pageSize = 12;
@@ -163,19 +165,19 @@ public class HandlerHelper {
 	//////////////////////////////////////////// ### 1 FROM HERE /////////////////////////////////////////////////////
 
 	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
-		ProductDao dao = new ProductDao();
-		int count = dao.getSearchCount(searchWord);
+		ProductDao  productDao= new ProductDao();
+		int count = productDao.getSearchCount(searchWord);
 		Map<String,String> map = makeCount(count,request);
 		map.put("searchWord", searchWord);
-		List<ProductDataBean> productList = dao.getNameSearch(map);
+		List<ProductDataBean> productList = productDao.getNameSearch(map);
 		List<ImageInfoDataBean> imgList = new ArrayList<ImageInfoDataBean>();
 		for(int i = 0 ; i<productList.size(); i++) {	
 			int ref = productList.get(i).getRef();		
-			List<ImageInfoDataBean> data = dao.getImage(ref);
+			List<ImageInfoDataBean> data = productDao.getImage(ref);
 			imgList.addAll(data);
 		}
 		request.setAttribute("goods", productList);
-		request.setAttribute("imageList",imgList);
+		request.setAttribute("imageList", imgList);
 	}
 
 	public void getGoodImage(HttpServletRequest request, String searchWord, String selectedColors) {	// OVERRIDNG METHOD FOR PRODUCT NAME + COLOR SEARCH
