@@ -314,9 +314,9 @@
 		    <div align="center">
 			    <c:if test="${count gt 0}">
 					<c:if test="${currentPage ne 1}">
-						<a href="searchGood.jk${url_pageNum}1${url_searchWord}${searchWord}">[◀◀]</a>
+						<a href="searchGood.jk?searchWord=${searchWord}&color=${color}">[◀◀]</a>
 					<c:if test="${startPage gt pageBlock}">
-						<a href="searchGood.jk${url_pageNum}${startPage-pageBlock}${url_searchWord}${searchWord}">[◀]</a>
+						<a href="searchGood.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">[◀]</a>
 						</c:if>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -324,14 +324,14 @@
 						<span>[${i}]</span>
 						</c:if>
 						<c:if test="${i ne currentPage}">
-						<a href="searchGood.jk${url_pageNum}${i}${url_searchWord}${searchWord}">[${i}]</a>
+						<a href="searchGood.jk?pageNum=${i}&searchWord=${searchWord}">[${i}]</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne pageCount}">
 						<c:if test="${pageCount>endPage}">
-						<a href="searchGood.jk${url_pageNum}${startPage+pageBlock}${url_searchWord}${searchWord}">[▶]</a>
+						<a href="searchGood.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">[▶]</a>
 						</c:if>
-						<a href="searchGood.jk${url_pageNum}${pageCount}${url_searchWord}${searchWord}">[▶▶]</a>
+						<a href="searchGood.jk?pageNum=${pageCount}&searchWord=${searchWord}">[▶▶]</a>
 					</c:if>
 				</c:if>
 			</div>

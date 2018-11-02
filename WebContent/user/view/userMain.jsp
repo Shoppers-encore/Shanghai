@@ -28,7 +28,7 @@
 		    		<c:forEach var="product" items="${productList}">
 						<div class="col-md-3"  align="center"><br>
 					  		<form name="${product.ref}">
-					  			<a class="goodName" href="productDetail.jk?ref=${product.ref}">
+					  			<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">
 									<img src="/WebProject/save/${product.thumbnail}" id="thumb" name="${product.ref}"><br>
 						     		${product.productName}<br>
 							    	<input type="hidden" name="id" value="${sessionScope.memid}">
