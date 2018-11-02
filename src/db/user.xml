@@ -25,7 +25,8 @@
 	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
 	</select>
-	<!-- Review DB -->
+	
+	<!-- Review -->
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -33,13 +34,21 @@
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
 			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
+			SELECT * FROM jk_review WHERE review_no=#{num}
+	</select>
+	
+	
+	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
 		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}
 	</select>
-  	
+  
+  
+  	<!-- Search -->
 	<sql id="search">
         <choose>
            <when test="searchType=='ttl'">

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.Review_Like_DataBean;
 import databean.BasketDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
@@ -61,6 +62,31 @@ public class UserViewHandler {
 	
 	@RequestMapping( "/reviewDetail" )
 	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
+		int num = Integer.parseInt( request.getParameter( "review_no" ) );
+		String pageNum = request.getParameter( "pageNum" );
+		String number = request.getParameter( "number" );
+		
+		ReviewDataBean reviewDto = boardDao.get( num );
+		reviewDto.setLikes(boardDao.getReviewLikes(num));
+		String id=(String)request.getSession().getAttribute("memid");
+
+		if(id !=null) {
+			Map<String, String> map = new HashMap<String,String>();
+			map.put("review_no", new Integer(num).toString());
+			map.put("id", id);
+			int me = boardDao.getReviewLike(map);
+			if(me>0) {
+				reviewDto.setMe(id);
+			}
+		}
+		reviewDto.setGood_name(new ProductDao().getGoodName(reviewDto.getGood_code()));
+		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
+			boardDao.addCount(num);
+		
+		request.setAttribute( "number", number );
+		request.setAttribute( "pageNum", pageNum );
+		request.setAttribute( "reviewDto", reviewDto );
+		
 		return new ModelAndView( "user/view/reviewDetail" );
 	}
 	@RequestMapping("/reviewList")

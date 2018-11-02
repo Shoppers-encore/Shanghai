@@ -55,21 +55,6 @@
 <c:set var="str_dandy" value="댄디"/>
 <c:set var="str_buyerCode" value="거래처"/>
 <c:set var="str_color" value="색상"/>
-<c:set var="msg_color_wht" value="WHITE, IVORY"/>
-<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
-<c:set var="msg_color_red" value="RED, BURGUNDY"/>
-<c:set var="msg_color_blu" value="BLUE, DENIM"/>
-<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
-<c:set var="msg_color_ylw" value="YELLOW"/>
-<c:set var="msg_color_brn" value="BROWN"/>
-<c:set var="msg_color_nvy" value="NAVY"/>
-<c:set var="msg_color_gry" value="GRAY"/>
-<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
-<c:set var="msg_color_sky" value="SKYBLUE"/>
-<c:set var="msg_color_org" value="ORANGE"/>
-<c:set var="msg_color_ppl" value="PURPLE"/>
-<c:set var="msg_color_pnk" value="PINK"/>
-<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="str_price" value="금액"/>
 <c:set var="str_salePercent" value="할인율"/>
 <c:set var="str_category" value="카테고리"/>
@@ -104,11 +89,26 @@
 <c:set var="str_totalUser" value="총 회원수"/>
 <c:set var="str_var" value="현재수량"/>
 <c:set var="str_varPlus" value="추가할 수량"/>
-
+<c:set var="str_writeDate" value="작성일"/>
 
 
 
 <!-- color -->
+<c:set var="msg_color_wht" value="WHITE, IVORY"/>
+<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
+<c:set var="msg_color_red" value="RED, BURGUNDY"/>
+<c:set var="msg_color_blu" value="BLUE, DENIM"/>
+<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
+<c:set var="msg_color_ylw" value="YELLOW"/>
+<c:set var="msg_color_brn" value="BROWN"/>
+<c:set var="msg_color_nvy" value="NAVY"/>
+<c:set var="msg_color_gry" value="GRAY"/>
+<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
+<c:set var="msg_color_sky" value="SKYBLUE"/>
+<c:set var="msg_color_org" value="ORANGE"/>
+<c:set var="msg_color_ppl" value="PURPLE"/>
+<c:set var="msg_color_pnk" value="PINK"/>
+<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="str_color_wht" value="하얀색"/>
 <c:set var="str_color_blk" value="검은색"/>
 <c:set var="str_color_red" value="빨간색"/>
@@ -141,8 +141,11 @@
 <c:set var="btn_save" value="저장"/>
 <c:set var="btn_buy" value="구매"/>
 <c:set var="btn_inputCart" value="장바구니"/>
-
-
+<c:set var="btn_like" value="나도 공감하기"/>
+<c:set var="btn_likecancel" value="공감취소"/>
+<c:set var="btn_modify" value="수정"/>
+<c:set var="btn_delete" value="삭제"/>
+<c:set var="btn_list" value="목록"/>
 
 
 <!-- Message -->
@@ -154,7 +157,7 @@
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 
-
+<c:set var="msg_like" value="명이 공감한 게시물입니다."/>
 
 
 <!-- url -->
