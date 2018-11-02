@@ -1,5 +1,6 @@
 package db;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -24,5 +25,8 @@ public class ProductDao{
 
 	public List<ProductDataBean> getProductDetail(int ref) {
 		return session.selectList("User.getProductDetail",ref);
+	}
+	public List<String> getProductCodesByRef(String ref) {
+		return session.selectList("User.getProductCodeByRef", ref);
 	}
 }

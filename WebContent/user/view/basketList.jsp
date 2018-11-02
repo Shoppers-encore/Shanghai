@@ -38,10 +38,12 @@
 						${str_productName}
 					</div>
 					<div class="col-lg-2">
+						${str_Color}
+					</div>
+					<div class="col-lg-2">
 						${str_productQuantity}
 					</div>
 					<div class="col-lg-2">
-						${str_}
 					</div>
 				</div>
 				<c:forEach var="basketList" items="${basketList}">
@@ -51,6 +53,12 @@
 						</div>
 						<div class="col-lg-4 pt-5">
 							${basketList.productName}
+						</div>
+						<div class="col-lg-2 pt-5">
+							
+						</div>
+						<div class="col-lg-2 pt-5">
+							${basketList.basketQuantity}
 						</div>
 						<div class="col-lg-2 pt-5">
 							${basketList.basketQuantity}

@@ -11,7 +11,7 @@
 		select * from jk_user where id=#{id}
 	</select>
 	
-	<!-- 상품 DB -->
+	<!-- Product DB -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> -->) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
@@ -24,6 +24,9 @@
 	</select>
 	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
+	</select>
+	<select id="getProductCodesByRef" parameterType="String" resultType="java.util.List">
+		SELECT productCode FROM jk_product WHERE ref=#{ref}
 	</select>
 	
 	<!-- Review -->

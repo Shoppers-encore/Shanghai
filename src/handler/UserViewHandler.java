@@ -1,8 +1,8 @@
 package handler;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -40,17 +40,30 @@ public class UserViewHandler {
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
 		/*String id=(String)request.getSession().getAttribute("id");*/
 		String id="aaa";
-		System.out.println("MAV/basketList: "+id);
+		System.out.println("MAV/basketList-id: "+id);
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
 		int basketCount=basketDao.getBasketCount(id);
+		int i=0;
 		
 		for(BasketDataBean product:basketList) {
-			List<String> color;
-			List<String> size;
+			List<Arrays> color;
+			List<Arrays> size;
 			
 			String productCode=product.getProductCode();
+			String ref=productCode.substring(2,5);
+			System.out.println("MAV/basketList-ref: "+ref);
 			if(productCode.substring(0,2).equals("XX")) {
-				
+				List<String> prodCodes=productDao.getProductCodesByRef(ref);
+				for(String prodCode:prodCodes) {
+					
+					System.out.println("MAV/basketList-prodCode: "+prodCode);
+					if(prodCode.length()>3) {
+						String[] colors;
+						colors[i]=(prodCode.substring(0,2);
+						i++;
+					}
+					
+				}	
 			}
 		}
 		
