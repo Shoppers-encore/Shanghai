@@ -27,7 +27,7 @@ public class UserViewHandler {
 	private ProductDao productDao;
 	@Resource
 	private BasketDao basketDao;
-  @Resource
+	@Resource
 	private BoardDao boardDao;
   
 	@RequestMapping( "/userMailCheck" )
@@ -37,10 +37,21 @@ public class UserViewHandler {
 	
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
-		String id=(String)request.getSession().getAttribute("id");
+		/*String id=(String)request.getSession().getAttribute("id");*/
+		String id="aaa";
 		System.out.println("MAV/basketList: "+id);
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
 		int basketCount=basketDao.getBasketCount(id);
+		
+		for(BasketDataBean product:basketList) {
+			List<String> color;
+			List<String> size;
+			
+			String productCode=product.getProductCode();
+			if(productCode.substring(0,2).equals("XX")) {
+				
+			}
+		}
 		
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
