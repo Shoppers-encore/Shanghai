@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import board.Review_Like_DataBean;
+import databean.ReviewScoreDataBean;
 import databean.BasketDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
@@ -67,19 +67,19 @@ public class UserViewHandler {
 		String number = request.getParameter( "number" );
 		
 		ReviewDataBean reviewDto = boardDao.get( num );
-		reviewDto.setLikes(boardDao.getReviewLikes(num));
+		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
 		String id=(String)request.getSession().getAttribute("memid");
 
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
-			map.put("review_no", new Integer(num).toString());
+			map.put("reviewNo", new Integer(num).toString());
 			map.put("id", id);
 			int me = boardDao.getReviewLike(map);
 			if(me>0) {
-				reviewDto.setMe(id);
+				reviewDto.setCheckedme( true );
 			}
 		}
-		reviewDto.setGood_name(new ProductDao().getGoodName(reviewDto.getGood_code()));
+		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
 		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
 			boardDao.addCount(num);
 		

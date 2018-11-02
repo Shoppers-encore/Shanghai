@@ -46,10 +46,10 @@
 								${reviewDto.reviewScoreSum} ${msg_like}
 								<c:if test="${sessionScope.memid ne null}">
 									<c:if test="${reviewDto.checkedme eq null || reviewDto.checkedme ne sessionScope.memid}">
-										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='good.jk?review_no=${reviewDto.reviewNo}&number=${number}'">
+										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='good.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
 									</c:if>
 									<c:if test="${reviewDto.checkedme eq sessionScope.memid}">
-										<input class="btn btn-outline-danger" type="button" value="${btn_likecancel}" onclick="location='cancelGood.jk?review_no=${reviewDto.reviewNo}&number=${number}'">
+										<input class="btn btn-outline-danger" type="button" value="${btn_likecancel}" onclick="location='cancelGood.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
 									</c:if>
 								</c:if>
 							</th>
