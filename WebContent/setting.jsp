@@ -18,6 +18,8 @@
 <c:set var="head_basketList" value="장바구니 상세페이지"/>
 
 
+
+
 <!-- String -->
 <c:set var="str_review" value="Review"/>
 <c:set var="str_productName" value="상품명"/>
@@ -51,7 +53,6 @@
 <c:set var="str_weight" value="몸무게"/>
 <c:set var="str_casual" value="캐주얼"/>
 <c:set var="str_dandy" value="댄디"/>
-<c:set var="str_productName" value="상품명"/>
 <c:set var="str_buyerCode" value="거래처"/>
 <c:set var="str_color" value="색상"/>
 <c:set var="str_price" value="금액"/>
@@ -79,7 +80,10 @@
 <c:set var="str_writeReview" value="Reveiw 작성하기"/>
 <c:set var="str_score" value="평점"/>
 <c:set var="str_uploading" value="이미지 첨부"/>
-<c:set var="str_totalBasketCount" value="전체 상품: "/>
+<c:set var="str_productQuantity" value="수량"/>
+<c:set var="str_itemsTotal" value="전체 상품: 총 "/>
+<c:set var="str_productImage" value="상품 이미지"/>
+<c:set var="str_quantityUnit" value="개"/>
 <c:set var="str_address" value="주소"/>
 <c:set var="str_orderList" value="주문내역"/>
 <c:set var="str_totalUser" value="총 회원수"/>
@@ -100,6 +104,8 @@
 <c:set var="str_chat" value="실시간 상담"/>
 <c:set var="str_orderDetail" value="주문상세"/>
 	<c:set var="str_viewRv" value="리뷰 내용"/>
+
+
 
 
 <!-- color -->
@@ -141,6 +147,7 @@
 
 
 
+
 <!-- Message -->
 <c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 <c:set var="msg_admLogin" value="관리자 로그인을 해 주세요."/>
@@ -148,6 +155,7 @@
 <c:set var="msg_rewritepw" value="수정 시 비밀번호 재입력이 필요합니다."/>
 <c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
+<<<<<<< HEAD
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
 <c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
 <c:set var="msg_color_red" value="RED, BURGUNDY"/>
@@ -165,9 +173,17 @@
 <c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="msg_copyright" value="Copyright &copy; 2018 삼김일정(3Kim1Jeong)"/>
 	<c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
+=======
+<c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
+
+
+>>>>>>> master
 
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum="/>
 <c:set var="url_searchType" value="&searchType="/>
 <c:set var="url_searchWord" value="&searchWord="/>
+
+
+

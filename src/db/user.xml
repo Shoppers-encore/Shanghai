@@ -7,6 +7,9 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
+	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
+		select * from jk_user where id=#{id}
+	</select>
 	
 	<!--  -->
 	<select id="getProductCount" resultType="int">
@@ -27,7 +30,7 @@
 	</select>
 	
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT * FROM jk_basket WHERE id=#{id}
+		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}

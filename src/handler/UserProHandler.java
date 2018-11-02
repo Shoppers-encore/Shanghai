@@ -1,5 +1,6 @@
 package handler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,11 +8,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import databean.UserDataBean;
 import db.UserDao;
+import db.BasketDao;
+import db.BoardDao;
+import db.OrderDao;
+import db.ProductDao;
+import db.ChatDao;
+import db.TagDao;
+
+import databean.UserDataBean;
 
 @Controller
 public class UserProHandler {
+	@Resource
+	private UserDao userDao;
+	
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/pro/userInputPro");
@@ -20,8 +31,15 @@ public class UserProHandler {
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		UserDataBean userDto = UserDao.getUser(id);
+		UserDataBean userDto = userDao.getUser(id);
 		
+		int result = userDao.check(id, password);
+		request.setAttribute("result", result);
+		request.setAttribute("id", id);
+		
+		if (result != -1) {
+			request.setAttribute("userDto", userDto);
+		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
 	@RequestMapping( "/userModifyPro" )

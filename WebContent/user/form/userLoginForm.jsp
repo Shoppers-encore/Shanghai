@@ -13,14 +13,12 @@
 <!-- Status: No User-->
 <c:if test="${sessionScope.id eq null}">	
 <body class="login">
-	<form class="form-signin" method="post" action="userloginPro.go" name="loginform">
+	<form class="form-signin" method="post" action="userLoginPro.jk" name="loginform">
   		<a href="userMain.jk">
   			<img class="pt-0 mt-0 mb-4" src="" alt="logo" width="350" height="200">
   		</a>
-     	<input type="text" id="inputId" name="id" class="form-control" 
-     		placeholder="${str_id}" required autofocus> 	 	
- 	 	<input type="password" id="inputPassword" name="password" class="form-control" 
- 	 		placeholder="${str_passwd}" required>
+     	<input type="text" name="id" class="form-control" placeholder="${str_id}" required autofocus>   			 	
+ 	 	<input type="password" name="password" class="form-control" placeholder="${str_passwd}" required>	 		
   		<button class="btn btn-lg btn-secondary btn-block" type="submit">${btn_login}</button>
   		<a href="userInputForm.jk"><u>${page_input}</u></a>
   		<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>	
