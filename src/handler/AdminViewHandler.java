@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import db.ProductDao;
+
 @Controller
 public class AdminViewHandler {
 	@RequestMapping("/userList")
@@ -35,10 +37,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		String productCode = request.getParameter("productCode");
+		String productName = new ProductDao().getProductName(productCode);
+		request.setAttribute("productName", productName);
 		return new ModelAndView("adm/view/admOrderDetail");
 	}
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
+		String productCode = request.getParameter("productCode");
+		String productName = new ProductDao().getProductName(productCode);
+		request.setAttribute("productName", productName);
 		return new ModelAndView("adm/view/admOrderList");
 	}
 	@RequestMapping("/productModifyForm")

@@ -11,7 +11,7 @@
       font-family: 'Nanum Gothic';
    }
    
-   #goodinput {
+   #productInput {
       text-align : center;
       width : 100%;
       padding : 10px;
@@ -219,15 +219,15 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="checkbox" name="size" value="4">${str_sizeF}
                      </td>
-                     <th style="width :10%"> ${str_style} </th>
-                     <td style="width :20%">
+                     <th style="width :10%" rowspan="2"> ${str_style} </th>
+                     <td style="width :20%" rowspan="2">
                         <input type="radio" name="style" value="1">${str_casual}
                      <input type="radio" name="style" value="2">${str_dandy}
                      </td>
                   </tr>
                   <tr>
                         <th> ${str_productName} </th>
-                        <td colspan="5"> 
+                        <td colspan="3"> 
                            <input type="text" name="product_name" class="form-control">
                         </td>
                         
