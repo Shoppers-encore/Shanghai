@@ -16,7 +16,7 @@ public class UserDao{
 	private SqlSession session = SqlMapClient.getSession();
 	
 	public int check(String id) {
-		return session.selectOne("db.checkUserId", id);
+		return session.selectOne("User.checkUserId", id);
 	}
 
 	public UserDataBean getUser(String id) {
