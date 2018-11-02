@@ -19,4 +19,13 @@ public class BoardDao {
 	public ReviewDataBean get(int num) {
 		return session.selectOne("User.selectReview", num);
 	}
+	public int getReviewLikes(int num) {
+		return session.selectOne("User.getReviewLikes", num);
+	}
+	public int getReviewLike(Map<String,String> map) {
+		return session.selectOne("User.getReviewLike", map);
+	}
+	public int addCount(int num) {
+		return session.update("User.addCount",num);
+	}
 }
