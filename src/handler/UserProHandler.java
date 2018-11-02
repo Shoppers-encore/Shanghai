@@ -56,6 +56,7 @@ public class UserProHandler {
 	}
 	@RequestMapping( "/basketInput" )
 	public ModelAndView basketInput ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSeesion().getAttribute("memid");
 		return new ModelAndView("user/pro/basketInput");
 	}
 	@RequestMapping( "/basketModify" )

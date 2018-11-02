@@ -7,10 +7,11 @@
 <head>
 	<title>${productList.get(0).productName} 상세페이지</title>
 	<script type="text/javascript">
-		$("#sz, #cl").on("change",function(){
-			$("#goodcode").val() = $("cl").val()+$("#reff").val()+$("#sz").val()
+		$("#sz, #cl").change(function(){
+			var productCode = $("cl").val()+$("#reff").val()+$("#sz").val();
+			$("#productCode").val() = productCode;
 		})
-		$("basket").on("click",function(){
+		$("basket").click(function(){
 			$("#goodcode").val()
 		})
 	</script>
@@ -70,7 +71,7 @@
 									</select>
 								</td>
 								<td><input type="hidden" id="reff" name="reff" value="${productList.get(0).ref}"></td>
-								<td><input type="hidden" id="goodcode" name="goodcode" value="0"></td>                   
+								<td><input type="hidden" id="productCode" name="productCode" value="0"></td>                   
 							</tr>
 							<tr>
 							<td>${str_var}</td>
