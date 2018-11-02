@@ -12,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.OrderListDataBean;
 import databean.UserDataBean;
+import db.OrderDao;
 import db.ProductDao;
 import db.UserDao;
 import etc.HandlerHelper;
+
 
 
 @Controller
@@ -23,6 +26,7 @@ public class AdminViewHandler {
 	@Resource
 	private UserDao userDao;
 	private ProductDao productDao;
+	private OrderDao orderDao;
 	
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -89,9 +93,26 @@ public class AdminViewHandler {
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/admOrderDetail");
 	}
+	
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
+		int count = orderDao.getOrderCount();
+		List <OrderListDataBean> orderDto = null;
+		String id=(String) request.getSession().getAttribute("memid");
 		
+			if(count > 0) {
+				
+				count = orderDao.getUserCount(id);
+				Map<String, String> map = new HandlerHelper().makeCount(count, request);
+				map.put("id", id);
+				orderDto = orderDao.getList(map);
+			
+				for(int i=0; i<orderDto.size(); i++) {
+					orderDto.get(i).setProductName(new ProductDao().getProductName(orderDto.get(i).getProductCode()));
+				}
+				request.setAttribute("orders", orderDto);
+				request.setAttribute("count", count);
+		}
 		return new ModelAndView("adm/view/admOrderList");
 	}
 

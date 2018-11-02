@@ -22,9 +22,15 @@
 	<select id="getSearchCount" parameterType="String" resultType="int">
 		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
-
- 
- 
+	<select id="getOrderCount" resultType="int">
+	 	 SELECT count(*) FROM jk_orderList
+	</select>
+	<select id="selectOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		  SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList ORDER BY ordercode desc) list ORDER BY ordercode  desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+	<select id="userCount" parameterType="String" resultType="int">
+	 	 SELECT count(orderCode) FROM jk_orderList WHERE id=#{id}
+	</select>
  
  
 </mapper>
