@@ -29,7 +29,7 @@
           <a class="nav-link" href="boardList.jk?type=Rv">${str_boardList}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="orderFind.jk">${str_admOrderFind}</a>
+          <a class="nav-link" href="orderFind.jk">${str_admOrderList}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="admProductList.jk">${str_admProductList}</a>
