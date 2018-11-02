@@ -163,7 +163,7 @@
 <c:set var="btn_inputCart" value="장바구니"/>
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
-
+<c:set var="btn_confirm" value="확인"/>
 
 <!-- Message -->
 <c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>

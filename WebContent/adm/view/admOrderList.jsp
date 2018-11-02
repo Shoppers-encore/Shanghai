@@ -53,7 +53,6 @@ $('input[name=btid]').attr('value', result)
                   <tr>
                      <th>${str_orderCode}</th>
                      <th>${str_orderId}</th>
-                     <th>${str_productName}</th>
                      <th>${str_orderStatus}</th>
                      <th>${str_address}</th>
                      <th>${str_totalPrice}</th>
@@ -62,7 +61,7 @@ $('input[name=btid]').attr('value', result)
                <tbody>
                   <c:if test="${count eq null or count eq 0}">   
                   <tr>
-                     <td colspan="6" align="center">
+                     <td colspan="5" align="center">
                         ${msg_list_x}
                      </td>
                   </tr>
@@ -72,28 +71,27 @@ $('input[name=btid]').attr('value', result)
                      <tr>
                         <td><a href="admOrderDetail.jk?orderCode=${order.orderCode}&order_id=${order.id}">${order.orderCode}</a></td>
                         <td>${order.id}</td>
-                        <td>${order.productName}</td>
                         <!-- something should be done by Handler => ask JH! -->
                         <td><c:choose>
 	                        	<c:when test="${order.orderStatus eq 0}">
-	                        		<input type="text" value="${orderStatus0}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
+	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
 	                        	</c:when>
 	                        	<c:when test="${order.orderStatus eq 1}">
-	                        		<input type="text" value="${orderStatus1}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
+	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
 	                        	</c:when>
 	                        	<c:when test="${order.orderStatus eq 2}">
-	                        		<input type="text" value="${orderStatus2}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
+	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
 	                        	</c:when>
 	                        	<c:when test="${order.orderStatus eq 3}">
-	                        		<input type="text" value="${orderStatus3}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
+	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
 	                        	</c:when>
                         	</c:choose>
                         <c:if test="${order.orderStatus lt 3}">
                         	<input type="button" id="${order.orderCode}" class="btn btn-outline-info btn-sm" name="${order.orderCode}" value="${btn_confirm}" onclick="location='orderStatusChange.jk?id=${order.id}&orderCode=${order.orderCode}'">
                         </c:if>
                         </td>
-                        <td>${order.zipcode}<br></td>
-                        <td>${order.price}</td>
+                        <td>${order.orderZipcode}<br></td>
+                        <td>${order.orderPrice}</td>
                         
                      </tr>
                   </c:forEach>

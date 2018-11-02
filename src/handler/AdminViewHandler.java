@@ -20,13 +20,12 @@ import db.UserDao;
 import etc.HandlerHelper;
 
 
-
 @Controller
 public class AdminViewHandler {
 	@Resource
 	private UserDao userDao;
 	private ProductDao productDao;
-	private OrderDao orderDao;
+
 	
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -96,23 +95,17 @@ public class AdminViewHandler {
 	
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
+		OrderDao orderDao = new OrderDao();
 		int count = orderDao.getOrderCount();
-		List <OrderListDataBean> orderDto = null;
+		System.out.println( count );
+	
 		String id=(String) request.getSession().getAttribute("memid");
-		
-			if(count > 0) {
 				
-				count = orderDao.getUserCount(id);
-				Map<String, String> map = new HandlerHelper().makeCount(count, request);
-				map.put("id", id);
-				orderDto = orderDao.getList(map);
-			
-				for(int i=0; i<orderDto.size(); i++) {
-					orderDto.get(i).setProductName(new ProductDao().getProductName(orderDto.get(i).getProductCode()));
-				}
-				request.setAttribute("orders", orderDto);
-				request.setAttribute("count", count);
-		}
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<OrderListDataBean> orders = orderDao.getOrderList(map);
+		
+		request.setAttribute("orders", orders);
+		request.setAttribute("count", count);
 		return new ModelAndView("adm/view/admOrderList");
 	}
 
