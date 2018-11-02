@@ -17,9 +17,6 @@ public class OrderDao {
 		return session.selectOne("Admin.getOrderCount");
 	}
 	
-	/*public List<OrderListDataBean> getList(Map<String, String> map){
-			return session.selectList("Admin.selectOrderList",map);
-	}*/
 	
 	public List<OrderListDataBean> getList(Map<String, String> map){
 		if(map.get("id") == null || map.get("id").length()<=5) {

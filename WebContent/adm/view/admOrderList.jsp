@@ -90,7 +90,7 @@ $('input[name=btid]').attr('value', result)
                         	<input type="button" id="${order.orderCode}" class="btn btn-outline-info btn-sm" name="${order.orderCode}" value="${btn_confirm}" onclick="location='orderStatusChange.jk?id=${order.id}&orderCode=${order.orderCode}'">
                         </c:if>
                         </td>
-                        <td>${order.orderZipcode}<br></td>
+                        <td>${order.orderAddress1} ${order.orderAddress2}<br></td>
                         <td>${order.orderPrice}</td>
                         
                      </tr>

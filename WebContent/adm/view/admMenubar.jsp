@@ -14,7 +14,7 @@
                </p>
                <a href="myPage.jk" class="btn btn-primary">${btn_myPage}</a>
                <input class="btn btn-primary" type="button" value="${btn_logout}"
-                 onclick="location='logout.jk'"><br>
+                 onclick="location='admLoginForm.jk'"><br>
              </div>
            </div>        
          </li>

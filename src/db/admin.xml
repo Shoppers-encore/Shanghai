@@ -48,4 +48,11 @@
 	 <select id="selectUserOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
 	 	 SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList WHERE id=#{id} ORDER BY orderCode desc) list ) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	 </select>
+	 <select id="getProdCount" resultType="int">
+	 	 SELECT count(*) FROM jk_product
+	</select>
+	<select id="getProdList" resultType="int">
+	 	 SELECT count(*) FROM jk_product
+	</select>
+	
 </mapper>

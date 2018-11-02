@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.OrderListDataBean;
+import databean.ProductDataBean;
 import databean.UserDataBean;
 import db.OrderDao;
 import db.ProductDao;
@@ -24,7 +25,6 @@ import etc.HandlerHelper;
 public class AdminViewHandler {
 	@Resource
 	private UserDao userDao;
-	private ProductDao productDao;
 
 	
 	@RequestMapping("/userList")
@@ -82,8 +82,17 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductList" )
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
+		ProductDao productDao = new ProductDao();
+		int count = productDao.getProdCount();
+		System.out.println( count );
+		Map<String,String> map = new HandlerHelper().makeCount(count, request);
+		List <ProductDataBean> products = productDao.getProdList(map);
+		request.setAttribute("products", products);
+		request.setAttribute("count", count);
+		
 		return new ModelAndView("adm/view/admProductList");
 	}
+	
 	@RequestMapping("/admMypage")
 	public ModelAndView admMypage(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/admMypage");
