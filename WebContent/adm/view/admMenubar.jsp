@@ -22,19 +22,19 @@
           <a class="nav-link" href="userList.jk">${str_userList}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="admproductView.jk">${str_productList}</a>
+          <a class="nav-link" href="admProductView.jk">${str_productList}</a>
         </li>
       <li class="nav-item">
-          <a class="nav-link" href="boardList.jk?type=Rv">${str_boardList}</a>
+          <a class="nav-link" href="admReviewList.jk">${str_boardList}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="orderFind.jk">${str_admOrderList}</a>
+          <a class="nav-link" href="admOrderList.jk">${str_admOrderList}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="admProductList.jk">${str_admProductList}</a>
         </li>
       <li class="nav-item">
-          <a class="nav-link" href="admChatting.jk">${str_chat}</a>
+          <a class="nav-link" href="admChatView.jk">${str_chat}</a>
         </li>
       </ul>
     </nav>

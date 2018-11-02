@@ -19,6 +19,9 @@
 		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, rownum r FROM 
 		(SELECT * FROM jk_user ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="getSearchCount" parameterType="String" resultType="int">
+		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
+	</select>
 
  
  
