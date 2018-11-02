@@ -40,6 +40,15 @@
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE review_no=#{num}
 	</select>
+	<select id="getReviewLikes" parameterType="int" resultType="int">
+			SELECT count(*) FROM jk_reviewScore WHERE reviewNo=#{reviewNo}
+	</select>
+	<select id="getReviewLike" parameterType="java.util.Map" resultType="int">
+			SELECT count(*) FROM jk_reviewScore WHERE TO_CHAR(reviewNo)=#{reviewNo} AND id=#{id}
+	</select>
+	<update id="addCount" parameterType="int">
+			UPDATE jk_review SET count=count+1 WHERE reviewNo=#{num}
+	</update>
 	
 	
 	<!-- Basket -->
