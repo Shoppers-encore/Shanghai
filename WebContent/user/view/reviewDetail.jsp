@@ -27,7 +27,7 @@
 							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled></td>		
 							<th style="width:20%">${str_score}</th>
 							<td style="width:30%"><input type="range" min="0" step="0.5" max="5" value="${reviewDto.score}" class="slider" id="myRange" disabled>
-								<span id="demo"> ${reviewDto.score} </span></td>
+								<span id="demo">${reviewDto.score}</span></td>
 						</tr>
 						<tr>
 							<th>${str_title}</th>
@@ -57,8 +57,8 @@
 						<tr>
 							<th colspan="4">
 								<c:if test="${sessionScope.memid.length() le 5 or reviewDto.id eq sessionScope.memid}">
-									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="ReviewModable()">
-									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick="ReviewDelcheck()">
+									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="reviewModable()">
+									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick="reviewDelcheck()">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk?pageNum=${pageNum}'">
 							</th>
