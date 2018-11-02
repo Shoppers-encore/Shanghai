@@ -103,12 +103,27 @@
 <c:set var="str_orderStatus3" value="배송완료"/>
 <c:set var="str_chat" value="실시간 상담"/>
 <c:set var="str_orderDetail" value="주문상세"/>
-	<c:set var="str_viewRv" value="리뷰 내용"/>
-
+<c:set var="str_viewRv" value="리뷰 내용"/>
+<c:set var="str_writeDate" value="작성일"/>
 
 
 
 <!-- color -->
+<c:set var="msg_color_wht" value="WHITE, IVORY"/>
+<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
+<c:set var="msg_color_red" value="RED, BURGUNDY"/>
+<c:set var="msg_color_blu" value="BLUE, DENIM"/>
+<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
+<c:set var="msg_color_ylw" value="YELLOW"/>
+<c:set var="msg_color_brn" value="BROWN"/>
+<c:set var="msg_color_nvy" value="NAVY"/>
+<c:set var="msg_color_gry" value="GRAY"/>
+<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
+<c:set var="msg_color_sky" value="SKYBLUE"/>
+<c:set var="msg_color_org" value="ORANGE"/>
+<c:set var="msg_color_ppl" value="PURPLE"/>
+<c:set var="msg_color_pnk" value="PINK"/>
+<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="str_color_wht" value="하얀색"/>
 <c:set var="str_color_blk" value="검은색"/>
 <c:set var="str_color_red" value="빨간색"/>
@@ -143,9 +158,11 @@
 <c:set var="btn_modify" value="수정"/>
 <c:set var="btn_productDel" value="상품삭제"/>
 <c:set var="btn_scoreUp" value="나도 공감하기"/>
-	<c:set var="btn_delete" value="삭제"/>
-
-
+<c:set var="btn_delete" value="삭제"/>
+<c:set var="btn_buy" value="구매"/>
+<c:set var="btn_inputCart" value="장바구니"/>
+<c:set var="btn_like" value="나도 공감하기"/>
+<c:set var="btn_likecancel" value="공감취소"/>
 
 
 <!-- Message -->
@@ -155,29 +172,10 @@
 <c:set var="msg_rewritepw" value="수정 시 비밀번호 재입력이 필요합니다."/>
 <c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
-<<<<<<< HEAD
-<c:set var="msg_color_wht" value="WHITE, IVORY"/>
-<c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
-<c:set var="msg_color_red" value="RED, BURGUNDY"/>
-<c:set var="msg_color_blu" value="BLUE, DENIM"/>
-<c:set var="msg_color_grn" value="GREEN, KAHKI, OLIVE"/>
-<c:set var="msg_color_ylw" value="YELLOW"/>
-<c:set var="msg_color_brn" value="BROWN"/>
-<c:set var="msg_color_nvy" value="NAVY"/>
-<c:set var="msg_color_gry" value="GRAY"/>
-<c:set var="msg_color_beg" value="BEIGE, CAMEL"/>
-<c:set var="msg_color_sky" value="SKYBLUE"/>
-<c:set var="msg_color_org" value="ORANGE"/>
-<c:set var="msg_color_ppl" value="PURPLE"/>
-<c:set var="msg_color_pnk" value="PINK"/>
-<c:set var="msg_color_etc" value="PURPLE, PINK, ORANGE, ETC"/>
 <c:set var="msg_copyright" value="Copyright &copy; 2018 삼김일정(3Kim1Jeong)"/>
-	<c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
-=======
+<c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
-
-
->>>>>>> master
+<c:set var="msg_like" value="명이 공감한 게시물입니다."/>
 
 
 <!-- url -->
