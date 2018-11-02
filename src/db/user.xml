@@ -11,13 +11,22 @@
 		select * from jk_user where id=#{id}
 	</select>
 	
-	<!--  -->
-	<select id="getProductCount" resultType="int">
-		SELECT count(*) FROM jk_product
+	<!-- 상품 DB -->
+	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> -->) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product WHERE productCode!=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT product.* FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> --> ) product
+		WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%') list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<select id="getProductName" parameterType="String" resultType="String">
+		SELECT productName FROM jk_product WHERE productCode=#{productCode}
+	</select>
+	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
+	</select>
+	
+	<!-- Review -->
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -25,17 +34,21 @@
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
 			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
-	<select id="getProductName" parameterType="String" resultType="String">
-		SELECT productName FROM jk_product WHERE productCode=#{productCode}
+	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
+			SELECT * FROM jk_review WHERE review_no=#{num}
 	</select>
 	
+	
+	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT * FROM jk_basket WHERE id=#{id}
+		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}
 	</select>
   
+  
+  	<!-- Search -->
 	<sql id="search">
         <choose>
            <when test="searchType=='ttl'">
@@ -55,5 +68,50 @@
            </otherwise>
         </choose>
      </sql>
-
+	
+	<sql id="colorSearch">
+		WHERE
+		<if test="selectedColors.contains('WH')">
+			productCode LIKE 'WH'||'%' OR
+		</if>
+		<if test="selectedColors.contains('BK')">
+			productCode LIKE 'BK'||'%' OR
+		</if>
+		<if test="selectedColors.contains('RD')">
+			productCode LIKE 'RD'||'%' OR
+		</if>
+		<if test="selectedColors.contains('BL')">
+			productCode LIKE 'BL'||'%' OR
+		</if>
+		<if test="selectedColors.contains('GN')">
+			productCode LIKE 'GN'||'%' OR
+		</if>
+		<if test="selectedColors.contains('YL')">
+			productCode LIKE 'YL'||'%' OR
+		</if>
+		<if test="selectedColors.contains('BR')">
+			productCode LIKE 'BR'||'%' OR
+		</if>
+		<if test="selectedColors.contains('NV')">
+			productCode LIKE 'NV'||'%' OR
+		</if>
+		<if test="selectedColors.contains('GR')">
+			productCode LIKE 'GR'||'%' OR
+		</if>
+		<if test="selectedColors.contains('BG')">
+			productCode LIKE 'BG'||'%' OR
+		</if>
+		<if test="selectedColors.contains('SK')">
+			productCode LIKE 'SK'||'%' OR
+		</if>
+		<if test="selectedColors.contains('ETC')">
+			productCode LIKE 'PK'||'%' OR
+			productCode LIKE 'PP'||'%' OR
+			productCode LIKE 'OR'||'%' OR
+		</if>
+		<if test="selectedColors==null">
+			productCode LIKE '' || '%' OR
+		</if>
+		productCode LIKE '0000'||'%'
+	</sql>
 </mapper>

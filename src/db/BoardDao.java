@@ -16,4 +16,7 @@ public class BoardDao {
 	public List<ReviewDataBean> getReviewList(Map<String, String> needData){
 		return session.selectList( "User.getReviewList", needData );
 	}
+	public ReviewDataBean get(int num) {
+		return session.selectOne("User.selectReview", num);
+	}
 }

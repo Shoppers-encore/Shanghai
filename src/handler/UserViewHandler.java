@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.Review_Like_DataBean;
 import databean.BasketDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
@@ -27,7 +28,7 @@ public class UserViewHandler {
 	private ProductDao productDao;
 	@Resource
 	private BasketDao basketDao;
-  @Resource
+	@Resource
 	private BoardDao boardDao;
   
 	@RequestMapping( "/userMailCheck" )
@@ -37,10 +38,21 @@ public class UserViewHandler {
 	
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
-		String id=(String)request.getSession().getAttribute("id");
+		/*String id=(String)request.getSession().getAttribute("id");*/
+		String id="aaa";
 		System.out.println("MAV/basketList: "+id);
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
 		int basketCount=basketDao.getBasketCount(id);
+		
+		for(BasketDataBean product:basketList) {
+			List<String> color;
+			List<String> size;
+			
+			String productCode=product.getProductCode();
+			if(productCode.substring(0,2).equals("XX")) {
+				
+			}
+		}
 		
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
@@ -50,6 +62,31 @@ public class UserViewHandler {
 	
 	@RequestMapping( "/reviewDetail" )
 	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
+		int num = Integer.parseInt( request.getParameter( "review_no" ) );
+		String pageNum = request.getParameter( "pageNum" );
+		String number = request.getParameter( "number" );
+		
+		ReviewDataBean reviewDto = boardDao.get( num );
+		reviewDto.setLikes(boardDao.getReviewLikes(num));
+		String id=(String)request.getSession().getAttribute("memid");
+
+		if(id !=null) {
+			Map<String, String> map = new HashMap<String,String>();
+			map.put("review_no", new Integer(num).toString());
+			map.put("id", id);
+			int me = boardDao.getReviewLike(map);
+			if(me>0) {
+				reviewDto.setMe(id);
+			}
+		}
+		reviewDto.setGood_name(new ProductDao().getGoodName(reviewDto.getGood_code()));
+		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
+			boardDao.addCount(num);
+		
+		request.setAttribute( "number", number );
+		request.setAttribute( "pageNum", pageNum );
+		request.setAttribute( "reviewDto", reviewDto );
+		
 		return new ModelAndView( "user/view/reviewDetail" );
 	}
 	@RequestMapping("/reviewList")
@@ -65,8 +102,13 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int count = productDao.getProductCount();
-		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
+		int count = productDao.getProductCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
 		List<ProductDataBean> productList = productDao.getProductList(map);
 		request.setAttribute("productList", productList);
 		request.setAttribute("productCount", count);
@@ -79,10 +121,40 @@ public class UserViewHandler {
 	
 	@RequestMapping("/userProductDetail")
 	public ModelAndView userProductDetail(HttpServletRequest request, HttpServletResponse response) {
+		int ref = Integer.parseInt(request.getParameter("ref"));
+		List<ProductDataBean> list =productDao.getProductDetail(ref);
+		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
+		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		request.setAttribute("productList", list);
+		request.setAttribute("colors", colors);
+		request.setAttribute("sizes", sizes);
 		return new ModelAndView("user/view/userProductDetail");
 	}
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, String> map = new HashMap<String, String>();
+		StringBuffer color = new StringBuffer();
+		int count = 0;
+		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
+			map.put("searchWord", request.getParameter("searchWord"));
+			String[] colors = request.getParameterValues("color");
+			if(colors !=null) {
+				for(int i = 0 ; i<colors.length ;i++) {
+					color.append(colors[i]+" ");
+				}
+			}
+			map.put("selectedColors", color.toString());
+			count = productDao.getProductCount(map);
+		}
+		map = new HandlerHelper().makeCount(count, request);
+		List<ProductDataBean> productList = null;
+		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
+			map.put("searchWord", request.getParameter("searchWord"));
+			map.put("selectedColors",color.toString());
+			productList = productDao.getProductList(map);
+		}
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userSearchProduct");
 	}
 	@RequestMapping("/userMypage")

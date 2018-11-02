@@ -33,14 +33,14 @@
     width : 20px;
 }
 
-/* 디폴트 체크박스 숨기기 */
+/* Hiding default (ugly) checkbox */
 .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
-/* 색상별 체크박스 커스터마이징 */
+/* Customizing each color checkbox */
 .checkmark {
     position: absolute;
     top: 0;
@@ -98,19 +98,18 @@
    background-color : #FF96AA;
 }
 
-/* 체크박스 마킹 시 이미지 뜨게 설정 */
+/* marking image pops up when checked */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* 체크 시 표시 이미지를 띄워주기  */
 .container input:checked ~ .checkmark:after {
     display: block;
 }
 
-/* 체크이미지 조절 */
+/* adjusting checkmarks */
 .container .checkmark:after {
     left: 8px;
     top: 3px;
@@ -122,7 +121,7 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-/* 흰 색 체크박스는 다른 색과 달리 체크 이미지가 검정색+크기가 좀 달라서 따로 조정해줌 */
+/* Customizing WHITE checkbox bc it has different options */
 .container .checkmark#white:after {
     left: 6px;
     top: 2px;
@@ -131,7 +130,7 @@
     border: solid black;
     border-width: 0 2px 2px 0;
 }
-/* 말풍선 텍스트 영역 설정 */
+/* adjusting tooltiptext area */
 .container .tooltiptext {
     visibility: hidden;
     width: 120px;
@@ -202,14 +201,14 @@
 
 <body>
    <div class="aa">
-       <div class="border" id="goodinput">
-               <h3>${str_goodInput}</h3>
+       <div class="border" id="productInput">
+               <h3>${str_productInput}</h3>
                <form name="goodInputform" encType="multipart/form-data" action="goodInputPro.jk" method="post" accept-charset="UTF-8">
                <table class="table">
                   <tr>
                      <th style="width :10%"> ${str_productCode} </th>
                      <td style="width :20%">
-                        <input type="text" name="product_code" class="form-control" readonly value="${num}">
+                        <input type="text" name="product_code" class="form-control" readonly value="${ref}">
                      </td>
                      <th style="width :10%"> ${str_size} </th>
                      <td style="width :30%">
@@ -344,12 +343,12 @@
                   <tr>
                         <th> ${str_content} </th>
                         <td colspan="5">
-                           <textarea id="goodcontent" name="good_content" class="form-control" rows="15"></textarea>
+                           <textarea id="productContent" name="good_content" class="form-control" rows="15"></textarea>
                         </td>
                   </tr>
                   <tr>
                         <th colspan="6" align="center">
-                           <input class="btn btn-primary" type="submit" value="${btn_goodInput}">
+                           <input class="btn btn-primary" type="submit" value="${btn_productInput}">
                            <input class="btn btn-secondary" type="button" value="${btn_back}" onclick="location='admGoodList.jk'">
                            <input class="btn btn-secondary" type="reset" value="${btn_cancel}">
                         </th>

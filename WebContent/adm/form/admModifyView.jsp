@@ -43,13 +43,6 @@
 					<form name="admModform" action="admModifyPro.jsp" onsubmit="return admModcheck()">
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
-								<span class="input-group-text">${str_dept}</span>
-							</div>
-							<input type="text" name="department_name" class="form-control"
-								placeholder="${admin.department_name}" disabled>
-						</div>
-						<div class="input-group mb-2">
-							<div class="input-group-prepend">
 								<span class="input-group-text">${str_id}</span>
 							</div>
 							<input type="text" name="id" class="form-control" value="${admin.id}" disabled>
