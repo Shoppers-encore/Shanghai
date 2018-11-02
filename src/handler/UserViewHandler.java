@@ -86,7 +86,9 @@ public class UserViewHandler {
 		}
 		
 		request.setAttribute("productColors", prodColors);
+		System.out.println(prodColors);
 		request.setAttribute("productSizes", prodSizes);
+		System.out.println(prodSizes);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
 		

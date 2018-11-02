@@ -22,12 +22,7 @@
 		<div class="container-fluid col-lg-10">
 			<div class="mt-3"><h5>${str_itemsTotal}${basketCount}${str_quantityUnit}</h5></div>
 			
-			<c:forEach var="basketList" items="${basketList}">
-				<c:forEach var="prodColors" items="${productColors}">
-					<c:forEach var="prodColor" items="${prodColors}">
-						<div>${prodColor}</div>
-					</c:forEach>
-				</c:forEach>
+			<c:forEach var="prodColors" items="${productColors}">
 			</c:forEach>
 			
 			<!-- If Basket is empty -->
