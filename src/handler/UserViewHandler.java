@@ -1,8 +1,10 @@
 package handler;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,35 +40,53 @@ public class UserViewHandler {
 	
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
-		/*String id=(String)request.getSession().getAttribute("id");*/
+		/* Temporarily loaded customer id */
 		String id="aaa";
-		System.out.println("MAV/basketList-id: "+id);
-		List<BasketDataBean> basketList=basketDao.getBasketList(id);
-		int basketCount=basketDao.getBasketCount(id);
-		int i=0;
 		
+		//String id=(String)request.getSession().getAttribute("id");
+		System.out.println("MAV/basketList-id: "+id);
+		
+		/* Get items from jk_basket using id */
+		List<BasketDataBean> basketList=basketDao.getBasketList(id);
+		
+		/* Total number of items in the basket */
+		int basketCount=basketDao.getBasketCount(id);
+		
+		/* Create a HashMap that can hold color and size options for each item in the basket */
+		ArrayList<HashSet<String>> prodColors=new ArrayList<HashSet<String>>();
+		ArrayList<HashSet<String>> prodSizes=new ArrayList<HashSet<String>>();
+		
+		/* For each item in the basket: */
 		for(BasketDataBean product:basketList) {
-			List<Arrays> color;
-			List<Arrays> size;
+			HashSet<String> colors=new HashSet<String>();
+			HashSet<String> sizes=new HashSet<String>();
 			
+			// 1) Get its productCode and reference number
 			String productCode=product.getProductCode();
 			String ref=productCode.substring(2,5);
 			System.out.println("MAV/basketList-ref: "+ref);
-			if(productCode.substring(0,2).equals("XX")) {
-				List<String> prodCodes=productDao.getProductCodesByRef(ref);
-				for(String prodCode:prodCodes) {
+			
+			// 2) Get productCodes with the same reference number
+			List<ProductDataBean> prodCodesFromRef=productDao.getProductCodesByRef(ref);
+			
+			// 3) Get color and size options using the productCodes
+			for(ProductDataBean prodCode:prodCodesFromRef) {
+				String color=prodCode.getProductCode().substring(0,2);
+				System.out.println("MAV/basketList-color: "+color);
+				colors.add(color);
 					
-					System.out.println("MAV/basketList-prodCode: "+prodCode);
-					if(prodCode.length()>3) {
-						String[] colors;
-						colors[i]=(prodCode.substring(0,2);
-						i++;
-					}
-					
-				}	
+				String size=prodCode.getProductCode().substring(prodCode.getProductCode().length()-2,prodCode.getProductCode().length());
+				System.out.println("MAV/basketList-size: "+size);
+				sizes.add(size);
 			}
+
+			// 4) Add color and size options for each item to prodOptions
+			prodColors.add(colors);
+			prodSizes.add(sizes);
 		}
 		
+		request.setAttribute("productColors", prodColors);
+		request.setAttribute("productSizes", prodSizes);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
 		

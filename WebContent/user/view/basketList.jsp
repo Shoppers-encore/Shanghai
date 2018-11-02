@@ -22,6 +22,14 @@
 		<div class="container-fluid col-lg-10">
 			<div class="mt-3"><h5>${str_itemsTotal}${basketCount}${str_quantityUnit}</h5></div>
 			
+			<c:forEach var="basketList" items="${basketList}">
+				<c:forEach var="prodColors" items="${productColors}">
+					<c:forEach var="prodColor" items="${prodColors}">
+						<div>${prodColor}</div>
+					</c:forEach>
+				</c:forEach>
+			</c:forEach>
+			
 			<!-- If Basket is empty -->
 			<c:if test="${basketCount eq 0}">
 				<div class="row font-weight-bold text-center pt-5">
@@ -38,15 +46,19 @@
 						${str_productName}
 					</div>
 					<div class="col-lg-2">
-						${str_Color}
+						${str_color}
 					</div>
 					<div class="col-lg-2">
+						${str_size}
+					</div>
+					<div class="col-lg-1">
 						${str_productQuantity}
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 					</div>
 				</div>
-				<c:forEach var="basketList" items="${basketList}">
+						
+				<c:forEach var="basketList" items="${basketList}">					
 					<div class="row border text-center">
 						<div class="col-lg-2">
 							<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -55,13 +67,16 @@
 							${basketList.productName}
 						</div>
 						<div class="col-lg-2 pt-5">
-							
+							${productColors}
 						</div>
 						<div class="col-lg-2 pt-5">
+							${productSizes}
+						</div>
+						<div class="col-lg-1 pt-5">
 							${basketList.basketQuantity}
 						</div>
-						<div class="col-lg-2 pt-5">
-							${basketList.basketQuantity}
+						<div class="col-lg-1 pt-5">
+							<button class="btn">${btn_delete}</button>
 						</div>
 					</div>
 				</c:forEach>

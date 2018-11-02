@@ -26,7 +26,7 @@ public class ProductDao{
 	public List<ProductDataBean> getProductDetail(int ref) {
 		return session.selectList("User.getProductDetail",ref);
 	}
-	public List<String> getProductCodesByRef(String ref) {
-		return session.selectList("User.getProductCodeByRef", ref);
+	public List<ProductDataBean> getProductCodesByRef(String ref) {
+		return session.selectList("User.getProductCodesByRef", ref);
 	}
 }
