@@ -106,6 +106,9 @@
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
 <c:set var="str_bday" value="생일"/>
+<c:set var="str_gender" value="성별"/>
+<c:set var="str_gender_m" value="남성"/>
+<c:set var="str_gender_f" value="여성"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -163,6 +166,7 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
+<c:set var="btn_selfConfirm" value="인증"/>
 
 
 <!-- Message -->
