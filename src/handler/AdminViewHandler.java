@@ -93,9 +93,7 @@ public class AdminViewHandler {
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
 		
 		return new ModelAndView("adm/view/admOrderList");
-	}
-
-	
+	}	
 	@RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/admReviewDetail");
