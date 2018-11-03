@@ -15,10 +15,11 @@ public class ProductDao{
 	public int getProductCount(Map<String, String> map) {
 		return session.selectOne("User.getProductCount", map);
 	}
-
+	
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
 		return session.selectList("User.getProductList", map);
 	}
+	
 	public String getProductName(String productCode) {
 		return session.selectOne("User.getProductName", productCode);
 	}
@@ -26,11 +27,16 @@ public class ProductDao{
 	public List<ProductDataBean> getProductDetail(int ref) {
 		return session.selectList("User.getProductDetail",ref);
 	}
-	
+
+	public List<ProductDataBean> getProductCodesByRef(String ref) {
+		return session.selectList("User.getProductCodesByRef", ref);
+	}
+
 	public int getSearchCount(String searchWord) {	
 		System.out.println(searchWord);
 		return session.selectOne("Admin.getSearchCount", searchWord);
 	}
+	
 	public List<ProductDataBean> getNameSearch(Map<String,String> map){
 		return session.selectList("Admin.searchName", map);
 		//SELECT * FROM jk_good WHERE good_name LIKE '%'||#{searchWord}||'%' AND good_code=to_char(ref)
