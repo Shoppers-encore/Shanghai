@@ -165,7 +165,6 @@
 <c:set var="btn_confirm" value="확인"/>
 
 
-
 <!-- Message -->
 <c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 <c:set var="msg_admLogin" value="관리자 로그인을 해 주세요."/>
