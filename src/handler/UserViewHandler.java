@@ -1,6 +1,5 @@
 package handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -41,10 +40,8 @@ public class UserViewHandler {
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
 		/* Temporarily loaded customer id */
-		String id="aaa";
-		
+		String id="aaa";		
 		//String id=(String)request.getSession().getAttribute("id");
-		System.out.println("MAV/basketList-id: "+id);
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -53,8 +50,8 @@ public class UserViewHandler {
 		int basketCount=basketDao.getBasketCount(id);
 		
 		/* Create a HashMap that can hold color and size options for each item in the basket */
-		ArrayList<HashSet<String>> prodColors=new ArrayList<HashSet<String>>();
-		ArrayList<HashSet<String>> prodSizes=new ArrayList<HashSet<String>>();
+		HashMap<String, HashSet<String>> prodColors=new HashMap<String, HashSet<String>>();
+		HashMap<String, HashSet<String>> prodSizes=new HashMap<String, HashSet<String>>();
 		
 		/* For each item in the basket: */
 		for(BasketDataBean product:basketList) {
@@ -70,7 +67,6 @@ public class UserViewHandler {
 			} else {
 				ref=productCode.substring(2,productCode.length()-2);
 			}
-			System.out.println("MAV/basketList-ref: "+ref);
 				
 			// 2) Get productCodes with the same reference number
 			List<ProductDataBean> prodCodesFromRef=productDao.getProductCodesByRef(ref);
@@ -78,23 +74,19 @@ public class UserViewHandler {
 			// 3) Get color and size options using the productCodes
 			for(ProductDataBean prodCode:prodCodesFromRef) {
 				String color=prodCode.getProductCode().substring(0,2);
-				System.out.println("MAV/basketList-color: "+color);
 				colors.add(color);
 					
 				String size=prodCode.getProductCode().substring(prodCode.getProductCode().length()-2,prodCode.getProductCode().length());
-				System.out.println("MAV/basketList-size: "+size);
 				sizes.add(size);
 			}
 
 			// 4) Add color and size options for each item to prodOptions
-			prodColors.add(colors);
-			prodSizes.add(sizes);
+			prodColors.put(productCode, colors);
+			prodSizes.put(productCode, sizes);
 		}
 		
 		request.setAttribute("productColors", prodColors);
-		System.out.println(prodColors);
 		request.setAttribute("productSizes", prodSizes);
-		System.out.println(prodSizes);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
 		

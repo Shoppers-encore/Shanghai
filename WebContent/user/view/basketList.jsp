@@ -22,12 +22,9 @@
 		<div class="container-fluid col-lg-10">
 			<div class="mt-3"><h5>${str_itemsTotal}${basketCount}${str_quantityUnit}</h5></div>
 			
-			<c:set var="i" value="1"/>
+
 			<c:forEach var="prodColors" items="${productColors}">
-				<c:set var="i" value="${i}"/>
-				<c:set var="'colorOptions'+${i}" value="${prodColors}"/>
-				<c:set var="i" value="${i+1}"/>
-				<div>${i}: </div>
+
 			</c:forEach>
 			
 			<!-- If Basket is empty -->
@@ -58,8 +55,7 @@
 					</div>
 				</div>
 						
-				<c:forEach var="basketList" items="${basketList}">
-					<c:if test="${!fn:startsWith(basketList.productCode, 'XX')}">					
+				<c:forEach var="basketList" items="${basketList}">					
 						<div class="row border text-center">
 							<div class="col-lg-2">
 								<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -80,7 +76,6 @@
 								<button class="btn">${btn_delete}</button>
 							</div>
 						</div>
-					</c:if>
 				</c:forEach>
 			</c:if>
 		</div>
