@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
+import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
+
 
 public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
@@ -50,5 +52,27 @@ public class ProductDao{
 		List<ProductDataBean> productList = null;
 		productList = session.selectList("Admin.getProdList", map);
 			return productList;
+	}
+	
+	public int getRef() {
+		return session.selectOne("Admin.getRef");
+	}
+	
+	public int input(ProductDataBean productDto) {
+		return session.insert("Admin.input", productDto);
+	}
+	
+	public int getImgNo() {
+		int num = 0;
+		if(session.selectOne("Admin.maxImg") == null) {
+			num = 0;
+		}else {
+			num = session.selectOne("Admin.maxImg");
+		}
+		return num;
+	}
+	
+	public int insertImgInfo(ImageInfoDataBean imgDto) {
+		return session.insert("Admin.insertImg", imgDto);
 	}
 }
