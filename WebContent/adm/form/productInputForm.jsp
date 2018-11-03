@@ -221,7 +221,7 @@ function deletePhoto(tb_no,photo_id,start){
    <div class="aa">
        <div class="border" id="productInput">
                <h3>${str_productInput}</h3>
-               <form name="goodInputform" encType="multipart/form-data" action="admProductList.jk" method="post" accept-charset="UTF-8">
+               <form name="goodInputform" encType="multipart/form-data" action="productInputPro.jk" method="post" accept-charset="UTF-8">
                <table class="table">
                   <tr>
                      <th style="width :10%"> ${str_productCode} </th>
@@ -245,10 +245,13 @@ function deletePhoto(tb_no,photo_id,start){
                   </tr>
                   <tr>
                      <th> ${str_productName} </th>
-                     <td colspan="5"> 
+                     <td colspan="3"> 
                         <input type="text" name="product_name" class="form-control">
                      </td>
-                        
+                     <th> ${str_productQuantity} </th>
+                     <td colspan="1"> 
+                        <input type="text" name="quantity" class="form-control">
+                     </td>           
                   </tr>
                   <tr>
                      <th> ${str_color} </th>
@@ -358,12 +361,6 @@ function deletePhoto(tb_no,photo_id,start){
                      <input class="btn btn-danger" type="file" name="upload2">     
                      </th>
                   </tr>
-				  <tr>
-				  	 <td align="center">
-                     <img src="../../images/xmark_24px.png" style="height:50px; weight:50px;">                   
-                     <button type="button" style="height:30px; !important" class="btn_album_delete"onclick="deletePhoto(${tb_no},${photo.photo_id},${start})"><img style="width:15px; height:15px; !important"src="../../images/xmark_24px.png"></img></button>
-                     </td>
-				  </tr>
 		                     	
 
                   <tr>

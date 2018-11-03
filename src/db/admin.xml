@@ -54,13 +54,19 @@
 	<select id="getProdList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
 		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
-		(SELECT * FROM jk_product ORDER BY productName desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_product ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getRef" resultType="int">
 		SELECT max(ref) FROM jk_product
 	</select>
-	<insert id="input">
-	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) 
-	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent},#{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{thumbnail}, #{productCategory}
+	<insert id="input" parameterType="databean.ProductDataBean">
+	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail) 
+	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail})
+	</insert>
+	<select id="maxImg" resultType="int">
+		SELECT max(imageNo) FROM jk_imageInfo
+	</select>
+	<insert id="insertImg" parameterType="databean.ImageInfoDataBean">
+		INSERT INTO jk_imageInfo VALUES (#{imageNo}, #{ref}, #{imageAddress})
 	</insert>
 </mapper>

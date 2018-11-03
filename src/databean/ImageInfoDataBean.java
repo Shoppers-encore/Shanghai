@@ -2,7 +2,7 @@ package databean;
 
 public class ImageInfoDataBean {
 	private int imageNo;
-	private String productCode;
+	private int ref;
 	private String imageAddress;
 	public int getImageNo() {
 		return imageNo;
@@ -10,11 +10,11 @@ public class ImageInfoDataBean {
 	public void setImageNo(int imageNo) {
 		this.imageNo = imageNo;
 	}
-	public String getProductCode() {
-		return productCode;
+	public int getRef() {
+		return ref;
 	}
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 	public String getImageAddress() {
 		return imageAddress;

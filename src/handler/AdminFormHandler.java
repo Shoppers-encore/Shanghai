@@ -30,7 +30,6 @@ public class AdminFormHandler {
 		String id = (String)request.getSession().getAttribute("memid");
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
-		System.out.println( id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
 	}
@@ -40,12 +39,14 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productInputForm")
 	public ModelAndView productInputPro (HttpServletRequest request, HttpServletResponse response) {
-		int ref = 0;
 		ProductDao productDao = new ProductDao();
+		int ref = new ProductDataBean().getRef();
+		if( ref > -1 ) {
 		if(productDao.getProdCount() > 0) {
 			ref = 1+productDao.getRef();
 		}else {
 			ref = 1;
+		}
 		}
 		request.setAttribute("ref", ref);
 

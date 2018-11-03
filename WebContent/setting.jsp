@@ -107,6 +107,7 @@
 <c:set var="str_writeDate" value="작성일"/>
 <c:set var="str_bday" value="생일"/>
 
+
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
 <c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>

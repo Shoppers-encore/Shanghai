@@ -11,7 +11,7 @@
 	</script>		
 </c:if>
 <c:if test="${result ne 0}">
-	<c:redirect url="admMain.jk"/>
+	<c:redirect url="admProductList.jk"/>
 </c:if>
 	
 
