@@ -168,7 +168,7 @@ public class UserProHandler {
 		reviewDto.setProductCode( request.getParameter( "productCode" ) );
 		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
 		String pageNum = request.getParameter( "pageNum" );
-	
+		
 		int result = boardDao.modify( reviewDto );
 	
 		request.setAttribute( "result", result );

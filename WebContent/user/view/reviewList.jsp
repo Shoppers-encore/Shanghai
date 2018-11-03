@@ -11,7 +11,7 @@
 <c:set var="id" value="aaa" scope="session"/>
 <body class="container">
 	<!-- User Header -->
-	<%@ include file="../../user/form/userHeader.jsp" %>
+<%-- 	<%@ include file="../../user/form/userHeader.jsp" %> --%>
 	<!-- Review Board List -->
 	<article><br><br>
 	    	<h4>${str_review}</h4>
@@ -36,7 +36,7 @@
 						<c:forEach var="reviewlist" items="${reviewLists}">
 							<tr>
 								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
-								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}">
+								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}&pageNum=${pageNum}">
 									<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
 									${reviewlist.title}</a></td>
 								<td>${reviewlist.id}</td>
@@ -58,7 +58,7 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="reviewwList.jk?pageNum=${i}">[${i}]</a>
+					<a href="reviewList.jk?pageNum=${i}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
@@ -69,7 +69,7 @@
 				</c:if>
 			</c:if>
 			<br>
-			<form name="searchForm" action="reviewList.js" method="post">
+			<form name="searchForm" action="reviewList.jk" method="post">
 			     <select name="searchType">
 			       <option value="ttl">제목</option>
 			       <option value="ctt">내용</option>

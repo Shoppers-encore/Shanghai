@@ -62,8 +62,8 @@
 						<tr>
 							<th colspan="4">
 								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
-									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="reviewModable()">
-									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick="reviewDelcheck()">
+									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="location='reviewModifyForm.jk?reviewNo=${reviewDto.reviewNo}'">
+									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}'">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk?pageNum=${pageNum}'">
 							</th>
@@ -73,4 +73,7 @@
 			 </div>
 		</article>
 </body>
+<script type="text/javascript">
+ alert(${pageNum});
+</script>
 </html>
