@@ -111,6 +111,7 @@
 
 
 
+
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
 <c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
@@ -167,6 +168,7 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
+<c:set var="btn_goodInput" value="상품등록"/>
 
 
 
