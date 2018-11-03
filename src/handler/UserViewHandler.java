@@ -235,7 +235,7 @@ public class UserViewHandler {
 		map.put("reviewNo", request.getParameter("reviewNo"));
 		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.insertReviewLike(map);
-		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&pageNum="+request.getParameter("pageNum");
 	}
 	
 	@RequestMapping("/cancelLike")
@@ -244,6 +244,6 @@ public class UserViewHandler {
 		map.put("reviewNo", request.getParameter("reviewNo"));
 		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.deleteReviewLike(map);
-		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&pageNum="+request.getParameter("pageNum");
 	}
 }
