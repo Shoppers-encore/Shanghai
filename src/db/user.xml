@@ -67,11 +67,14 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail FROM jk_basket b, jk_product p WHERE b.id=#{id} AND p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
-		Select count(*) FROM jk_basket WHERE id=#{id}
+		SELECT count(*) FROM jk_basket WHERE id=#{id}
 	</select>
+	<delete id="deleteBasketItem" parameterType="java.util.Map">
+		DELETE FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
+	</delete>
   
   
   	<!-- Search -->

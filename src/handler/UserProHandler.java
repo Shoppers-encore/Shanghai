@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.media.jai.JAI;
@@ -15,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -35,7 +40,12 @@ import databean.UserDataBean;
 public class UserProHandler {
 	@Resource
 	private UserDao userDao;
+	
+	@Resource
 	private BoardDao boardDao;
+	
+	@Resource
+	private BasketDao basketDao;
 	
 	
 	// User 
@@ -90,6 +100,38 @@ public class UserProHandler {
 		return new ModelAndView( "user/pro/basketDelete" );
 	}
 	
+	@RequestMapping(value="/deleteBasketItemAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
+		
+		// 1) Get id from session
+		String id=(String)request.getSession().getAttribute("id");
+		
+		// 2) Get productCode from Ajax data
+		String productCode=request.getParameter("productCode");
+		
+		// 3) Make a map containing id and productCode
+		Map<String, String> deleteReferences=new HashMap<String, String>();
+		deleteReferences.put("id", id);
+		deleteReferences.put("productCode", productCode);
+		
+		// 4) Delete the item and get the result
+		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
+		
+		// 5) If the result returns 1, the item is deleted from jk_basket
+		if(deleteResult=='1') {
+			String itemDeleted="true";
+			
+			// 6) Convert Java String to JSON and return
+			String isItemDeleted=new Gson().toJson(itemDeleted);
+			return isItemDeleted;
+		} else {
+			String itemDeleted="false";
+			// 6) Convert Java String to JSON and return
+			String isItemDeleted=new Gson().toJson(itemDeleted);
+			return isItemDeleted;
+		}
+	}
 	
 	// Review
 	@RequestMapping( "/reviewWritePro" )

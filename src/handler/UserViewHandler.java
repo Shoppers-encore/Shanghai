@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import databean.ReviewScoreDataBean;
 import databean.BasketDataBean;
 import databean.ProductDataBean;
@@ -75,8 +77,8 @@ public class UserViewHandler {
 		int basketCount=basketDao.getBasketCount(id);
 		
 		/* Create a HashMap that can hold color and size options for each item in the basket */
-		HashMap<String, HashSet<String>> prodColors=new HashMap<String, HashSet<String>>();
-		HashMap<String, HashSet<String>> prodSizes=new HashMap<String, HashSet<String>>();
+		Map<String, HashSet<String>> prodColors=new HashMap<String, HashSet<String>>();
+		Map<String, HashSet<String>> prodSizes=new HashMap<String, HashSet<String>>();
 		
 		/* For each item in the basket: */
 		for(BasketDataBean product:basketList) {
@@ -109,10 +111,12 @@ public class UserViewHandler {
 			prodColors.put(productCode, colors);
 			prodSizes.put(productCode, sizes);
 		}
-
 		
-		request.setAttribute("productColors", prodColors);
-		request.setAttribute("productSizes", prodSizes);
+		String prodColorOptions=new Gson().toJson(prodColors);
+		String prodSizeOptions=new Gson().toJson(prodSizes);
+	
+		request.setAttribute("colorOptions", prodColorOptions);
+		request.setAttribute("sizeOptions", prodSizeOptions);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("basketCount", basketCount);
 		

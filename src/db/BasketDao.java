@@ -1,6 +1,7 @@
 package db;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -12,13 +13,15 @@ public class BasketDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
 	public List<BasketDataBean> getBasketList(String id) {
-		System.out.println("BasketDao/getBasketList: "+id);
 		return session.selectList("User.getBasketList", id);
 	}
 	
 	public int getBasketCount(String id) {
-		System.out.println("BasketDao/getBasketCount: "+id);
 		return session.selectOne("User.getBasketCount", id);
 		
+	}
+	
+	public int deleteBasketItem(Map<String, String> deleteReferences) {
+		return session.delete("User.deleteBasketItem", deleteReferences);
 	}
 }
