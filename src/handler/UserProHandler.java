@@ -197,6 +197,7 @@ public class UserProHandler {
 				request.setAttribute( "result", result );
 			}
 		}
+		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}
 	
