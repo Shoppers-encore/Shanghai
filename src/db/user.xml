@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
+
 	<!-- User DB (member log-in) -->
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
@@ -40,8 +41,8 @@
 			(SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<insert id="insertReview" parameterType="databean.ReviewDataBean">
-			INSERT INTO jk_review (reviewNo, title, content, reviewDate, id, productCode, rating, photo1, photo2) 
-			VALUES (SEQ_jk_review_reviewNo.NEXTVAL, #{title}, #{content}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
+			VALUES (SEQ_jk_review_reviewNo.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
 	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE reviewNo=#{num}
@@ -64,6 +65,10 @@
 	<delete id="deleteReview" parameterType="int">
 			DELETE FROM jk_review WHERE reviewNo=#{num}
 	</delete>
+	<update id="modifyReview" parameterType="databean.ReviewDataBean">
+			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
+	</update>
+		
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
@@ -84,10 +89,10 @@
               WHERE title LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='ctt'">
-              WHERE content LIKE '%'||#{searchWord}||'%'
+              WHERE reviewContent LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='both'">
-              WHERE title LIKE '%'||#{searchWord}||'%' OR content LIKE '%'||#{searchWord}||'%'
+              WHERE title LIKE '%'||#{searchWord}||'%' OR reviewContent LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='writer'">
               WHERE id LIKE '%'||#{searchWord}||'%'

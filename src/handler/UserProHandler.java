@@ -88,6 +88,12 @@ public class UserProHandler {
 	// Basket
 	@RequestMapping( "/basketInput" )
 	public ModelAndView basketInput ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("memid");
+		if(id == null) {
+			return new ModelAndView("user/form/userLoginForm");
+		}
+		String productCode = request.getParameter("productCode");
+		
 		return new ModelAndView("user/pro/basketInput");
 	}
 	@RequestMapping( "/basketModify" )
@@ -168,6 +174,7 @@ public class UserProHandler {
 
 				reviewDto.setPhoto1( systemName );
 			}
+			
 			int count = boardDao.getReviewCount();
 			int reviewNo = 1;
 			if(count >0) {
@@ -175,7 +182,7 @@ public class UserProHandler {
 			}
 			reviewDto.setReviewNo( reviewNo );
 			reviewDto.setTitle( multi.getParameter( "title" ) );
-			reviewDto.setReviewContent( multi.getParameter( "content" ) );
+			reviewDto.setReviewContent( multi.getParameter( "reviewContent" ) );
 			reviewDto.setReviewDate( new Timestamp( System.currentTimeMillis() ) );
 			reviewDto.setId( (String)request.getSession().getAttribute("memid") );
 			reviewDto.setProductCode( multi.getParameter( "productCode" ) );
@@ -183,7 +190,6 @@ public class UserProHandler {
 			reviewDto.setReviewScoreSum( 0 );
 		
 			int result = boardDao.insert( reviewDto );
-
 			request.setAttribute( "result", result );	
 			
 		return new ModelAndView( "user/pro/reviewWritePro" );
@@ -191,7 +197,26 @@ public class UserProHandler {
 	
 	@RequestMapping( "/reviewModifyPro" )
 	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) {
-		return "redirect:reviewContent.jk";
+		try {
+			request.setCharacterEncoding( "utf-8" );
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		ReviewDataBean reviewDto = new ReviewDataBean();
+		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
+		reviewDto.setTitle( request.getParameter( "title" ) );
+		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );
+		reviewDto.setId( (String)request.getSession().getAttribute("memid"));
+		reviewDto.setProductCode( request.getParameter( "productCode" ) );
+		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
+		String pageNum = request.getParameter( "pageNum" );
+	
+		int result = boardDao.modify( reviewDto );
+	
+		request.setAttribute( "result", result );
+		request.setAttribute( "pageNum", pageNum );
+	
+		return "redirect:reviewDetail.jk?reviewNo="+reviewDto.getReviewNo();
 	}
 	
 	@RequestMapping( "/reviewDeletePro" )
