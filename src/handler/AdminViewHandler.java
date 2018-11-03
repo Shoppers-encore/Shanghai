@@ -12,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.OrderListDataBean;
+import databean.ProductDataBean;
 import databean.UserDataBean;
+import db.OrderDao;
 import db.ProductDao;
 import db.UserDao;
 import etc.HandlerHelper;
@@ -22,7 +25,7 @@ import etc.HandlerHelper;
 public class AdminViewHandler {
 	@Resource
 	private UserDao userDao;
-	private ProductDao productDao;
+
 	
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -79,8 +82,17 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductList" )
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
+		ProductDao productDao = new ProductDao();
+		int count = productDao.getProdCount();
+		System.out.println( count );
+		Map<String,String> map = new HandlerHelper().makeCount(count, request);
+		List <ProductDataBean> products = productDao.getProdList(map);
+		request.setAttribute("products", products);
+		request.setAttribute("count", count);
+		
 		return new ModelAndView("adm/view/admProductList");
 	}
+	
 	@RequestMapping("/admMypage")
 	public ModelAndView admMypage(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/admMypage");
@@ -89,9 +101,20 @@ public class AdminViewHandler {
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/view/admOrderDetail");
 	}
+	
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
+		OrderDao orderDao = new OrderDao();
+		int count = orderDao.getOrderCount();
+		System.out.println( count );
+	
+		String id=(String) request.getSession().getAttribute("memid");
+				
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<OrderListDataBean> orders = orderDao.getOrderList(map);
 		
+		request.setAttribute("orders", orders);
+		request.setAttribute("count", count);
 		return new ModelAndView("adm/view/admOrderList");
 	}	
 	@RequestMapping("/admReviewDetail")

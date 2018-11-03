@@ -32,11 +32,36 @@ public class UserViewHandler {
 	@Resource
 	private BoardDao boardDao;
   
+	//Main
+	@RequestMapping("/main")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
+		int count = productDao.getProductCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("searchWord", "");
+		map.put("selectedColors", "");
+		List<ProductDataBean> productList = productDao.getProductList(map);
+		request.setAttribute("productList", productList);
+		request.setAttribute("productCount", count);
+		return new ModelAndView("user/view/userMain");
+	}
+	
+	
+	// User
 	@RequestMapping( "/userMailCheck" )
 	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView( "user/view/userMailCheck" );
 	}
 	
+	@RequestMapping("/userMypage")
+	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("user/view/userMypage");
+	}
+	
+	
+	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
 		/* Temporarily loaded customer id */
@@ -84,6 +109,7 @@ public class UserViewHandler {
 			prodColors.put(productCode, colors);
 			prodSizes.put(productCode, sizes);
 		}
+
 		
 		request.setAttribute("productColors", prodColors);
 		request.setAttribute("productSizes", prodSizes);
@@ -93,60 +119,8 @@ public class UserViewHandler {
 		return new ModelAndView( "/user/view/basketList" );
 	}
 	
-	@RequestMapping( "/reviewDetail" )
-	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
-		int num = Integer.parseInt( request.getParameter( "review_no" ) );
-		String pageNum = request.getParameter( "pageNum" );
-		String number = request.getParameter( "number" );
-		
-		ReviewDataBean reviewDto = boardDao.get( num );
-		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
-		String id=(String)request.getSession().getAttribute("memid");
-
-		if(id !=null) {
-			Map<String, String> map = new HashMap<String,String>();
-			map.put("reviewNo", new Integer(num).toString());
-			map.put("id", id);
-			int me = boardDao.getReviewLike(map);
-			if(me>0) {
-				reviewDto.setCheckedme( true );
-			}
-		}
-		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
-		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
-			boardDao.addCount(num);
-		
-		request.setAttribute( "number", number );
-		request.setAttribute( "pageNum", pageNum );
-		request.setAttribute( "reviewDto", reviewDto );
-		
-		return new ModelAndView( "user/view/reviewDetail" );
-	}
-	@RequestMapping("/reviewList")
-	public ModelAndView userReviewList(HttpServletRequest request, HttpServletResponse response) {
-		int count = boardDao.getReviewCount();	
-
-		if( count > 0 ) {
-			Map<String, String> map = new HandlerHelper().makeCount( count, request );
-			List <ReviewDataBean> articles = boardDao.getReviewList( map );
-			request.setAttribute( "reviewLists", articles );
-		}
-		return new ModelAndView("user/view/reviewList");
-	}
-	@RequestMapping("/main")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchWord", "");
-		map.put("selectedColors", "");
-		int count = productDao.getProductCount(map);
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("searchWord", "");
-		map.put("selectedColors", "");
-		List<ProductDataBean> productList = productDao.getProductList(map);
-		request.setAttribute("productList", productList);
-		request.setAttribute("productCount", count);
-		return new ModelAndView("user/view/userMain");
-	}
+	
+	//Product
 	@RequestMapping ( "/userProductList" )
 	public ModelAndView userProductList ( HttpServletRequest request, HttpServletResponse response ) {
 		return new ModelAndView ( "user/userMain" );
@@ -190,10 +164,9 @@ public class UserViewHandler {
 		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userSearchProduct");
 	}
-	@RequestMapping("/userMypage")
-	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/view/userMypage");
-	}
+	
+	
+	// Order
 	@RequestMapping("/userOrderDetail")
 	public ModelAndView userOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/view/userOrderDetail");
@@ -201,5 +174,67 @@ public class UserViewHandler {
 	@RequestMapping("/userOrderList")
 	public ModelAndView userOrderList(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/view/userOrderList");
+	}
+
+	
+	// Review
+	@RequestMapping("/reviewList")
+	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {
+		int count = boardDao.getReviewCount();	
+
+		if( count > 0 ) {
+			Map<String, String> map = new HandlerHelper().makeCount( count, request );
+			List <ReviewDataBean> articles = boardDao.getReviewList( map );
+			request.setAttribute( "reviewLists", articles );
+		}
+		return new ModelAndView("user/view/reviewList");
+	}
+	
+	@RequestMapping( "/reviewDetail" )
+	public ModelAndView reviewDetail (HttpServletRequest request, HttpServletResponse response) {
+		int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
+		String pageNum = request.getParameter( "pageNum" );
+		String number = request.getParameter( "number" );
+		
+		ReviewDataBean reviewDto = boardDao.get( num );
+		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
+		String id=(String)request.getSession().getAttribute("memid");
+
+		if(id !=null) {
+			Map<String, String> map = new HashMap<String,String>();
+			map.put("reviewNo", new Integer(num).toString());
+			map.put("id", id);
+			int me = boardDao.getReviewLike(map);
+			if(me>0) {
+				reviewDto.setCheckedme( true );
+			}
+		}
+		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
+		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
+			boardDao.addCount(num);
+		
+		request.setAttribute( "number", number );
+		request.setAttribute( "pageNum", pageNum );
+		request.setAttribute( "reviewDto", reviewDto );
+		
+		return new ModelAndView( "user/view/reviewDetail" );
+	}
+	
+	@RequestMapping("/like")
+	public String reviewLike(HttpServletRequest request, HttpServletResponse response) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("reviewNo", request.getParameter("reviewNo"));
+		map.put("id", (String)request.getSession().getAttribute("memid"));
+		boardDao.insertReviewLike(map);
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+	}
+	
+	@RequestMapping("/cancelLike")
+	public String reviewLikeCancel(HttpServletRequest request, HttpServletResponse response) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("reviewNo", request.getParameter("reviewNo"));
+		map.put("id", (String)request.getSession().getAttribute("memid"));
+		boardDao.deleteReviewLike(map);
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
 	}
 }

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<script src="script.js"></script>
+<script src="../../script.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -78,7 +78,7 @@
 <c:set var="str_spt" value="반바지"/>
 <c:set var="str_content" value="내용"/>
 <c:set var="str_writeReview" value="Reveiw 작성하기"/>
-<c:set var="str_score" value="평점"/>
+<c:set var="str_rating" value="평점"/>
 <c:set var="str_uploading" value="이미지 첨부"/>
 <c:set var="str_productQuantity" value="수량"/>
 <c:set var="str_itemsTotal" value="전체 상품: 총 "/>
@@ -163,7 +163,6 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
-
 
 
 <!-- Message -->
