@@ -29,7 +29,8 @@
 					${msg_emptyBasket}
 				</div>
 			</c:if>
-		
+			
+			<!-- If Basket has items -->
 			<c:if test="${basketCount ne 0}">
 				<div class="row font-weight-bold text-center pt-5">
 					<div class="col-lg-2">
@@ -50,8 +51,9 @@
 					<div class="col-lg-1">
 					</div>
 				</div>
-						
-				<c:forEach var="basketList" items="${basketList}">					
+				
+				<form>
+					<c:forEach var="basketList" items="${basketList}">					
 						<div class="row border text-center ${basketList.productCode}">
 							<div class="col-lg-2">
 								<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -109,7 +111,8 @@
 								</script>
 							</div>
 						</div>
-				</c:forEach>
+					</c:forEach>
+				</form>
 			</c:if>
 		</div>
 	</c:if>

@@ -88,7 +88,7 @@ public class UserProHandler {
 	// Basket
 	@RequestMapping( "/basketInput" )
 	public ModelAndView basketInput ( HttpServletRequest request, HttpServletResponse response ) {
-		String id = (String)request.getSession().getAttribute("memid");
+		String id = (String)request.getSession().getAttribute("id");
 		if(id == null) {
 			return new ModelAndView("user/form/userLoginForm");
 		}
@@ -111,7 +111,9 @@ public class UserProHandler {
 	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		
 		// 1) Get id from session
-		String id=(String)request.getSession().getAttribute("id");
+		/*String id=(String)request.getSession().getAttribute("id");*/
+		// For now, id is directly set here
+		String id="aaa";
 		
 		// 2) Get productCode from Ajax data
 		String productCode=request.getParameter("productCode");
@@ -125,18 +127,16 @@ public class UserProHandler {
 		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
 		
 		// 5) If the result returns 1, the item is deleted from jk_basket
-		if(deleteResult=='1') {
-			String itemDeleted="true";
-			
-			// 6) Convert Java String to JSON and return
-			String isItemDeleted=new Gson().toJson(itemDeleted);
-			return isItemDeleted;
+		String itemDeleted;
+		if(deleteResult==1) {
+			itemDeleted="true";
 		} else {
-			String itemDeleted="false";
-			// 6) Convert Java String to JSON and return
-			String isItemDeleted=new Gson().toJson(itemDeleted);
-			return isItemDeleted;
+			itemDeleted="false";
 		}
+		
+		// 6) Convert Java String to JSON and return
+		String isItemDeleted=new Gson().toJson(itemDeleted);
+		return isItemDeleted;
 	}
 	
 	// Review
