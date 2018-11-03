@@ -11,7 +11,9 @@ public class ProductDataBean {
 	private int productPrice;
 	private Timestamp productRegDate;
 	private int productQuantity;
+	private int productCategory;
 	private String thumbnail;
+	
 	public int getRef() {
 		return ref;
 	}
@@ -59,6 +61,12 @@ public class ProductDataBean {
 	}
 	public void setProductQuantity(int productQuantity) {
 		this.productQuantity = productQuantity;
+	}
+	public int getProductCategory() {
+		return productCategory;
+	}
+	public void setProductCategory(int productCategory) {
+		this.productCategory = productCategory;
 	}
 	public String getThumbnail() {
 		return thumbnail;
