@@ -152,7 +152,7 @@ public class UserProHandler {
 			reviewDto.setTitle( multi.getParameter( "title" ) );
 			reviewDto.setReviewContent( multi.getParameter( "reviewContent" ) );
 			reviewDto.setReviewDate( new Timestamp( System.currentTimeMillis() ) );
-			reviewDto.setId( (String)request.getSession().getAttribute("memid") );
+			reviewDto.setId( (String)request.getSession().getAttribute("id") );
 			reviewDto.setProductCode( multi.getParameter( "productCode" ) );
 			reviewDto.setRating( Double.parseDouble( multi.getParameter( "rating" ) ) );
 			reviewDto.setReviewScoreSum( 0 );
@@ -174,11 +174,11 @@ public class UserProHandler {
 		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
 		reviewDto.setTitle( request.getParameter( "title" ) );
 		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );
-		reviewDto.setId( (String)request.getSession().getAttribute("memid"));
+		reviewDto.setId( (String)request.getSession().getAttribute("id"));
 		reviewDto.setProductCode( request.getParameter( "productCode" ) );
 		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
 		String pageNum = request.getParameter( "pageNum" );
-	
+		
 		int result = boardDao.modify( reviewDto );
 	
 		request.setAttribute( "result", result );
@@ -191,7 +191,7 @@ public class UserProHandler {
 	public ModelAndView reviewDeletePro (HttpServletRequest request, HttpServletResponse response) {
 		int num = Integer.parseInt(request.getParameter("reviewNo"));
 		String pageNum = request.getParameter("pageNum");
-		String id = (String)request.getSession().getAttribute("memid");
+		String id = (String)request.getSession().getAttribute("id");
 		if(id != null ) {
 			if(id.length()>5) {
 				if(id.equals(boardDao.get(num).getId())) {
@@ -207,6 +207,7 @@ public class UserProHandler {
 				request.setAttribute( "result", result );
 			}
 		}
+		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}
 	
