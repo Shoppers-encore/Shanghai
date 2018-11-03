@@ -41,6 +41,22 @@ public class UserProHandler {
 	// User 
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
+		UserDataBean userDto = new UserDataBean();
+		//inputData-id(NN), password(NN), name(NN), birthday(NN), tel(NN), email(NN), gender, 
+		//userLevel=default 1(NN), height(3,0), weight(3,0), address(NN), addressDetail(NN), zipcode(NN)
+		userDto.setId(request.getParameter("id"));
+		userDto.setPassword(request.getParameter("password"));
+		userDto.setName(request.getParameter("name"));
+		userDto.setEmail(request.getParameter("email"));
+		int gender = Integer.parseInt(request.getParameter("gender"));
+		userDto.setGender(gender);
+		//birthday
+		//
+		
+		//insertUser
+		//int result = userDao.insertUser(userDto);
+		
+		
 		return new ModelAndView("user/pro/userInputPro");
 	}
 	@RequestMapping( "/userLoginPro" )

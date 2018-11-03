@@ -110,6 +110,7 @@
 <c:set var="str_gender_m" value="남성"/>
 <c:set var="str_gender_f" value="여성"/>
 <c:set var="str_modifyReview" value="리뷰 수정"/>
+<c:set var="str_addressDetail" value="상세 주소"/>
 
 
 <!-- color -->
