@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.ReviewDataBean;
+import databean.ReviewScoreDataBean;
 public class BoardDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
@@ -45,5 +46,8 @@ public class BoardDao {
 	
 	public int delete(int num) {
 		return session.delete("User.deleteReview", num);
+	}
+	public int modify(ReviewDataBean dto) {
+		return session.update("User.modifyReview", dto);
 	}
 }

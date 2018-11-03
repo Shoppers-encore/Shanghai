@@ -106,6 +106,10 @@
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
 <c:set var="str_bday" value="생일"/>
+<c:set var="str_modifyReview" value="리뷰 수정"/>
+
+
+
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -165,6 +169,8 @@
 <c:set var="btn_confirm" value="확인"/>
 
 
+
+
 <!-- Message -->
 <c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 <c:set var="msg_admLogin" value="관리자 로그인을 해 주세요."/>
@@ -176,6 +182,8 @@
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
+
+
 
 
 <!-- url -->
