@@ -8,13 +8,13 @@
 		<title>메인 페이지</title>
 	</head>
 	<body>
-      	<c:if test="${sessionScope.memid ne null}">
+      	<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
 	      	<div id="cart">
 				<img id="cartImg" src="images/cart_red.png">
-				<form><input type="hidden" name="id" value="${sessionScope.memid}"></form>
+				<form><input type="hidden" name="id" value="${sessionScope.id}"></form>
 			</div>
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
@@ -31,7 +31,7 @@
 					  			<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">
 									<img src="/WebProject/save/${product.thumbnail}" id="thumb" name="${product.ref}"><br>
 						     		${product.productName}<br>
-							    	<input type="hidden" name="id" value="${sessionScope.memid}">
+							    	<input type="hidden" name="id" value="${sessionScope.id}">
 							    	<input type="hidden" name="productCode" value="${product.ref}">
 									<input type="hidden" name="var" value="1">
 									${str_price} : 

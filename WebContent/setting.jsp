@@ -109,6 +109,8 @@
 <c:set var="str_gender" value="성별"/>
 <c:set var="str_gender_m" value="남성"/>
 <c:set var="str_gender_f" value="여성"/>
+<c:set var="str_modifyReview" value="리뷰 수정"/>
+
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -169,6 +171,8 @@
 <c:set var="btn_selfConfirm" value="인증"/>
 
 
+
+
 <!-- Message -->
 <c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
 <c:set var="msg_admLogin" value="관리자 로그인을 해 주세요."/>
@@ -180,6 +184,8 @@
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
+
+
 
 
 <!-- url -->
