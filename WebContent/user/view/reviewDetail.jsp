@@ -25,9 +25,9 @@
 						<tr>
 							<th style="width:20%">${str_productName}</th>
 							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled></td>		
-							<th style="width:20%">${str_score}</th>
-							<td style="width:30%"><input type="range" min="0" step="0.5" max="5" value="${reviewDto.score}" class="slider" id="myRange" disabled>
-								<span id="demo">${reviewDto.score}</span></td>
+							<th style="width:20%">${str_rating}</th>
+							<td style="width:30%"><input type="range" min="0" step="0.5" max="5" value="${reviewDto.rating}" class="slider" id="myRange" disabled>
+								<span id="demo">${reviewDto.rating}</span></td>
 						</tr>
 						<tr>
 							<th>${str_title}</th>
@@ -45,11 +45,11 @@
 							<th colspan="4">
 								${reviewDto.reviewScoreSum} ${msg_like}
 								<c:if test="${sessionScope.memid ne null}">
-									<c:if test="${reviewDto.checkedme eq null || reviewDto.checkedme ne sessionScope.memid}">
-										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='good.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
+									<c:if test="${reviewDto.checkedme eq false}">
+										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='like.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
 									</c:if>
-									<c:if test="${reviewDto.checkedme eq sessionScope.memid}">
-										<input class="btn btn-outline-danger" type="button" value="${btn_likecancel}" onclick="location='cancelGood.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
+									<c:if test="${reviewDto.checkedme eq true}">
+										<input class="btn btn-outline-danger" type="button" value="${btn_likecancel}" onclick="location='cancelLike.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
 									</c:if>
 								</c:if>
 							</th>
