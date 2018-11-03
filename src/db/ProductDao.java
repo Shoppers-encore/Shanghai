@@ -51,4 +51,12 @@ public class ProductDao{
 		productList = session.selectList("Admin.getProdList", map);
 			return productList;
 	}
+	
+	public int getRef() {
+		return session.selectOne("Admin.getRef");
+	}
+	
+	public int input(ProductDataBean productDto) {
+		return session.insert("Admin.input", productDto);
+	}
 }

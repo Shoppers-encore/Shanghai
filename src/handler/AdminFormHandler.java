@@ -11,14 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.ProductDataBean;
 import databean.UserDataBean;
+import db.ProductDao;
 import db.UserDao;
 
 @Controller
 public class AdminFormHandler {
 	@Resource 
 	private UserDao userDao;
-
+	
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
@@ -38,6 +40,15 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productInputForm")
 	public ModelAndView productInputPro (HttpServletRequest request, HttpServletResponse response) {
+		int ref = 0;
+		ProductDao productDao = new ProductDao();
+		if(productDao.getProdCount() > 0) {
+			ref = 1+productDao.getRef();
+		}else {
+			ref = 1;
+		}
+		request.setAttribute("ref", ref);
+
 		return new ModelAndView("adm/form/productInputForm");
 	}
 	@RequestMapping("/tagInputForm")
