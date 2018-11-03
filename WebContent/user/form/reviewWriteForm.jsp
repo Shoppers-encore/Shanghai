@@ -43,7 +43,7 @@
 					<tr>
 						<th> ${str_content} </th>
 						<td colspan="3">
-							<textarea name="content" rows="10" cols="60"></textarea>
+							<textarea name="reviewContent" rows="10" cols="60"></textarea>
 						</td>
 					</tr>	
 					<tr>
