@@ -116,6 +116,7 @@ public class AdminViewHandler {
 		request.setAttribute("orders", orders);
 		request.setAttribute("count", count);
 		return new ModelAndView("adm/view/admOrderList");
+
 	}	
 	@RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
