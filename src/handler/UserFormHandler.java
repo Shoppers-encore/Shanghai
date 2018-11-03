@@ -1,5 +1,8 @@
 package handler;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,14 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.BasketDataBean;
 import databean.ReviewDataBean;
 import databean.ReviewScoreDataBean;
+import db.BasketDao;
 import db.BoardDao;
 import db.ProductDao;
 
 @Controller
 public class UserFormHandler {
+	@Resource
 	private BoardDao boardDao;
+	@Resource
+	private BasketDao basketDao;
 	
 	// User
 	@RequestMapping("/userInputForm")
@@ -81,6 +89,17 @@ public class UserFormHandler {
 	// Order
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		List<BasketDataBean> baskets = basketDao.getBasketList(id);
+		if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
+			String productCode = request.getParameter("productCode");
+			int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
+			BasketDataBean basket = new BasketDataBean();
+			basket.setId(id);
+			basket.setProductCode(productCode);
+			basket.setBasketQuantity(basketQuantity);
+			baskets.add(basket);
+		}
 		return new ModelAndView("user/form/orderInputForm");
 	}
 }
