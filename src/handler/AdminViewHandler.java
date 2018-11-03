@@ -84,7 +84,6 @@ public class AdminViewHandler {
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
 		ProductDao productDao = new ProductDao();
 		int count = productDao.getProdCount();
-		System.out.println( count );
 		Map<String,String> map = new HandlerHelper().makeCount(count, request);
 		List <ProductDataBean> products = productDao.getProdList(map);
 		request.setAttribute("products", products);
@@ -106,7 +105,6 @@ public class AdminViewHandler {
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
 		OrderDao orderDao = new OrderDao();
 		int count = orderDao.getOrderCount();
-		System.out.println( count );
 	
 		String id=(String) request.getSession().getAttribute("memid");
 				

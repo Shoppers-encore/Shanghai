@@ -196,14 +196,32 @@
     opacity: 0.7;
 }
   </style>
-  
+<script type="text/javascript">
+function deletePhoto(tb_no,photo_id,start){
+	$.ajax({
+		type:'POST',
+		url:'productInputForm.jk',
+		data:{
+			tb_no:tb_no,
+			photo_id:photo_id
+		},
+		success:function(data){
+			var page="svc/boardAlbum.go?tb_no="+tb_no+"&start="+start;
+			$('#album').load(page);
+		},
+		error:function(e){
+			alert(photodeleteerror);
+		}
+	});
+}
+</script>  
 </head>
 
 <body>
    <div class="aa">
        <div class="border" id="productInput">
                <h3>${str_productInput}</h3>
-               <form name="goodInputform" encType="multipart/form-data" action="goodInputPro.jk" method="post" accept-charset="UTF-8">
+               <form name="goodInputform" encType="multipart/form-data" action="productInputPro.jk" method="post" accept-charset="UTF-8">
                <table class="table">
                   <tr>
                      <th style="width :10%"> ${str_productCode} </th>
@@ -226,11 +244,14 @@
                      </td>
                   </tr>
                   <tr>
-                        <th> ${str_productName} </th>
-                        <td colspan="5"> 
-                           <input type="text" name="product_name" class="form-control">
-                        </td>
-                        
+                     <th> ${str_productName} </th>
+                     <td colspan="3"> 
+                        <input type="text" name="product_name" class="form-control">
+                     </td>
+                     <th> ${str_productQuantity} </th>
+                     <td colspan="1"> 
+                        <input type="text" name="quantity" class="form-control">
+                     </td>           
                   </tr>
                   <tr>
                      <th> ${str_color} </th>
@@ -336,10 +357,12 @@
                   </tr>
                   <tr>
                      <th colspan="6">
-                     <input class="btn btn-danger" type="file" name="upload1">
-                     <input class="btn btn-danger" type="file" name="upload2">                        
+                     <input class="btn btn-danger" type="file" name="upload1" value="${systemName}">
+                     <input class="btn btn-danger" type="file" name="upload2">     
                      </th>
                   </tr>
+		                     	
+
                   <tr>
                         <th> ${str_content} </th>
                         <td colspan="5">
@@ -349,7 +372,7 @@
                   <tr>
                         <th colspan="6" align="center">
                            <input class="btn btn-primary" type="submit" value="${btn_productInput}">
-                           <input class="btn btn-secondary" type="button" value="${btn_back}" onclick="location='admGoodList.jk'">
+                           <input class="btn btn-secondary" type="button" value="${btn_back}" onclick="location='admProductList.jk'">
                            <input class="btn btn-secondary" type="reset" value="${btn_cancel}">
                         </th>
                   </tr>
