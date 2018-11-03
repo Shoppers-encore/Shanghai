@@ -105,6 +105,7 @@
 <c:set var="str_orderDetail" value="주문상세"/>
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
+<c:set var="str_bday" value="생일"/>
 
 
 
@@ -163,6 +164,8 @@
 <c:set var="btn_inputCart" value="장바구니"/>
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
+<c:set var="btn_confirm" value="확인"/>
+
 
 
 <!-- Message -->
