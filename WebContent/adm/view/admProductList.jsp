@@ -47,27 +47,27 @@
 					<th>${str_salePercent}</th>
 					<th>${str_price}</th>
 					<th>${str_var}</th>
-					<th>${str_varPlus}</th>
+					<!-- <th>${str_varPlus}</th> -->
    				</tr>
 			</thead>
 			<tbody>
-   				<c:if test="${goods eq null or goods.size() eq 0}">   
+   				<c:if test="${count eq null or count eq 0}">  
 				<tr>
-					<td colspan="6" align="center">
+					<td colspan="7" align="center">
 					${msg_list_x}
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${count ne 0}">
-					<c:forEach var="good" items="${goods}">   
+					<c:forEach var="product" items="${products}">   
 						<tr>
-							<td><input type="checkbox" class="form-check-input" id="check" name="check" value="${good.good_code}">${good.good_code}</td>
-							<td><a href="dealInputForm.jk?good_code=${good.good_code}">${good.good_name}</a></td>
-							<td>${good.sale}</td>
-							<td><fmt:formatNumber value="${good.price}"/></td>
-							<td>${good.var}</td>
-							<td><input type="number" name="${good.good_code}var" value="0"></td>
-								</tr>
+							<td><input type="checkbox" class="form-check-input" id="check" name="check"></td>
+							<td>${product.productCode}</td>
+							<td>${product.productName}</td>
+							<td>${product.discount}</td>
+							<td>${product.productPrice}</td>
+							<td>${product.productQuantity}</td>
+						</tr>
 					</c:forEach>
 						<tr>
 							<td colspan="6" align="right">
@@ -82,9 +82,9 @@
          <div align="center">
                <c:if test="${count gt 0}">
                <c:if test="${currentPage ne 1}">
-                  <a href="admGoodList.jk">[◀◀]</a>
+                  <a href="admProductList.jk">[◀◀]</a>
                <c:if test="${startPage gt pageBlock}">
-                  <a href="admGoodList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+                  <a href="admProductList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
                   </c:if>
                </c:if>
                <c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -92,14 +92,14 @@
                   <span>[${i}]</span>
                   </c:if>
                   <c:if test="${i ne currentPage}">
-                  <a href="admGoodList.jk?pageNum=${i}">[${i}]</a>
+                  <a href="admProductList.jk?pageNum=${i}">[${i}]</a>
                   </c:if>
                </c:forEach>
                <c:if test="${currentPage ne pageCount}">
                   <c:if test="${pageCount>endPage}">
-                  <a href="admGoodList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+                  <a href="admProductList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
                   </c:if>
-                  <a href="admGoodList.jk?pageNum=${pageCount}">[▶▶]</a>
+                  <a href="admProductList.jk?pageNum=${pageCount}">[▶▶]</a>
                </c:if>
             </c:if>
 		</div>

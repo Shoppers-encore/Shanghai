@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
+
 	<!-- User DB (member log-in) -->
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
@@ -10,6 +11,7 @@
 	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
 		select * from jk_user where id=#{id}
 	</select>
+	
 	
 	<!-- Product DB -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
@@ -25,6 +27,10 @@
 	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
 	</select>
+	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
+		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>3
+	</select>
+	
 	
 	<!-- Review -->
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
@@ -32,10 +38,14 @@
 	</select>
 	<select id="getReviewList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
-			(SELECT * FROM jk_Review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+			(SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	<insert id="insertReview" parameterType="databean.ReviewDataBean">
+			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
+			VALUES (SEQ_jk_review_reviewNo.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
-			SELECT * FROM jk_review WHERE review_no=#{num}
+			SELECT * FROM jk_review WHERE reviewNo=#{num}
 	</select>
 	<select id="getReviewLikes" parameterType="int" resultType="int">
 			SELECT count(*) FROM jk_reviewScore WHERE reviewNo=#{reviewNo}
@@ -46,7 +56,19 @@
 	<update id="addCount" parameterType="int">
 			UPDATE jk_review SET count=count+1 WHERE reviewNo=#{num}
 	</update>
-	
+	<insert id="insertReviewLike" parameterType="java.util.Map">
+			INSERT INTO jk_reviewScore (reviewNo, id) VALUES(TO_NUMBER(#{reviewNo}), #{id})
+	</insert>
+	<delete id="deleteReviewLike" parameterType="java.util.Map">
+			DELETE FROM jk_reviewScore WHERE reviewNo=#{reviewNo} AND id=#{id}
+	</delete>
+	<delete id="deleteReview" parameterType="int">
+			DELETE FROM jk_review WHERE reviewNo=#{num}
+	</delete>
+	<update id="modifyReview" parameterType="databean.ReviewDataBean">
+			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
+	</update>
+		
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
@@ -64,10 +86,10 @@
               WHERE title LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='ctt'">
-              WHERE content LIKE '%'||#{searchWord}||'%'
+              WHERE reviewContent LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='both'">
-              WHERE title LIKE '%'||#{searchWord}||'%' OR content LIKE '%'||#{searchWord}||'%'
+              WHERE title LIKE '%'||#{searchWord}||'%' OR reviewContent LIKE '%'||#{searchWord}||'%'
            </when>
            <when test="searchType=='writer'">
               WHERE id LIKE '%'||#{searchWord}||'%'
