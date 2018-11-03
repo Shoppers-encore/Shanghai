@@ -52,7 +52,7 @@ public class AdminProHandler {
 	@SuppressWarnings("null")
 	@RequestMapping ( "/productInputPro" )
 	   public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
-		
+		  ProductDao productDao = new ProductDao(); 
 	      //ImageInfoDataBean imgDto = new ImageInfoDataBean();
 	      String path =  request.getSession().getServletContext().getRealPath( "/save" );
 	      MultipartRequest multi = null;
@@ -85,10 +85,7 @@ public class AdminProHandler {
 	            ImageIO.write( tbuffer, "png", new File( tname ) );
 	            ImageIO.write( tbuffer, "gif", new File( tname ) );
 	        
-	            request.setAttribute( "systemName", systemName );
-	            
-	      }
-	      ProductDao productDao = new ProductDao(); 
+
 	      	ImageInfoDataBean imgDto = new ImageInfoDataBean();
 	          int imageNo = productDao.getImgNo()+1;
 	  	      imgDto.setImageNo(imageNo);
@@ -100,7 +97,8 @@ public class AdminProHandler {
 		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
 	              new HandlerHelper().fileWriter(sql);
 		  	   }
-	         
+		  	 request.setAttribute( "systemName", systemName );
+			}
 	      
 	      
 	      String col[] = multi.getParameterValues( "color" );
