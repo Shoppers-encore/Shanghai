@@ -3,5 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="Admin">
-  </mapper>
+<mapper namespace="Admin">
+	<!-- admin login from jk_user -->
+	<select id="getUser" parameterType="String" resultType="databean.UserDataBean">
+		SELECT * FROM jk_user WHERE id=#{id}
+	</select>
+	<select id="getUserListCount" resultType="int">
+		SELECT count(*) FROM jk_user
+	</select>
+	<select id="getNameuserlist" parameterType="String" resultType="databean.UserDataBean">
+		SELECT * FROM jk_user WHERE name=#{name}
+	</select>
+	<select id="getAlluserlist" parameterType="java.util.Map" resultType="databean.UserDataBean">
+		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, r FROM(
+		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, rownum r FROM 
+		(SELECT * FROM jk_user ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
+	<select id="getSearchCount" parameterType="String" resultType="int">
+		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
+	</select>
+
+ 
+ 
+ 
+ 
+</mapper>
