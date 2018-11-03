@@ -6,20 +6,21 @@
 <html>
 <head>
 	<title>${productList.get(0).productName} 상세페이지</title>
-	<script type="text/javascript">
-		$("#sz, #cl").change(function(){
-			var productCode = $("cl").val()+$("#reff").val()+$("#sz").val();
-			$("#productCode").val() = productCode;
-		})
-		$("basket").click(function(){
-			$("#goodcode").val()
-		})
-	</script>
+	
 </head>
 	<body class="container">
 	<!-- User Menu Bar -->
 	<%@ include file="../form/userHeader.jsp" %>
-	
+	<script type="text/javascript">
+		//<!--
+			var productCode = document.getElementById('productCode').value;
+			var ref = document.getElementElementById('reff').value;
+			
+			function changeSelect(){
+				
+			}
+		//-->
+	</script>
 	<!-- Good Detail View Page -->
 		<article class="row">
 			<!-- Good Picture -->
@@ -52,7 +53,7 @@
 							<tr>
 								<td>${str_color}</td>
 								<td>
-									<select id="cl">
+									<select id="cl" onchange="selectChange()">
 										<option value="-1">${btn_select}</option>
 										<c:forEach var="productColor" items="${colors}">
 											<option value="${productColor}">${productColor}</option>
@@ -63,7 +64,7 @@
 							<tr>
 								<td>${str_size}</td>
 								<td>
-									<select id="sz">
+									<select id="sz" onchange="selectChange()">
 										<option value="-1">${btn_select}</option>
 										<c:forEach var="productSize" items="${sizes}">
 											<option value="${productSize}">${productSize}</option>
@@ -75,13 +76,13 @@
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="var" value="1" style="width:60px;"></td>
+								<td><input type="number" name="quantity" value="1" style="width:60px;"></td>
 							</tr>
 							<tr>
 								<th colspan="2"><input type="submit" class="btn-block" value="${btn_buy}"></th>
 							</tr>
 							<tr>
-								<th colspan="2"><input type="button" id="basket" class="btn-block" onclick="location:'basketInput.jk?" value="${btn_inputCart}"></th>
+								<th colspan="2"><input type="button" id="basket" class="btn-block" value="${btn_inputCart}"></th>
 							</tr>
 						</tbody>
 					</table>
