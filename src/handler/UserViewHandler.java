@@ -61,11 +61,17 @@ public class UserViewHandler {
 			HashSet<String> colors=new HashSet<String>();
 			HashSet<String> sizes=new HashSet<String>();
 			
-			// 1) Get its productCode and reference number
+			// 1-1) Get its productCode and reference number
 			String productCode=product.getProductCode();
-			String ref=productCode.substring(2,5);
+			String ref;
+			// 1-2) Check if productCode=ref (=options not selected)
+			if(productCode.length()<7) {
+				ref=productCode;
+			} else {
+				ref=productCode.substring(2,productCode.length()-2);
+			}
 			System.out.println("MAV/basketList-ref: "+ref);
-			
+				
 			// 2) Get productCodes with the same reference number
 			List<ProductDataBean> prodCodesFromRef=productDao.getProductCodesByRef(ref);
 			
