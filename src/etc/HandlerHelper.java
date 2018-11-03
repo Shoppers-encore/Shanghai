@@ -40,7 +40,6 @@ public class HandlerHelper {
 		end=start+pageSize-1;
 		if(end>count) end=count;
 		number=count-(currentPage-1)*pageSize;
-		System.out.println(start + " , " + end);
 		startPage=(currentPage/pageBlock)*pageBlock+1;
 		if(currentPage%pageBlock==0)startPage-=pageBlock;
 		endPage=startPage+pageBlock-1;
@@ -62,12 +61,7 @@ public class HandlerHelper {
 	}
 
 	public String[] makeProductCode( int[] colors, int[] sizes ,int ref) {
-
-		System.out.println(colors.length);
-		System.out.println(ref);
-		System.out.println(sizes.length);
 		String product_codes[] = new String[ (colors.length * sizes.length)+1 ];
-		System.out.println(product_codes.length);
 		String color[] = { "WH", "BK", "RD", "OR", "YL", "GN", "BL", "SK",  "NV", "PP", "BR", "GR", "BG", "PK" };
 		String size[] = { "SS", "MM", "LL", "XL", "FR" };
 		
@@ -100,8 +94,6 @@ public class HandlerHelper {
 			}
 		}
 		int[] colors = removeDuplicate(results);
-		for(int i=0; i <colors.length ; i++)
-		System.out.println("color : "+colors[i]);
 		return colors;
 	}
 
@@ -117,8 +109,6 @@ public class HandlerHelper {
 			}
 		}
 		int[] sizes = removeDuplicate(results);
-		for(int i = 0 ; i<sizes.length;i++)
-		System.out.println("size : " +sizes[i]);
 		return sizes;
 	}
 	
@@ -127,13 +117,11 @@ public class HandlerHelper {
 		for(int i=0; i<numbers.length ; i++) {
 			if(!resultList.contains(new Integer(numbers[i])) && i!=0){
 				resultList.add(numbers[i]);
-				System.out.println("duplev "+numbers[i]);
 			}
 		}
 		int[] result = new int[resultList.size()];
 		for(int i=0; i<resultList.size(); i++) {
 			result[i] = resultList.get(i);
-			System.out.println("duple2 "+result[i]);
 		}
 		return result;
 	}
@@ -144,7 +132,6 @@ public class HandlerHelper {
 			for(int j=0;j<tmp.length;j++) {
 				if(color[i] == j)
 					colors[i]=tmp[j];
-				System.out.println(color[i]);
 			}
 		}
 		return colors;
@@ -155,7 +142,6 @@ public class HandlerHelper {
 		for(int i=0; i<size.length;i++) {
 			for(int j=0; j<tmp.length;j++) {
 				if(size[i]==j) {
-					System.out.println(size[i]);
 					sizes[i]=tmp[j];
 				}
 			}
