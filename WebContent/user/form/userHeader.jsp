@@ -26,7 +26,7 @@
 		<li class="nav-item">
 			<a class="nav-link" href="reviewList.jk">Review</a>
 		</li>
-		<c:if test="${sessionScope.id eq null or sessionScope.id eq 0}">
+		<c:if test="${sessionScope.id eq null or sessionScope.id.length() eq 0}">
 			<li class="nav-item">
 				<a class="nav-link" href="userLoginForm.jk">LOGIN</a>
 			</li>

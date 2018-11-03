@@ -20,8 +20,14 @@ public class BasketDao {
 		return session.selectOne("User.getBasketCount", id);
 		
 	}
-	
+
 	public int deleteBasketItem(Map<String, String> deleteReferences) {
 		return session.delete("User.deleteBasketItem", deleteReferences);
+	}
+	
+	//basket input
+	public int inputBasket(BasketDataBean basket) {
+		return session.insert("User.inputBasket", basket);
+
 	}
 }

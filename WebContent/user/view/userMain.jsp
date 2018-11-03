@@ -7,7 +7,7 @@
 	<head>
 		<title>메인 페이지</title>
 	</head>
-	<body>
+	<body class="container">
       	<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
