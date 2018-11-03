@@ -21,7 +21,7 @@
 					</tr>			
 					<tr>
 						<th> ${str_writer} </th>
-						<td colspan="3">  ${sessionScope.memid}</td>
+						<td colspan="3">  ${sessionScope.id}</td>
 					</tr>			
 					<tr>
 						<th style="width:20%"> ${str_productName} </th>

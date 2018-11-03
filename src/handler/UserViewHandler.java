@@ -187,6 +187,10 @@ public class UserViewHandler {
 	// Review
 	@RequestMapping("/reviewList")
 	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {
+		Map<String,String> search = new HashMap<String,String>();
+		search.put("searchType", request.getParameter("searchType"));
+		search.put("searchWord", request.getParameter("searchWord"));
+		
 		int count = boardDao.getReviewCount();	
 
 		if( count > 0 ) {
@@ -205,7 +209,7 @@ public class UserViewHandler {
 		
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
-		String id=(String)request.getSession().getAttribute("memid");
+		String id=(String)request.getSession().getAttribute("id");
 
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
@@ -217,8 +221,6 @@ public class UserViewHandler {
 			}
 		}
 		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
-		if(id == null || ! ((String)request.getSession().getAttribute( "memid" )).equals(reviewDto.getId() ) )
-			boardDao.addCount(num);
 		
 		request.setAttribute( "number", number );
 		request.setAttribute( "pageNum", pageNum );
@@ -231,7 +233,7 @@ public class UserViewHandler {
 	public String reviewLike(HttpServletRequest request, HttpServletResponse response) {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("reviewNo", request.getParameter("reviewNo"));
-		map.put("id", (String)request.getSession().getAttribute("memid"));
+		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.insertReviewLike(map);
 		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
 	}
@@ -240,7 +242,7 @@ public class UserViewHandler {
 	public String reviewLikeCancel(HttpServletRequest request, HttpServletResponse response) {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("reviewNo", request.getParameter("reviewNo"));
-		map.put("id", (String)request.getSession().getAttribute("memid"));
+		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.deleteReviewLike(map);
 		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
 	}

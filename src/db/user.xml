@@ -53,9 +53,6 @@
 	<select id="getReviewLike" parameterType="java.util.Map" resultType="int">
 			SELECT count(*) FROM jk_reviewScore WHERE TO_CHAR(reviewNo)=#{reviewNo} AND id=#{id}
 	</select>
-	<update id="addCount" parameterType="int">
-			UPDATE jk_review SET count=count+1 WHERE reviewNo=#{num}
-	</update>
 	<insert id="insertReviewLike" parameterType="java.util.Map">
 			INSERT INTO jk_reviewScore (reviewNo, id) VALUES(TO_NUMBER(#{reviewNo}), #{id})
 	</insert>

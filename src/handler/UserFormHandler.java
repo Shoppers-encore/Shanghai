@@ -38,7 +38,7 @@ public class UserFormHandler {
 	// Review
 	@RequestMapping( "/reviewWriteForm" )
 	public ModelAndView reviewWriteForm (HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String id= (String)request.getSession().getAttribute("memid");
+		String id= (String)request.getSession().getAttribute("id");
 		if(id==null) {
 			return new UserViewHandler().main(request,response);
 		}else if(id.length()<=5) {
@@ -60,7 +60,7 @@ public class UserFormHandler {
 	
 	@RequestMapping( "/reviewModifyForm" )
 	public ModelAndView reviewModifyForm (HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("memid");
+		String id = (String)request.getSession().getAttribute("id");
 		int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
 		request.setAttribute("pageNum", pageNum);

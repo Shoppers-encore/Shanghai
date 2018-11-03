@@ -8,17 +8,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
+<c:set var="id" value="aaa" scope="session"/>
 <body class="container">
 	<article class="centered">
 	<br><br>
 		    <div id="view">
+		    <form name="detailForm">
 					<table class="table" >
 						<tr>
 							<th colspan="4">${str_review}</th>	
 						</tr>		
 						<tr>
 							<th>${str_writer}</th>
-							<td>${reviewDto.id}</td>
+							<td>${reviewDto.id}
+								<input type="hidden" name="id" value="${reviewDto.id}">
+								<input type="hidden" name="sessionId" value="${sessionScope.id}"/>
+							</td>
 							<th> ${str_writeDate} </th>
 							<td><fmt:formatDate value="${reviewDto.reviewDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 						</tr>	
@@ -44,7 +49,7 @@
 						<tr>
 							<th colspan="4">
 								${reviewDto.reviewScoreSum} ${msg_like}
-								<c:if test="${sessionScope.memid ne null}">
+								<c:if test="${sessionScope.id ne null}">
 									<c:if test="${reviewDto.checkedme eq false}">
 										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='like.jk?reviewNo=${reviewDto.reviewNo}&number=${number}'">
 									</c:if>
@@ -56,7 +61,7 @@
 						</tr>
 						<tr>
 							<th colspan="4">
-								<c:if test="${sessionScope.memid.length() le 5 or reviewDto.id eq sessionScope.memid}">
+								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
 									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="reviewModable()">
 									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick="reviewDelcheck()">
 								</c:if>
@@ -64,6 +69,7 @@
 							</th>
 						</tr>		
 					</table>
+			 </form>
 			 </div>
 		</article>
 </body>
