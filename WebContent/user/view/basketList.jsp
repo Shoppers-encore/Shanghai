@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
-
 <html>
 <head>
 <title>${head_basketList}</title>
@@ -52,9 +51,10 @@
 					</div>
 				</div>
 				
-				<form>
+				<form class="form" name="basketListForm" method="post" action="basketListPro.jk">
 					<c:forEach var="basketList" items="${basketList}">					
-						<div class="row border text-center ${basketList.productCode}">
+						<div class="form-group row border text-center ${basketList.productCode}">
+							<input type="hidden" name="${basketList.productCode}" value="${basketList.productCode}">
 							<div class="col-lg-2">
 								<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
 							</div>
@@ -77,6 +77,7 @@
 							</div>
 							<div class="col-lg-1 pt-5">
 								${basketList.basketQuantity}
+								<input type="number" name="basketQuantity_${basketList.productCode}">
 							</div>
 							<div class="col-lg-1 pt-5">
 								<button class="btn basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
@@ -98,7 +99,7 @@
 														console.log('basket update 성공');
 														$('.${basketList.productCode}').remove();
 													} else {
-														alert('죄송합니다. 잠시 후 다시 시도해 주세요.');
+														alert('잠시 후 다시 시도해 주세요.');
 													}
 												},
 												error: function(e) {
@@ -112,6 +113,8 @@
 							</div>
 						</div>
 					</c:forEach>
+					<button type="button" class="btn" onclick="returnToList()">쇼핑 계속하기</button>
+					<button type="submit" class="btn" onclick="updateBasketList()">결제하기</button>
 				</form>
 			</c:if>
 		</div>
