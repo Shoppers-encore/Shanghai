@@ -26,6 +26,9 @@
 	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
 	</select>
+	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
+		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>3
+	</select>
 	
 	
 	<!-- Review -->
