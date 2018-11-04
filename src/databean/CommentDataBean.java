@@ -8,6 +8,7 @@ public class CommentDataBean {
 	private String id;
 	private String commentContent;
 	private Timestamp commentDate;
+	private String userName;
 	public int getReviewNo() {
 		return reviewNo;
 	}
@@ -37,5 +38,11 @@ public class CommentDataBean {
 	}
 	public void setCommentDate(Timestamp commentDate) {
 		this.commentDate = commentDate;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
