@@ -237,10 +237,10 @@ function deletePhoto(tb_no,photo_id,start){
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="checkbox" name="size" value="4">${str_sizeF}
                      </td>
-                     <th style="width :10%" rowspan="2"> ${str_style} </th>
-                     <td style="width :20%" rowspan="2">
+                     <th style="width :10%"> ${str_style} </th>
+                     <td style="width :20%">
                         <input type="radio" name="style" value="1">${str_casual}
-                     <input type="radio" name="style" value="2">${str_dandy}
+                    	<input type="radio" name="style" value="2">${str_dandy}
                      </td>
                   </tr>
                   <tr>

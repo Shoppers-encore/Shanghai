@@ -12,7 +12,7 @@
                ${msg_hello}<br>
                ${str_id} : ${userDto.id} <br>
                </p>
-               <a href="myPage.jk" class="btn btn-primary">${btn_myPage}</a>
+               <a href="admModifyView.jk" class="btn btn-primary">${btn_myPage}</a>
                <input class="btn btn-primary" type="button" value="${btn_logout}"
                  onclick="location='admLoginForm.jk'"><br>
              </div>
@@ -25,7 +25,7 @@
           <a class="nav-link" href="admProductView.jk">${str_productList}</a>
         </li>
       <li class="nav-item">
-          <a class="nav-link" href="admReviewList.jk">${str_boardList}</a>
+          <a class="nav-link" href="admReviewList.jk">${str_reviewList}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="admOrderList.jk">${str_admOrderList}</a>

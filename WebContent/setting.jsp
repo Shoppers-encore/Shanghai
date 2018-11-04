@@ -91,7 +91,7 @@
 <c:set var="str_var" value="현재수량"/>
 <c:set var="str_varPlus" value="추가할 수량"/>
 <c:set var="str_num" value="글번호"/>
-<c:set var="str_reviewList" value="리뷰 관리"/>
+<c:set var="str_reviewList" value="리뷰관리"/>
 <c:set var="str_searchTitle" value="제목"/>
 <c:set var="str_searchBoth" value="제목+내용"/>
 <c:set var="str_orderCode" value="주문번호"/>
