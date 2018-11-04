@@ -5,6 +5,8 @@ var delCheck = "삭제하시겠습니까?";
 var cannotdelete = "삭제 권한이 없습니다.";
 var cannotmodify = "수정 권한이 없습니다.";
 
+var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 시도하세요.";
+
 
 
 
@@ -12,6 +14,7 @@ var cannotmodify = "수정 권한이 없습니다.";
 
 //Function
 
+////// <User>
 //<Review>
 function reviewDelcheck() {
 	   var writer = document.detailForm.id.value;
@@ -37,3 +40,10 @@ function reviewModable() {
 	      return false;
 	   }
 	}
+
+////// <Admin>
+// <tag>
+function addTag() {
+    var url = "tagInputForm.jk";
+    open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=300px" );
+ }

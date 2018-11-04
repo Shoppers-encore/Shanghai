@@ -15,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import databean.ReviewDataBean;
+import databean.TagDataBean;
 import databean.UserDataBean;
 import db.OrderDao;
 import db.ProductDao;
+import db.TagDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
@@ -128,6 +130,9 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/tagList")
 	public ModelAndView tagList(HttpServletRequest request, HttpServletResponse response) {
+		TagDao tagDao = new TagDao();
+		List <TagDataBean> tags = tagDao.getTags();
+		request.setAttribute("tags", tags);
 		return new ModelAndView("adm/view/tagList");
 	}
 }
