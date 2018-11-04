@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.media.jai.JAI;
@@ -14,7 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -41,7 +46,7 @@ public class UserProHandler {
 	@Resource
 	private BasketDao basketDao;
 	
-	// User 
+	//////////////////// User /////////////////////
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
 		UserDataBean userDto = new UserDataBean();
@@ -62,6 +67,22 @@ public class UserProHandler {
 		
 		return new ModelAndView("user/pro/userInputPro");
 	}
+
+	////////////////Ajax User-ConfirmId 
+	@RequestMapping(value = "/idCheck.go", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<Object, Object> idCheck(@RequestBody String id) {
+		id = id.split("=")[0];
+		int countId = 0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		countId = userDao.confirmId(id);
+		map.put("countId", countId);
+
+		return map;
+	}
+	////////////////
+	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");

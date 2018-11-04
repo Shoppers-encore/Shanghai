@@ -17,17 +17,17 @@ var confirmerror = "아이디 중복확인 해 주세요";
 //Confirm ID - check if it is possible to use the entered ID
 var confirmId = 0;
 function confirmID() {
-	var id = $("#id").val();
+	var id = $("#id").val();			//getValue from the inputform & set Variable
 	if (id) {
 		$.ajax({
 			async : true,
 			type : 'POST',
-			data : id,
-			url : "idCheck.go",
-			dataType : "json",
-			success : function(data) {
+			data : id,					//Parameter value
+			url : "idCheck.go",			//Controller Mapping
+			dataType : "json",			//Transformed format
+			success : function(data) {	//When succeeded
 				if (data.countId > 0) {
-					$('#IdCheckMessagegg').html(
+					$('#idConfirmed').html(
 							"아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 				} else {
 					$('#IdCheckMessagegg').html("사용가능한 아이디입니다.");

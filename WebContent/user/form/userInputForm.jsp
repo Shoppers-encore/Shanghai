@@ -27,10 +27,11 @@
 			<div class="form-group row"><!-- Id -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
 					<div class="col-sm-8">
-						<input type="text" name=id class="form-control" placeholder="ID" maxlength="12" required autofocus>											
+						<input type="text" name=id id=id class="form-control" placeholder="ID" maxlength="12" required autofocus>											
 					</div>
+					<h6 style="color: red;" id="IdCheckMessagegg"></h6>
 					<div class="col-sm-2">
-						<button type="button" class="btn btn-md btn-secondary" onclick="IdCheck()">${btn_confirm}</button>					
+						<button type="button" class="btn btn-md btn-secondary" onclick="confirmId()">${btn_confirm}</button>					
 					</div>				
 			</div>
 			<div class="form-group row pass"><!-- password -->
