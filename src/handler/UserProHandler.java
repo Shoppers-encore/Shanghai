@@ -340,6 +340,7 @@ public class UserProHandler {
 		for(int i = 0 ; i<baskets.size(); i++) {
 			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
 		}
+		System.out.println(baskets.size());
 		request.setAttribute("count", baskets.size());
 		request.setAttribute("baskets", baskets);
 		return baskets;
@@ -352,7 +353,7 @@ public class UserProHandler {
 		BasketDataBean basket = new BasketDataBean();
 		basket.setId(id);
 		basket.setProductCode(productCode);
-		basketDao.deleteOnebasket(basket);
+		basketDao.deleteBasketItem(basket);
 	}
 	
 	//chat ajax

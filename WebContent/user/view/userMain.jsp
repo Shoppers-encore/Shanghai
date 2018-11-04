@@ -145,6 +145,7 @@
 							data : $('form[name="' + targetid + '"]').serialize(),
 							dataType : 'xml',
 							success: setTimeout( function(){
+								cartDiv.removeChild(document.getElementById('table'));
 								show();
 							}, 1000 )
 	  					});
@@ -185,9 +186,8 @@
 				url : 'viewCart.jk',
 				data: $('form').serialize(),
 				success : function( data ){
-					$('#t').html('');
-					var count = count;
-					if( count != 0 ){
+					if( data.length > 0 ){
+						$('#t').html('');
 						var table = document.createElement( 'table' );
 	  					var tbody = document.createElement( 'tbody' );
 		  				table.setAttribute( 'border', '1' );
