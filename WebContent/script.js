@@ -81,14 +81,14 @@ function commentList(reviewNo){
        success : function(data){
            var commentView ='';
            $.each(data, function(key, comment){ 
-           	commentView += '<th  colspan="2"><div class="commentArea">';
-           	commentView += '</div class="commentInfo'+comment.commentNo+'"><b>'+comment.id+'</b>';
-           	if(SessionID == comment.userId){
-           	commentView += '<a onclick="commentUpdate('+comment.commentNo+',\''+comment.commentContent+'\');"> 수정 </a>';
-           	commentView += '<a onclick="commentDelete('+comment.commentNo+');"> 삭제 </a>';
+           	commentView += '<div class="commentArea row">';
+           	commentView += '<div class="commentInfo'+comment.commentNo+'" style="width:35%;"><b>'+comment.id+'</b>';
+           	if(sessionId == comment.id){
+           	commentView += '<button type="btn btn-outline-primary btn-sm" onclick="commentUpdate('+comment.commentNo+',\''+comment.commentContent+'\');"> 수정 </a>';
+           	commentView += '<button type="btn btn-outline-primary btn-sm" onclick="commentDelete('+comment.commentNo+');"> 삭제 </a></div>';
            	}
-           	commentView += '<div class="commentContent"> <p>'+comment.commentContent +'</p>';
-           	commentView += '</div></div></th>'
+           	commentView += '<div class="commentContent" style="width:65%;"><p>'+comment.commentContent +'</p>';
+           	commentView += '</div></div>'
            });
            $(".commentList").html(commentView);
        },

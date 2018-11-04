@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="ccc" scope="session"/>
-<body class="container">
+<c:set var="id" value="bbb" scope="session"/>
+<body class="container" onload="commentList(${reviewDto.reviewNo})">
 	<article class="centered">
 	<br><br>
 		    <div id="view">
@@ -28,8 +28,7 @@
 						</tr>	
 						<tr>
 							<th style="width:20%">${str_productName}</th>
-							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled>
-								<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/></td>	
+							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled></td>	
 							<th style="width:20%">${str_rating}</th>
 							<td style="width:30%"><input type="range" min="0" step="0.5" max="5" value="${reviewDto.rating}" class="slider" id="myRange" disabled>
 								<span id="demo">${reviewDto.rating}</span></td>
@@ -75,7 +74,7 @@
 									</form>
 								</td>
 							</tr>
-							<tr class="commentList"></tr>
+							<div class="commentList container"></div>
 							<!-- comment -->
 						<tr>
 							<th colspan="2">
