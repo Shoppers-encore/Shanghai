@@ -7,8 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
 import javax.annotation.Resource;
