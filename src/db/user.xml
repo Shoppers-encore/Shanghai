@@ -81,6 +81,9 @@
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		Select count(*) FROM jk_basket WHERE id=#{id}
 	</select>
+	<insert id="inputBasket" parameterType="databean.BasketDataBean">
+		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
+	</insert>
   
   
   	<!-- Search -->

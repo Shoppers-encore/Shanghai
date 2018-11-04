@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import databean.BasketDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
 import db.BasketDao;
@@ -40,7 +41,10 @@ import databean.UserDataBean;
 public class UserProHandler {
 	@Resource
 	private UserDao userDao;
+	@Resource
 	private BoardDao boardDao;
+	@Resource
+	private BasketDao basketDao;
 	
 	// User 
 	@RequestMapping( "/userInputPro" )
@@ -82,12 +86,19 @@ public class UserProHandler {
 	// Basket
 	@RequestMapping( "/basketInput" )
 	public ModelAndView basketInput ( HttpServletRequest request, HttpServletResponse response ) {
-		String id = (String)request.getSession().getAttribute("memid");
+		String id = (String)request.getSession().getAttribute("id");
 		if(id == null) {
 			return new ModelAndView("user/form/userLoginForm");
 		}
 		String productCode = request.getParameter("productCode");
-		
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		BasketDataBean basket = new BasketDataBean();
+		basket.setId((String)request.getSession().getAttribute("id"));
+		basket.setBasketQuantity(quantity);
+		basket.setProductCode(productCode);
+		int result = basketDao.inputBasket(basket);
+		request.setAttribute("result", result);
+		request.setAttribute("ref", request.getParameter("ref"));
 		return new ModelAndView("user/pro/basketInput");
 	}
 	@RequestMapping( "/basketModify" )
