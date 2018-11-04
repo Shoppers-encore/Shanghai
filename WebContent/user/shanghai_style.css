@@ -1,6 +1,16 @@
 @charset "UTF-8";
 /*====Common Shanghai Theme====*/
+/*===userInputForm.jsp===*/
+.iconMargin img {
+	margin-botton : -5px;
+}
+.form-group {
+	margin-bottom: 0.8rem !important;
+}
 
+.btn_join .btn_cancel {
+	
+}
 /*===userLoginForm.jsp===*/
 body.login {
 	margin-top: 5rem;
