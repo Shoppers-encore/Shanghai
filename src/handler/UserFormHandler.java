@@ -84,7 +84,6 @@ public class UserFormHandler {
 		}
 	}
 	
-	
 	// Order
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {

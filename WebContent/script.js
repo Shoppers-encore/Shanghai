@@ -37,3 +37,8 @@ function reviewModable() {
 	      return false;
 	   }
 	}
+
+// BasketList
+function returnToList() {
+	window.location.href='main.jk';
+}
