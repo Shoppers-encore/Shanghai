@@ -183,46 +183,42 @@
   			$.ajax({
 				type : 'POST',
 				url : 'viewCart.jk',
-				dataType : 'xml',
 				data: $('form').serialize(),
 				success : function( data ){
 					$('#t').html('');
-					var code = $(data).find('code').text().trim();
-					if( code == 'success' ){
-						var count = $(data).find('count').text().trim();
-						if( count != 0 ){
-							var table = document.createElement( 'table' );
-		  					var tbody = document.createElement( 'tbody' );
-			  				table.setAttribute( 'border', '1' );
-			  				table.setAttribute( 'id', 'table' );
-		  					tbody.setAttribute( 'id', 't' );
-		  					table.appendChild( tbody );
-		  					cartDiv.appendChild( table );
-							var cartgoods = eval( "(" + $(data).find('cartgoods').text() + ")" );
-							
-							for( var i=0; i<cartgoods.good.length; i++ ){
-								if( i%2 == 1 ){ 
-								var html =
-									'<tr>' +
-									'<td><img style="width:50px; height:50px;" src="/Shanghai/save/' + cartgoods.good[i].img_adr +'"></td>' 
-									+ '<td><input type="button" id="' + cartgoods.good[i].good_code + '" class="btn btn-outline-secondary btn-sm" value="${btn_x}">'
-									+ '<form name="' + cartgoods.good[i].good_code + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="good_code" value="'
-									+ cartgoods.good[i].good_code + '"></td></form></tr>';
-									
-									$(html).appendTo('#t');
-								}
-							}
-						} else {
-  							var add_cart = document.createElement( 'img' );
-  							add_cart.setAttribute( 'id', 'add_cart' );
-  		  					add_cart.setAttribute( 'src', '/Shanghai/images/add_cart.png' );
-  		  					cartDiv.appendChild( add_cart );
-						}
-					} 
+					var count = count;
+					if( count != 0 ){
+						var table = document.createElement( 'table' );
+	  					var tbody = document.createElement( 'tbody' );
+		  				table.setAttribute( 'border', '1' );
+		  				table.setAttribute( 'id', 'table' );
+	  					tbody.setAttribute( 'id', 't' );
+	  					table.appendChild( tbody );
+	  					cartDiv.appendChild( table );
+						
+						$.each(data, function(key, baskets){
+							var html =
+								'<tr>' +
+								'<td><img style="width:50px; height:50px;" src="/Shanghai/save/' + baskets.thumbnail +'"></td>' 
+								+ '<td><input type="button" id="' + baskets.productCode + '" class="btn btn-outline-secondary btn-sm" value="${btn_x}">'
+								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="good_code" value="'
+								+ baskets.productCode + '"></td></form></tr>';
+								
+								$(html).appendTo('#t');
+						});
+					} else {
+ 							var add_cart = document.createElement( 'img' );
+ 							add_cart.setAttribute( 'id', 'add_cart' );
+ 		  					add_cart.setAttribute( 'src', '/Shanghai/images/add_cart.png' );
+ 		  					cartDiv.appendChild( add_cart );
+					}
 				}
 			});
   		}
   	});
+	function chatting(){
+		window.open("chat.jk");
+	}
   	//-->
   </script>
 </html>

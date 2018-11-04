@@ -30,4 +30,8 @@ public class BasketDao {
 		return session.insert("User.inputBasket", basket);
 
 	}
+
+	public int deleteOnebasket(BasketDataBean basket) {
+		return session.delete("User.deleteOneBasket", basket);
+	}
 }

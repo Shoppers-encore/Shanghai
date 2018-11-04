@@ -21,11 +21,13 @@ import com.google.gson.Gson;
 import databean.ReviewScoreDataBean;
 
 import databean.BasketDataBean;
+import databean.ChatDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
 import db.BoardDao;
+import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
 import etc.HandlerHelper;
@@ -41,6 +43,8 @@ public class UserViewHandler {
 	private BoardDao boardDao;
 	@Resource
 	private OrderDao orderDao;
+	@Resource
+	private ChatDao chatDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -348,5 +352,14 @@ public class UserViewHandler {
 		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.deleteReviewLike(map);
 		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+	}
+	
+	//chatting open url
+	@RequestMapping("/chat")
+	public ModelAndView chat(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		List<ChatDataBean> chatdata = chatDao.getList(id);
+		request.setAttribute("chatData", chatdata);
+		return new ModelAndView("user/view/chatView");
 	}
 }
