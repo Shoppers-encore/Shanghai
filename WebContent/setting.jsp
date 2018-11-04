@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<script src="script.js"></script>
+
+<script src="/Shanghai/script.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -78,7 +79,7 @@
 <c:set var="str_spt" value="반바지"/>
 <c:set var="str_content" value="내용"/>
 <c:set var="str_writeReview" value="Reveiw 작성하기"/>
-<c:set var="str_score" value="평점"/>
+<c:set var="str_rating" value="평점"/>
 <c:set var="str_uploading" value="이미지 첨부"/>
 <c:set var="str_productQuantity" value="수량"/>
 <c:set var="str_itemsTotal" value="전체 상품: 총 "/>
@@ -105,6 +106,10 @@
 <c:set var="str_orderDetail" value="주문상세"/>
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
+<c:set var="str_bday" value="생일"/>
+<c:set var="str_modifyReview" value="리뷰 수정"/>
+
+
 
 
 
@@ -163,6 +168,11 @@
 <c:set var="btn_inputCart" value="장바구니"/>
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
+<c:set var="btn_confirm" value="확인"/>
+<c:set var="btn_select" value="선택"/>
+<c:set var="btn_goodInput" value="상품등록"/>
+
+
 
 
 <!-- Message -->
@@ -176,6 +186,8 @@
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
+
+
 
 
 <!-- url -->

@@ -21,7 +21,7 @@
 					</tr>			
 					<tr>
 						<th> ${str_writer} </th>
-						<td colspan="3">  ${sessionScope.memid}</td>
+						<td colspan="3">  ${sessionScope.id}</td>
 					</tr>			
 					<tr>
 						<th style="width:20%"> ${str_productName} </th>
@@ -30,9 +30,9 @@
 							<!-- 주문내역 배송완료 목록에서 받아온 상품명 값을 입력해줌 -->
 							<input type="hidden" name="productCode" value="${productCode}">
 						</td>		
-						<th style="width:20%">${str_score}</th>
+						<th style="width:20%">${str_rating}</th>
 						<td style="width:30%">
-							<input type="range" name="score" min="0" step="0.5" max="5" value="2.5" class="slider" id="myRange" onclick="scoring()">
+							<input type="range" name="rating" min="0" step="0.5" max="5" value="2.5" class="slider" id="myRange" onclick="scoring()">
 							<span id="demo"> </span>
 						</td>
 					</tr>
@@ -43,7 +43,7 @@
 					<tr>
 						<th> ${str_content} </th>
 						<td colspan="3">
-							<textarea name="content" rows="10" cols="60"></textarea>
+							<textarea name="reviewContent" rows="10" cols="60"></textarea>
 						</td>
 					</tr>	
 					<tr>

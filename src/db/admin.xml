@@ -22,9 +22,51 @@
 	<select id="getSearchCount" parameterType="String" resultType="int">
 		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
 	</select>
-
- 
- 
- 
- 
+	<select id="getOrderCount" resultType="int">
+	 	 SELECT count(*) FROM jk_orderList
+	</select>
+	<select id="selectOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		  SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList ORDER BY ordercode desc) list ORDER BY ordercode  desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+	<select id="userCount" parameterType="String" resultType="int">
+	 	 SELECT count(orderCode) FROM jk_orderList WHERE id=#{id}
+	</select>
+	<select id="getOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
+		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
+		(SELECT * FROM jk_orderList ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
+ 	<select id="getOrder" parameterType="String" resultType="databean.OrderListDataBean">
+		SELECT * FROM jk_orderList WHERE id=#{id}
+	</select>
+	<select id="getAllCount" resultType="int">
+	 	 SELECT count(*) FROM jk_orderList
+	 </select>
+	 <select id="selectAllOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		  SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList ORDER BY orderCode desc) list ORDER BY orderCode desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	 </select>
+	 <select id="selectUserOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+	 	 SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList WHERE id=#{id} ORDER BY orderCode desc) list ) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	 </select>
+	 <select id="getProdCount" resultType="int">
+	 	 SELECT count(*) FROM jk_product
+	</select>
+	<select id="getProdList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
+		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
+		(SELECT * FROM jk_product ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
+	<select id="getRef" resultType="int">
+		SELECT max(ref) FROM jk_product
+	</select>
+	<insert id="input" parameterType="databean.ProductDataBean">
+	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail) 
+	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail})
+	</insert>
+	<select id="maxImg" resultType="int">
+		SELECT max(imageNo) FROM jk_imageInfo
+	</select>
+	<insert id="insertImg" parameterType="databean.ImageInfoDataBean">
+		INSERT INTO jk_imageInfo VALUES (#{imageNo}, #{ref}, #{imageAddress})
+	</insert>
 </mapper>

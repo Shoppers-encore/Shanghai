@@ -6,19 +6,23 @@
 <html>
 <head>
 	<title>${productList.get(0).productName} 상세페이지</title>
-	<script type="text/javascript">
-		$("#sz, #cl").on("change",function(){
-			$("#goodcode").val() = $("cl").val()+$("#reff").val()+$("#sz").val()
-		})
-		$("basket").on("click",function(){
-			$("#goodcode").val()
-		})
-	</script>
+	
 </head>
 	<body class="container">
 	<!-- User Menu Bar -->
 	<%@ include file="../form/userHeader.jsp" %>
-	
+	<script type="text/javascript">
+		//<!--
+		$(document).ready(function(){
+			$("select").change(function(){
+				$("input[name='productCode']").val($("select[name='cl']").val()+$("input[name='reff']").val()+$("select[name='sz']").val());
+			});
+			$("input:button[name='inputCart']").on("click",function(){
+					location.href="basketInput.jk?productCode="+$("input[name='productCode']").val()+"&quantity="+$("input[name='quantity']").val()+"&ref="+$("input[name='reff']").val();
+				});
+		});
+		//-->
+	</script>
 	<!-- Good Detail View Page -->
 		<article class="row">
 			<!-- Good Picture -->
@@ -51,8 +55,8 @@
 							<tr>
 								<td>${str_color}</td>
 								<td>
-									<select id="cl">
-										<option value="-1">${btn_select}</option>
+									<select name="cl">
+										<option value=" " selected>${btn_select}</option>
 										<c:forEach var="productColor" items="${colors}">
 											<option value="${productColor}">${productColor}</option>
 										</c:forEach>
@@ -62,25 +66,25 @@
 							<tr>
 								<td>${str_size}</td>
 								<td>
-									<select id="sz">
-										<option value="-1">${btn_select}</option>
+									<select name="sz">
+										<option value=" " selected>${btn_select}</option>
 										<c:forEach var="productSize" items="${sizes}">
 											<option value="${productSize}">${productSize}</option>
 										</c:forEach>
 									</select>
 								</td>
 								<td><input type="hidden" id="reff" name="reff" value="${productList.get(0).ref}"></td>
-								<td><input type="hidden" id="goodcode" name="goodcode" value="0"></td>                   
+								<td><input type="hidden" id="productCode" name="productCode" value="${productList.get(0).ref}"></td>                   
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="var" value="1" style="width:60px;"></td>
+								<td><input type="number" name="quantity" value="1" style="width:60px;"></td>
 							</tr>
 							<tr>
 								<th colspan="2"><input type="submit" class="btn-block" value="${btn_buy}"></th>
 							</tr>
 							<tr>
-								<th colspan="2"><input type="button" id="basket" class="btn-block" onclick="location:'basketInput.jk?" value="${btn_inputCart}"></th>
+								<th colspan="2"><input type="button" id="basket" name="inputCart" class="btn-block" value="${btn_inputCart}"></th>
 							</tr>
 						</tbody>
 					</table>
