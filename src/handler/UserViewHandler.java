@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -353,11 +354,19 @@ public class UserViewHandler {
 	}
 	
 	//chatting open url
-	@RequestMapping("/chat")
+	@RequestMapping("/chatView")
 	public ModelAndView chat(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
 		List<ChatDataBean> chatdata = chatDao.getList(id);
 		request.setAttribute("chatData", chatdata);
 		return new ModelAndView("user/view/chatView");
+	}
+	@RequestMapping("/chat")
+	@ResponseBody
+	public List<ChatDataBean> chatView(HttpServletRequest request, HttpServletResponse response){
+		String id = (String)request.getSession().getAttribute("id");
+		List<ChatDataBean> chatdata = chatDao.getList(id);
+		request.setAttribute("chatData", chatdata);
+		return chatdata;
 	}
 }
