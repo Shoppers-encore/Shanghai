@@ -75,4 +75,9 @@ public class ProductDao{
 	public int insertImgInfo(ImageInfoDataBean imgDto) {
 		return session.insert("Admin.insertImg", imgDto);
 	}
+
+	//For basket's Thumbnail use
+	public String getThumbnail(String productCode) {
+		return session.selectOne("User.getProductThumbnail", productCode);
+	}
 }

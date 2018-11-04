@@ -22,7 +22,7 @@
 	<context:component-scan base-package="db"/>
 	<context:component-scan base-package="bean"/>
 	
-	<!-- <mvc:annotation-driven>
+	<mvc:annotation-driven>
       <mvc:message-converters>
          <bean class="org.springframework.http.converter.StringHttpMessageConverter">
             <property name="supportedMediaTypes">
@@ -41,7 +41,7 @@
       </mvc:message-converters>
    </mvc:annotation-driven>
    
-   MultipartResolver 설정
+   <!-- MultipartResolver 설정 -->
    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-   </bean> -->
+   </bean>
 </beans>

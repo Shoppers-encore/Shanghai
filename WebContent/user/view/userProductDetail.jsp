@@ -97,13 +97,13 @@
 		<div align="center" style="width:100%;">
 			${productList.get(0).productContent}
 			<c:forEach var="img" items="${imageList}">
-			<img src="/WebProject/save/${img.image_address}">
+				<img src="/WebProject/save/${img.image_address}">
 			</c:forEach>
 		</div>
 	<hr><br><br><br>
 	<!-- Redirect to Board -->
 		<div align="right">
-			Remain your Comment! &nbsp;
+			Leave your Comment! &nbsp;
 			<input type="button" value="${str_review}" onclick="location='userReviewList.jk'"/><br><br><br><hr>
 		</div>
 	

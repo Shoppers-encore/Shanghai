@@ -30,6 +30,9 @@
 	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
 		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>3
 	</select>
+	<select id="getProductThumbnail" parameterType="String" resultType="String">
+		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}
+	</select>
 	
 	
 	<!-- Review -->
@@ -42,7 +45,7 @@
 	</select>
 	<insert id="insertReview" parameterType="databean.ReviewDataBean">
 			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
-			VALUES (SEQ_jk_review_reviewNo.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
 	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE reviewNo=#{num}
@@ -65,20 +68,57 @@
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
 			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
 	</update>
-		
+	<insert id="insertComment" parameterType="databean.CommentDataBean">
+			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)
+			VALUES(#{reviewNo}, commentNoSEQ.NEXTVAL, #{id}, #{commentContent, jdbcType=VARCHAR}, SYSDATE)
+	</insert>
+	<select id="getComment" parameterType="int" resultType="databean.CommentDataBean">
+		select * from jk_comment where reviewNo=#{reviewNo} order by commentNo desc
+	</select>
+	<update id="updateComment" parameterType="databean.CommentDataBean">
+		UPDATE jk_comment set commentContent = #{commentContent} where commentNo = #{commentNo}
+	</update>
+	<delete id="deleteComment" parameterType="int">
+		delete from jk_comment where commentNo = #{commentNo}
+	</delete>
+	
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail FROM jk_basket b, jk_product p WHERE b.id=#{id} AND p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
-		Select count(*) FROM jk_basket WHERE id=#{id}
+		SELECT count(*) FROM jk_basket WHERE id=#{id}
 	</select>
+	<delete id="deleteBasketItem" parameterType="java.util.Map">
+		DELETE FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
+	</delete>
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
-  
-  
+	
+	<!-- Order -->
+	<select id="getDistinctOrderCountById" parameterType="String" resultType="int">
+		SELECT count(DISTINCT orderCode) FROM jk_orderList WHERE id=#{id} 
+	</select>
+	<select id="getDistinctOrderListById" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate
+		FROM 
+		(SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate, rownum r 
+		FROM 
+		(SELECT DISTINCT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate 
+		FROM jk_orderList 
+		WHERE id=#{id} 
+		ORDER BY orderDate DESC)
+		)
+		WHERE r between #{start} and #{end}
+	</select>
+  	<select id="getOrderListByOrderCode" parameterType="int" resultType="databean.OrderListDataBean">
+  		SELECT o.productCode, p.productName, p.thumbnail, o.orderQuantity, o.orderPrice, o.orderStatus, o.orderAddress1, o.orderAddress2, o.orderZipcode
+  		FROM jk_orderList o, jk_product p 
+  		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
+  	</select>
+  	
   	<!-- Search -->
 	<sql id="search">
         <choose>
