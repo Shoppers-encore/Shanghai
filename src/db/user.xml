@@ -85,16 +85,40 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		select b.productCode, b.basketQuantity, p.productName, p.thumbnail from jk_basket b, jk_product p where b.id=#{id} and p.productCode=b.productCode 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail FROM jk_basket b, jk_product p WHERE b.id=#{id} AND p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
-		Select count(*) FROM jk_basket WHERE id=#{id}
+		SELECT count(*) FROM jk_basket WHERE id=#{id}
 	</select>
+	<delete id="deleteBasketItem" parameterType="java.util.Map">
+		DELETE FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
+	</delete>
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
-  
-  
+	
+	<!-- Order -->
+	<select id="getDistinctOrderCountById" parameterType="String" resultType="int">
+		SELECT count(DISTINCT orderCode) FROM jk_orderList WHERE id=#{id} 
+	</select>
+	<select id="getDistinctOrderListById" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate
+		FROM 
+		(SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate, rownum r 
+		FROM 
+		(SELECT DISTINCT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate 
+		FROM jk_orderList 
+		WHERE id=#{id} 
+		ORDER BY orderDate DESC)
+		)
+		WHERE r between #{start} and #{end}
+	</select>
+  	<select id="getOrderListByOrderCode" parameterType="int" resultType="databean.OrderListDataBean">
+  		SELECT o.productCode, p.productName, p.thumbnail, o.orderQuantity, o.orderPrice, o.orderStatus, o.orderAddress1, o.orderAddress2, o.orderZipcode
+  		FROM jk_orderList o, jk_product p 
+  		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
+  	</select>
+  	
   	<!-- Search -->
 	<sql id="search">
         <choose>

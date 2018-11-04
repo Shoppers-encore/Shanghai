@@ -13,7 +13,7 @@ var commenterror = "댓글을 입력해 주세요.";
 //Function
 
 ///<Review>
-function reviewDelcheck() {
+/*function reviewDelcheck() {
 	   var writer = document.detailForm.id.value;
 	   var sessionId = document.detailForm.sessionId.value;
 
@@ -36,9 +36,7 @@ function reviewModable() {
 	      alert( cannotmodify );
 	      return false;
 	   }
-	}
-
-
+	}*/
 
 ///<Review Comment>
 function commentInsert(){
@@ -143,3 +141,8 @@ function commentDelete(commentNo){
    });
 }
 
+
+// BasketList
+function returnToList() {
+	window.location.href='main.jk';
+}

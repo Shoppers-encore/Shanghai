@@ -7,12 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.OrderListDataBean;
-import databean.UserDataBean;
-
 
 public class OrderDao {
 	private SqlSession session = SqlMapClient.getSession();
 
+	// ADMIN
 	public int getOrderCount() {
 		return session.selectOne("Admin.getOrderCount");
 	}
@@ -41,5 +40,18 @@ public class OrderDao {
 		return session.selectOne("Admin.getOrder", id);
 		}
 
+	// USER
+	public int getDistinctOrderCountById(String id) {
+		return session.selectOne("User.getDistinctOrderCountById", id);
+	}
+	
+	public List<OrderListDataBean> getDistinctOrderListById(Map<String, String> selectReferences) {
+		return session.selectList("User.getDistinctOrderListById", selectReferences);
+	}
+			
+	public List<OrderListDataBean> getOrderListByOrderCode(int orderCode) {
+		return session.selectList("User.getOrderListByOrderCode", orderCode);
+	}
+	
 }
 	
