@@ -54,7 +54,7 @@
 						${str_orderStatus}
 					</div>
 					<div class="col-lg-1">
-						${str_writeReview}
+						${str_review}
 					</div>
 				</div>
 				<c:forEach var="orderedItem" items="${orderListByOrderCode}">

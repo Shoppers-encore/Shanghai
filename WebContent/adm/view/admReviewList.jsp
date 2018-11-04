@@ -55,7 +55,7 @@
 						</tr>
 					</c:if>
 					<c:if test="${count ne 0}">
-						<c:forEach var="reviewlist" items="${reviewLists}">
+						<c:forEach var="reviewlist" items="${articles}">
 							<tr>
 								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
 								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}">

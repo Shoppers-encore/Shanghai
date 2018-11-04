@@ -90,7 +90,7 @@
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		SELECT count(*) FROM jk_basket WHERE id=#{id}
 	</select>
-	<delete id="deleteBasketItem" parameterType="java.util.Map">
+	<delete id="deleteBasketItem" parameterType="databean.BasketDataBean">
 		DELETE FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
 	</delete>
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">

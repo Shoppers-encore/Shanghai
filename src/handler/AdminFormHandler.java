@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.ProductDataBean;
+import databean.TagDataBean;
 import databean.UserDataBean;
 import db.ProductDao;
+import db.TagDao;
 import db.UserDao;
 
 @Controller
@@ -28,6 +31,7 @@ public class AdminFormHandler {
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("memid");
+		System.out.println(request.getSession());
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
@@ -42,13 +46,17 @@ public class AdminFormHandler {
 		ProductDao productDao = new ProductDao();
 		int ref = new ProductDataBean().getRef();
 		if( ref > -1 ) {
-		if(productDao.getProdCount() > 0) {
-			ref = 1+productDao.getRef();
-		}else {
-			ref = 1;
-		}
+			if(productDao.getProdCount() > 0) {
+				ref = 1+productDao.getRef();
+			}else {
+				ref = 1;
+			}
 		}
 		request.setAttribute("ref", ref);
+
+		TagDao tagDao = new TagDao();
+		List <TagDataBean> tags = tagDao.getTags();
+		request.setAttribute("tags", tags);
 
 		return new ModelAndView("adm/form/productInputForm");
 	}

@@ -4,13 +4,16 @@ var inserterror = "글쓰기에 실패했습니다.\n잠시 후 다시 시도하
 var delCheck = "삭제하시겠습니까?";
 var cannotdelete = "삭제 권한이 없습니다.";
 var cannotmodify = "수정 권한이 없습니다.";
+var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 시도하세요.";
 var commenterror = "댓글을 입력해 주세요.";
 
 
 
 
+////// <User>
 
 //Function
+
 
 ///<Review>
 /*function reviewDelcheck() {
@@ -146,3 +149,14 @@ function commentDelete(commentNo){
 function returnToList() {
 	window.location.href='main.jk';
 }
+
+
+
+
+//////<Admin>
+//<tag>
+function addTag() {
+ var url = "tagInputForm.jk";
+ open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=300px" );
+}
+

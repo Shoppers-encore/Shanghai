@@ -55,7 +55,10 @@
 				<c:if test="${count ne 0}">
 					<c:forEach var="orderList" items="${orders}">
 						<tr>
-							<td>${order.productName}</td>
+							<td>
+								<input type="hidden" name="productCode" value="${order.productCode}">
+								${order.productName}
+							</td>
 							<td>${order.orderQuantity}</td>
 							<td>${order.orderPrice}</td>
 						</tr>

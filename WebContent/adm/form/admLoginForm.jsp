@@ -31,7 +31,7 @@
 		}
 	  </style>
 	  </head>
-	<body onload="loginfocus()">
+	<body>
 		<div class="container-fluid">
 		    <div class="centered col-*-4 border" id="admlogin">
 					<p>
@@ -39,10 +39,10 @@
 					</p>
 					<form name="loginform" method="post" action="admLoginPro.jk" onsubmit="return logincheck()">
 						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text">${str_id}</span>
+							<div class="input-group-prepend" >
+								<span class="input-group-text" >${str_id}</span>
 							</div>
-							<input type="text" name="id" class="form-control" maxlength="5">
+							<input type="text" name="id" class="form-control" maxlength="5" autofocus>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
