@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="bbb" scope="session"/>
+<c:set var="id" value="aaa" scope="session"/>
 <body class="container" onload="commentList(${reviewDto.reviewNo})">
 	<article class="centered">
 	<br><br>
@@ -78,7 +78,7 @@
 							<!-- comment -->
 						<tr>
 							<th colspan="2">
-								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
+								<c:if test="${sessionScope.id.length() le 5 || reviewDto.id eq sessionScope.id}">
 									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="location='reviewModifyForm.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 								</c:if>

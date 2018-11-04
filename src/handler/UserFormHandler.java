@@ -79,7 +79,7 @@ public class UserFormHandler {
 			request.setAttribute("num",num);
 			return new ModelAndView("user/form/reviewModifyForm");
 		}else {
-			//failed to load?
+			//Admin
 			return new ModelAndView("#");
 		}
 	}

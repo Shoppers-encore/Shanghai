@@ -51,7 +51,17 @@
 						</td>
 					</tr>	
 					<tr>
-					<th> ${str_uploading} </th>
+						<th> ${str_uploading} </th>
+						<td colspan="3">
+							<div class="input-group">
+								<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">
+								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto()">${btn_delete}</button> 
+							</div>
+							<div class="input-group">	
+								<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto()">${btn_delete}</button>
+							</div>
+						</td>
 					</tr>	
 					<tr>
 						<th colspan="4">
