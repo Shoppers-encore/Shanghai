@@ -169,7 +169,7 @@
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
 <c:set var="btn_goodInput" value="상품등록"/>
-
+<c:set var="btn_writeComment" value="댓글쓰기"/>
 
 
 
@@ -184,7 +184,7 @@
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
-
+<c:set var="msg_insertContent" value="내용을 입력하세요"/>
 
 
 

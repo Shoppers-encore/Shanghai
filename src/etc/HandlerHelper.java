@@ -40,7 +40,6 @@ public class HandlerHelper {
 		end=start+pageSize-1;
 		if(end>count) end=count;
 		number=count-(currentPage-1)*pageSize;
-		System.out.println(start + " , " + end);
 		startPage=(currentPage/pageBlock)*pageBlock+1;
 		if(currentPage%pageBlock==0)startPage-=pageBlock;
 		endPage=startPage+pageBlock-1;

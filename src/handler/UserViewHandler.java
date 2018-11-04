@@ -187,6 +187,10 @@ public class UserViewHandler {
 	// Review
 	@RequestMapping("/reviewList")
 	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {
+		/*int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
+		ReviewDataBean reviewDto = boardDao.get( num );
+		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));*/
+		
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));

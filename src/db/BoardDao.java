@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
+import databean.CommentDataBean;
 import databean.ReviewDataBean;
 public class BoardDao {
 	private SqlSession session = SqlMapClient.getSession();
@@ -46,4 +47,12 @@ public class BoardDao {
 	public int modify(ReviewDataBean reviewDto) {
 		return session.update("User.modifyReview", reviewDto);
 	}
+	
+	public int insertComment(CommentDataBean cmtDto) {
+		return session.insert("User.insertComment", cmtDto);
+	}
+	public List<CommentDataBean> getComment( int reviewNo ) {
+		return session.selectList("User.getComment", reviewNo);
+	}
+	
 }

@@ -6,15 +6,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -27,6 +31,7 @@ import db.BoardDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.ChatDao;
+import databean.CommentDataBean;
 import db.TagDao;
 
 import databean.UserDataBean;
@@ -36,7 +41,6 @@ public class UserProHandler {
 	@Resource
 	private UserDao userDao;
 	private BoardDao boardDao;
-	
 	
 	// User 
 	@RequestMapping( "/userInputPro" )
@@ -201,6 +205,70 @@ public class UserProHandler {
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}
 	
+	// Review Comment
+	@RequestMapping(value = "/commentInsert.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void commentInsertProcess(HttpServletRequest request, HttpSession session){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String id = (String) session.getAttribute("id");
+		String commentContent= request.getParameter("commentContent");
+		CommentDataBean cmtDto = new CommentDataBean();
+		if(commentContent != null) {
+		cmtDto.setId(id);
+		cmtDto.setReviewNo(Integer.parseInt(request.getParameter("reviewNo")));
+		cmtDto.setCommentContent(commentContent);
+		
+		boardDao.insertComment(cmtDto);
+		}
+	}
+
+	@RequestMapping(value = "/commentSelect.jk", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<CommentDataBean> commentSelectProcess(HttpServletRequest request, HttpServletResponse response){
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		List<CommentDataBean> comment = boardDao.getComment(reviewNo);
+		/*for (CommentDataBean dto : comment) {
+			String id = dto.getId();
+			if (id == null || id.equals("")) {
+				userName = "Ex-User";
+				dto.setUserName(userName);
+			} else {
+				userName = userDao.getUserName(id);
+				dto.setUserName(userName);
+			}
+		}*/
+
+		request.setAttribute("comment", comment);
+		return comment;
+	}
+
+	/*
+	@RequestMapping(value = "/commentUpdate.go", method = RequestMethod.POST, produces = "application/json") // 댓글 수정
+	@ResponseBody
+	private void commentUpdateProcess(HttpServletRequest request, HttpServletResponse response)
+			throws HandlerException {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		CmtDataBean cmtDto = new CmtDataBean();
+		cmtDto.setC_id(Integer.parseInt(request.getParameter("c_id")));
+		cmtDto.setC_content(request.getParameter("c_content"));
+		cmtDao.updateComment(cmtDto);
+	}
+
+	@RequestMapping(value = "/commentDelete.go", method = RequestMethod.POST) // 댓글 삭제
+	@ResponseBody
+	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int c_id = Integer.parseInt(request.getParameter("c_id"));
+		cmtDao.deleteComment(c_id);
+	}
+	*/
 	
 	// Order
 	@RequestMapping("/orderInputPro")

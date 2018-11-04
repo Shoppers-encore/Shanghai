@@ -65,7 +65,14 @@
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
 			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
 	</update>
-		
+	<insert id="insertComment" parameterType="databean.CommentDataBean">
+			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)
+			VALUES(#{reviewNo}, SEQ_jk_comment_commentNo.NEXTVAL, #{id}, #{commentContent, jdbcType=VARCHAR}, SYSDATE)
+	</insert>
+	<select id="getComment" parameterType="int" resultType="databean.CommentDataBean">
+		select * from jk_comment where reviewNo=#{reviewNo} order by commentNo desc
+	</select>
+	
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
