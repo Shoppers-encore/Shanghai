@@ -140,7 +140,15 @@ public class UserViewHandler {
 	//Product
 	@RequestMapping ( "/userProductList" )
 	public ModelAndView userProductList ( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "user/userMain" );
+		String category = request.getParameter("category");
+		if("TOP".equals(category)) {
+			
+		}else if("BOTTOM".equals(category)) {
+			
+		}else {
+			
+		}
+		return new ModelAndView ( "user/userProductList" );
 	}
 	
 	@RequestMapping("/userProductDetail")
