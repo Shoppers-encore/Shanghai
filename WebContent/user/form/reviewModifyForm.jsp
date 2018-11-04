@@ -55,11 +55,11 @@
 						<td colspan="3">
 							<div class="input-group">
 								<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">
-								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto()">${btn_delete}</button> 
+								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto(${reviewDto.photo1})">${btn_delete}</button> 
 							</div>
 							<div class="input-group">	
 								<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
-								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto()">${btn_delete}</button>
+								<button class="btn btn-outline-primary btn-sm" onclick="deletePhoto(${reviewDto.photo2})">${btn_delete}</button>
 							</div>
 						</td>
 					</tr>	

@@ -119,7 +119,10 @@ function commentUpdateProc(commentNo){
    $.ajax({
        url : 'commentUpdate.jk',
        type : 'post',
-       data : {'commentContent' : updateContent, 'commentNo' : commentNo},
+       data : {
+    	   'commentContent' : updateContent, 
+    	   'commentNo' : commentNo
+    	   },
        success : function(data){
            commentList(reviewNo); 
        }
@@ -144,6 +147,24 @@ function commentDelete(commentNo){
    });
 }
 
+//Delete Photo
+function deletePhoto(fileName){
+	var reviewNo=$('input[name=reviewNo]').val();
+   $.ajax({
+       url : 'deletePhoto.jk',
+       type : 'post',
+       data : {
+       	reviewNo : reviewNo,
+       	fileName : fileName
+       },
+       success : function(data){
+           //change to file input 
+       },
+       error : function(error) {
+           alert("error : " + error);
+       }
+   });
+}
 
 // BasketList
 function returnToList() {

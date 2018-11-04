@@ -81,6 +81,9 @@
 	<delete id="deleteComment" parameterType="int">
 		delete from jk_comment where commentNo = #{commentNo}
 	</delete>
+	<delete id="deletePhoto" parameterType="int">
+		
+	</delete>
 	
 	
 	<!-- Basket -->

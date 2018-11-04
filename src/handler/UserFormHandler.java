@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.BasketDataBean;
@@ -82,6 +84,13 @@ public class UserFormHandler {
 			//Admin
 			return new ModelAndView("#");
 		}
+	}
+	@RequestMapping(value = "/deletePhoto.jk", method = RequestMethod.POST)
+	@ResponseBody
+	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		String fileName = request.getParameter("fileName");
+		boardDao.deletePhoto(reviewNo);
 	}
 	
 	// Order

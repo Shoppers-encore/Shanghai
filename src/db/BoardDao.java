@@ -47,6 +47,9 @@ public class BoardDao {
 	public int modify(ReviewDataBean reviewDto) {
 		return session.update("User.modifyReview", reviewDto);
 	}
+	public int deletePhoto( int reviewNo) {
+		return session.delete("User.deletePhoto", reviewNo);
+	}
 	
 	public int insertComment(CommentDataBean cmtDto) {
 		return session.insert("User.insertComment", cmtDto);

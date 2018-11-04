@@ -295,11 +295,15 @@ public class UserViewHandler {
 		search.put("searchWord", request.getParameter("searchWord"));
 		
 		int count = boardDao.getReviewCount();
-		
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
 			request.setAttribute( "reviewLists", articles );
+			
+			int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
+			ReviewDataBean reviewDto = boardDao.get( num );
+			String productName = new ProductDao().getProductName(reviewDto.getProductCode());
+			request.setAttribute("productName", productName);
 		}
 		return new ModelAndView("user/view/reviewList");
 	}
