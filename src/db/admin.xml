@@ -69,4 +69,10 @@
 	<insert id="insertImg" parameterType="databean.ImageInfoDataBean">
 		INSERT INTO jk_imageInfo VALUES (#{imageNo}, #{ref}, #{imageAddress})
 	</insert>
+	<select id="getTags" resultType="databean.TagDataBean">
+		SELECT * FROM jk_tag
+	</select>
+	<insert id="insertTag" parameterType="String">
+			INSERT INTO jk_tag VALUES (SEQ_jk_tag_tagId.NEXTVAL, #{newTag})
+	</insert>
 </mapper>

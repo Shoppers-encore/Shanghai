@@ -35,6 +35,7 @@
 	<article class="col-sm-10 col-8" ><br><br>
 		<h4>${str_admProductList}</h4>
 		<div class="buttons">
+			<a href="tagList.jk" class="btn btn-info">${btn_manageTag}</a>
 			<a href="productInputForm.jk" class="btn btn-primary">${btn_goodInput}</a><br><br>
 		</div>
 	<form method="post" action="changeVar.jk">

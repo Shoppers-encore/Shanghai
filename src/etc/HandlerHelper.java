@@ -148,9 +148,8 @@ public class HandlerHelper {
 		}
 		return sizes;
 	}
-	//////////////////////////////////////////// ### 1 FROM HERE /////////////////////////////////////////////////////
 
-	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
+/*	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
 		ProductDao  productDao= new ProductDao();
 		int count = productDao.getSearchCount(searchWord);
 		Map<String,String> map = makeCount(count,request);
@@ -185,8 +184,7 @@ public class HandlerHelper {
 		request.setAttribute("goods", productList);
 		request.setAttribute("imageList",imgList);
 	}
-
-	//////////////////////////////////////////// ### 1 TO HERE /////////////////////////////////////////////////////
+*/
 
 	public void fileWriter(String sql) {
         File file = new File("C:/ExpertJava/start.txt");

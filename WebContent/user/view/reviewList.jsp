@@ -37,6 +37,7 @@
 							<tr>
 								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
 								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}&pageNum=${pageNum}">
+									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
 									<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
 									${reviewlist.title}</a></td>
 								<td>${reviewlist.id}</td>

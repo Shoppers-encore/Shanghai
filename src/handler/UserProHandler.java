@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.BasketDataBean;
+import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
 import db.BasketDao;
@@ -35,6 +39,7 @@ import db.BoardDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.ChatDao;
+import databean.CommentDataBean;
 import db.TagDao;
 
 import databean.UserDataBean;
@@ -43,14 +48,22 @@ import databean.UserDataBean;
 public class UserProHandler {
 	@Resource
 	private UserDao userDao;
+
 	@Resource
 	private BoardDao boardDao;
+	
 	@Resource
 	private BasketDao basketDao;
+
 	@Resource
 	private ProductDao productDao;
 	
-	//////////////////// User /////////////////////
+	@Resource
+	private ChatDao chatDao;
+
+	
+	//////////////////// User /////////////////////	
+
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
 		UserDataBean userDto = new UserDataBean();
@@ -72,7 +85,7 @@ public class UserProHandler {
 		return new ModelAndView("user/pro/userInputPro");
 	}
 
-	////////////////Ajax User-ConfirmId 
+	/////Ajax User-ConfirmId 
 	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> idCheck(@RequestBody String id) {
@@ -157,6 +170,38 @@ public class UserProHandler {
 		return new ModelAndView( "user/pro/basketDelete" );
 	}
 	
+	@RequestMapping(value="/deleteBasketItemAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
+		
+		// 1) Get id from session
+		/*String id=(String)request.getSession().getAttribute("id");*/
+		// For now, id is directly set here
+		String id="aaa";
+		
+		// 2) Get productCode from Ajax data
+		String productCode=request.getParameter("productCode");
+		
+		// 3) Add id and productCode to BasketDataBean
+		BasketDataBean deleteReferences=new BasketDataBean();
+		deleteReferences.setId(id);
+		deleteReferences.setProductCode(productCode);
+		
+		// 4) Delete the item and get the result
+		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
+		
+		// 5) If the result returns 1, the item is deleted from jk_basket
+		String itemDeleted;
+		if(deleteResult==1) {
+			itemDeleted="true";
+		} else {
+			itemDeleted="false";
+		}
+		
+		// 6) Convert Java String to JSON and return
+		String isItemDeleted=new Gson().toJson(itemDeleted);
+		return isItemDeleted;
+	}
 	
 	// Review
 	@RequestMapping( "/reviewWritePro" )
@@ -262,6 +307,58 @@ public class UserProHandler {
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}
 	
+	// Review Comment
+	@RequestMapping(value = "/commentInsert.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void commentInsertProcess(HttpServletRequest request, HttpSession session){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String id = (String) session.getAttribute("id");
+		String commentContent= request.getParameter("commentContent");
+		CommentDataBean cmtDto = new CommentDataBean();
+		if(commentContent != null) {
+		cmtDto.setId(id);
+		cmtDto.setReviewNo(Integer.parseInt(request.getParameter("reviewNo")));
+		cmtDto.setCommentContent(commentContent);
+		
+		boardDao.insertComment(cmtDto);
+		}
+	}
+
+	@RequestMapping(value = "/commentSelect.jk", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<CommentDataBean> commentSelectProcess(HttpServletRequest request, HttpServletResponse response){
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		List<CommentDataBean> comment = boardDao.getComment(reviewNo);
+
+		request.setAttribute("comment", comment);
+		return comment;
+	}
+
+	@RequestMapping(value = "/commentUpdate.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	private void commentUpdateProcess(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		CommentDataBean cmtDto = new CommentDataBean();
+		cmtDto.setCommentNo(Integer.parseInt(request.getParameter("commentNo")));
+		cmtDto.setCommentContent(request.getParameter("commentContent"));
+		boardDao.updateComment(cmtDto);
+	}
+
+	@RequestMapping(value = "/commentDelete.jk", method = RequestMethod.POST)
+	@ResponseBody
+	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		boardDao.deleteComment(commentNo);
+	}
+	
 	
 	// Order
 	@RequestMapping("/orderInputPro")
@@ -286,12 +383,34 @@ public class UserProHandler {
 	@RequestMapping(value="/viewCart", produces="application/json", method=RequestMethod.POST)
 	@ResponseBody
 	public List<BasketDataBean> viewCart(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("  1  ");
 		List<BasketDataBean> baskets = basketDao.getBasketList((String)request.getSession().getAttribute("id"));
 		for(int i = 0 ; i<baskets.size(); i++) {
 			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
 		}
-		request.setAttribute("count", baskets.size());
+		request.setAttribute("baskets", baskets);
 		return baskets;
+	}
+	@RequestMapping("/cartDelete")
+	@ResponseBody
+	public void cartDelete(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		String productCode=request.getParameter("productCode");
+		BasketDataBean basket = new BasketDataBean();
+		basket.setId(id);
+		basket.setProductCode(productCode);
+		basketDao.deleteBasketItem(basket);
+	}
+	
+	//chat ajax
+	@RequestMapping("/userChatInput")
+	@ResponseBody
+	public void chatInput(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		String chatContent = request.getParameter("message");
+		ChatDataBean chat = new ChatDataBean();
+		chat.setSender(id);
+		chat.setChatContent(chatContent);
+		chat.setReceiver("admin");
+		chatDao.chatInput(chat);
 	}
 }

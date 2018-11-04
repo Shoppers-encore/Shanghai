@@ -12,17 +12,21 @@ public class BasketDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
 	public List<BasketDataBean> getBasketList(String id) {
-		System.out.println("BasketDao/getBasketList: "+id);
 		return session.selectList("User.getBasketList", id);
 	}
 	
 	public int getBasketCount(String id) {
-		System.out.println("BasketDao/getBasketCount: "+id);
 		return session.selectOne("User.getBasketCount", id);
 		
 	}
-//basket input
+
+	public int deleteBasketItem(BasketDataBean deleteReferences) {
+		return session.delete("User.deleteBasketItem", deleteReferences);
+	}
+	
+	//basket input
 	public int inputBasket(BasketDataBean basket) {
 		return session.insert("User.inputBasket", basket);
+
 	}
 }

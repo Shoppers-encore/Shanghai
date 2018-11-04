@@ -10,8 +10,8 @@
   * {
       font-family: 'Nanum Gothic';
    }
-   
-   #goodinput {
+
+   #productInput {
       text-align : center;
       width : 100%;
       padding : 10px;
@@ -240,8 +240,20 @@ function deletePhoto(tb_no,photo_id,start){
                      <th style="width :10%"> ${str_style} </th>
                      <td style="width :20%">
                         <input type="radio" name="style" value="1">${str_casual}
-                     <input type="radio" name="style" value="2">${str_dandy}
+                    	<input type="radio" name="style" value="2">${str_dandy}
                      </td>
+                  </tr>
+                  <tr>
+                  	<th> ${str_style} </th>
+                  	<td colspan="4">
+                  		<c:forEach var="tag" items="${tags}">   
+							<label class="btn btn-secondary">
+                  	 		 	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}
+                 		    </label>
+                 		</c:forEach>
+                  	</td>
+                  	<td> <input type="button" class="btn btn-primary" value="${btn_manageTag}"
+                  							 onclick="location='tagList.jk'"> </td>
                   </tr>
                   <tr>
                      <th> ${str_productName} </th>

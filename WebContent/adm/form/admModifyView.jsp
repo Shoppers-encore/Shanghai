@@ -85,7 +85,7 @@
 							onclick="confirmmail()"> <br><br>
 						</div>
 						<input class="btn btn-secondary" type="button" value="${btn_back}"
-									onclick="location='admMain_loggedon.jsp'">
+									onclick="location='admMain.jk'">
 						<input class="btn btn-primary" type="submit" value="${btn_membermod}">
 					</form>
 					

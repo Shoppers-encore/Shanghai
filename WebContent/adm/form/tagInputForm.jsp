@@ -1,12 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<%@ include file="../../setting.jsp" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+  <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  * {
+   font-family: 'Nanum Gothic';
+	}
+	html, body {
+		height:100%;
+	}
+	body {
+	  display:flex;
+	  align-items:center;
+	}
+
+	#tagInputForm {
+		text-align : center;
+		float : none;
+		margin : 0 auto;
+		width : 300px;
+		height : 230px;
+		padding : 20px;
+	}
+  </style>
 </head>
 <body>
-
+	<form name="tagInputForm" onsubmit="tagInputPro.jk">
+		<div class="container-fluid">
+		    <div class="col-*-4 border centered" id="tagInputForm">
+		    	<br> ${msg_addTag} <br><br>
+		    	<input type="text" class="form-control" name="newTag"> <br>
+		    	<input type="submit" class="btn btn-primary" value="${btn_confirm}">
+		    	<input type="button" class="btn btn-primary" value="${btn_cancel}" onclick="self.close()">
+			</div>
+		</div>
+	</form>
 </body>
 </html>
