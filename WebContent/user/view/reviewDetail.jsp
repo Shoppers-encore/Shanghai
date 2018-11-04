@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="aaa" scope="session"/>
+<c:set var="id" value="ccc" scope="session"/>
 <body class="container">
 	<article class="centered">
 	<br><br>
@@ -28,7 +28,8 @@
 						</tr>	
 						<tr>
 							<th style="width:20%">${str_productName}</th>
-							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled></td>		
+							<td style="width:30%"><input class="input" type="text" name="productName" value=" ${reviewDto.productName}" disabled>
+								<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/></td>	
 							<th style="width:20%">${str_rating}</th>
 							<td style="width:30%"><input type="range" min="0" step="0.5" max="5" value="${reviewDto.rating}" class="slider" id="myRange" disabled>
 								<span id="demo">${reviewDto.rating}</span></td>
@@ -62,19 +63,17 @@
 						</tr>
 						<tr>
 							<!-- comment -->
-							<c:if test="${sessionScope.id != null}">
 								<th>comment</th>
 								<td>
 									<form name="commentInsertForm" method="post">
 										<div class="input-group">
-											<input type="hidden" name="reviewNo" value="${reviewNo}"/>
+											<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/>
 											<input type="hidden" name="session" value="${sessionScope.id}"/>
 											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${mgs_insertComment}">
 											&nbsp;<button class="btn btn-default" type="button" onclick="commentInsert()">${btn_writeComment}</button>
 										</div>
 									</form>
 								</td>
-							</c:if>
 							</tr>
 							<tr class="commentList"></tr>
 							<!-- comment -->

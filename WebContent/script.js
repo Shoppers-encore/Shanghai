@@ -42,13 +42,13 @@ function reviewModable() {
 
 ///<Review Comment>
 function commentInsert(){
-	 var insertData = $('[name=commentInsertForm]').serialize();
-	 CmtInsert(insertData);
+	var insertData = $('[name=commentInsertForm]').serialize();
+	CmtInsert(insertData);
 }
 
 //Comment Insert
 function CmtInsert(insertData){
-	var reviewNo=$("input[name=reviewNo").val();
+	var reviewNo=$('input[name=reviewNo]').val();
 	if(commentInsertForm.commentContent.value){
 	$.ajax({
        url : 'commentInsert.jk',
