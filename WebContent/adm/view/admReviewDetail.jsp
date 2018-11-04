@@ -102,7 +102,7 @@
 								<input class="input" type="text" name="productName"
 											value=" ${reviewDto.productName}" disabled> 
 							</td>		
-							<th style="width:20%"> ${str_score} </th>
+							<th style="width:20%"> ${str_rating} </th>
 							<td style="width:30%">
 							  <input type="range" min="0" step="0.5" max="5" value="${reviewDto.rating}" class="slider" id="myRange" disabled>
 								<span id="demo"> ${reviewDto.rating} </span>

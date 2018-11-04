@@ -71,7 +71,10 @@ $('input[name=btid]').attr('value', result)
                      <tr>
                         <td><a href="admOrderDetail.jk?orderCode=${order.orderCode}&order_id=${order.id}">${order.orderCode}</a></td>
                         <td>${order.id}</td>
-                        <!-- something should be done by Handler => ask JH! -->
+                        <td>
+							<input type="hidden" name="productCode" value="${order.productCode}">
+                      		${order.productName}
+						</td>
                         <td><c:choose>
 	                        	<c:when test="${order.orderStatus eq 0}">
 	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>

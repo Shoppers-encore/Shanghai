@@ -15,6 +15,7 @@
 <!-- Page --> 
 <c:set var="page_input" value="회원가입"/> 
 <c:set var="page_login" value="로그인"/> 
+<c:set var="page_manageTag" value="태그 관리"/>
 <c:set var="head_basketList" value="장바구니 상세 페이지"/>
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
@@ -91,7 +92,7 @@
 <c:set var="str_var" value="현재수량"/>
 <c:set var="str_varPlus" value="추가할 수량"/>
 <c:set var="str_num" value="글번호"/>
-<c:set var="str_reviewList" value="리뷰 관리"/>
+<c:set var="str_reviewList" value="리뷰관리"/>
 <c:set var="str_searchTitle" value="제목"/>
 <c:set var="str_searchBoth" value="제목+내용"/>
 <c:set var="str_orderCode" value="주문번호"/>
@@ -176,6 +177,10 @@
 <c:set var="btn_confirm" value="확인"/>
 <c:set var="btn_select" value="선택"/>
 <c:set var="btn_goodInput" value="상품등록"/>
+<c:set var="btn_manageTag" value="태그 관리"/>
+<c:set var="btn_addTag" value="태그 추가"/>
+<c:set var="btn_delTag" value="태그 삭제"/>
+<c:set var="btn_writeComment" value="댓글쓰기"/>
 <c:set var="btn_orderDetails" value="상세보기"/>
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
 <c:set var="btn_fold" value="접기"/>
@@ -193,6 +198,8 @@
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_emptyBasket" value="장바구니에 담긴 상품이 없습니다."/>
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
+<c:set var="msg_addTag" value="추가할 태그를 입력하세요."/>
+<c:set var="msg_insertContent" value="내용을 입력하세요"/>
 <c:set var="msg_emptyOrderList" value="주문 내역이 없습니다." />
 
 

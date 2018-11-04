@@ -1,6 +1,5 @@
 package databean;
 
-
 public class ReviewScoreDataBean {
 	private String id;
 	private int reviewNo;

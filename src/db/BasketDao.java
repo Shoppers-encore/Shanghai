@@ -1,7 +1,6 @@
 package db;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,7 +20,7 @@ public class BasketDao {
 		
 	}
 
-	public int deleteBasketItem(Map<String, String> deleteReferences) {
+	public int deleteBasketItem(BasketDataBean deleteReferences) {
 		return session.delete("User.deleteBasketItem", deleteReferences);
 	}
 	

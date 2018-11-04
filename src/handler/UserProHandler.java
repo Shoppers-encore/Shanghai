@@ -16,6 +16,7 @@ import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ import db.BoardDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.ChatDao;
+import databean.CommentDataBean;
 import db.TagDao;
 
 import databean.UserDataBean;
@@ -133,10 +135,10 @@ public class UserProHandler {
 		// 2) Get productCode from Ajax data
 		String productCode=request.getParameter("productCode");
 		
-		// 3) Make a map containing id and productCode
-		Map<String, String> deleteReferences=new HashMap<String, String>();
-		deleteReferences.put("id", id);
-		deleteReferences.put("productCode", productCode);
+		// 3) Add id and productCode to BasketDataBean
+		BasketDataBean deleteReferences=new BasketDataBean();
+		deleteReferences.setId(id);
+		deleteReferences.setProductCode(productCode);
 		
 		// 4) Delete the item and get the result
 		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
@@ -256,6 +258,58 @@ public class UserProHandler {
 		}
 		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
+	}
+	
+	// Review Comment
+	@RequestMapping(value = "/commentInsert.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void commentInsertProcess(HttpServletRequest request, HttpSession session){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String id = (String) session.getAttribute("id");
+		String commentContent= request.getParameter("commentContent");
+		CommentDataBean cmtDto = new CommentDataBean();
+		if(commentContent != null) {
+		cmtDto.setId(id);
+		cmtDto.setReviewNo(Integer.parseInt(request.getParameter("reviewNo")));
+		cmtDto.setCommentContent(commentContent);
+		
+		boardDao.insertComment(cmtDto);
+		}
+	}
+
+	@RequestMapping(value = "/commentSelect.jk", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<CommentDataBean> commentSelectProcess(HttpServletRequest request, HttpServletResponse response){
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		List<CommentDataBean> comment = boardDao.getComment(reviewNo);
+
+		request.setAttribute("comment", comment);
+		return comment;
+	}
+
+	@RequestMapping(value = "/commentUpdate.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	private void commentUpdateProcess(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		CommentDataBean cmtDto = new CommentDataBean();
+		cmtDto.setCommentNo(Integer.parseInt(request.getParameter("commentNo")));
+		cmtDto.setCommentContent(request.getParameter("commentContent"));
+		boardDao.updateComment(cmtDto);
+	}
+
+	@RequestMapping(value = "/commentDelete.jk", method = RequestMethod.POST)
+	@ResponseBody
+	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		boardDao.deleteComment(commentNo);
 	}
 	
 	
