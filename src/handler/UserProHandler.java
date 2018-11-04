@@ -73,19 +73,19 @@ public class UserProHandler {
 	}
 
 	////////////////Ajax User-ConfirmId 
-	@RequestMapping(value = "/idCheck.go", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> idCheck(@RequestBody String id) {
 		id = id.split("=")[0];
 		int countId = 0;
 		Map<Object, Object> map = new HashMap<Object, Object>();
 
-		countId = userDao.confirmId(id);
+		countId = userDao.check(id);
 		map.put("countId", countId);
 
 		return map;
 	}
-	////////////////
+	/////Log-in process
 	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -102,6 +102,16 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
+	
+	@RequestMapping( "/findId" )
+	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("user/pro/findIdResult");
+	}
+	@RequestMapping( "/findPassword" )
+	public ModelAndView passwordFindProcess(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("user/pro/findPasswordResult");
+	}
+	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:userModifyView.jk";
@@ -112,7 +122,7 @@ public class UserProHandler {
 	}
 	
 	
-	// LogIn
+	// Logout
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:main.jk";

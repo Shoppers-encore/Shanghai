@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../setting.jsp" %>
 <!DOCTYPE html>
-<!-- 로그인 한 페이지(admMain_loggedon)랑 안 한 페이지(이거) 합쳐서 admMain 페이지 하나로 하면 될 것 같아요 -->
+
 <html>
 <head>
  <meta charset="utf-8">
@@ -20,7 +20,9 @@
      	<input type="text" name="id" class="form-control" placeholder="${str_id}" required autofocus>   			 	
  	 	<input type="password" name="password" class="form-control" placeholder="${str_passwd}" required>	 		
   		<button class="btn btn-lg btn-secondary btn-block" type="submit">${btn_login}</button>
-  		<a href="userInputForm.jk"><u>${page_input}</u></a>
+  		<a href="userInputForm.jk">${page_input}</a> |
+  		<a onclick="window.open('findId.jk','아이디 찾기','width=400,height=400,location=no,status=no,scrollbars=no');">${page_findId}</a> |
+		<a onclick="window.open('findPassword.jk','비밀번호 찾기','width=400,height=400,location=no,status=no,scrollbars=no');">${page_findPasswd}</a>
   		<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>	
   	</form>
 </body>
