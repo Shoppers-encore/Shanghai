@@ -86,11 +86,17 @@
 		SELECT count(DISTINCT orderCode) FROM jk_orderList WHERE id=#{id} 
 	</select>
 	<select id="getDistinctOrderListById" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
-		SELECT * FROM jk_orderList WHERE id=#{id}
+		SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate
+		FROM 
+		(SELECT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate, rownum r 
+		FROM 
+		(SELECT DISTINCT orderCode, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate 
+		FROM jk_orderList 
+		WHERE id=#{id} 
+		ORDER BY orderDate DESC)
+		)
+		WHERE r between #{start} and #{end}
 	</select>
-	<select id="getItemCountPerOrderCode" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
-		SELECT orderCode, count(*) as orderQuantity FROM jk_orderList WHERE id=#{id} GROUP BY orderCode
-  	</select>
   	<select id="getOrderListByOrderCode" parameterType="int" resultType="databean.OrderListDataBean">
   		SELECT o.productCode, p.productName, o.orderQuantity, o.orderPrice, o.orderStatus 
   		FROM jk_orderList o, jk_product p 

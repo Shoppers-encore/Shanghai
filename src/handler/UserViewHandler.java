@@ -1,5 +1,7 @@
 package handler;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,10 +20,12 @@ import com.google.gson.Gson;
 import databean.ReviewScoreDataBean;
 
 import databean.BasketDataBean;
+import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
 import db.BoardDao;
+import db.OrderDao;
 import db.ProductDao;
 import etc.HandlerHelper;
 
@@ -34,6 +38,8 @@ public class UserViewHandler {
 	private BasketDao basketDao;
 	@Resource
 	private BoardDao boardDao;
+	@Resource
+	private OrderDao orderDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -174,12 +180,100 @@ public class UserViewHandler {
 	// Order
 	@RequestMapping("/userOrderDetail")
 	public ModelAndView userOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		
 		return new ModelAndView("user/view/userOrderDetail");
 	}
+	
 	@RequestMapping("/userOrderList")
 	public ModelAndView userOrderList(HttpServletRequest request, HttpServletResponse response) {
+		/* Temporarily loaded customer id */
+		String id="aaa";		
+		//String id=(String)request.getSession().getAttribute("id");
 		
+		/* Number of Order History Per Page */
+		int pageSize=1; 
+		int pageBlock=1;
 		
+		int count=0;
+		int start=0;
+		int end=0;
+		
+		String pageNum=null;
+		int currentPage=0;
+		int number=0;
+		
+		int startPage=0;
+		int endPage=0;
+		int pageCount=0;
+		
+		count=orderDao.getDistinctOrderCountById(id);
+		pageNum=request.getParameter("pageNum");
+		
+		if(pageNum==null || pageNum.equals("")) {
+			pageNum="1";
+		}
+		
+		currentPage=Integer.parseInt(pageNum);
+		pageCount=count/pageSize+(count%pageSize>0? 1:0);
+		
+		if(currentPage>pageCount) {
+			currentPage=pageCount;
+		}
+		
+		start=(currentPage-1)*pageSize+1;
+		end=start+pageSize-1;
+		
+		if(end>count) {
+			end=count;
+		}
+		
+		number=count-(currentPage-1)*pageSize;
+		startPage=(currentPage/pageBlock)*pageBlock+1;
+		
+		if(currentPage%pageBlock==0) {
+			startPage-=pageBlock;
+		}
+		
+		endPage=startPage+pageBlock-1;
+		
+		if(endPage>pageCount) {
+			endPage=pageCount;
+		}
+		
+		request.setAttribute("count", count);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("number", number);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("pageBlock", pageBlock);
+		
+		if(count>0) {
+			Map<String, String> selectReferences=new HashMap<String, String>();
+			String startNum=String.valueOf(start);
+			String endNum=String.valueOf(end);
+			
+			selectReferences.put("id", id);
+			selectReferences.put("start", startNum);
+			selectReferences.put("end", endNum);
+			
+			SimpleDateFormat newDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+			Map<String, String> orderDateMap=new HashMap<String, String>();
+		
+			List<OrderListDataBean> distinctOrderList=orderDao.getDistinctOrderListById(selectReferences);
+			for(OrderListDataBean orderList:distinctOrderList) {
+				String orderCode=String.valueOf(orderList.getOrderCode());
+				String orderDate=newDateFormat.format(orderList.getOrderDate());
+				orderDateMap.put(orderCode, orderDate);
+			}
+			
+			String orderDateJson=new Gson().toJson(orderDateMap);
+			
+			request.setAttribute("orderDate", orderDateJson);
+			request.setAttribute("distinctOrderList", distinctOrderList);
+		}
 		
 		return new ModelAndView("user/view/userOrderList");
 	}
