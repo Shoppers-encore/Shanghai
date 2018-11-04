@@ -340,7 +340,6 @@ public class UserProHandler {
 		for(int i = 0 ; i<baskets.size(); i++) {
 			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
 		}
-		System.out.println(baskets.size());
 		request.setAttribute("baskets", baskets);
 		return baskets;
 	}
@@ -360,7 +359,7 @@ public class UserProHandler {
 	@ResponseBody
 	public void chatInput(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
-		String chatContent = request.getParameter("chatContent");
+		String chatContent = request.getParameter("message");
 		ChatDataBean chat = new ChatDataBean();
 		chat.setSender(id);
 		chat.setChatContent(chatContent);

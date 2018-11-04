@@ -97,7 +97,7 @@
   					cartbt.setAttribute( 'id', 'cartbt' );
   					cartbt.setAttribute( 'type', 'button' );
   					cartbt.setAttribute( 'class', 'btn btn-outline-danger btn-sm' );
-  					cartbt.setAttribute( 'onclick', 'location="basketView.jk"');
+  					cartbt.setAttribute( 'onclick', 'location="basketList.jk"');
   					cartbt.setAttribute( 'value', '${str_cart}' );
   					cartDiv.appendChild( cartbt );
 				//장바구니 리스트 조회
@@ -217,7 +217,7 @@
   		}
   	});
 	function chatting(){
-		window.open("chat.jk");
+		window.open("chatView.jk");
 	}
   	//-->
   </script>
