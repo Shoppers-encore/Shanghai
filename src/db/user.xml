@@ -97,6 +97,7 @@
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
 	
+	
 	<!-- Order -->
 	<select id="getDistinctOrderCountById" parameterType="String" resultType="int">
 		SELECT count(DISTINCT orderCode) FROM jk_orderList WHERE id=#{id} 
@@ -118,6 +119,14 @@
   		FROM jk_orderList o, jk_product p 
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
+  	
+  	<!-- chatting -->
+  	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">
+  		SELECT * FROM jk_chat WHERE sender=#{id} OR receiver=#{id} ORDER BY chatdate desc
+  	</select>
+  	<insert id="chatInput" parameterType="databean.ChatDataBean">
+  		INSERT INTO jk_chat VALUES(#{sender}, #{receiver}, #{chatContent}, sysdate)
+  	</insert>
   	
   	<!-- Search -->
 	<sql id="search">

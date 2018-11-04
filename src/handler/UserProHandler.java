@@ -29,6 +29,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.BasketDataBean;
+import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
 import db.BasketDao;
@@ -54,6 +55,8 @@ public class UserProHandler {
 
 	@Resource
 	private ProductDao productDao;
+	@Resource
+	private ChatDao chatDao;
 
 	// User 
 	@RequestMapping( "/userInputPro" )
@@ -333,12 +336,34 @@ public class UserProHandler {
 	@RequestMapping(value="/viewCart", produces="application/json", method=RequestMethod.POST)
 	@ResponseBody
 	public List<BasketDataBean> viewCart(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("  1  ");
 		List<BasketDataBean> baskets = basketDao.getBasketList((String)request.getSession().getAttribute("id"));
 		for(int i = 0 ; i<baskets.size(); i++) {
 			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
 		}
-		request.setAttribute("count", baskets.size());
+		request.setAttribute("baskets", baskets);
 		return baskets;
+	}
+	@RequestMapping("/cartDelete")
+	@ResponseBody
+	public void cartDelete(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		String productCode=request.getParameter("productCode");
+		BasketDataBean basket = new BasketDataBean();
+		basket.setId(id);
+		basket.setProductCode(productCode);
+		basketDao.deleteBasketItem(basket);
+	}
+	
+	//chat ajax
+	@RequestMapping("/userChatInput")
+	@ResponseBody
+	public void chatInput(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		String chatContent = request.getParameter("message");
+		ChatDataBean chat = new ChatDataBean();
+		chat.setSender(id);
+		chat.setChatContent(chatContent);
+		chat.setReceiver("admin");
+		chatDao.chatInput(chat);
 	}
 }
