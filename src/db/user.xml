@@ -45,7 +45,7 @@
 	</select>
 	<insert id="insertReview" parameterType="databean.ReviewDataBean">
 			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
-			VALUES (SEQ_jk_review_reviewNo.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
 	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE reviewNo=#{num}
@@ -68,7 +68,20 @@
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
 			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
 	</update>
-		
+	<insert id="insertComment" parameterType="databean.CommentDataBean">
+			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)
+			VALUES(#{reviewNo}, commentNoSEQ.NEXTVAL, #{id}, #{commentContent, jdbcType=VARCHAR}, SYSDATE)
+	</insert>
+	<select id="getComment" parameterType="int" resultType="databean.CommentDataBean">
+		select * from jk_comment where reviewNo=#{reviewNo} order by commentNo desc
+	</select>
+	<update id="updateComment" parameterType="databean.CommentDataBean">
+		UPDATE jk_comment set commentContent = #{commentContent} where commentNo = #{commentNo}
+	</update>
+	<delete id="deleteComment" parameterType="int">
+		delete from jk_comment where commentNo = #{commentNo}
+	</delete>
+	
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">

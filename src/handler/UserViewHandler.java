@@ -289,7 +289,7 @@ public class UserViewHandler {
 	
 	// Review
 	@RequestMapping("/reviewList")
-	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {		
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
@@ -338,7 +338,7 @@ public class UserViewHandler {
 		map.put("reviewNo", request.getParameter("reviewNo"));
 		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.insertReviewLike(map);
-		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&pageNum="+request.getParameter("pageNum");
 	}
 	
 	@RequestMapping("/cancelLike")
@@ -347,6 +347,6 @@ public class UserViewHandler {
 		map.put("reviewNo", request.getParameter("reviewNo"));
 		map.put("id", (String)request.getSession().getAttribute("id"));
 		boardDao.deleteReviewLike(map);
-		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&number="+request.getParameter("number");
+		return "redirect:reviewDetail.jk?reviewNo="+request.getParameter("reviewNo")+"&pageNum="+request.getParameter("pageNum");
 	}
 }
