@@ -115,7 +115,7 @@
 						</c:forEach>
 						<div class="text-right">
 							<button type="button" class="btn" onclick="returnToList()">쇼핑 계속하기</button>
-							<button type="submit" class="btn" onclick="updateBasketList()">결제하기</button>
+							<button type="submit" class="btn">결제하기</button>
 						</div>
 					</form>
 				</c:if>
