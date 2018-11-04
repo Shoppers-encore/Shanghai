@@ -215,7 +215,7 @@
 						} else {
   							var add_cart = document.createElement( 'img' );
   							add_cart.setAttribute( 'id', 'add_cart' );
-  		  					add_cart.setAttribute( 'src', 'images/add_cart.png' );
+  		  					add_cart.setAttribute( 'src', '/Shanghai/images/add_cart.png' );
   		  					cartDiv.appendChild( add_cart );
 						}
 					} 

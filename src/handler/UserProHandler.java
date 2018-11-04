@@ -245,6 +245,7 @@ public class UserProHandler {
 		for(int i = 0 ; i<baskets.size(); i++) {
 			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
 		}
+		System.out.println(baskets.size());
 		request.setAttribute("count", baskets.size());
 		return baskets;
 	}
