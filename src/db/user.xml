@@ -80,7 +80,23 @@
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
-  
+	
+	<!-- Order -->
+	<select id="getDistinctOrderCountById" parameterType="String" resultType="int">
+		SELECT count(DISTINCT orderCode) FROM jk_orderList WHERE id=#{id} 
+	</select>
+	<select id="getDistinctOrderListById" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT * FROM jk_orderList WHERE id=#{id}
+	</select>
+	<select id="getItemCountPerOrderCode" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT orderCode, count(*) as orderQuantity FROM jk_orderList WHERE id=#{id} GROUP BY orderCode
+  	</select>
+  	<select id="getOrderListByOrderCode" parameterType="int" resultType="databean.OrderListDataBean">
+  		SELECT o.productCode, p.productName, o.orderQuantity, o.orderPrice, o.orderStatus 
+  		FROM jk_orderList o, jk_product p 
+  		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode};
+  	</select>
+  	
   	<!-- Search -->
 	<sql id="search">
         <choose>
