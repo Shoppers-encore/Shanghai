@@ -130,10 +130,10 @@ public class UserProHandler {
 		// 2) Get productCode from Ajax data
 		String productCode=request.getParameter("productCode");
 		
-		// 3) Make a map containing id and productCode
-		Map<String, String> deleteReferences=new HashMap<String, String>();
-		deleteReferences.put("id", id);
-		deleteReferences.put("productCode", productCode);
+		// 3) Add id and productCode to BasketDataBean
+		BasketDataBean deleteReferences=new BasketDataBean();
+		deleteReferences.setId(id);
+		deleteReferences.setProductCode(productCode);
 		
 		// 4) Delete the item and get the result
 		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
