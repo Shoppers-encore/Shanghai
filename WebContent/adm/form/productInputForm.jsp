@@ -10,7 +10,7 @@
   * {
       font-family: 'Nanum Gothic';
    }
-   
+
    #productInput {
       text-align : center;
       width : 100%;
