@@ -15,10 +15,14 @@
 <!-- Page --> 
 <c:set var="page_input" value="회원가입"/> 
 <c:set var="page_login" value="로그인"/> 
+<c:set var="page_findId" value="아이디 찾기"/>
+<c:set var="page_findPasswd" value="비밀번호 찾기"/>
+
 <c:set var="page_manageTag" value="태그 관리"/>
 <c:set var="head_basketList" value="장바구니 상세 페이지"/>
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
+
 
 
 
@@ -30,6 +34,13 @@
 <c:set var="str_reviewDate" value="작성일"/>
 <c:set var="str_id" value="아이디"/>
 <c:set var="str_passwd" value="비밀번호"/>
+<c:set var="str_repasswd" value="비밀번호 재확인"/>
+<c:set var="str_bday" value="생일"/>
+<c:set var="str_gender" value="성별"/>
+<c:set var="str_gender_m" value="남성"/>
+<c:set var="str_gender_f" value="여성"/>
+<c:set var="str_address" value="주소"/>
+<c:set var="str_addressDetail" value="상세 주소"/>
 <c:set var="str_nim" value=" 님"/>
 <c:set var="str_dept" value="부서"/>
 <c:set var="str_userList" value="회원목록"/>
@@ -86,7 +97,7 @@
 <c:set var="str_itemsTotal" value="전체 상품: 총 "/>
 <c:set var="str_productImage" value="상품 이미지"/>
 <c:set var="str_quantityUnit" value="개"/>
-<c:set var="str_address" value="주소"/>
+
 <c:set var="str_orderList" value="주문내역"/>
 <c:set var="str_totalUser" value="총 회원수"/>
 <c:set var="str_var" value="현재수량"/>
@@ -107,8 +118,8 @@
 <c:set var="str_orderDetail" value="주문상세"/>
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
-<c:set var="str_bday" value="생일"/>
 <c:set var="str_modifyReview" value="리뷰 수정"/>
+
 <c:set var="str_myOrderList" value="내 주문 내역: 총 "/>
 <c:set var="str_orderDate" value="주문날짜"/>
 <c:set var="str_orderCount" value="주문한 상품"/>
@@ -116,6 +127,7 @@
 <c:set var="str_orderAddress" value="배송 주소"/>
 <c:set var="str_productPrice" value="가격"/>
 <c:set var="str_cart" value="장바구니"/>
+
 
 
 
@@ -175,6 +187,9 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
+
+<c:set var="btn_selfConfirm" value="인증"/>
+
 <c:set var="btn_select" value="선택"/>
 <c:set var="btn_goodInput" value="상품등록"/>
 <c:set var="btn_manageTag" value="태그 관리"/>
@@ -184,6 +199,7 @@
 <c:set var="btn_orderDetails" value="상세보기"/>
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
 <c:set var="btn_fold" value="접기"/>
+
 
 
 
