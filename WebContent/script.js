@@ -155,8 +155,12 @@ function returnToList() {
 
 //////<Admin>
 //<tag>
-function addTag() {
- var url = "tagInputForm.jk";
- open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=300px" );
+function tagPopup() {
+	var url = "tagInputForm.jk";
+	open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=300px" );
+}
+function inputTag() {
+	opener.location.reload(true);
+	window.location.href='tagInputPro.jk';
 }
 

@@ -31,6 +31,8 @@
 	<div>
 		<br><br>
 		<h4> ${page_manageTag} </h4>
+		<br><br>
+		<form name="tagForm" onsubmit="tagDeletePro.jk">
 		<c:forEach var="tag" items="${tags}">   
 			<label class="btn btn-secondary">
 	           	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}
@@ -38,9 +40,11 @@
 	    </c:forEach>
 	    <br><hr><br>
 	    <input type="button" class="btn btn-primary" value="${btn_addTag}"
-	    		onclick="addTag()">
-	    <input type="button" class="btn btn-danger" value="${btn_delTag}"
-	    		onclick="location='tagDeletePro.jk'">
+	    		onclick="tagPopup()">
+	    <input type="submit" class="btn btn-danger" value="${btn_delTag}">
+	   	<input type="button" class="btn btn-secondary" value="${btn_back}"
+	    		onclick="history.back()">
+	    </form>
 	</div>
 </article>
 
