@@ -15,9 +15,9 @@
 <!-- Page --> 
 <c:set var="page_input" value="회원가입"/> 
 <c:set var="page_login" value="로그인"/> 
-<c:set var="head_basketList" value="장바구니 상세페이지"/>
+<c:set var="head_basketList" value="장바구니 상세 페이지"/>
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
-
+<c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
 
 
 
@@ -112,6 +112,9 @@
 <c:set var="str_orderDate" value="주문날짜"/>
 <c:set var="str_orderCount" value="주문한 상품"/>
 <c:set var="str_orderUnit" value="건"/>
+<c:set var="str_orderAddress" value="배송 주소"/>
+<c:set var="str_productPrice" value="가격"/>
+
 
 
 <!-- color -->
@@ -173,7 +176,7 @@
 <c:set var="btn_select" value="선택"/>
 <c:set var="btn_goodInput" value="상품등록"/>
 <c:set var="btn_orderDetails" value="상세보기"/>
-
+<c:set var="btn_writeReview" value="리뷰쓰기"/>
 
 
 

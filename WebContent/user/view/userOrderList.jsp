@@ -82,7 +82,7 @@
 									$('.orderListDetails_${distinctOrderList.orderCode}').on(
 										'click',
 										function(event) {
-											window.location.href='userOrderDetail.jk?productCode=${distinctOrderList.orderCode}&orderDate='+orderDate;
+											window.location.href='userOrderDetail.jk?orderCode=${distinctOrderList.orderCode}&orderDate='+orderDate;
 										}
 									);
 								</script>

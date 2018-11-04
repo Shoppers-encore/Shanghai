@@ -52,5 +52,6 @@ public class OrderDao {
 	public List<OrderListDataBean> getOrderListByOrderCode(int orderCode) {
 		return session.selectList("User.getOrderListByOrderCode", orderCode);
 	}
+	
 }
 	

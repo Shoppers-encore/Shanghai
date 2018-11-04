@@ -1,5 +1,6 @@
 package handler;
 
+import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -181,7 +182,14 @@ public class UserViewHandler {
 	@RequestMapping("/userOrderDetail")
 	public ModelAndView userOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		
+		String orderDate=request.getParameter("orderDate");
 		
+		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
+		List<OrderListDataBean> orderListByOrderCode=orderDao.getOrderListByOrderCode(orderCode);
+		
+		request.setAttribute("orderDate", orderDate);
+		request.setAttribute("orderCode", orderCode);
+		request.setAttribute("orderListByOrderCode", orderListByOrderCode);
 		return new ModelAndView("user/view/userOrderDetail");
 	}
 	

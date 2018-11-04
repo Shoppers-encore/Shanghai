@@ -6,6 +6,7 @@ public class OrderListDataBean {
 	private int orderCode;
 	private String productCode;
 	private String productName;
+	private String thumbnail;
 	private String id;
 	private String orderZipcode;
 	private String orderAddress1;
@@ -79,5 +80,11 @@ public class OrderListDataBean {
 	}
 	public void setOrderPrice(int orderPrice) {
 		this.orderPrice = orderPrice;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }
