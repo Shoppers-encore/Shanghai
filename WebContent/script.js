@@ -73,7 +73,7 @@ function CmtInsert(insertData){
 
 //Comment List
 function commentList(reviewNo){
-	var sessionId=$("input[name=session]").val();
+	var sessionId=$('input[name=session]').val();
 	$.ajax({
        url : 'commentSelect.jk',
        type : 'get',
@@ -82,12 +82,12 @@ function commentList(reviewNo){
            var commentView ='';
            $.each(data, function(key, comment){ 
            	commentView += '<div class="commentArea row">';
-           	commentView += '<div class="commentInfo'+comment.commentNo+'" style="width:35%;"><b>'+comment.id+'</b>';
+           	commentView += '<div class="commentInfo'+comment.commentNo+'" style="width:20%;"><b>'+comment.id+'</b>';
            	if(sessionId == comment.id){
-           	commentView += '<button type="btn btn-outline-primary btn-sm" onclick="commentUpdate('+comment.commentNo+',\''+comment.commentContent+'\');"> 수정 </a>';
-           	commentView += '<button type="btn btn-outline-primary btn-sm" onclick="commentDelete('+comment.commentNo+');"> 삭제 </a></div>';
+           	commentView += '&nbsp;<button class="btn btn-outline-primary btn-sm" onclick="commentUpdate('+comment.commentNo+',\''+comment.commentContent+'\');">수정</button>';
+           	commentView += '<button class="btn btn-outline-primary btn-sm" onclick="commentDelete('+comment.commentNo+');">삭제</button>';
            	}
-           	commentView += '<div class="commentContent" style="width:65%;"><p>'+comment.commentContent +'</p>';
+           	commentView += '</div><div class="commentContent'+comment.commentNo+'" style="width:80%;"><p>'+comment.commentContent +'</p>';
            	commentView += '</div></div>'
            });
            $(".commentList").html(commentView);
@@ -98,49 +98,48 @@ function commentList(reviewNo){
    });
 }
 
-/*
-//Comment Modify-change to inputform 
-function commentUpdate(c_id, c_content){
+//Comment Modify change to inputform 
+function commentUpdate(commentNo, commentContent){
    var commentModify ='';
    
-   commentModify += '<div class="input-group">';
-   commentModify += '<input type="text" class="form-control" name="c_content_'+c_id+'" value="'+c_content+'"/>';
-   commentModify += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+c_id+');">수정</button> </span>';
+   commentModify += '<div class="input-group" style="width:80%;">';
+   commentModify += '<input type="text" class="form-control" name="commentContent_'+commentNo+'" value="'+commentContent+'"/>';
+   commentModify += '&nbsp;<button class="btn btn-outline-primary btn-sm" onclick="commentUpdateProc('+commentNo+');">수정</button>';
    commentModify += '</div>';
    
-   $('.commentContent'+c_id).html(commentModify);
+   $('.commentContent'+commentNo).html(commentModify);
    
 }
 
 //Comment Modify
-function commentUpdateProc(c_id){
-   var updateContent = $('input[name=c_content_'+c_id+']').val();
-   var tb_no=$("input[name=tb_no").val();
+function commentUpdateProc(commentNo){
+   var updateContent = $('input[name=commentContent_'+commentNo+']').val();
+   var reviewNo=$('input[name=reviewNo]').val();
    $.ajax({
-       url : 'commentUpdate.go',
+       url : 'commentUpdate.jk',
        type : 'post',
-       data : {'c_content' : updateContent, 'c_id' : c_id},
+       data : {'commentContent' : updateContent, 'commentNo' : commentNo},
        success : function(data){
-           commentList(tb_no); 
+           commentList(reviewNo); 
        }
    });
 }
 
 //Comment Delete
-function commentDelete(c_id){
-	var tb_no=$("input[name=tb_no]").val();
+function commentDelete(commentNo){
+	var reviewNo=$('input[name=reviewNo]').val();
    $.ajax({
-       url : 'commentDelete.go',
+       url : 'commentDelete.jk',
        type : 'post',
        data : {
-       	c_id : c_id
+       	commentNo : commentNo
        },
        success : function(data){
-           commentList(tb_no); 
+           commentList(reviewNo); 
        },
        error : function(error) {
            alert("error : " + error);
        }
    });
-}*/
+}
 

@@ -244,44 +244,32 @@ public class UserProHandler {
 	public List<CommentDataBean> commentSelectProcess(HttpServletRequest request, HttpServletResponse response){
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		List<CommentDataBean> comment = boardDao.getComment(reviewNo);
-		/*for (CommentDataBean dto : comment) {
-			String id = dto.getId();
-			if (id == null || id.equals("")) {
-				userName = "Ex-User";
-				dto.setUserName(userName);
-			} else {
-				userName = userDao.getUserName(id);
-				dto.setUserName(userName);
-			}
-		}*/
 
 		request.setAttribute("comment", comment);
 		return comment;
 	}
 
-	/*
-	@RequestMapping(value = "/commentUpdate.go", method = RequestMethod.POST, produces = "application/json") // 댓글 수정
+	@RequestMapping(value = "/commentUpdate.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	private void commentUpdateProcess(HttpServletRequest request, HttpServletResponse response)
-			throws HandlerException {
+	private void commentUpdateProcess(HttpServletRequest request, HttpServletResponse response){
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		CmtDataBean cmtDto = new CmtDataBean();
-		cmtDto.setC_id(Integer.parseInt(request.getParameter("c_id")));
-		cmtDto.setC_content(request.getParameter("c_content"));
-		cmtDao.updateComment(cmtDto);
+		CommentDataBean cmtDto = new CommentDataBean();
+		cmtDto.setCommentNo(Integer.parseInt(request.getParameter("commentNo")));
+		cmtDto.setCommentContent(request.getParameter("commentContent"));
+		boardDao.updateComment(cmtDto);
 	}
 
-	@RequestMapping(value = "/commentDelete.go", method = RequestMethod.POST) // 댓글 삭제
+	@RequestMapping(value = "/commentDelete.jk", method = RequestMethod.POST)
 	@ResponseBody
 	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int c_id = Integer.parseInt(request.getParameter("c_id"));
-		cmtDao.deleteComment(c_id);
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		boardDao.deleteComment(commentNo);
 	}
-	*/
+	
 	
 	// Order
 	@RequestMapping("/orderInputPro")

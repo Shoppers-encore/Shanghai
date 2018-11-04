@@ -54,5 +54,11 @@ public class BoardDao {
 	public List<CommentDataBean> getComment( int reviewNo ) {
 		return session.selectList("User.getComment", reviewNo);
 	}
+	public int updateComment(CommentDataBean cmtDto) {
+		return session.update("User.updateComment", cmtDto);
+	}
+	public int deleteComment( int commentNo ) {
+		return session.delete("User.deleteComment", commentNo);
+	}
 	
 }

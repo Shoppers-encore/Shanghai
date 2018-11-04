@@ -75,6 +75,12 @@
 	<select id="getComment" parameterType="int" resultType="databean.CommentDataBean">
 		select * from jk_comment where reviewNo=#{reviewNo} order by commentNo desc
 	</select>
+	<update id="updateComment" parameterType="databean.CommentDataBean">
+		UPDATE jk_comment set commentContent = #{commentContent} where commentNo = #{commentNo}
+	</update>
+	<delete id="deleteComment" parameterType="int">
+		delete from jk_comment where commentNo = #{commentNo}
+	</delete>
 	
 	
 	<!-- Basket -->
