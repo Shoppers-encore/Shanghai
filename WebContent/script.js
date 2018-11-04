@@ -45,8 +45,10 @@ function confirmID() {
 
 //<Review>
 function reviewDelcheck() {
-	   var writer = '${document.ReviewDto.id}';
-	   if( sessionScope.id == writer ) {
+	   var writer = document.detailForm.id.value;
+	   var sessionId = document.detailForm.sessionId.value;
+
+	  if( sessionId == writer ) {
 		   if ( confirm( delCheck ) ) {
 			   document.location.href = "reviewDeletePro.jk";
 		   } else {
@@ -57,9 +59,10 @@ function reviewDelcheck() {
 	}
 
 function reviewModable() {
-	   var writer = '${document.ReviewDto.id}';      // 작성자 변수 이렇게 쓰는게 맞는지 여전히 모르겟음
-	   if( sessionScope.id == writer ){
-	      document.location.href = "ReviewModifyForm.jk";
+	   var writer = document.detailForm.id.value;
+	   var sessionId = document.detailForm.sessionId.value;
+	   if( sessionId == writer ){
+	      document.location.href = "reviewModifyForm.jk";
 	   } else {
 	      alert( cannotmodify );
 	      return false;

@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<script src="../../script.js"></script>
+
+<script src="/Shanghai/script.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -113,6 +114,7 @@
 <c:set var="str_addressDetail" value="상세 주소"/>
 
 
+
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
 <c:set var="msg_color_blk" value="BLACK,  CHARCOAL"/>
@@ -169,7 +171,12 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
+
 <c:set var="btn_selfConfirm" value="인증"/>
+
+<c:set var="btn_select" value="선택"/>
+<c:set var="btn_goodInput" value="상품등록"/>
+
 
 
 
