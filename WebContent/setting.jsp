@@ -115,6 +115,7 @@
 <c:set var="str_orderUnit" value="건"/>
 <c:set var="str_orderAddress" value="배송 주소"/>
 <c:set var="str_productPrice" value="가격"/>
+<c:set var="str_cart" value="장바구니"/>
 
 
 
@@ -182,6 +183,7 @@
 <c:set var="btn_writeComment" value="댓글쓰기"/>
 <c:set var="btn_orderDetails" value="상세보기"/>
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
+<c:set var="btn_fold" value="접기"/>
 
 
 
