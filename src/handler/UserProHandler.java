@@ -116,14 +116,14 @@ public class UserProHandler {
 		return new ModelAndView("user/pro/userLoginPro");
 	}
 	
-	@RequestMapping( "/findId" )
-	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/pro/findIdResult");
-	}
-	@RequestMapping( "/findPassword" )
-	public ModelAndView passwordFindProcess(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/pro/findPasswordResult");
-	}
+//	@RequestMapping( "/findId" )
+//	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
+//		return new ModelAndView("user/pro/findIdResult");
+//	}
+//	@RequestMapping( "/findPassword" )
+//	public ModelAndView passwordFindProcess(HttpServletRequest request, HttpServletResponse response) {
+//		return new ModelAndView("user/pro/findPasswordResult");
+//	}
 	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
