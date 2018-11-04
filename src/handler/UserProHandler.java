@@ -45,6 +45,8 @@ public class UserProHandler {
 	private BoardDao boardDao;
 	@Resource
 	private BasketDao basketDao;
+	@Resource
+	private ProductDao productDao;
 	
 	// User 
 	@RequestMapping( "/userInputPro" )
@@ -285,5 +287,31 @@ public class UserProHandler {
 	@RequestMapping("/orderInputPro")
 	public ModelAndView orderInputPro(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/pro/orderInputPro");
+	}
+	
+	//Cart Ajax
+	@RequestMapping("/cartInsert")
+	@ResponseBody
+	public void cartInsert(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		String productCode=request.getParameter("productCode");
+		int quantity = Integer.parseInt(request.getParameter("var"));
+		BasketDataBean basket = new BasketDataBean();
+		basket.setId(id);
+		basket.setProductCode(productCode);
+		basket.setBasketQuantity(quantity);
+		basketDao.inputBasket(basket);
+	}
+	
+	@RequestMapping(value="/viewCart", produces="application/json", method=RequestMethod.POST)
+	@ResponseBody
+	public List<BasketDataBean> viewCart(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("  1  ");
+		List<BasketDataBean> baskets = basketDao.getBasketList((String)request.getSession().getAttribute("id"));
+		for(int i = 0 ; i<baskets.size(); i++) {
+			baskets.get(i).setThumbnail(productDao.getThumbnail(baskets.get(i).getProductCode()));
+		}
+		request.setAttribute("count", baskets.size());
+		return baskets;
 	}
 }
