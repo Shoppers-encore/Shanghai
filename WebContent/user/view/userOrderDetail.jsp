@@ -98,7 +98,7 @@
 								$('.review_${orderedItem.productCode}').on(
 									'click',
 									function(event) {
-										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}&productName=${orderedItem.productName}';
+										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}';
 									} 
 								);
 							</script>
