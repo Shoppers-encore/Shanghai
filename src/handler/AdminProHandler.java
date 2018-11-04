@@ -56,7 +56,7 @@ public class AdminProHandler {
 	      //ImageInfoDataBean imgDto = new ImageInfoDataBean();
 	      String path =  request.getSession().getServletContext().getRealPath( "/save" );
 	      MultipartRequest multi = null;
-	      new File( path ).mkdir();      // 폴더 이미 존재하면 생성X 존재 안 하면 생성O 중복X
+	      new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
 	      if(-1 < request.getContentType().indexOf("multipart/form-data"))
 	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 	      	int ref=Integer.parseInt(multi.getParameter("product_code"));
