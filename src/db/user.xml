@@ -30,6 +30,9 @@
 	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
 		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>3
 	</select>
+	<select id="getProductThumbnail" parameterType="String" resultType="String">
+		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}
+	</select>
 	
 	
 	<!-- Review -->
