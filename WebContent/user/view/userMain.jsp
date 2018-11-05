@@ -252,7 +252,6 @@
 							type : 'POST',
 							url : 'cartInsert.jk',
 							data : $('form[name="' + targetname + '"]').serialize(),
-							dataType : 'xml',
 							success: setTimeout( function(){
 								show();
 							}, 1000 )

@@ -101,4 +101,12 @@ public class ProductDao{
 	public List<ProductDataBean> getNoSearchProductList(Map<String, String> map) {
 		return session.selectList("User.getProductNoSearchList", map);
 	}
+
+	public int getProductQuantityCount(String productList) {
+		return session.selectOne("User.getProductQuantityCount", productList);
+	}
+
+	public int getProductQuantity(String productList) {
+		return session.selectOne("User.getProductQuantity", productList);
+	}
 }
