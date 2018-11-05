@@ -16,4 +16,7 @@ public class TagDao {
 	public int insertTag(String newTag) {
 		return session.insert("Admin.insertTag", newTag);
 	}
+	public int deleteTag(int tagId) {
+		return session.insert("Admin.deleteTag", tagId);
+	}
 }

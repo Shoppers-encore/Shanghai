@@ -80,7 +80,7 @@ public class ProductDao{
 	public String getThumbnail(String productCode) {
 		return session.selectOne("User.getProductThumbnail", productCode);
 	}
-	
+
 	public String getImgAddress(int ref) {
 		return session.selectOne("Admin.getImgAddress", ref);
 	}
@@ -93,5 +93,12 @@ public class ProductDao{
 			num = session.selectOne("Admin.maxTag");
 		}
 		return num;
+	}
+	public int getProductNoSearchCount(Map<String, String> map) {
+		return session.selectOne("User.getProductNoSearch", map);
+	}
+
+	public List<ProductDataBean> getNoSearchProductList(Map<String, String> map) {
+		return session.selectList("User.getProductNoSearchList", map);
 	}
 }

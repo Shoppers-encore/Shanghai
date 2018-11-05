@@ -81,4 +81,7 @@
 	<select id="getImgAddress" parameterType="int" resultType="String">
 		 SELECT imageAddress FROM jk_imageInfo WHERE ref=#{ref} AND MOD(imageNo, 2) = 1
 	</select>
+	<delete id="deleteTag" parameterType="int">
+		DELETE FROM jk_tag WHERE tagId = #{tagId}
+	</delete>
 </mapper>
