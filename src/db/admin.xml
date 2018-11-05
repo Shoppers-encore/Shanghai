@@ -75,4 +75,16 @@
 	<insert id="insertTag" parameterType="String">
 		INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, #{newTag})
 	</insert>
+	<select id="maxTag" resultType="int">
+		SELECT max(tagId) FROM jk_ProductTag
+	</select>
+	<select id="getImgAddress" parameterType="int" resultType="String">
+		 SELECT imageAddress FROM jk_imageInfo WHERE ref=#{ref} AND MOD(imageNo, 2) = 1
+	</select>
+	<delete id="deleteTag" parameterType="int">
+		DELETE FROM jk_tag WHERE tagId = #{tagId}
+	</delete>
+	<insert id="insertProdTag" parameterType="databean.ProductTagDataBean">
+		INSERT INTO jk_ProductTag VALUES (#{ref}, #{tagId})
+	</insert>
 </mapper>

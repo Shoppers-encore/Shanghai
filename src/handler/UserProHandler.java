@@ -125,10 +125,35 @@ public class UserProHandler {
 	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
-		return "redirect:userModifyView.jk";
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean user = new UserDataBean();
+		user.setId(id);
+		user.setPassword(request.getParameter("password"));
+		user.setTel(request.getParameter("tel"));
+		user.setEmail(request.getParameter("email"));
+		user.setAddress(request.getParameter("address"));
+		user.setAddressDetail(request.getParameter("addressDetail"));
+		int height = 0;
+		if(request.getParameter("height") !=null || !"".equals(request.getParameter("height"))) {
+			height=Integer.parseInt(request.getParameter("height"));
+		}
+		user.setHeight(height);
+		int weight = 0;
+		if(request.getParameter("weight") != null || !"".equals(request.getParameter("weight"))) {
+			weight = Integer.parseInt(request.getParameter("weight"));
+		}
+		user.setWeight(weight);
+		userDao.modifyUser(user);
+		return "redirect:userMypage.jk";
 	}
 	@RequestMapping( "/userDeletePro" )
 	public ModelAndView userDeletePro (HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		int result = userDao.deleteUser(id);
+		if(result == 1) {
+			request.getSession().setAttribute("id", null);
+		}
+		request.setAttribute("result", result);
 		return new ModelAndView("user/pro/userDeletePro");
 	}
 	
@@ -136,6 +161,7 @@ public class UserProHandler {
 	// Logout
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().setAttribute("id", null);
 		return "redirect:main.jk";
 	}
 	
@@ -153,7 +179,13 @@ public class UserProHandler {
 		basket.setId((String)request.getSession().getAttribute("id"));
 		basket.setBasketQuantity(quantity);
 		basket.setProductCode(productCode);
-		int result = basketDao.inputBasket(basket);
+		int count = basketDao.getDupicateCheck(basket);
+		int result = 0;
+		if(count == 0) {
+			result = basketDao.inputBasket(basket);
+		}else {
+			result = basketDao.increaseBasketItem(basket);
+		}
 		request.setAttribute("result", result);
 		request.setAttribute("ref", request.getParameter("ref"));
 		return new ModelAndView("user/pro/basketInput");
@@ -406,7 +438,12 @@ public class UserProHandler {
 		basket.setId(id);
 		basket.setProductCode(productCode);
 		basket.setBasketQuantity(quantity);
-		basketDao.inputBasket(basket);
+		int count = basketDao.getDupicateCheck(basket);
+		if(count == 0) {
+			basketDao.inputBasket(basket);
+		}else {
+			basketDao.increaseBasketItem(basket);
+		}
 	}
 	
 	@RequestMapping(value="/viewCart", produces="application/json", method=RequestMethod.POST)

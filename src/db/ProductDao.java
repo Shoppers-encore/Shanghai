@@ -81,6 +81,19 @@ public class ProductDao{
 		return session.selectOne("User.getProductThumbnail", productCode);
 	}
 
+	public String getImgAddress( int ref ) {
+		return session.selectOne("Admin.getImgAddress", ref);
+	}
+	
+	public int getTagNo() {
+		int num = 0;
+		if(session.selectOne("Admin.maxTag") == null) {
+			num = 0;
+		}else {
+			num = session.selectOne("Admin.maxTag");
+		}
+		return num;
+	}
 	public int getProductNoSearchCount(Map<String, String> map) {
 		return session.selectOne("User.getProductNoSearch", map);
 	}

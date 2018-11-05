@@ -34,18 +34,35 @@ public class AdminViewHandler {
 
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/view/userList");
 	}
 	@RequestMapping("/admChatView")
 	   public ModelAndView admChatView(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 	      return new ModelAndView("adm/view/admChatView");
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/view/admProductView");
 	}
 	@RequestMapping("/admProductList")
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
+		
 		ProductDao productDao = new ProductDao();
 		int count = productDao.getProdCount();
 		Map<String,String> map = new HandlerHelper().makeCount(count, request);
@@ -56,28 +73,43 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView ( "adm/view/admProductDetail" );
 	}
-	@RequestMapping ( "/admSearchProduct" )
+	/*@RequestMapping ( "/admSearchProduct" )
 	public ModelAndView searchProduct( HttpServletRequest request, HttpServletResponse response ) {
 		return new ModelAndView ( "adm/view/admSearchProduct" );
-	}
+	}*/
 	
-	@RequestMapping("/admMypage")
+	/*@RequestMapping("/admMypage")
 	public ModelAndView admMypage(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/view/admMypage");
-	}
+	}*/
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/view/admOrderDetail");
 	}
 	
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
+		
 		OrderDao orderDao = new OrderDao();
 		int count = orderDao.getOrderCount();
-	
-		String id=(String) request.getSession().getAttribute("memid");
 				
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<OrderListDataBean> orders = orderDao.getOrderList(map);
@@ -87,16 +119,22 @@ public class AdminViewHandler {
 		return new ModelAndView("adm/view/admOrderList");
 	}	
 	
+
+	
 	@RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
+		/*String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );*/
+		
 		int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
 		String number = request.getParameter( "number" );
 		
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
-		String id=(String)request.getSession().getAttribute("id");
-
+		String id = (String)request.getSession().getAttribute("id");
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(num).toString());
@@ -115,6 +153,10 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admReviewList")
 	public ModelAndView admReviewList(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
@@ -130,6 +172,10 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/tagList")
 	public ModelAndView tagList(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		TagDao tagDao = new TagDao();
 		List <TagDataBean> tags = tagDao.getTags();
 		request.setAttribute("tags", tags);

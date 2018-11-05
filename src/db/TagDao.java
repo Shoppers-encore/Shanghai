@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
+import databean.ImageInfoDataBean;
+import databean.ProductTagDataBean;
 import databean.TagDataBean;
 
 public class TagDao {
@@ -15,5 +17,11 @@ public class TagDao {
 	}
 	public int insertTag(String newTag) {
 		return session.insert("Admin.insertTag", newTag);
+	}
+	public int deleteTag(int tagId) {
+		return session.insert("Admin.deleteTag", tagId);
+	}
+	public int insertProdTag(ProductTagDataBean productTagDto) {
+		return session.insert("Admin.insertProdTag", productTagDto);
 	}
 }

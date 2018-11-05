@@ -258,7 +258,7 @@ function deletePhoto(tb_no,photo_id,start){
                   </tr>
                   <tr>
                   	<th> ${str_style} </th>
-                  	<td colspan="5">
+                  <td colspan="5">
                   		<c:forEach var="tag" items="${tags}">   
 							<label class="btn btn-info">
                   	 		 	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}
@@ -364,7 +364,7 @@ function deletePhoto(tb_no,photo_id,start){
                   </tr>
                   <tr>
                      <th colspan="6">
-                     <input class="btn btn-danger" type="file" name="upload1" value="${systemName}">
+                     <input class="btn btn-danger" type="file" name="upload1">
                      <input class="btn btn-danger" type="file" name="upload2">     
                      </th>
                   </tr>
