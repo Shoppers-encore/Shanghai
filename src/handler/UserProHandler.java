@@ -259,6 +259,7 @@ public class UserProHandler {
 			updateReferences.put("productCode", productCode);
 			
 			int result = basketDao.updateBasketList(updateReferences);
+			System.out.println(result);
 		}
 		
 		return new ModelAndView( "user/pro/basketListPro" );

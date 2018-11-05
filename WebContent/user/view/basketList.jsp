@@ -18,7 +18,7 @@
 		<!-- When logged in -->
 		<c:if test="${id ne null}">
 			<div class="container-fluid col-lg-10">
-				<div class="mt-3"><h5 class="totalNumberOfItems">${str_itemsTotal}${basketCount}${str_quantityUnit}</h5></div>
+				<div class="mt-3"><h5 id="totalNumberOfItems">${str_itemsTotal}${basketCount}${str_quantityUnit}</h5></div>
 				
 				<!-- If Basket is empty -->
 				<c:if test="${basketCount eq 0}">
@@ -51,7 +51,7 @@
 					
 					<form class="form basketListForm" name="basketListForm" method="post" action="basketListPro.jk">
 						<c:forEach var="basketList" items="${basketList}">					
-							<div class="form-group row border text-center ${basketList.productCode}">
+							<div class="form-group row border text-center" id="${basketList.productCode}">
 								<script type="text/javascript">
 									var prodCode=[];
 									prodCode.push('${basketList.productCode}');
@@ -64,40 +64,39 @@
 									${basketList.productName}
 								</div>
 								<div class="col-lg-2 pt-5">
-									<select class="selectColorOptions_${basketList.productCode}" name="selectColorOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
+									<select class="" id="selectColorOptions_${basketList.productCode}" name="selectColorOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
 									<script type="text/javascript">
 										var key='${basketList.productCode}';
 										var prodColors=JSON.parse('${colorOptions}')[key];
 										for(var color in prodColors) {
 											if('${basketList.productCode}'.length>3) {
 												if('${basketList.productCode}'.substring(0,2)==prodColors[color]) {
-													$('.selectColorOptions_${basketList.productCode}').removeAttr('selected');
-													$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
+													$('#selectColorOptions_${basketList.productCode}').removeAttr('selected');
+													$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
 												} else {
-													$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
+													$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
 												}
 											} else {
-												$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
+												$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
 											} 
 										}
 									</script>
 								</div>
 								<div class="col-lg-2 pt-5">							
-									<select class="selectSizeOptions_${basketList.productCode}" name="selectSizeOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
+									<select class="" id="selectSizeOptions_${basketList.productCode}" name="selectSizeOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
 									<script type="text/javascript">
-										var key='${basketList.productCode}';
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
 										
 										for(var size in prodSizes) {
 											if('${basketList.productCode}'.length>3) {
 												if('${basketList.productCode}'.substring('${basketList.productCode}'.length-2,'${basketList.productCode}'.length)==prodSizes[size]) {
-													$('.selectSizeOptions_${basketList.productCode}').removeAttr('selected');
-													$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
+													$('#selectSizeOptions_${basketList.productCode}').removeAttr('selected');
+													$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
 												} else {
-													$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
+													$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
 												}
 											} else {
-												$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
+												$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
 											}	
 										}
 									</script>
@@ -107,9 +106,9 @@
 									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="99">
 								</div>
 								<div class="col-lg-1 pt-5">
-									<button class="btn basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
+									<button class="btn" id="basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
 									<script type="text/javascript">
-										$('.basketItemDeleteBtn_${basketList.productCode}').on(
+										$('#basketItemDeleteBtn_${basketList.productCode}').on(
 											'click',
 											function(event) {
 												event.preventDefault();
@@ -126,9 +125,9 @@
 														
 														if(isItemDeleted=='true') {
 															console.log('basket update ${msg_success}');
-															$('.${basketList.productCode}').remove()
+															$('#${basketList.productCode}').remove()
 															basketCount--;
-															$('.totalNumberOfItems').text('${str_itemsTotal}'+basketCount+'${str_quantityUnit}');
+															$('#totalNumberOfItems').text('${str_itemsTotal}'+basketCount+'${str_quantityUnit}');
 														} else {
 															alert('${msg_tryLater}');
 														}
@@ -146,21 +145,21 @@
 						</c:forEach>
 						<div class="text-right">
 							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
-							<button type="submit" class="btn basketListFormSubmitBtn">${msg_pay}</button>
+							<button type="submit" class="btn" id="basketListFormSubmitBtn">${msg_pay}</button>
 							<script type="text/javascript">
-								$('.basketListFormSubmitBtn').on(
+								$('#basketListFormSubmitBtn').on(
 									'click',
 									function(event) {
 										for(product in prodCode) {
 											sizeSelector='selectSizeOptions_'+prodCode[product];
 											colorSelector='selectColorOptions_'+prodCode[product];
-											sizeSelection=document.getElementsByClassName(sizeSelector);
-											colorSelection=document.getElementsByClassName(colorSelector);
+											sizeSelection=document.getElementById(sizeSelector);
+											colorSelection=document.getElementById(colorSelector);
 											
-											if(colorSelection[0].value=='unselected') {
+											if(colorSelection.value=='unselected') {
 												event.preventDefault();
 												alert('${msg_selectColor}');
-											} else if(sizeSelection[0].value=='unselected') {
+											} else if(sizeSelection.value=='unselected') {
 												event.preventDefault();
 												alert('${msg_selectSize}');
 											}
