@@ -12,8 +12,8 @@
 		<div class="dropdown">
 			<a class="navbar-brand" href="#" data-toggle="dropdown">PRODUCT</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="userGoodList.jk?category=TOP">TOP</a>
-				<a class="dropdown-item" href="userGoodList.jk?category=BOTTOM">BOTTOM</a>
+				<a class="dropdown-item" href="userProductList.jk?category=TOP">TOP</a>
+				<a class="dropdown-item" href="userProductList.jk?category=BOTTOM">BOTTOM</a>
 			</div>
 		</div>
 		<ul class="navbar-nav">

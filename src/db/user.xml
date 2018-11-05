@@ -15,11 +15,12 @@
 	
 	<!-- Product DB -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> -->) WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
+		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT product.* FROM (SELECT * FROM jk_product <!-- <include refid="colorSearch"></include> --> ) product
-		WHERE productCode=TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%') list) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		SELECT tmp3.* FROM(SELECT tmp2.*, rownum r FROM (SELECT tmp.* FROM ( SELECT list.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') list
+				<include refid="colorSearch"></include>) tmp WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp2 ) tmp3
+		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
 		SELECT productName FROM jk_product WHERE productCode=#{productCode}
@@ -32,6 +33,12 @@
 	</select>
 	<select id="getProductThumbnail" parameterType="String" resultType="String">
 		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}
+	</select>
+	<select id="getProductNoSearch" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref)
+	</select>
+	<select id="getProductNoSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
 	
 	
@@ -196,5 +203,18 @@
 			productCode LIKE '' || '%' OR
 		</if>
 		productCode LIKE '0000'||'%'
+	</sql>
+	<sql id="cate">
+		<choose>
+			<when test="category == 'TOP'">
+				WHERE productcategory &lt;= 10 AND
+			</when>
+			<when test="category == 'BOTTOM'">
+				WHERE productcategory &gt; 10 AND
+			</when>
+			<otherwise>
+				WHERE
+			</otherwise>
+		</choose>
 	</sql>
 </mapper>
