@@ -24,6 +24,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
+import databean.ProductTagDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
 import db.ProductDao;
@@ -54,19 +55,23 @@ public class AdminProHandler {
 		return new ModelAndView ("adm/pro/admLoginPro");
 	}
 	
-	@SuppressWarnings("null")
+
 	@RequestMapping ( "/productInputPro" )
 	   public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
 		  ProductDao productDao = new ProductDao(); 
-	      //ImageInfoDataBean imgDto = new ImageInfoDataBean();
+	      ImageInfoDataBean imgDto = new ImageInfoDataBean();
+	      ProductTagDataBean productTagDto = new ProductTagDataBean();
+	      
 	      String path =  request.getSession().getServletContext().getRealPath( "/save" );
 	      MultipartRequest multi = null;
 	      new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
-	      if(-1 < request.getContentType().indexOf("multipart/form-data"))
+	      if(-1 < request.getContentType().indexOf("multipart/form-data")) 
 	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
-	      	int ref=Integer.parseInt(multi.getParameter("product_code"));
+	      int ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
+	         
 	      String systemName = null;
 	      Enumeration<?> e = multi.getFileNames();
+	      
 	      while( e.hasMoreElements() ) {
 	         String inputName = (String) e.nextElement();
 	         //String originName = multi.getOriginalFileName( inputName );
@@ -84,19 +89,18 @@ public class AdminProHandler {
 	         BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
 	         Graphics g = tbuffer.getGraphics();
 	         g.drawImage(sbuffer, 0, 0, width, height, null );   
-	         
 	   
 	            ImageIO.write( tbuffer, "jpg", new File( tname ) );   
 	            ImageIO.write( tbuffer, "png", new File( tname ) );
 	            ImageIO.write( tbuffer, "gif", new File( tname ) );
 	        
-
-	      	ImageInfoDataBean imgDto = new ImageInfoDataBean();
+	           
 	          int imageNo = productDao.getImgNo()+1;
 	  	      imgDto.setImageNo(imageNo);
 	  	      imgDto.setRef( ref );
 	  	      imgDto.setImageAddress(systemName);
 	  	      int result = productDao.insertImgInfo(imgDto);
+	  	      
 		  	   if( result == 1 ) {
 		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
 		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
@@ -104,8 +108,7 @@ public class AdminProHandler {
 		  	   }
 		  	 request.setAttribute( "systemName", systemName );
 			}
-	      
-	      
+	      	      
 	      String col[] = multi.getParameterValues( "color" );
 	      int colors[] = null;
 	      if( col != null ) {
@@ -123,17 +126,31 @@ public class AdminProHandler {
 	         sizes[i] = Integer.parseInt( siz[i] );
 	         }
 	      }
-	     // int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
+	      
+	      String tag[] = multi.getParameterValues( "tag" );
+	      int tags[] = null;
+	      if( tag != null ) {
+	    	  tags = new int[ tag.length ];
+	      for( int i=0; i<tag.length; i++ ) {
+	    	  tags[i] = Integer.parseInt( tag[i] );
+	    	  //int tagId = productDao.getTagNo()+1;
+		       productTagDto.setRef( ref );
+		       productTagDto.setTagid(  tags[i] );	
+		       int result1 = tagDao.insertProdTag(productTagDto);
+	      }
+	      }
+	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	      ProductDataBean productDto = new ProductDataBean();
 	      String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
 	      //String product_code[] = this.makeProductCode( int colors[], int sizes[] );
-	      for(int i=0; i<product_codes.length;i++) {
+	      
+	      for( int i=0; i<product_codes.length; i++ ) {
 	    	  
+	    	 ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	    	 String product_name = multi.getParameter( "product_name" );
 	    	 int quantity = Integer.parseInt( multi.getParameter( "quantity" ) );
-	    	 int category = Integer.parseInt(multi.getParameter("category"));
-	    	 String good_content = multi.getParameter("good_content");
-	    	
+	    	 int category = Integer.parseInt( multi.getParameter("category"));
+	    	 String good_content = multi.getParameter("good_content");	    	
 	    	 String saleCheck = multi.getParameter( "sale" );
 	    	 int sale;
 	    	 
@@ -146,8 +163,8 @@ public class AdminProHandler {
 	    	 }
 	    	 
 	    	 int price = Integer.parseInt( multi.getParameter( "price" ) );
-	         String thumbnail = "thumbnail";
-	        		 //multi.getParameter( "upload1" );
+		     String thumbnail = productDao.getImgAddress( ref );
+		     // System.out.println( thumbnail );
 	         productDto.setRef( ref );
 	         productDto.setProductCode( product_codes[i] );
 	         productDto.setProductName( product_name ); 
@@ -156,13 +173,12 @@ public class AdminProHandler {
 	         productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
 	         productDto.setProductCategory( category );
 	         productDto.setProductQuantity( quantity );
-	         productDto.setThumbnail( thumbnail );
-	        
+	         productDto.setThumbnail( thumbnail );         
 	         
 	        int result2 = productDao.input( productDto );
 	         
 	        productDao.getProdCount();
-	         System.out.println("ref:" + ref);
+
 	         if( result2 >= 1 ) {
 	               String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "
 		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', " + product_name + ", '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + "," + category + ", '" + thumbnail + "');";
@@ -173,6 +189,7 @@ public class AdminProHandler {
 	      }  
 		return new ModelAndView ( "adm/pro/productInputPro" );
 	   }
+	   
 	
 	@RequestMapping ( "/productModifyPro" )
 	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
