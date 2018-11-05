@@ -144,7 +144,6 @@ public class UserViewHandler {
 		map = new HandlerHelper().makeCount(count, request);
 		map.put("category", category);
 		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		System.out.println(productList.get(0).getProductName());
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		request.setAttribute("category", category);

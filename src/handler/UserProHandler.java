@@ -179,7 +179,13 @@ public class UserProHandler {
 		basket.setId((String)request.getSession().getAttribute("id"));
 		basket.setBasketQuantity(quantity);
 		basket.setProductCode(productCode);
-		int result = basketDao.inputBasket(basket);
+		int count = basketDao.getDupicateCheck(basket);
+		int result = 0;
+		if(count == 0) {
+			result = basketDao.inputBasket(basket);
+		}else {
+			result = basketDao.increaseBasketItem(basket);
+		}
 		request.setAttribute("result", result);
 		request.setAttribute("ref", request.getParameter("ref"));
 		return new ModelAndView("user/pro/basketInput");
@@ -401,7 +407,12 @@ public class UserProHandler {
 		basket.setId(id);
 		basket.setProductCode(productCode);
 		basket.setBasketQuantity(quantity);
-		basketDao.inputBasket(basket);
+		int count = basketDao.getDupicateCheck(basket);
+		if(count == 0) {
+			basketDao.inputBasket(basket);
+		}else {
+			basketDao.increaseBasketItem(basket);
+		}
 	}
 	
 	@RequestMapping(value="/viewCart", produces="application/json", method=RequestMethod.POST)
