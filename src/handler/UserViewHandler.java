@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.ReviewScoreDataBean;
 
@@ -290,7 +293,6 @@ public class UserViewHandler {
 		
 		return new ModelAndView("user/view/userOrderList");
 	}
-
 	
 	// Review
 	@RequestMapping("/reviewList")
@@ -305,10 +307,10 @@ public class UserViewHandler {
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
 			request.setAttribute( "reviewLists", articles );
 			
-			int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
+			/*int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
 			ReviewDataBean reviewDto = boardDao.get( num );
 			String productName = new ProductDao().getProductName(reviewDto.getProductCode());
-			request.setAttribute("productName", productName);
+			request.setAttribute("productName", productName);*/
 		}
 		return new ModelAndView("user/view/reviewList");
 	}

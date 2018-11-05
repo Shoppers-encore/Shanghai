@@ -38,8 +38,18 @@
 								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
 								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}&pageNum=${pageNum}">
 									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
-									<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
-									${reviewlist.title}</a></td>
+										
+										<c:if test="${reviewlist.photo1 ne null}">
+											<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
+											${reviewlist.title}
+										</c:if>
+										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 ne null}">
+											<img src="${reviewlist.photo2}" style="width:50px; height:50px;">
+											${reviewlist.title}
+										</c:if>
+										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 eq null}">
+											${reviewlist.title}
+										</c:if></a></td>
 								<td>${reviewlist.id}</td>
 								<td>${reviewlist.reviewDate}</td>
 							</tr>

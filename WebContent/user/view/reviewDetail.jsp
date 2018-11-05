@@ -43,8 +43,19 @@
 						</tr>
 						</table>
 							<div style="align:center;">
-								<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
-								<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 ne null}"> 
+									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
+									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								</c:if>
+								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 eq null}">
+									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
+								</c:if>
+								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 ne null}">
+									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								</c:if>
+								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 eq null}">
+									${msg_noPhoto}
+								</c:if>
 							</div>
 						<table class="table">
 						<tr>

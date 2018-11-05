@@ -220,25 +220,31 @@ public class UserProHandler {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			//Need to change for 2images
 			String systemName=null;
+			String[] photos = {null,null};
+			int i = 0;
 			Enumeration<?> e = multi.getFileNames();
 			while(e.hasMoreElements()) {
 				String inputName = (String) e.nextElement();
 				systemName = multi.getFilesystemName(inputName);
-				String sname = path+"\\"+systemName;
-				RenderedOp op = JAI.create("fileload", sname);
-				BufferedImage sbuffer = op.getAsBufferedImage();
-				int SIZE = 3;
-				int width = sbuffer.getWidth()/SIZE;
-				int height = sbuffer.getHeight()/SIZE;
-				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
-				Graphics g = tbuffer.getGraphics();
-				g.drawImage(sbuffer, 0, 0, width,height,null);
-
-				reviewDto.setPhoto1( systemName );
+				if( systemName != null ) {
+					String sname = path+"\\"+systemName;
+					RenderedOp op = JAI.create("fileload", sname);
+					BufferedImage sbuffer = op.getAsBufferedImage();
+					int SIZE = 3;
+					int width = sbuffer.getWidth()/SIZE;
+					int height = sbuffer.getHeight()/SIZE;
+					BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+					Graphics g = tbuffer.getGraphics();
+					g.drawImage(sbuffer, 0, 0, width,height,null);
+	
+					photos[i] = systemName; 
+					i++;
+				}
 			}
-			
+				reviewDto.setPhoto1( photos[0] );
+				reviewDto.setPhoto2( photos[1] );
+
 			int count = boardDao.getReviewCount();
 			int reviewNo = 1;
 			if(count >0) {

@@ -210,7 +210,7 @@ function commentDelete(commentNo){
 }
 
 //Delete Photo
-function deletePhoto(fileName){
+function deletePhoto(reviewNo, fileName){
 	var reviewNo=$('input[name=reviewNo]').val();
    $.ajax({
        url : 'deletePhoto.jk',
