@@ -2,3 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
+<c:if test="${result eq 0}">
+	<script type="text/javascript">
+		// <!--
+		erroralert( inputerror );
+		//-->
+	</script>		
+</c:if>
+<c:if test="${result ne 0}">
+	<c:redirect url="admGoodView.jk"/>
+</c:if>

@@ -29,16 +29,19 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("memid");
-		// System.out.println(request.getSession().getAttribute("memid"));
-		// System.out.println(request.getSession().getAttribute("id"));
+		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
 	}
+	
 	@RequestMapping("/admModifyView")
 	public ModelAndView admModifyView(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admModifyView");
 	}
 	@RequestMapping("/productInputForm")

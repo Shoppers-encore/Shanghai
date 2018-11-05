@@ -39,6 +39,8 @@ public class AdminProHandler {
 	@Resource
 	private TagDao tagDao;
 	public static final int USERLEVEL=9;
+	@Resource
+	private ProductDao productDao;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -51,7 +53,7 @@ public class AdminProHandler {
 			result = 1; 
 		}
 		request.setAttribute( "result", result );
-		request.getSession().setAttribute("memid", id);
+		request.getSession().setAttribute("id", id);
 		return new ModelAndView ("adm/pro/admLoginPro");
 	}
 	
@@ -195,13 +197,16 @@ public class AdminProHandler {
 		return new ModelAndView ( "adm/pro/productInputPro" );
 	   }
 	   
-	
 	@RequestMapping ( "/productModifyPro" )
 	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
 		return "redirect:productDetail.jk";
 	}
 	@RequestMapping("/productDeletePro")
 	public ModelAndView productDeletePro(HttpServletRequest request, HttpServletResponse response) {
+		int ref = Integer.parseInt( request.getParameter("ref") );
+		productDao.deleteImg( ref );
+		int result = productDao.deleteProd( ref );
+		request.setAttribute( "result", result );
 		return new ModelAndView("adm/pro/productDeletePro");
 	}
 	@RequestMapping("/orderStatusChange")

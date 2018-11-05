@@ -101,4 +101,21 @@ public class ProductDao{
 	public List<ProductDataBean> getNoSearchProductList(Map<String, String> map) {
 		return session.selectList("User.getProductNoSearchList", map);
 	}
+	
+	public List<ProductDataBean> getProdDetail(int ref) {
+		return session.selectList("Admin.getProdDetail", ref);
+	}
+	
+	public List<ImageInfoDataBean> getImgDetail(int ref) {
+		return session.selectList("Admin.getImgDetail", ref);
+	}
+	
+	public int deleteImg(int ref) {
+		return session.delete("Admin.deleteImg", ref);
+	}
+	
+	public int deleteProd(int ref) {
+		return session.delete("Admin.deleteProd", ref);
+	}
+	
 }

@@ -11,16 +11,20 @@
 	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
 		select * from jk_user where id=#{id}
 	</select>
-	
+	<update id="deleteUser" parameterType="String">
+		UPDATE jk_user SET password='0', tel=0, email='0@a.com', name='0',userLevel=0, addressDetail='0' WHERE id=#{id}
+	</update>
+	<update id="modifyUser" parameterType="databean.UserDataBean">
+		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
+	</update>
 	
 	<!-- Product DB -->
 	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'
 	</select>
 	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp3.* FROM(SELECT tmp2.*, rownum r FROM (SELECT tmp.* FROM ( SELECT list.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') list
-				<include refid="colorSearch"></include>) tmp WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp2 ) tmp3
-		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		SELECT tmp3.*,r FROM(SELECT tmp2.*, rownum r FROM (SELECT tmp.* FROM ( SELECT list.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') list
+		<include refid="colorSearch"></include>) tmp WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp2 ) tmp3 WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
 		SELECT productName FROM jk_product WHERE productCode=#{productCode}
@@ -103,6 +107,12 @@
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
+	<select id="getDuplicateCheck" parameterType="databean.BasketDataBean" resultType="int">
+		SELECT count(*) FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
+	</select>
+	<update id="increaseBasketItemQuantity" parameterType="databean.BasketDataBean">
+		UPDATE jk_basket SET basketquantity=basketquantity+#{basketQuantity} WHERE id=#{id} AND productCode=#{productCode}
+	</update>
 	
 	
 	<!-- Order -->
