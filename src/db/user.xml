@@ -116,7 +116,8 @@
 	<update id="updateBasketList" parameterType="java.util.Map">
 		UPDATE jk_basket 
 		SET productCode=#{newProductCode}, basketQuantity=#{basketQuantity} 
-		WHERE id=#{id} AND productCode=#{productCode} 
+		WHERE id=#{id} AND productCode=#{productCode}
+	</update> 
 	<select id="getDuplicateCheck" parameterType="databean.BasketDataBean" resultType="int">
 		SELECT count(*) FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
 	</select>

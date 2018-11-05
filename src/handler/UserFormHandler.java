@@ -95,6 +95,13 @@ public class UserFormHandler {
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		
+		/* If this page is accessed from basketList, identifier=1; else identifier=null || identifier="" */
+		String identifier=request.getParameter("identifier");
+		
+		if(identifier.equals("1")) {
+			
+		}
 		List<BasketDataBean> baskets = basketDao.getBasketList(id);
 		if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
 			String productCode = request.getParameter("productCode");

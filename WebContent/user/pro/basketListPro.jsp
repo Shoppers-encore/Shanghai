@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="../../setting.jsp" %>
 
-</body>
-</html>
+<c:forEach var="result" items="${results}">
+	<c:if test="${result ne 1}">
+		<script type="text/javascript">
+			alert('${msg_systemFailure}');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${result eq 1}">
+		<c:redirect url="orderInputForm.jsp?identifier=1"/>
+	</c:if>
+</c:forEach>
