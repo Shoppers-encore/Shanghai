@@ -61,23 +61,47 @@
 								<div class="col-lg-4 pt-5">
 									${basketList.productName}
 								</div>
-								<div class="col-lg-2 pt-5 colorOptions_${basketList.productCode}">
+								<div class="col-lg-2 pt-5">
+									<select class="selectColorOptions_${basketList.productCode}" name="selectColorOptions_${basketList.productCode}"></select>
 									<script type="text/javascript">
 										var key='${basketList.productCode}';
 										var prodColors=JSON.parse('${colorOptions}')[key];
-										$('.colorOptions_${basketList.productCode}').text(prodColors);
+										
+										for(var color in prodColors) {
+											if('${basketList.productCode}'.length>3) {
+												if('${basketList.productCode}'.substring(0,2)==prodColors[color]) {
+													$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
+												} else {
+													$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
+												}
+											} else {
+												$('.selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
+											} 
+										}
 									</script>
 								</div>
-								<div class="col-lg-2 pt-5 sizeOptions_${basketList.productCode}">								
+								<div class="col-lg-2 pt-5">							
+									<select class="selectSizeOptions_${basketList.productCode}" name="selectSizeOptions_${basketList.productCode}"></select>
 									<script type="text/javascript">
 										var key='${basketList.productCode}';
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
-										$('.sizeOptions_${basketList.productCode}').text(prodSizes);
+										
+										for(var size in prodSizes) {
+											if('${basketList.productCode}'.length>3) {
+												if('${basketList.productCode}'.substring('${basketList.productCode}'.length-2,'${basketList.productCode}'.length)==prodSizes[size]) {
+													$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
+												} else {
+													$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
+												}
+											} else {
+												$('.selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
+											}	
+										}
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5">
-									${basketList.basketQuantity}
-									<input type="number" name="basketQuantity_${basketList.productCode}">
+									<input type="number" name="basketQuantity_${basketList.productCode}" 
+									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="99">
 								</div>
 								<div class="col-lg-1 pt-5">
 									<button class="btn basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
