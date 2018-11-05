@@ -40,7 +40,7 @@
 					<p>
 			      	<br> ${str_mypage} <br>
 					</p>
-					<form name="admModform" action="admModifyPro.jsp" onsubmit="return admModcheck()">
+					<form name="admModForm" method="post" action="admModifyPro.jk" onsubmit="return admModcheck()">
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_id}</span>

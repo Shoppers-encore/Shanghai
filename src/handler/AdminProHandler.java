@@ -220,4 +220,21 @@ public class AdminProHandler {
 	public String tagModifyPro(HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:tagList.jk";
 	}
+	@RequestMapping("/admModifyPro")
+	public ModelAndView admModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		UserDataBean dto = new UserDataBean();
+		dto.setId((String)request.getSession().getAttribute("id"));
+		dto.setPassword(request.getParameter("passwd"));
+		dto.setName(request.getParameter("name"));
+		dto.setTel(request.getParameter("tel"));
+		dto.setEmail(request.getParameter("email"));
+		int result = userDao.admModify(dto);
+		request.setAttribute("result", result);
+		return new ModelAndView ("adm/pro/admModifyPro");
+	}
 }
