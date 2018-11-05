@@ -187,9 +187,7 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
-
 <c:set var="btn_selfConfirm" value="인증"/>
-
 <c:set var="btn_select" value="선택"/>
 <c:set var="btn_goodInput" value="상품등록"/>
 <c:set var="btn_manageTag" value="태그 관리"/>
@@ -199,6 +197,7 @@
 <c:set var="btn_orderDetails" value="상세보기"/>
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
 <c:set var="btn_fold" value="접기"/>
+<c:set var="btn_x" value="삭제"/>
 
 
 

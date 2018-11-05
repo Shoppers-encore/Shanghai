@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import databean.BasketDataBean;
 import databean.ReviewDataBean;
+import databean.UserDataBean;
 import db.BasketDao;
 import db.BoardDao;
 import db.ProductDao;
+import db.UserDao;
 
 @Controller
 public class UserFormHandler {
@@ -24,6 +26,8 @@ public class UserFormHandler {
 	private BoardDao boardDao;
 	@Resource
 	private BasketDao basketDao;
+	@Resource
+	private UserDao userDao;
 	
 	// User
 	@RequestMapping("/userInputForm")
@@ -40,6 +44,9 @@ public class UserFormHandler {
 	}
 	@RequestMapping( "/userModifyForm" )
 	public ModelAndView userModifyForm (HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean user = userDao.getUser(id);
+		request.setAttribute("user", user);
 		return new ModelAndView( "user/form/userModifyFrom" );
 	}
 	

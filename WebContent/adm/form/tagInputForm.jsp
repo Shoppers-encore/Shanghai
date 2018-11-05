@@ -27,7 +27,7 @@
 	}
   </style>
 </head>
-<body>
+<body onload="opener.location.reload(true)">
 	<form name="tagInputForm" method="post" action="tagInputPro.jk">
 		<div class="container-fluid">
 		    <div class="col-*-4 border centered" id="tagInputForm">

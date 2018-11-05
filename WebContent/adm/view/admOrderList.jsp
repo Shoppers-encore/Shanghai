@@ -71,10 +71,10 @@ $('input[name=btid]').attr('value', result)
                      <tr>
                         <td><a href="admOrderDetail.jk?orderCode=${order.orderCode}&order_id=${order.id}">${order.orderCode}</a></td>
                         <td>${order.id}</td>
-                        <td>
+                        <!-- <td>
 							<input type="hidden" name="productCode" value="${order.productCode}">
                       		${order.productName}
-						</td>
+						</td>-->
                         <td><c:choose>
 	                        	<c:when test="${order.orderStatus eq 0}">
 	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
@@ -101,6 +101,7 @@ $('input[name=btid]').attr('value', result)
                </c:if>
              </tbody>
           </table>
+          <div align="center">
              <c:if test="${count gt 0}">
             <c:if test="${currentPage ne 1}">
                <a href="admOrderFind.do">[◀◀]</a>
@@ -123,6 +124,7 @@ $('input[name=btid]').attr('value', result)
                <a href="admOrderFind.do?pageNum=${pageCount}">[▶▶]</a>
             </c:if>
          </c:if>
+         </div>
        </article>
 
 </body>

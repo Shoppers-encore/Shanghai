@@ -55,5 +55,16 @@ public class UserDao{
 		}
 		return userlist;
 	}
+
+	public int deleteUser(String id) {
+		return session.update("User.deleteUser", id);
+	}
+
+	public int modifyUser(UserDataBean user) {
+		return session.update("User.modifyUser", user);
+	}
 	
+	public int admModify(UserDataBean dto) {
+		return session.update("Admin.admModify", dto);
+	}
 }

@@ -16,11 +16,34 @@
 		$(document).ready(function(){
 			$("select").change(function(){
 				$("input[name='productCode']").val($("select[name='cl']").val()+$("input[name='reff']").val()+$("select[name='sz']").val());
+				 $.ajax({
+						type : 'POST',
+						url : 'howManyQuantity.jk',
+						data : $("input[name='productCode']").serialize(),
+						dataType : "json",
+						success: function(data){
+							if(data.count>0){
+								if(data.quantity == 0){
+									alert("재고가 없습니다.");
+									$("input:submit").attr("diable")
+								}
+								$("input[name='remainQuantity']").val(data.quantity);
+								$("input[name='quantity']").attr("max",data.quantity);
+								
+							}
+						}
+					});
 			});
 			$("input:button[name='inputCart']").on("click",function(){
 					location.href="basketInput.jk?productCode="+$("input[name='productCode']").val()+"&quantity="+$("input[name='quantity']").val()+"&ref="+$("input[name='reff']").val();
-				});
+			});
 		});
+		function checkSizeColor(){
+			if($("select[name='cl']").val()==" " || $("select[name='sz']").val()==" "){
+				alert('상품 세부사항을 선택해주세요');
+				return false;
+			}
+		}
 		//-->
 	</script>
 	<!-- Good Detail View Page -->
@@ -31,7 +54,7 @@
 			</div>
 			<!-- Good Detail -->
 			<div class="col-sm-6" align="center" style="padding:10%;">
-				<form method="post" name="productDetailForm" action="orderInputForm.jk">
+				<form method="post" name="productDetailForm" action="orderInputForm.jk" onsubmit="return checkSizeColor()">
 					<table style="height:50%;">
 						<thead>
 							<tr>
@@ -78,7 +101,8 @@
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="quantity" value="1" style="width:60px;"></td>
+								<td><input type="number" name="quantity" value="1" style="width:60px;" min="0"></td>
+								<td><input type="text" name="remainQuantity" style="width:20px;" readonly></td>
 							</tr>
 							<tr>
 								<th colspan="2"><input type="submit" class="btn-block" value="${btn_buy}"></th>
