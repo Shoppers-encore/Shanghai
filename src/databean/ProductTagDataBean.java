@@ -1,13 +1,14 @@
 package databean;
 
 public class ProductTagDataBean {
-	private String productCode;
+	private int ref;
 	private int tagId;
-	public String getProductCode() {
-		return productCode;
+
+	public int getRef() {
+		return ref;
 	}
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 	public int getTagid() {
 		return tagId;
