@@ -14,6 +14,7 @@ var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호
 //Message-userInputForm-Join Member
 var confirmerror = "아이디 중복확인 해 주세요";
 var error = "아이디 중복확인 실패";
+var emailfmterror = "이메일 형식에 맞지 않습니다.";
 
 
 ////// <User>
@@ -74,7 +75,19 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+//SMTP - Simple Mail Transfer Protocol
+function mailTransfer() {
+	if(inputform.email.value.indexOf("@")==-1){
+	      alert(emailfmterror);
+	      return false;
+	   }
+	var url = "userMailCheck.jk?email="+inputform.email.value;
+	   var popOption = "width=370, height=250, resizable=no, status=no";
+	   open(url,"",popOption);
 
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 
 ///<Review>

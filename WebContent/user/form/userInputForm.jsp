@@ -54,28 +54,28 @@
 					</div>	
 			</div>
 			<div class="form-group row"><!-- birthday -->
-					<label for="inputID" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
+					<label for="birthday" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=birthday placeholder="ex)월/일/년도, 01/01/2019" maxlength="10" required>											
 					</div>		
 			</div>
 			<div class="form-group row"><!-- tel -->
-					<label for="inputID" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
+					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12" required>											
 					</div>			
 			</div>
 			<div class="form-group row"><!-- email -->
-					<label for="inputID" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
+					<label for="email" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="12" required>											
 					</div>
 					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary" type="button"  onclick="">${btn_selfConfirm}</button>					
+						<button class="btn btn-md btn-secondary" type="button"  onclick="mailTransfer()">${btn_selfConfirm}</button>					
 					</div>				
 			</div>
 			<div class="form-group row"><!--address -->
-					<label for="inputID" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
+					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=address placeholder="${str_address}" required>											
 					</div>
@@ -90,15 +90,15 @@
 					</div>		
 			</div>
 			<div class="form-group row"><!-- gender -->
-					<label for="inputID" class="col-sm-2 col-form-label">${str_gender}</label>
+					<label for="gender" class="col-sm-2 col-form-label">${str_gender}</label>
 					<div class="col-sm-10">
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gender" value="0" checked> 								
-								<label class="form-check-label" for="gridRadios2">${str_gender_m} </label>															
+								<label class="form-check-label">${str_gender_m} </label>															
 						</div>		
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gender" value="1"> 								
-								<label class="form-check-label" for="gridRadios1">${str_gender_f} </label>								
+								<label class="form-check-label">${str_gender_f} </label>								
 						</div>																		
 					</div>				
 			</div>
