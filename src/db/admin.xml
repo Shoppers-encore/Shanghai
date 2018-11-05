@@ -99,4 +99,7 @@
 	<delete id="deleteProd" parameterType="int">
 		DELETE FROM jk_product WHERE ref=#{ref}
 	</delete>
+	<update id="admModify" parameterType="databean.UserDataBean">
+		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
+	</update>
 </mapper>
