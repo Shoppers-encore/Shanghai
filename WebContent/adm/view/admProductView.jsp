@@ -60,33 +60,30 @@
 				<br><p>${count} ${msg_searchResult} <b>${searchWord}</b></p><br>
 		</c:if>
 		
-		
-    	<c:if test="${goods eq null or goods.size() eq 0}">	
-				<br><br><br><br><br>
-				<p>${msg_list_x}</p>
-		</c:if>
-		<c:if test="${count ne 0}">
-	    	<div class="row">
-	    		<c:forEach var="good" items="${goods}">
-	    			<c:set var="loop-flag" value="0"/>
-	    			<c:set var="image" value="0"/>
-	    			<c:forEach var="i" items="${imageList}" step="2">
-	    				<c:if test="${loop-flag eq 0}">
-		    				<c:if test="${good.ref eq i.ref}">
-		    					<c:set var="loop-flag" value="1"/>
-		    					<c:set var="image" value="${i.image_address}"/>
-				        	</c:if>
-			        	</c:if>
-	    			</c:forEach>
-		    		<div class="col-md-3"  align="center"><br>
-		            	<img src="/WebProject/save/${image}" name="thumb"><br>
-			         	<!-- How to get image names from image_info DataBean -->
-			         	<a class="goodName" href="productDetail.jk?ref=${good.ref}">${good.good_name}<br>
-			         	${str_price} : <fmt:formatNumber value="${good.price}"/></a><br>
-			        </div>
-			     </c:forEach>
-	    	</div>
-	    </c:if>
+			<c:if test="${productCount ne 0}">
+		    	<div class="row">
+		    		<c:forEach var="product" items="${productList}">
+						<div class="col-md-3"  align="center"><br>
+					  		<form name="${product.ref}">
+					  			<a class="goodName" href="admProductDetail.jk?ref=${product.ref}">
+									<img src="/Shanghai/save/${product.thumbnail}" id="thumb" name="${product.ref}"><br>
+						     		${product.productName}<br>
+							    	<input type="hidden" name="id" value="${sessionScope.id}">
+							    	<input type="hidden" name="productCode" value="${product.ref}">
+									<input type="hidden" name="var" value="1">
+									${str_price} : 
+										<c:if test="${product.discount eq null or product.discount eq 0}">
+											<fmt:formatNumber value="${product.productPrice}" type="currency" currencySymbol="￦"/>
+										</c:if>
+										<c:if test="${product.discount ne 0}">
+											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
+										</c:if>
+								</a><br>
+							</form>
+						</div>
+				     </c:forEach>
+				    </div>
+				    </c:if>
 	    <div align="center">
 		    <c:if test="${count gt 0}">
 				<c:if test="${currentPage ne 1}">
