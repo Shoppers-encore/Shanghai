@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <style>
    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -74,14 +75,20 @@
 						<button class="btn btn-md btn-secondary" type="button"  onclick="mailTransfer()">${btn_selfConfirm}</button>					
 					</div>				
 			</div>
+			<div class="form-group row"><!--zip code -->
+					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
+					<div class="col-sm-8">
+						<input class="form-control" type="text" name=zipcode placeholder="${str_zipcode}" required>											
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>					
+					</div>				
+			</div>
 			<div class="form-group row"><!--address -->
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=address placeholder="${str_address}" required>											
-					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary" type="button" onclick="">${btn_confirm}</button>					
-					</div>				
+					</div>			
 			</div>
 			<div class="form-group row"><!--addressDetail -->
 					<div class="col-sm-2"></div>

@@ -39,6 +39,7 @@
 <c:set var="str_gender" value="성별"/>
 <c:set var="str_gender_m" value="남성"/>
 <c:set var="str_gender_f" value="여성"/>
+<c:set var="str_zipcode" value="우편번호"/>
 <c:set var="str_address" value="주소"/>
 <c:set var="str_addressDetail" value="상세 주소"/>
 <c:set var="str_nim" value=" 님"/>
