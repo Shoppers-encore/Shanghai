@@ -64,4 +64,7 @@ public class UserDao{
 		return session.update("User.modifyUser", user);
 	}
 	
+	public int admModify(UserDataBean dto) {
+		return session.update("Admin.admModify", dto);
+	}
 }
