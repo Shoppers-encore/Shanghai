@@ -27,13 +27,13 @@
 	}
   </style>
 </head>
-<body>
-	<form name="tagInputForm" onsubmit="tagInputPro.jk">
+<body onload="opener.location.reload(true)">
+	<form name="tagInputForm" method="post" action="tagInputPro.jk">
 		<div class="container-fluid">
 		    <div class="col-*-4 border centered" id="tagInputForm">
 		    	<br> ${msg_addTag} <br><br>
-		    	<input type="text" class="form-control" name="newTag"> <br>
-		    	<input type="submit" class="btn btn-primary" value="${btn_confirm}">
+		    	<input type="text" class="form-control" name="newTag" autofocus> <br>
+		    	<input type="submit" class="btn btn-primary" value="${btn_confirm}" >
 		    	<input type="button" class="btn btn-primary" value="${btn_cancel}" onclick="self.close()">
 			</div>
 		</div>

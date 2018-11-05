@@ -15,7 +15,7 @@
 	      	</div>
 	      	<div id="cart">
 				<img id="cartImg" src="images/cart_red.png">
-				<form><input type="hidden" name="id" value="${sessionScope.id}"></form>
+				<form></form>
 			</div>
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
@@ -48,7 +48,7 @@
 						</div>
 				     </c:forEach>
 					<div align="center">
-					    <c:if test="${count gt 0}">
+					    <c:if test="${productCount gt 0}">
 							<c:if test="${currentPage ne 1}">
 								<a href="main.jk">[◀◀]</a>
 							<c:if test="${startPage gt pageBlock}">

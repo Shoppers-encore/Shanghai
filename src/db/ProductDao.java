@@ -80,4 +80,12 @@ public class ProductDao{
 	public String getThumbnail(String productCode) {
 		return session.selectOne("User.getProductThumbnail", productCode);
 	}
+
+	public int getProductNoSearchCount(Map<String, String> map) {
+		return session.selectOne("User.getProductNoSearch", map);
+	}
+
+	public List<ProductDataBean> getNoSearchProductList(Map<String, String> map) {
+		return session.selectList("User.getProductNoSearchList", map);
+	}
 }
