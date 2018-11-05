@@ -33,7 +33,7 @@
 			div#cart {
 				position: sticky;
 				top: 300px;
-				width: 120px;
+				width: 0px;
 				height: 150px;
 				font-size: 20px;
 				float: right;

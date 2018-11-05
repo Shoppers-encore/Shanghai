@@ -443,13 +443,11 @@ public class UserProHandler {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		int count = productDao.getProductQuantityCount(productList);
 		map.put("count", count);
-		System.out.println(count);
 		if(count == 0) {
 			return map;
 		}else {
 			int quantity = productDao.getProductQuantity(productList);
 			map.put("quantity", quantity);
-			System.out.println(" ; "+quantity);
 			return map;
 		}
 	}

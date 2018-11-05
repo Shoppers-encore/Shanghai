@@ -25,9 +25,11 @@
 							if(data.count>0){
 								if(data.quantity == 0){
 									alert("재고가 없습니다.");
+									$("input:submit").attr("diable")
 								}
 								$("input[name='remainQuantity']").val(data.quantity);
 								$("input[name='quantity']").attr("max",data.quantity);
+								
 							}
 						}
 					});
@@ -99,7 +101,7 @@
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="quantity" value="1" style="width:60px;"></td>
+								<td><input type="number" name="quantity" value="1" style="width:60px;" min="0"></td>
 								<td><input type="text" name="remainQuantity" style="width:20px;" readonly></td>
 							</tr>
 							<tr>
