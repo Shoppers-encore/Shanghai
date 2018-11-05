@@ -68,7 +68,7 @@
 			<div class="form-group row"><!-- email -->
 					<label for="email" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="12" required>											
+						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="70" required>											
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"  onclick="mailTransfer()">${btn_selfConfirm}</button>					

@@ -64,12 +64,6 @@ public class UserViewHandler {
 	}
 	
 	
-	// User
-	@RequestMapping( "/userMailCheck" )
-	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView( "user/view/userMailCheck" );
-	}
-	
 	@RequestMapping("/userMypage")
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("user/view/userMypage");

@@ -187,9 +187,8 @@
 <c:set var="btn_like" value="나도 공감하기"/>
 <c:set var="btn_likecancel" value="공감취소"/>
 <c:set var="btn_confirm" value="확인"/>
-
 <c:set var="btn_selfConfirm" value="인증"/>
-
+<c:set var="btn_resend" value="재전송"/>
 <c:set var="btn_select" value="선택"/>
 <c:set var="btn_goodInput" value="상품등록"/>
 <c:set var="btn_manageTag" value="태그 관리"/>
@@ -216,7 +215,8 @@
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_addTag" value="추가할 태그를 입력하세요."/>
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
-<c:set var="msg_emptyOrderList" value="주문 내역이 없습니다." />
+<c:set var="msg_emptyOrderList" value="주문 내역이 없습니다."/>
+<c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요."/>
 
 
 

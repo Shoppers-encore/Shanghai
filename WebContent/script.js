@@ -15,6 +15,7 @@ var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호
 var confirmerror = "아이디 중복확인 해 주세요";
 var error = "아이디 중복확인 실패";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
+var emailcheckerror = "이메일 인증 해 주세요";
 
 
 ////// <User>
@@ -77,14 +78,22 @@ function checkNumber() {
 }
 //SMTP - Simple Mail Transfer Protocol
 function mailTransfer() {
-	if(inputform.email.value.indexOf("@")==-1){
+	if(inputform.email.value.indexOf("@")==-1){ //check proper email format
 	      alert(emailfmterror);
 	      return false;
-	   }
-	var url = "userMailCheck.jk?email="+inputform.email.value;
-	   var popOption = "width=370, height=250, resizable=no, status=no";
-	   open(url,"",popOption);
-
+	 }
+	var url = "userMailCheck.jk?email="+inputform.email.value;	//direct to UserProHandler.java with email value
+	//open(URL, name, specs, replace)
+	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=370, height=250, top=300, left=300" );
+}
+//Check authentication-key match
+function matchAuthKey(){
+    if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ) {
+        alert( emailcheckerror );
+    } else{
+        alert( "인증 완료되었습니다" );
+        self.close();
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////

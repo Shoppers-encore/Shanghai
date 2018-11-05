@@ -34,6 +34,7 @@ import databean.BasketDataBean;
 import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
+import etc.SendMail;
 import db.BasketDao;
 import db.BoardDao;
 import db.OrderDao;
@@ -63,7 +64,7 @@ public class UserProHandler {
 
 	
 	//////////////////// User /////////////////////	
-
+	/*Join Member*/
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
 		UserDataBean userDto = new UserDataBean();
@@ -85,7 +86,7 @@ public class UserProHandler {
 		return new ModelAndView("user/pro/userInputPro");
 	}
 
-	/////Ajax User-ConfirmId 
+	//Ajax User-ConfirmId 
 	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> idCheck(@RequestBody String id) {
@@ -98,8 +99,32 @@ public class UserProHandler {
 
 		return map;
 	}
-	/////Log-in process
 	
+	// SMTP - Simple Mail Transfer Protocol
+	@RequestMapping( "/userMailCheck" )
+	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("email");  
+        String number = null; 										//Variable for authentication-key 
+        try {														//Create authentication-key
+           StringBuffer num = new StringBuffer();
+           for(int i =0;i<6;i++) {
+              num.append((int)(Math.random()*10));
+           }
+           number = num.toString();									//End-of-creation: set StringBuffer to String 
+           Map<String, String> info = new HashMap<String,String>(); //parameter for SendMail.java
+           info.put("sender", "hkk9331@gmail.com");
+           info.put("receiver", email);
+           info.put("subject", "Shanghai 쇼핑몰 가입인증 메일입니다.");
+           info.put("content", "인증번호 : "+ "[" + number + "]");
+           new SendMail().sendMail(info);
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        request.setAttribute("num", number);						//set to confirm match authentication key			
+		return new ModelAndView( "user/view/userMailCheck" );
+	}	
+	
+	/*Log-in process*/	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
@@ -115,6 +140,7 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
+
 	
 //	@RequestMapping( "/findId" )
 //	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {

@@ -34,9 +34,9 @@ public class SendMail {
 			message.setText(map.get("content"),"UTF-8");
 			message.setSentDate(new java.util.Date());
 			Transport.send(message);
-			return 1;
+			return 1; //email transfer success
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Failed Email transfer
 			e.printStackTrace();
 			return 0;
 		}
