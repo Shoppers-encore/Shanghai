@@ -73,6 +73,6 @@
 		SELECT * FROM jk_tag
 	</select>
 	<insert id="insertTag" parameterType="String">
-			INSERT INTO jk_tag VALUES (SEQ_jk_tag_tagId.NEXTVAL, #{newTag})
+		INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, #{newTag})
 	</insert>
 </mapper>
