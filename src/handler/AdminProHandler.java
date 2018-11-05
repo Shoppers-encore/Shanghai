@@ -50,7 +50,7 @@ public class AdminProHandler {
 			result = 1; 
 		}
 		request.setAttribute( "result", result );
-		request.getSession().setAttribute("memid", id);
+		request.getSession().setAttribute("id", id);
 		return new ModelAndView ("adm/pro/admLoginPro");
 	}
 	
