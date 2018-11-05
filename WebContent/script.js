@@ -210,23 +210,18 @@ function commentDelete(commentNo){
 }
 
 //Delete Photo
-function deletePhoto(reviewNo, fileName){
-	var reviewNo=$('input[name=reviewNo]').val();
-   $.ajax({
-       url : 'deletePhoto.jk',
-       type : 'post',
-       data : {
-       	reviewNo : reviewNo,
-       	fileName : fileName
-       },
-       success : function(data){
-           //change to file input 
-       },
-       error : function(error) {
-           alert("error : " + error);
-       }
-   });
-}
+function photoModify(photoNo){
+	alert( photoNo);
+	/*var photoModify ='';
+	
+	photoModify += '<div class="input-group" style="width:80%;">';
+	photoModify += '<input type="text" class="form-control" name="commentContent_'+commentNo+'" value="'+commentContent+'"/>';
+	photoModify += '&nbsp;<button class="btn btn-outline-primary btn-sm" onclick="commentUpdateProc('+commentNo+');">수정</button>';
+	photoModify += '</div>';
+	   
+	$('.photo'+photoNo).html(photoModify);*/
+	   
+	}
 
 // BasketList
 function returnToList() {
