@@ -39,6 +39,8 @@ public class AdminProHandler {
 	@Resource
 	private TagDao tagDao;
 	public static final int USERLEVEL=9;
+	@Resource
+	private ProductDao productDao;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -133,10 +135,15 @@ public class AdminProHandler {
 	    	  tags = new int[ tag.length ];
 	      for( int i=0; i<tag.length; i++ ) {
 	    	  tags[i] = Integer.parseInt( tag[i] );
-	    	  //int tagId = productDao.getTagNo()+1;
 		       productTagDto.setRef( ref );
 		       productTagDto.setTagid(  tags[i] );	
+		       int tagId = tags[i];
 		       int result1 = tagDao.insertProdTag(productTagDto);
+		       if( result1 == 1 ) {
+		  		   String sql = "INSERT INTO jk_ProductTag (ref, tagId)"
+		               		+ "VALUES (" + ref + "," + tagId + " );";
+	              new HandlerHelper().fileWriter(sql);
+		  	   }
 	      }
 	      }
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
@@ -190,13 +197,16 @@ public class AdminProHandler {
 		return new ModelAndView ( "adm/pro/productInputPro" );
 	   }
 	   
-	
 	@RequestMapping ( "/productModifyPro" )
 	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
 		return "redirect:productDetail.jk";
 	}
 	@RequestMapping("/productDeletePro")
 	public ModelAndView productDeletePro(HttpServletRequest request, HttpServletResponse response) {
+		int ref = Integer.parseInt( request.getParameter("ref") );
+		productDao.deleteImg( ref );
+		int result = productDao.deleteProd( ref );
+		request.setAttribute( "result", result );
 		return new ModelAndView("adm/pro/productDeletePro");
 	}
 	@RequestMapping("/orderStatusChange")
@@ -236,5 +246,22 @@ public class AdminProHandler {
 	@RequestMapping("/tagModifyPro")
 	public String tagModifyPro(HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:tagList.jk";
+	}
+	@RequestMapping("/admModifyPro")
+	public ModelAndView admModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		UserDataBean dto = new UserDataBean();
+		dto.setId((String)request.getSession().getAttribute("id"));
+		dto.setPassword(request.getParameter("passwd"));
+		dto.setName(request.getParameter("name"));
+		dto.setTel(request.getParameter("tel"));
+		dto.setEmail(request.getParameter("email"));
+		int result = userDao.admModify(dto);
+		request.setAttribute("result", result);
+		return new ModelAndView ("adm/pro/admModifyPro");
 	}
 }
