@@ -72,7 +72,7 @@
 								<span class="input-group-text">${str_tel}</span>
 							</div>
 							<input type="text" name="tel" class="form-control" value="${userDto.tel}"
-							onkeyup="numberonly(event, admModform)" maxlength="11">
+							onkeyup="numberonly(event, admModForm)" maxlength="11">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
