@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import databean.ReviewDataBean;
@@ -31,6 +32,8 @@ public class AdminViewHandler {
 	private UserDao userDao;
 	@Resource
 	private db.BoardDao boardDao;
+	@Resource
+	private ProductDao productDao;
 
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -50,10 +53,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
+		String category = request.getParameter("category");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
 		return new ModelAndView("adm/view/admProductView");
 	}
 	@RequestMapping("/admProductList")
@@ -73,10 +82,15 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
+		int ref = Integer.parseInt(request.getParameter("ref"));
+		List<ProductDataBean> list =productDao.getProdDetail( ref );
+		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
+		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
+		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		request.setAttribute("productList", list);
+		request.setAttribute("imageList", imageList);
+		request.setAttribute("colors", colors);
+		request.setAttribute("sizes", sizes);
 		return new ModelAndView ( "adm/view/admProductDetail" );
 	}
 	/*@RequestMapping ( "/admSearchProduct" )

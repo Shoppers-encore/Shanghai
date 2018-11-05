@@ -5,6 +5,34 @@
 <html>
 	<head>
 		<title>${category} 페이지</title>
+		<style>
+			div#cart {
+				position: sticky;
+				top: 300px;
+				width: 120px;
+				height: 150px;
+				font-size: 20px;
+				float: right;
+			}
+			div#chat {
+				position: sticky;
+				top: 600px;
+				right: 120px;
+				float: right;
+			}
+			img#cartImg {
+				width: 30px;
+				height: 30px;
+			}
+			img#chatImg {
+				width: 40px;
+				height: 40px;
+			}
+			img#thumb {
+				width:80px;
+				height:120px;
+			}
+		</style>
 	</head>
 	<body class="container">
       	<c:if test="${sessionScope.id ne null}">
@@ -48,9 +76,9 @@
 					<div align="center">
 					    <c:if test="${productCount gt 0}">
 							<c:if test="${currentPage ne 1}">
-								<a href="userProductList.jk">[◀◀]</a>
+								<a href="userProductList.jk?category=${category}">[◀◀]</a>
 							<c:if test="${startPage gt pageBlock}">
-								<a href="userProductList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+								<a href="userProductList.jk?category="${category}pageNum=${startPage-pageBlock}">[◀]</a>
 								</c:if>
 							</c:if>
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -58,14 +86,14 @@
 								<span>[${i}]</span>
 								</c:if>
 								<c:if test="${i ne currentPage}">
-								<a href="userProductList.jk?pageNum=${i}">[${i}]</a>
+								<a href="userProductList.jk?category=${category}&pageNum=${i}">[${i}]</a>
 								</c:if>
 							</c:forEach>
 							<c:if test="${currentPage ne pageCount}">
 								<c:if test="${pageCount>endPage}">
-								<a href="userProductList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+								<a href="userProductList.jk?category=${category}&pageNum=${startPage+pageBlock}">[▶]</a>
 								</c:if>
-								<a href="userProductList.jk?pageNum=${pageCount}">[▶▶]</a>
+								<a href="userProductList.jk?category=${cateory}&pageNum=${pageCount}">[▶▶]</a>
 							</c:if>
 						</c:if>
 					</div>

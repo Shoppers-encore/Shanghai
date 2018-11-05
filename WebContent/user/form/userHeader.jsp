@@ -4,7 +4,7 @@
 <head>
 
 </head>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" width="767px">
 	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
 		<a class="navbar-brand" href="main.jk">
 			<img src="images/logo.png" alt="Logo">
