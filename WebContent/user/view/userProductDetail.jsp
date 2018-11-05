@@ -19,8 +19,9 @@
 			});
 			$("input:button[name='inputCart']").on("click",function(){
 					location.href="basketInput.jk?productCode="+$("input[name='productCode']").val()+"&quantity="+$("input[name='quantity']").val()+"&ref="+$("input[name='reff']").val();
-				});
+			});
 		});
+		
 		//-->
 	</script>
 	<!-- Good Detail View Page -->
@@ -31,7 +32,7 @@
 			</div>
 			<!-- Good Detail -->
 			<div class="col-sm-6" align="center" style="padding:10%;">
-				<form method="post" name="productDetailForm" action="orderInputForm.jk">
+				<form method="post" name="productDetailForm" action="orderInputForm.jk" onsubmit="checkSizeColor()">
 					<table style="height:50%;">
 						<thead>
 							<tr>
