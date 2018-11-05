@@ -12,5 +12,8 @@
    </script>      
 </c:if>
 <c:if test="${result ne 0}">
+	<script type="text/javascript">
+		opener.location.reload(true);
+	</script>
    <c:redirect url="tagInputForm.jk"/>
 </c:if>

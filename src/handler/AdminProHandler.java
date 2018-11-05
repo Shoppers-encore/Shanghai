@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 
@@ -23,8 +24,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
+import databean.TagDataBean;
 import databean.UserDataBean;
 import db.ProductDao;
+import db.TagDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
@@ -32,6 +35,8 @@ import etc.HandlerHelper;
 public class AdminProHandler {
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private TagDao tagDao;
 	public static final int USERLEVEL=9;
 	
 	@RequestMapping("/admLoginPro")
@@ -186,7 +191,15 @@ public class AdminProHandler {
 		return new ModelAndView("adm/pro/admReviewDelete");
 	}
 	@RequestMapping("/tagInputPro")
-	public ModelAndView tagInputPro(HttpServletRequest requset, HttpServletResponse response) {
+	public ModelAndView tagInputPro(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		String newTag = request.getParameter( "newTag" );
+		int result = tagDao.insertTag(newTag);
+		request.setAttribute( "result", result );
 		return new ModelAndView("adm/pro/tagInputPro");
 	}
 	@RequestMapping("/tagDeletePro")
