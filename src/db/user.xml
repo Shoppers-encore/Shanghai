@@ -83,7 +83,7 @@
 			DELETE FROM jk_review WHERE reviewNo=#{num}
 	</delete>
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
-			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
+			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating}, photo1=#{photo1}, photo2=#{photo2} WHERE reviewNo=#{reviewNo}
 	</update>
 	<insert id="insertComment" parameterType="databean.CommentDataBean">
 			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)

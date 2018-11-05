@@ -303,6 +303,41 @@ public class UserProHandler {
 			e.printStackTrace();
 		}
 		ReviewDataBean reviewDto = new ReviewDataBean();
+		
+		//photos
+		String path = request.getSession().getServletContext().getRealPath("/save");
+		MultipartRequest multi = null;
+		if(-1< request.getContentType().indexOf("multipart/form-data"))
+			try {
+				multi = new MultipartRequest(request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		String systemName=null;
+		String[] photos = {null,null};
+		int i = 0;
+		Enumeration<?> e = multi.getFileNames();
+		while(e.hasMoreElements()) {
+			String inputName = (String) e.nextElement();
+			systemName = multi.getFilesystemName(inputName);
+			if( systemName != null ) {
+				String sname = path+"\\"+systemName;
+				RenderedOp op = JAI.create("fileload", sname);
+				BufferedImage sbuffer = op.getAsBufferedImage();
+				int SIZE = 3;
+				int width = sbuffer.getWidth()/SIZE;
+				int height = sbuffer.getHeight()/SIZE;
+				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+				Graphics g = tbuffer.getGraphics();
+				g.drawImage(sbuffer, 0, 0, width,height,null);
+
+				photos[i] = systemName; 
+				i++;
+			}
+		}
+			reviewDto.setPhoto1( photos[0] );
+			reviewDto.setPhoto2( photos[1] );
+		
 		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
 		reviewDto.setTitle( request.getParameter( "title" ) );
 		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );

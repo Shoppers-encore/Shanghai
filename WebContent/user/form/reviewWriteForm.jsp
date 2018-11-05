@@ -14,7 +14,7 @@
 	<!-- Review Write Form -->
 	<article><br><br>
 	    <div id="writeForm">
-			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform" onsubmit="return Rvwritecheck()" >
+			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform">
 				<table class="table" >
 					<tr>
 						<th colspan="4">${str_writeReview}</th>
@@ -57,8 +57,7 @@
 						<th colspan="4">
 							<input class="btn btn-primary" type="submit" value="${btn_write}">
 							<input class="btn btn-secondary" type="reset" value="${btn_cancel}">
-							<input class="btn btn-secondary" type="button" value="${btn_list}"
-								onclick="location='reviewList.jk'">
+							<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk'">
 						</th>
 					</tr>			
 				</table>		

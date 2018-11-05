@@ -14,7 +14,7 @@
 	<article class="centered">
 	<br><br>
 	    <div id="writeform">
-			<form method="get" encType="multipart/form-data" action="reviewModidfyPro.jk" name="writeform" onsubmit="return Rvwritecheck()" >
+			<form method="get" encType="multipart/form-data" action="reviewModidfyPro.jk" name="writeform">
 				<table class="table" >
 					<tr>
 						<th colspan="4">
@@ -82,8 +82,7 @@
 					<tr>
 						<th colspan="4">
 							<input class="btn btn-primary" type="submit" value="${btn_write}">
-							<input class="btn btn-secondary" type="button" value="${btn_list}"
-								onclick="location='reviewList.jk'">
+							<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk'">
 						</th>
 					</tr>			
 				</table>		

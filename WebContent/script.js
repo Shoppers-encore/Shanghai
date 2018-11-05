@@ -222,17 +222,12 @@ function commentDelete(commentNo){
 
 //Delete Photo
 function photoModify(photoNo){
-	alert( photoNo);
-	/*var photoModify ='';
-	
-	photoModify += '<div class="input-group" style="width:80%;">';
-	photoModify += '<input type="text" class="form-control" name="commentContent_'+commentNo+'" value="'+commentContent+'"/>';
-	photoModify += '&nbsp;<button class="btn btn-outline-primary btn-sm" onclick="commentUpdateProc('+commentNo+');">수정</button>';
-	photoModify += '</div>';
+	var photoModify ='';
+	photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
 	   
-	$('.photo'+photoNo).html(photoModify);*/
-	   
+	$('.photo'+photoNo).html(photoModify);
 	}
+
 
 // BasketList
 function returnToList() {
