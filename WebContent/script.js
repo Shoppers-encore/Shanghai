@@ -5,6 +5,8 @@ var delCheck = "삭제하시겠습니까?";
 var cannotdelete = "삭제 권한이 없습니다.";
 var cannotmodify = "수정 권한이 없습니다.";
 var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 시도하세요.";
+var tagdeleteerror = "태그를 삭제하지 못했습니다.\n잠시 후 다시 시도하세요.";
+var notagchecked = "삭제할 태그를 선택해주세요.";
 var commenterror = "댓글을 입력해 주세요.";
 
 //Message-userLoginPro-User Login
@@ -219,10 +221,16 @@ function returnToList() {
 //<tag>
 function tagPopup() {
 	var url = "tagInputForm.jk";
-	open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=300px" );
+	open( url, "add Tag", "toolbar=no, scrollbar=no, status=no, menubar=no, width=400px, height=300px" );
 }
 function inputTag() {
 	opener.location.reload(true);
 	window.location.href='tagInputPro.jk';
+}
+function isTagChecked() {
+	if( ! tagForm.getAttribute("checked") ) {
+		alert( notagchecked );
+		return false;
+	} 
 }
 
