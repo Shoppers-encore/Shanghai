@@ -212,9 +212,6 @@ function returnToList() {
 	window.location.href='main.jk';
 }
 
-
-
-
 //////<Admin>
 //<tag>
 function tagPopup() {

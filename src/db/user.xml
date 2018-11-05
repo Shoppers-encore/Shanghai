@@ -103,6 +103,11 @@
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
+	<update id="updateBasketList" parameterType="java.util.Map">
+		UPDATE jk_basket 
+		SET productCode=#{newProductCode}, basketQuantity=#{basketQuantity} 
+		WHERE id=#{id} AND productCode=#{productCode} 
+	</update>
 	
 	
 	<!-- Order -->

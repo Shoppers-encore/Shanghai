@@ -173,9 +173,7 @@ public class UserProHandler {
 	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		
 		// 1) Get id from session
-		/*String id=(String)request.getSession().getAttribute("id");*/
-		// For now, id is directly set here
-		String id="aaa";
+		String id=(String)request.getSession().getAttribute("id");
 		
 		// 2) Get productCode from Ajax data
 		String productCode=request.getParameter("productCode");
@@ -199,6 +197,39 @@ public class UserProHandler {
 		// 6) Convert Java String to JSON and return
 		String isItemDeleted=new Gson().toJson(itemDeleted);
 		return isItemDeleted;
+	}
+	
+	@RequestMapping("/basketListPro")
+	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
+		String id=(String)request.getSession().getAttribute("id");
+		
+		/* Get items from jk_basket using id */
+		List<BasketDataBean> basketList=basketDao.getBasketList(id);
+		
+		for(BasketDataBean basketItem:basketList) {
+			String productCode=request.getParameter(basketItem.getProductCode());
+			int basketQuantity=Integer.parseInt(request.getParameter("basketQuantity_"+productCode));
+			String colorSelected=request.getParameter("selectColorOptions_"+productCode);
+			String sizeSelected=request.getParameter("selectedSizeOptions_"+productCode);
+			String ref;
+			if(productCode.length()>5) {
+				ref=productCode.substring(2, productCode.length()-2);
+			} else {
+				ref=productCode;
+			}
+			
+			String newProductCode=colorSelected+ref+sizeSelected;
+			
+			Map<String, Object> updateReferences=new HashMap<String, Object>();
+			updateReferences.put("newProductCode", newProductCode);
+			updateReferences.put("basketQuantity", basketQuantity);
+			updateReferences.put("id", id);
+			updateReferences.put("productCode", productCode);
+			
+			int result = basketDao.updateBasketList(updateReferences);
+		}
+		
+		return new ModelAndView( "user/pro/basketListPro" );
 	}
 	
 	// Review

@@ -75,10 +75,8 @@ public class UserViewHandler {
 	
 	// Basket
 	@RequestMapping( "/basketList" )
-	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {
-		/* Temporarily loaded customer id */
-		String id="aaa";		
-		//String id=(String)request.getSession().getAttribute("id");
+	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
+		String id=(String)request.getSession().getAttribute("id");
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -206,9 +204,7 @@ public class UserViewHandler {
 	
 	@RequestMapping("/userOrderList")
 	public ModelAndView userOrderList(HttpServletRequest request, HttpServletResponse response) {
-		/* Temporarily loaded customer id */
-		String id="aaa";		
-		//String id=(String)request.getSession().getAttribute("id");
+		String id=(String)request.getSession().getAttribute("id");
 		
 		/* Number of Order History Per Page */
 		int pageSize=1; 
