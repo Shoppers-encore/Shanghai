@@ -86,7 +86,7 @@
    background-color : #6EE3F7;
 }
 .checkmark#etc {
-   background: url('../images/rainbow.jpg') center/32px no-repeat; 
+   background: url('../../images/rainbow.jpg') center/32px no-repeat; 
 }
 .checkmark#orange {
    background-color : #FF7012;
@@ -237,33 +237,41 @@ function deletePhoto(tb_no,photo_id,start){
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="checkbox" name="size" value="4">${str_sizeF}
                      </td>
-                     <th style="width :10%"> ${str_style} </th>
-                     <td style="width :20%">
-                        <input type="radio" name="style" value="1">${str_casual}
-                    	<input type="radio" name="style" value="2">${str_dandy}
-                     </td>
+                      <th style="width :10%"> ${str_category} </th>
+                      <td style="width :20%">
+                      <select name="category">
+                                 <option value="1">${str_out}${str_cot}</option>
+                                 <option value="2">${str_out}${str_jkt}</option>
+                                 <option value="3">${str_out}${str_jpr}</option>
+                                 <option value="4">${str_out}${str_cdg}</option>
+                                 <option value="5">${str_tst}${str_lst}</option>
+                                 <option value="6">${str_tst}${str_sst}</option>
+                                 <option value="7">${str_tst}${str_mtm}</option>
+                                 <option value="8">${str_tst}${str_hdt}</option>
+                                 <option value="9">${str_sht}${str_lss}</option>
+                                 <option value="10">${str_sht}${str_sss}</option>
+                                 <option value="11">${str_btm}${str_lpt}</option>
+                                 <option value="12">${str_btm}${str_spt}</option>
+                           </select>
+                        </td>
+                     
                   </tr>
                   <tr>
                   	<th> ${str_style} </th>
-                  	<td colspan="4">
+                  	<td colspan="5">
                   		<c:forEach var="tag" items="${tags}">   
-							<label class="btn btn-secondary">
+							<label class="btn btn-info">
                   	 		 	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}
                  		    </label>
                  		</c:forEach>
                   	</td>
-                  	<td> <input type="button" class="btn btn-primary" value="${btn_manageTag}"
-                  							 onclick="location='tagList.jk'"> </td>
                   </tr>
                   <tr>
                      <th> ${str_productName} </th>
-                     <td colspan="3"> 
+                     <td colspan="5"> 
                         <input type="text" name="product_name" class="form-control">
                      </td>
-                     <th> ${str_productQuantity} </th>
-                     <td colspan="1"> 
-                        <input type="text" name="quantity" class="form-control">
-                     </td>           
+                               
                   </tr>
                   <tr>
                      <th> ${str_color} </th>
@@ -349,23 +357,10 @@ function deletePhoto(tb_no,photo_id,start){
                         <td>
                            <input type="text" name="sale" class="form-control">
                         </td>
-                        <th> ${str_category} </th>
-                        <td>
-                      <select name="category">
-                                 <option value="1">${str_out}${str_cot}</option>
-                                 <option value="2">${str_out}${str_jkt}</option>
-                                 <option value="3">${str_out}${str_jpr}</option>
-                                 <option value="4">${str_out}${str_cdg}</option>
-                                 <option value="5">${str_tst}${str_lst}</option>
-                                 <option value="6">${str_tst}${str_sst}</option>
-                                 <option value="7">${str_tst}${str_mtm}</option>
-                                 <option value="8">${str_tst}${str_hdt}</option>
-                                 <option value="9">${str_sht}${str_lss}</option>
-                                 <option value="10">${str_sht}${str_sss}</option>
-                                 <option value="11">${str_btm}${str_lpt}</option>
-                                 <option value="12">${str_btm}${str_spt}</option>
-                           </select>
-                        </td>
+                       	<th> ${str_productQuantity} </th>
+                    	<td> 
+                        <input type="text" name="quantity" class="form-control">
+                    	</td> 
                   </tr>
                   <tr>
                      <th colspan="6">
