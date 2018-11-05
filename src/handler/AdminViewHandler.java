@@ -31,6 +31,8 @@ public class AdminViewHandler {
 	private UserDao userDao;
 	@Resource
 	private db.BoardDao boardDao;
+	@Resource
+	private ProductDao productDao;
 
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -42,6 +44,18 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
+		String category = request.getParameter("category");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		System.out.println(productList.get(0).getProductName());
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
+
 		return new ModelAndView("adm/view/admProductView");
 	}
 	@RequestMapping("/admProductList")

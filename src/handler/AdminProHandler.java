@@ -133,10 +133,15 @@ public class AdminProHandler {
 	    	  tags = new int[ tag.length ];
 	      for( int i=0; i<tag.length; i++ ) {
 	    	  tags[i] = Integer.parseInt( tag[i] );
-	    	  //int tagId = productDao.getTagNo()+1;
 		       productTagDto.setRef( ref );
 		       productTagDto.setTagid(  tags[i] );	
+		       int tagId = tags[i];
 		       int result1 = tagDao.insertProdTag(productTagDto);
+		       if( result1 == 1 ) {
+		  		   String sql = "INSERT INTO jk_ProductTag (ref, tagId)"
+		               		+ "VALUES (" + ref + "," + tagId + " );";
+	              new HandlerHelper().fileWriter(sql);
+		  	   }
 	      }
 	      }
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
