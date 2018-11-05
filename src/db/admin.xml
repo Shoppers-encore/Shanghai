@@ -87,4 +87,16 @@
 	<insert id="insertProdTag" parameterType="databean.ProductTagDataBean">
 		INSERT INTO jk_ProductTag VALUES (#{ref}, #{tagId})
 	</insert>
+	<select id="getProdDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT * FROM jk_product WHERE ref=#{ref}
+	</select>
+	<select id="getImgDetail" parameterType="int" resultType="databean.ImageInfoDataBean">
+		SELECT * FROM jk_imageInfo WHERE ref=#{ref}
+	</select>
+	<delete id="deleteImg" parameterType="int">
+		DELETE FROM jk_imageInfo WHERE ref=#{ref}
+	</delete>
+	<delete id="deleteProd" parameterType="int">
+		DELETE FROM jk_product WHERE ref=#{ref}
+	</delete>
 </mapper>
