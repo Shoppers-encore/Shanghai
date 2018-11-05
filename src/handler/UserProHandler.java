@@ -435,6 +435,22 @@ public class UserProHandler {
 		basket.setProductCode(productCode);
 		basketDao.deleteBasketItem(basket);
 	}
+	//productDetail - productQuantity
+	@RequestMapping(value="/howManyQuantity", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public Map<Object, Object> howManyQuantity(HttpServletRequest request, HttpServletResponse response) {
+		String productList = request.getParameter("productCode");
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		int count = productDao.getProductQuantityCount(productList);
+		map.put("count", count);
+		if(count == 0) {
+			return map;
+		}else {
+			int quantity = productDao.getProductQuantity(productList);
+			map.put("quantity", quantity);
+			return map;
+		}
+	}
 	
 	//chat ajax
 	@RequestMapping("/userChatInput")
