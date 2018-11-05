@@ -81,7 +81,7 @@ public class ProductDao{
 		return session.selectOne("User.getProductThumbnail", productCode);
 	}
 
-	public String getImgAddress(int ref) {
+	public String getImgAddress( int ref ) {
 		return session.selectOne("Admin.getImgAddress", ref);
 	}
 	

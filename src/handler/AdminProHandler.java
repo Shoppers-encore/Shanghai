@@ -108,8 +108,7 @@ public class AdminProHandler {
 		  	   }
 		  	 request.setAttribute( "systemName", systemName );
 			}
-	      
-	      
+	      	      
 	      String col[] = multi.getParameterValues( "color" );
 	      int colors[] = null;
 	      if( col != null ) {
@@ -129,12 +128,16 @@ public class AdminProHandler {
 	      }
 	      
 	      String tag[] = multi.getParameterValues( "tag" );
-	      
-	      for( int i=0; i<tag.length; i++ )
-	      {
-	       //int tagId = productDao.getTagNo()+1;
-	       productTagDto.setRef( ref );
-	       productTagDto.setTagid( Integer.parseInt( tag[i] ) );	     
+	      int tags[] = null;
+	      if( tag != null ) {
+	    	  tags = new int[ tag.length ];
+	      for( int i=0; i<tag.length; i++ ) {
+	    	  tags[i] = Integer.parseInt( tag[i] );
+	    	  //int tagId = productDao.getTagNo()+1;
+		       productTagDto.setRef( ref );
+		       productTagDto.setTagid(  tags[i] );	
+		       int result1 = tagDao.insertProdTag(productTagDto);
+	      }
 	      }
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	      ProductDataBean productDto = new ProductDataBean();
@@ -143,6 +146,7 @@ public class AdminProHandler {
 	      
 	      for( int i=0; i<product_codes.length; i++ ) {
 	    	  
+	    	 ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	    	 String product_name = multi.getParameter( "product_name" );
 	    	 int quantity = Integer.parseInt( multi.getParameter( "quantity" ) );
 	    	 int category = Integer.parseInt( multi.getParameter("category"));

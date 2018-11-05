@@ -84,4 +84,7 @@
 	<delete id="deleteTag" parameterType="int">
 		DELETE FROM jk_tag WHERE tagId = #{tagId}
 	</delete>
+	<insert id="insertProdTag" parameterType="databean.ProductTagDataBean">
+		INSERT INTO jk_ProductTag VALUES (#{ref}, #{tagId})
+	</insert>
 </mapper>

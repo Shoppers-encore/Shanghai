@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.ProductDataBean;
@@ -21,7 +20,7 @@ import db.UserDao;
 
 @Controller
 public class AdminFormHandler {
-	@Resource 
+	@Resource
 	private UserDao userDao;
 	
 	@RequestMapping("/admLoginForm")
