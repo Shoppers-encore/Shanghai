@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+
 import javax.annotation.Resource;
 import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,14 +57,49 @@ public class UserProHandler {
 
 	@Resource
 	private ProductDao productDao;
+	
 	@Resource
 	private ChatDao chatDao;
 
-	// User 
+	
+	//////////////////// User /////////////////////	
+
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
+		UserDataBean userDto = new UserDataBean();
+		//inputData-id(NN), password(NN), name(NN), birthday(NN), tel(NN), email(NN), gender, 
+		//userLevel=default 1(NN), height(3,0), weight(3,0), address(NN), addressDetail(NN), zipcode(NN)
+		userDto.setId(request.getParameter("id"));
+		userDto.setPassword(request.getParameter("password"));
+		userDto.setName(request.getParameter("name"));
+		userDto.setEmail(request.getParameter("email"));
+		int gender = Integer.parseInt(request.getParameter("gender"));
+		userDto.setGender(gender);
+		//birthday
+		//
+		
+		//insertUser
+		//int result = userDao.insertUser(userDto);
+		
+		
 		return new ModelAndView("user/pro/userInputPro");
 	}
+
+	/////Ajax User-ConfirmId 
+	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<Object, Object> idCheck(@RequestBody String id) {
+		id = id.split("=")[0];
+		int countId = 0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		countId = userDao.check(id);
+		map.put("countId", countId);
+
+		return map;
+	}
+	/////Log-in process
+	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
@@ -78,6 +115,16 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
+	
+//	@RequestMapping( "/findId" )
+//	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
+//		return new ModelAndView("user/pro/findIdResult");
+//	}
+//	@RequestMapping( "/findPassword" )
+//	public ModelAndView passwordFindProcess(HttpServletRequest request, HttpServletResponse response) {
+//		return new ModelAndView("user/pro/findPasswordResult");
+//	}
+	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:userModifyView.jk";
@@ -88,7 +135,7 @@ public class UserProHandler {
 	}
 	
 	
-	// LogIn
+	// Logout
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:main.jk";

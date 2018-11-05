@@ -29,8 +29,10 @@ public class UserDao{
 			//Yes ID
 			UserDataBean UserDto = getUser(id);
 			if( password.equals(UserDto.getPassword())) {
+				// correct password
 				result = 1;
 			} else {
+				// wrong password 
 				result = -1;
 			}
 		} else {
