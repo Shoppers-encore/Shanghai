@@ -75,4 +75,7 @@
 	<insert id="insertTag" parameterType="String">
 		INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, #{newTag})
 	</insert>
+	<delete id="deleteTag" parameterType="int">
+		DELETE FROM jk_tag WHERE tagId = #{tagId}
+	</delete>
 </mapper>

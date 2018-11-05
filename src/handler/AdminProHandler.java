@@ -198,12 +198,22 @@ public class AdminProHandler {
 			e.printStackTrace();
 		}
 		String newTag = request.getParameter( "newTag" );
-		int result = tagDao.insertTag(newTag);
-		request.setAttribute( "result", result );
-		return new ModelAndView("adm/pro/tagInputPro");
+		if ( newTag == null || newTag == "" ) {
+			return new ModelAndView("adm/form/tagInputForm");
+		} else {
+			int result = tagDao.insertTag(newTag);
+			request.setAttribute( "result", result );
+			return new ModelAndView("adm/pro/tagInputPro");
+		}
 	}
 	@RequestMapping("/tagDeletePro")
 	public ModelAndView tagDeletePro(HttpServletRequest request, HttpServletResponse response) {
+		String checked[] = request.getParameterValues("tag");
+		int result = 0;
+		for(int i=0; i<checked.length; i++) {
+			result = tagDao.deleteTag( Integer.parseInt(checked[i]) );
+		}
+		request.setAttribute("result", result);
 		return new ModelAndView("adm/pro/tagDeletePro");
 	}
 	@RequestMapping("/tagModifyPro")
