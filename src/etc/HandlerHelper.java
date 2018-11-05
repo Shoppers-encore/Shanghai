@@ -115,7 +115,7 @@ public class HandlerHelper {
 	public int[] removeDuplicate(int[] numbers){
 		List<Integer> resultList = new ArrayList<Integer>();
 		for(int i=0; i<numbers.length ; i++) {
-			if(!resultList.contains(new Integer(numbers[i])) && i!=0){
+			if(!resultList.contains(new Integer(numbers[i]))){
 				resultList.add(numbers[i]);
 			}
 		}

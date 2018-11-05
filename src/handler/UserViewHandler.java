@@ -48,14 +48,13 @@ public class UserViewHandler {
 	//Main
 	@RequestMapping("/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String category=request.getParameter("category");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchWord", "");
-		map.put("selectedColors", "");
-		int count = productDao.getProductCount(map);
+		map.put("category", category);
+		int count = productDao.getProductNoSearchCount(map);
 		map = new HandlerHelper().makeCount(count, request);
-		map.put("searchWord", "");
-		map.put("selectedColors", "");
-		List<ProductDataBean> productList = productDao.getProductList(map);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
 		request.setAttribute("productList", productList);
 		request.setAttribute("productCount", count);
 		return new ModelAndView("user/view/userMain");
@@ -138,7 +137,18 @@ public class UserViewHandler {
 	//Product
 	@RequestMapping ( "/userProductList" )
 	public ModelAndView userProductList ( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "user/userMain" );
+		String category = request.getParameter("category");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		System.out.println(productList.get(0).getProductName());
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
+		return new ModelAndView ( "user/view/userProductList" );
 	}
 	
 	@RequestMapping("/userProductDetail")
@@ -169,12 +179,10 @@ public class UserViewHandler {
 			count = productDao.getProductCount(map);
 		}
 		map = new HandlerHelper().makeCount(count, request);
-		List<ProductDataBean> productList = null;
-		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
-			map.put("searchWord", request.getParameter("searchWord"));
-			map.put("selectedColors",color.toString());
-			productList = productDao.getProductList(map);
-		}
+		map.put("searchWord", request.getParameter("searchWord"));
+		map.put("selectedColors",color.toString());
+		List<ProductDataBean> productList = productDao.getProductList(map);
+		System.out.println(productList.get(0).getProductName());
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userSearchProduct");
