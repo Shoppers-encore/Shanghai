@@ -36,14 +36,17 @@
 						<div class="col-lg-4">
 							${str_productName}
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-1">
 							${str_color}
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-1">
 							${str_size}
 						</div>
 						<div class="col-lg-1">
 							${str_productQuantity}
+						</div>
+						<div class="col-lg-2">
+							${str_productPrice}
 						</div>
 						<div class="col-lg-1">
 						</div>
@@ -65,7 +68,7 @@
 								<div class="col-lg-4 pt-5">
 									${basketList.productName}
 								</div>
-								<div class="col-lg-2 pt-5">
+								<div class="col-lg-1 pt-5">
 									<select class="" id="selectColorOptions_${basketList.productCode}" name="selectColorOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
 									<script type="text/javascript">
 										var key='${basketList.productCode}';
@@ -84,7 +87,7 @@
 										}
 									</script>
 								</div>
-								<div class="col-lg-2 pt-5">							
+								<div class="col-lg-1 pt-5">							
 									<select class="" id="selectSizeOptions_${basketList.productCode}" name="selectSizeOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
 									<script type="text/javascript">
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
@@ -104,8 +107,11 @@
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5">
-									<input type="number" name="basketQuantity_${basketList.productCode}" 
+									<input type="number" name="basketQuantity_${basketList.productCode}" id="basketQuantity_${basketList.productCode}"
 									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="99">
+								</div>
+								<div class="col-lg-2 pt-5" id="productPrice_${basketList.productPrice}">
+									${basketList.productPrice}
 								</div>
 								<div class="col-lg-1 pt-5">
 									<button class="btn" id="basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
@@ -146,6 +152,26 @@
 							</div>
 						</c:forEach>
 						<div class="text-right">
+							<h5>${str_totalPrice}: <span id="totalPrice"></span>${str_currencyUnit}</h5>
+							<script type="text/javascript">
+								for(product in prodCode) {
+									alert(prodCode[product])
+								}
+								var prodQtyId='basketQuantity_${basketList.productCode}';
+								var productQty=document.getElementById(prodQtyId).value;
+								var productPrice=eval('${basketList.productPrice}'*productQty);
+								$('#totalPRice').text('productPrice');
+								
+								$('#basketQuantity_${basketList.productCode}').on(
+									'change',
+									function(event) {
+										productQty=document.getElementById(prodQtyId).value;
+										productPrice=eval('${basketList.productPrice}'*productQty);
+										$('#productPrice').text(productPrice);
+									}
+								);
+							</script>
+							
 							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${msg_pay}</button>
 							<script type="text/javascript">

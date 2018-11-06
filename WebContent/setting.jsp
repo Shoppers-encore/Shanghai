@@ -128,7 +128,7 @@
 <c:set var="str_productPrice" value="가격"/>
 <c:set var="str_cart" value="장바구니"/>
 <c:set var="str_select" value="선택"/>
-
+<c:set var="str_currencyUnit" value="원"/>
 
 
 <!-- color -->

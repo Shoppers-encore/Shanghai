@@ -273,6 +273,7 @@ public class UserViewHandler {
 			selectReferences.put("start", startNum);
 			selectReferences.put("end", endNum);
 			
+			/* Change the time format */
 			SimpleDateFormat newDateFormat=new SimpleDateFormat("yyyy-MM-dd");
 			Map<String, String> orderDateMap=new HashMap<String, String>();
 		
