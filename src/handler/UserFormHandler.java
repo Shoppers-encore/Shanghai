@@ -100,17 +100,17 @@ public class UserFormHandler {
 		String identifier=request.getParameter("identifier");
 		
 		if(identifier.equals("1")) {
+			List<BasketDataBean> basketList=basketDao.getBasketList(id);
+			request.setAttribute("basketList", basketList);
 			
-		}
-		List<BasketDataBean> baskets = basketDao.getBasketList(id);
-		if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
-			String productCode = request.getParameter("productCode");
-			int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
-			BasketDataBean basket = new BasketDataBean();
-			basket.setId(id);
-			basket.setProductCode(productCode);
-			basket.setBasketQuantity(basketQuantity);
-			baskets.add(basket);
+		} else {
+			if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
+				String productCode = request.getParameter("productCode");
+				int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
+				
+				BasketDataBean basketItem=new BasketDataBean();
+				
+			}
 		}
 		return new ModelAndView("user/form/orderInputForm");
 	}

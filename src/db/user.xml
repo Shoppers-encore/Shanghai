@@ -50,6 +50,9 @@
 	<select id="getProductQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productList}
 	</select>
+	<select id="getProductDetailsByProductCode" parameterType="String" resultType="databean.ProductDataBean">
+		SELECT productName, thumbnail, productPrice FROM jk_product WHERE productCode=#{productList}
+	</select>
 	
 	
 	<!-- Review -->
@@ -102,7 +105,10 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail FROM jk_basket b, jk_product p WHERE b.id=#{id} AND p.productCode=b.productCode 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice 
+		FROM jk_basket b, jk_product p 
+		WHERE b.id=#{id} 
+		AND p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		SELECT count(*) FROM jk_basket WHERE id=#{id}
@@ -147,6 +153,10 @@
   		FROM jk_orderList o, jk_product p 
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
+  	
+  	
+  	
+  	
   	
   	<!-- chatting -->
   	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">

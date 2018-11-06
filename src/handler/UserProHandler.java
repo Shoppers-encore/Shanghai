@@ -205,21 +205,21 @@ public class UserProHandler {
 	@ResponseBody
 	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		
-		// 1) Get id from session
+		/* Get id from session */
 		String id=(String)request.getSession().getAttribute("id");
 		
-		// 2) Get productCode from Ajax data
+		/* Get productCode from Ajax data */
 		String productCode=request.getParameter("productCode");
 		
-		// 3) Add id and productCode to BasketDataBean
+		/* Add id and productCode to BasketDataBean */
 		BasketDataBean deleteReferences=new BasketDataBean();
 		deleteReferences.setId(id);
 		deleteReferences.setProductCode(productCode);
 		
-		// 4) Delete the item and get the result
+		/* Delete the item and get the result */
 		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
 		
-		// 5) If the result returns 1, the item is deleted from jk_basket
+		/* If the result returns 1, the item is deleted from jk_basket */
 		String itemDeleted;
 		if(deleteResult==1) {
 			itemDeleted="true";
@@ -227,7 +227,7 @@ public class UserProHandler {
 			itemDeleted="false";
 		}
 		
-		// 6) Convert Java String to JSON and return
+		/* Convert Java String to JSON and return */
 		String isItemDeleted=new Gson().toJson(itemDeleted);
 		return isItemDeleted;
 	}
