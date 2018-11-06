@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,17 +67,42 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
-		String category = request.getParameter("category");
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		
+		String searchWord = request.getParameter("searchWord");
+		HandlerHelper hh = new HandlerHelper();
 		Map<String, String> map = new HashMap<String,String>();
-		map.put("category",  category);
-		int count = productDao.getProductNoSearchCount(map);
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("category", category);
-		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		request.setAttribute("productCount", count);
-		request.setAttribute("productList", productList);
-		request.setAttribute("category", category);
-		return new ModelAndView("adm/view/admProductView");
+		int count = 0;
+		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
+			map.put("searchWord", searchWord);
+			count = productDao.getProductCount(map);
+			if( count == 0 ) {
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("count", count);
+				return new ModelAndView("adm/view/admProductView");
+			} else {		
+				map = hh.makeCount(count, request);
+				map.put("searchWord", searchWord);
+				Map<String, String> cmap = hh.makeCount(count, request);
+				cmap.put("searchWord", searchWord);
+				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("productList", productList);
+				return new ModelAndView("adm/view/admProductView");
+			}
+		} else {										// IF there is NO input for searchWord
+			count = productDao.getProductNoSearchCount(map);
+			map = hh.makeCount(count, request);
+			List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+			request.setAttribute("productCount", count);
+			request.setAttribute("productList", productList);
+			return new ModelAndView("adm/view/admProductView");
+		}
 	}
 	@RequestMapping("/admProductList")
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
@@ -111,19 +137,6 @@ public class AdminViewHandler {
 		request.setAttribute("sizes", sizes);
 		return new ModelAndView ( "adm/view/admProductDetail" );
 	}
-	/*@RequestMapping ( "/admSearchProduct" )
-	public ModelAndView searchProduct( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "adm/view/admSearchProduct" );
-	}*/
-	
-	/*@RequestMapping("/admMypage")
-	public ModelAndView admMypage(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
-		return new ModelAndView("adm/view/admMypage");
-	}*/
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
@@ -183,6 +196,7 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
+		
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
