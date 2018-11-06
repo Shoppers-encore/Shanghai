@@ -43,9 +43,11 @@
                <thead>
                   <tr>
                      <th>${str_id}</th>
+                     <th>${str_lastChat}</th>
+                     <th>${str_chatTime}</th>
                   </tr>
                </thead>
-               <tbody>
+               <tbody id="content">
                
                </tbody>
             </table>
@@ -54,7 +56,7 @@
  <script type="text/javascript">
   	//<!--
   		$(document).ready(
-  				function show(){
+  				function admChatList() {
 					$.ajax({
 						type : 'POST',
 						url : 'admChatList.jk',
@@ -62,17 +64,19 @@
 						success : function( data ){
 							$('#content').html('');
 							if( data.length > 0 ){
-								$.each(data, function(key, chatData){
-									var html = chatData.sender + ' : '
-											 + chatData.chatContent + '\t'
-											 + new Date(chatData.chatDate).toDateString() + '\n';
+								$.each(data, function(key, chatList){
+									var html = "<tr><th>"+chatList.sender+"</th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td><td>"
+									+"<input type='button' value='보기' onclick='window.open(admChatting.jk?id="+chatList.sender+")' ></td></tr>";
 										$('#content').append( html );
 							
 								});
+							}else{
+								var html="<th colspan='2'>목록이 존재하지 않습니다.</th>";
+								$('#content').append(html);
 							}
 						}
 					});
-				}		
+  				}
   		);
   	//-->
   </script>

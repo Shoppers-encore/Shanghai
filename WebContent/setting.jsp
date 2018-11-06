@@ -114,7 +114,6 @@
 <c:set var="str_orderStatus1" value="배송준비중"/>
 <c:set var="str_orderStatus2" value="배송중"/>
 <c:set var="str_orderStatus3" value="배송완료"/>
-<c:set var="str_chat" value="실시간 상담"/>
 <c:set var="str_orderDetail" value="주문상세"/>
 <c:set var="str_viewRv" value="리뷰 내용"/>
 <c:set var="str_writeDate" value="작성일"/>
@@ -127,6 +126,8 @@
 <c:set var="str_orderAddress" value="배송 주소"/>
 <c:set var="str_productPrice" value="가격"/>
 <c:set var="str_cart" value="장바구니"/>
+<c:set var="str_lastChat" value="마지막 내용"/>
+<c:set var="str_chatTime" value="시간"/>
 
 
 
