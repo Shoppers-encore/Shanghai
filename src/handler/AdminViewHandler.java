@@ -195,4 +195,7 @@ public class AdminViewHandler {
 		request.setAttribute("tags", tags);
 		return new ModelAndView("adm/view/tagList");
 	}
+	
+	//chat ajax
+	
 }

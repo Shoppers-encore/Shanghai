@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -163,28 +164,47 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> map = new HashMap<String, String>();
-		StringBuffer color = new StringBuffer();
-		int count = 0;
-		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
-			map.put("searchWord", request.getParameter("searchWord"));
-			String[] colors = request.getParameterValues("color");
-			if(colors !=null) {
-				for(int i = 0 ; i<colors.length ;i++) {
-					color.append(colors[i]+" ");
-				}
-			}
-			map.put("selectedColors", color.toString());
-			count = productDao.getProductCount(map);
+		try {
+			request.setCharacterEncoding( "utf-8" );
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("searchWord", request.getParameter("searchWord"));
-		map.put("selectedColors",color.toString());
-		List<ProductDataBean> productList = productDao.getProductList(map);
-		System.out.println(productList.get(0).getProductName());
-		request.setAttribute("productCount", count);
-		request.setAttribute("productList", productList);
-		return new ModelAndView("user/view/userSearchProduct");
+		String id = (String)request.getSession().getAttribute("id");
+		int count = 0;
+		String searchWord = request.getParameter("searchWord");
+		if(searchWord == null || "".equals(searchWord)) {
+			return new ModelAndView("user/view/userSearchProduct");
+		} else {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchWord", request.getParameter("searchWord"));
+			count = productDao.getProductCount(map);		
+			if( count == 0 ) {
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("count", count);
+				return new ModelAndView("user/view/userSearchProduct");
+			} else {		
+				HandlerHelper hh = new HandlerHelper();
+				count = productDao.getProductCount(map);
+				map = hh.makeCount(count, request);
+				map.put("searchWord", searchWord);
+				String[] selectedColors_temp = request.getParameterValues("color");
+				String selectedColors = "";
+				if( selectedColors_temp !=null)
+					for(int i=0; i<selectedColors_temp.length; i++) {
+						selectedColors += selectedColors_temp[i] + " ";
+					}
+				map.put("selectedColors", selectedColors);
+				count = productDao.getProductCount(map);
+				Map<String, String> cmap = hh.makeCount(count, request);
+				cmap.put("searchWord", searchWord);
+				cmap.put("selectedColors", selectedColors);
+				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("selectedColors", selectedColors);
+				request.setAttribute("productList", productList);
+				return new ModelAndView("user/view/userSearchProduct");
+			}
+		}
 	}
 	
 	

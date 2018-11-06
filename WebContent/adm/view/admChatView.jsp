@@ -29,7 +29,7 @@
      float: right;
   }
   </style>
-  
+ 
 </head>
 <body class="container-fluid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 <!-- Admin Menu Bar -->
@@ -46,22 +46,34 @@
                   </tr>
                </thead>
                <tbody>
-               <c:if test="${count eq null or count eq 0}">   
-               <tr>
-                  <td align="center">
-                     ${msg_list_x}
-                  </td>
-               </tr>
-            </c:if>
-            <c:if test="${count ne 0}">
-                  <c:forEach var="member" items="${list}">
-                     <tr>
-                        <td><input type="button" name="id" value="${member}" onclick="admChatting('${member}')"></td>
-                        </tr>
-                  </c:forEach>
-               </c:if>
+               
                </tbody>
             </table>
       </article>
 </body>
+ <script type="text/javascript">
+  	//<!--
+  		$(document).ready(
+  				function show(){
+					$.ajax({
+						type : 'POST',
+						url : 'admChatList.jk',
+						data : { id : '${sessionScope.id}'},
+						success : function( data ){
+							$('#content').html('');
+							if( data.length > 0 ){
+								$.each(data, function(key, chatData){
+									var html = chatData.sender + ' : '
+											 + chatData.chatContent + '\t'
+											 + new Date(chatData.chatDate).toDateString() + '\n';
+										$('#content').append( html );
+							
+								});
+							}
+						}
+					});
+				}		
+  		);
+  	//-->
+  </script>
 </html>
