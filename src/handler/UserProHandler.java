@@ -16,6 +16,7 @@ import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -235,7 +236,7 @@ public class UserProHandler {
 	
 	// Review
 	@RequestMapping( "/reviewWritePro" )
-		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) {
+		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch ( UnsupportedEncodingException e ) {
@@ -244,31 +245,33 @@ public class UserProHandler {
 			ReviewDataBean reviewDto = new ReviewDataBean();
 			String path = request.getSession().getServletContext().getRealPath("/save");
 			MultipartRequest multi = null;
-			if(-1< request.getContentType().indexOf("multipart/form-data"))
-				try {
-					multi = new MultipartRequest(request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			//Need to change for 2images
+			if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+		         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 			String systemName=null;
+			String[] photos = {null,null};
+			int i = 0;
 			Enumeration<?> e = multi.getFileNames();
 			while(e.hasMoreElements()) {
 				String inputName = (String) e.nextElement();
 				systemName = multi.getFilesystemName(inputName);
-				String sname = path+"\\"+systemName;
-				RenderedOp op = JAI.create("fileload", sname);
-				BufferedImage sbuffer = op.getAsBufferedImage();
-				int SIZE = 3;
-				int width = sbuffer.getWidth()/SIZE;
-				int height = sbuffer.getHeight()/SIZE;
-				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
-				Graphics g = tbuffer.getGraphics();
-				g.drawImage(sbuffer, 0, 0, width,height,null);
-
-				reviewDto.setPhoto1( systemName );
+				if( systemName != null ) {
+					String sname = path+"\\"+systemName;
+					RenderedOp op = JAI.create("fileload", sname);
+					BufferedImage sbuffer = op.getAsBufferedImage();
+					int SIZE = 3;
+					int width = sbuffer.getWidth()/SIZE;
+					int height = sbuffer.getHeight()/SIZE;
+					BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+					Graphics g = tbuffer.getGraphics();
+					g.drawImage(sbuffer, 0, 0, width,height,null);
+	
+					photos[i] = systemName; 
+					i++;
+				}
 			}
-			
+				reviewDto.setPhoto1( photos[0] );
+				reviewDto.setPhoto2( photos[1] );
+
 			int count = boardDao.getReviewCount();
 			int reviewNo = 1;
 			if(count >0) {
@@ -290,20 +293,58 @@ public class UserProHandler {
 	}
 	
 	@RequestMapping( "/reviewModifyPro" )
-	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) {
+	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding( "utf-8" );
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		ReviewDataBean reviewDto = new ReviewDataBean();
-		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
-		reviewDto.setTitle( request.getParameter( "title" ) );
-		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );
+		
+		//photos
+		String path = request.getSession().getServletContext().getRealPath("/save");
+		MultipartRequest multi = null;
+		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+	
+		String photo1 = multi.getParameter( "p1" );
+		String photo2 = multi.getParameter( "p2" );
+		String systemName=null;
+		String[] photos = {photo1, photo2};
+		int i = 0;
+		Enumeration<?> e = multi.getFileNames();
+		while(e.hasMoreElements()) {
+			String inputName = (String) e.nextElement();
+			systemName = multi.getFilesystemName(inputName);
+			if( systemName != null ) {
+				String sname = path+"\\"+systemName;
+				RenderedOp op = JAI.create("fileload", sname);
+				BufferedImage sbuffer = op.getAsBufferedImage();
+				int SIZE = 3;
+				int width = sbuffer.getWidth()/SIZE;
+				int height = sbuffer.getHeight()/SIZE;
+				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+				Graphics g = tbuffer.getGraphics();
+				g.drawImage(sbuffer, 0, 0, width,height,null);
+				
+				if( photos[i] != systemName ) {
+					photos[i] = systemName;
+				} else {
+					photos[i] ="";
+				}
+				i++;
+			}
+		}
+			reviewDto.setPhoto1( photos[0] );
+			reviewDto.setPhoto2( photos[1] );
+		reviewDto.setReviewNo( Integer.parseInt( multi.getParameter( "reviewNo" ) ) );
+		reviewDto.setTitle( multi.getParameter( "title" ) );
+		reviewDto.setReviewContent( multi.getParameter( "reviewContent" ) );
 		reviewDto.setId( (String)request.getSession().getAttribute("id"));
-		reviewDto.setProductCode( request.getParameter( "productCode" ) );
-		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
-		String pageNum = request.getParameter( "pageNum" );
+		reviewDto.setProductCode( multi.getParameter( "productCode" ) );
+		reviewDto.setRating( Double.parseDouble( multi.getParameter( "rating" ) ) );
+	
+		String pageNum = multi.getParameter( "pageNum" );
 		
 		int result = boardDao.modify( reviewDto );
 	
@@ -323,7 +364,6 @@ public class UserProHandler {
 				if(id.equals(boardDao.get(num).getId())) {
 					int result = boardDao.delete( num );
 					request.setAttribute( "result", result );
-				
 				}else {
 					int result = 0;
 					request.setAttribute("result", result);
@@ -333,6 +373,8 @@ public class UserProHandler {
 				request.setAttribute( "result", result );
 			}
 		}
+		boardDao.deleteRvComment(num);
+		boardDao.deleteReviewLikes(num);
 		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}

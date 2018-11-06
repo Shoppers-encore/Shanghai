@@ -220,8 +220,8 @@
 <c:set var="msg_addTag" value="추가할 태그를 입력하세요."/>
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
 <c:set var="msg_emptyOrderList" value="주문 내역이 없습니다." />
+<c:set var="msg_noPhoto" value="사진을 등록해주세요!"/>
 <c:set var="msg_gotoProductList" value="수정은 상품관리에서 가능합니다." />
-
 
 
 
