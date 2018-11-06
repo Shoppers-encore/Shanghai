@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,7 @@ import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +36,7 @@ import databean.BasketDataBean;
 import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
+import etc.SendMail;
 import db.BasketDao;
 import db.BoardDao;
 import db.OrderDao;
@@ -62,29 +66,43 @@ public class UserProHandler {
 
 	
 	//////////////////// User /////////////////////	
-
+	/*Join Member*/
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		UserDataBean userDto = new UserDataBean();
-		//inputData-id(NN), password(NN), name(NN), birthday(NN), tel(NN), email(NN), gender, 
-		//userLevel=default 1(NN), height(3,0), weight(3,0), address(NN), addressDetail(NN), zipcode(NN)
+		//inputData-id varchar2(NN), password varchar2(NN), name varchar2(NN), birthday date(NN), tel varchar2(NN), email varchar2(NN), gender number, 
+		//userLevel=default 1(NN), height number(3,0), weight number(3,0), address varchar2(NN), addressDetail varchar2(NN), zipcode varchar2(NN)
 		userDto.setId(request.getParameter("id"));
 		userDto.setPassword(request.getParameter("password"));
 		userDto.setName(request.getParameter("name"));
-		userDto.setEmail(request.getParameter("email"));
+		userDto.setBirthday(request.getParameter("birthday"));
+		userDto.setTel(request.getParameter("tel"));
+		userDto.setEmail(request.getParameter("email"));	
 		int gender = Integer.parseInt(request.getParameter("gender"));
 		userDto.setGender(gender);
-		//birthday
-		//
+		int height = Integer.parseInt(request.getParameter("height"));
+		userDto.setHeight(height);
+		int weight = Integer.parseInt(request.getParameter("weight"));
+		userDto.setWeight(weight);
+		userDto.setZipcode(request.getParameter("zipcode"));
+		userDto.setAddress(request.getParameter("address"));
+		userDto.setAddressDetail(request.getParameter("addressDetail"));	
 		
 		//insertUser
-		//int result = userDao.insertUser(userDto);
-		
+		int result = userDao.insertUser(userDto);
+		request.setAttribute("result", result);
+		request.setAttribute("userDto", userDto);
 		
 		return new ModelAndView("user/pro/userInputPro");
 	}
 
-	/////Ajax User-ConfirmId 
+	//Ajax User-ConfirmId 
 	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> idCheck(@RequestBody String id) {
@@ -97,8 +115,32 @@ public class UserProHandler {
 
 		return map;
 	}
-	/////Log-in process
 	
+	// SMTP - Simple Mail Transfer Protocol
+	@RequestMapping( "/userMailCheck" )
+	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("email");  
+        String number = null; 										//Variable for authentication-key 
+        try {														//Create authentication-key
+           StringBuffer num = new StringBuffer();
+           for(int i =0;i<6;i++) {
+              num.append((int)(Math.random()*10));
+           }
+           number = num.toString();									//End-of-creation: set StringBuffer to String 
+           Map<String, String> info = new HashMap<String,String>(); //parameter for SendMail.java
+           info.put("sender", "hkk9331@gmail.com");
+           info.put("receiver", email);
+           info.put("subject", "Shanghai 쇼핑몰 가입인증 메일입니다.");
+           info.put("content", "인증번호 : "+ "[" + number + "]");
+           new SendMail().sendMail(info);
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        request.setAttribute("num", number);						//set to confirm match authentication key			
+		return new ModelAndView( "user/view/userMailCheck" );
+	}	
+	
+	/*Log-in process*/	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
@@ -114,6 +156,7 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
+
 	
 //	@RequestMapping( "/findId" )
 //	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
@@ -275,7 +318,7 @@ public class UserProHandler {
 	
 	// Review
 	@RequestMapping( "/reviewWritePro" )
-		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) {
+		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch ( UnsupportedEncodingException e ) {
@@ -284,31 +327,33 @@ public class UserProHandler {
 			ReviewDataBean reviewDto = new ReviewDataBean();
 			String path = request.getSession().getServletContext().getRealPath("/save");
 			MultipartRequest multi = null;
-			if(-1< request.getContentType().indexOf("multipart/form-data"))
-				try {
-					multi = new MultipartRequest(request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			//Need to change for 2images
+			if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+		         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 			String systemName=null;
+			String[] photos = {null,null};
+			int i = 0;
 			Enumeration<?> e = multi.getFileNames();
 			while(e.hasMoreElements()) {
 				String inputName = (String) e.nextElement();
 				systemName = multi.getFilesystemName(inputName);
-				String sname = path+"\\"+systemName;
-				RenderedOp op = JAI.create("fileload", sname);
-				BufferedImage sbuffer = op.getAsBufferedImage();
-				int SIZE = 3;
-				int width = sbuffer.getWidth()/SIZE;
-				int height = sbuffer.getHeight()/SIZE;
-				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
-				Graphics g = tbuffer.getGraphics();
-				g.drawImage(sbuffer, 0, 0, width,height,null);
-
-				reviewDto.setPhoto1( systemName );
+				if( systemName != null ) {
+					String sname = path+"\\"+systemName;
+					RenderedOp op = JAI.create("fileload", sname);
+					BufferedImage sbuffer = op.getAsBufferedImage();
+					int SIZE = 3;
+					int width = sbuffer.getWidth()/SIZE;
+					int height = sbuffer.getHeight()/SIZE;
+					BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+					Graphics g = tbuffer.getGraphics();
+					g.drawImage(sbuffer, 0, 0, width,height,null);
+	
+					photos[i] = systemName; 
+					i++;
+				}
 			}
-			
+				reviewDto.setPhoto1( photos[0] );
+				reviewDto.setPhoto2( photos[1] );
+
 			int count = boardDao.getReviewCount();
 			int reviewNo = 1;
 			if(count >0) {
@@ -330,20 +375,58 @@ public class UserProHandler {
 	}
 	
 	@RequestMapping( "/reviewModifyPro" )
-	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) {
+	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding( "utf-8" );
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		ReviewDataBean reviewDto = new ReviewDataBean();
-		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
-		reviewDto.setTitle( request.getParameter( "title" ) );
-		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );
+		
+		//photos
+		String path = request.getSession().getServletContext().getRealPath("/save");
+		MultipartRequest multi = null;
+		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+	
+		String photo1 = multi.getParameter( "p1" );
+		String photo2 = multi.getParameter( "p2" );
+		String systemName=null;
+		String[] photos = {photo1, photo2};
+		int i = 0;
+		Enumeration<?> e = multi.getFileNames();
+		while(e.hasMoreElements()) {
+			String inputName = (String) e.nextElement();
+			systemName = multi.getFilesystemName(inputName);
+			if( systemName != null ) {
+				String sname = path+"\\"+systemName;
+				RenderedOp op = JAI.create("fileload", sname);
+				BufferedImage sbuffer = op.getAsBufferedImage();
+				int SIZE = 3;
+				int width = sbuffer.getWidth()/SIZE;
+				int height = sbuffer.getHeight()/SIZE;
+				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+				Graphics g = tbuffer.getGraphics();
+				g.drawImage(sbuffer, 0, 0, width,height,null);
+				
+				if( photos[i] != systemName ) {
+					photos[i] = systemName;
+				} else {
+					photos[i] ="";
+				}
+				i++;
+			}
+		}
+			reviewDto.setPhoto1( photos[0] );
+			reviewDto.setPhoto2( photos[1] );
+		reviewDto.setReviewNo( Integer.parseInt( multi.getParameter( "reviewNo" ) ) );
+		reviewDto.setTitle( multi.getParameter( "title" ) );
+		reviewDto.setReviewContent( multi.getParameter( "reviewContent" ) );
 		reviewDto.setId( (String)request.getSession().getAttribute("id"));
-		reviewDto.setProductCode( request.getParameter( "productCode" ) );
-		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
-		String pageNum = request.getParameter( "pageNum" );
+		reviewDto.setProductCode( multi.getParameter( "productCode" ) );
+		reviewDto.setRating( Double.parseDouble( multi.getParameter( "rating" ) ) );
+	
+		String pageNum = multi.getParameter( "pageNum" );
 		
 		int result = boardDao.modify( reviewDto );
 	
@@ -363,7 +446,6 @@ public class UserProHandler {
 				if(id.equals(boardDao.get(num).getId())) {
 					int result = boardDao.delete( num );
 					request.setAttribute( "result", result );
-				
 				}else {
 					int result = 0;
 					request.setAttribute("result", result);
@@ -373,6 +455,8 @@ public class UserProHandler {
 				request.setAttribute( "result", result );
 			}
 		}
+		boardDao.deleteRvComment(num);
+		boardDao.deleteReviewLikes(num);
 		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}

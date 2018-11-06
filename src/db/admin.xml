@@ -17,7 +17,7 @@
 	<select id="getAlluserlist" parameterType="java.util.Map" resultType="databean.UserDataBean">
 		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, r FROM(
 		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, rownum r FROM 
-		(SELECT * FROM jk_user ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_user ORDER BY userLevel desc, id asc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getSearchCount" parameterType="String" resultType="int">
 		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
@@ -54,7 +54,7 @@
 	<select id="getProdList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
 		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
-		(SELECT * FROM jk_product ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getRef" resultType="int">
 		SELECT max(ref) FROM jk_product
@@ -102,4 +102,34 @@
 	<update id="admModify" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
 	</update>
+	<update id="changeStatus" parameterType="java.util.Map">
+	 	UPDATE jk_orderList SET orderStatus=orderStatus+1 WHERE id=#{id} AND orderCode=TO_NUMBER(#{orderCode})
+	 </update>
+	 <select id="getRvList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+	<select id="getProdName" parameterType="String" resultType="String">
+		SELECT productName from jk_product WHERE productCode=#{productCode}
+	</select>
+	<delete id="reviewDelete" parameterType="int">
+		DELETE FROM jk_review WHERE reviewNo=#{reviewNo}
+	</delete>
+	<select id="getProductTagId" parameterType="int" resultType="int">
+		SELECT tagId FROM jk_productTag WHERE ref=#{ref}
+	</select>
+	<update id="changeQuantity" parameterType="databean.ProductDataBean">
+		UPDATE jk_product SET productQuantity=${productQuantity} WHERE productCode=#{productCode}
+	</update>
+
+	
+	<!-- chatData -->
+	<select id="getChatList" resultType="databean.ChatDataBean">
+		SELECT * FROM jk_chat
+		WHERE chatdate=(select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+	</select>
+	<select id="getChatListCount" resultType="int">
+		SELECT count(*) FROM jk_chat
+	</select>
+	
+
 </mapper>

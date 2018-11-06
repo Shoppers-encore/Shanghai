@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -22,11 +24,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import databean.CommentDataBean;
 import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import databean.ProductTagDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
+import db.BoardDao;
+import db.OrderDao;
 import db.ProductDao;
 import db.TagDao;
 import db.UserDao;
@@ -41,6 +46,8 @@ public class AdminProHandler {
 	public static final int USERLEVEL=9;
 	@Resource
 	private ProductDao productDao;
+	@Resource
+	private BoardDao boardDao;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -48,9 +55,12 @@ public class AdminProHandler {
 		String password = request.getParameter( "password" );
 		UserDataBean userDto = userDao.getUser(id);
 		int result = 0;
-		if( userDto.getUserLevel() == USERLEVEL && 
-				userDto.getPassword().equals( password ) ) {
+		if(userDto.getUserLevel() != USERLEVEL) {
+			result = -9;
+		} else if( userDto.getPassword().equals( password ) ) {
 			result = 1; 
+		} else if ( userDto.getPassword() != password ) {
+			result = -1;
 		}
 		request.setAttribute( "result", result );
 		request.getSession().setAttribute("id", id);
@@ -211,10 +221,22 @@ public class AdminProHandler {
 	}
 	@RequestMapping("/orderStatusChange")
 	public String orderStatusChange(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter( "id" );
+		OrderDao orderDao = new OrderDao();
+		String orderCode=request.getParameter("orderCode");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("orderCode", orderCode);
+		orderDao.changeStatus(map);
 		return "redirect:admOrderList.jk";
 	}
 	@RequestMapping("/admReviewDelete")
 	public ModelAndView admReviewDelete(HttpServletRequest request, HttpServletResponse response) {
+		
+		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
+		int result = boardDao.reviewDelete( reviewNo );
+		
+		request.setAttribute( "result", result );
 		return new ModelAndView("adm/pro/admReviewDelete");
 	}
 	@RequestMapping("/tagInputPro")
@@ -264,4 +286,37 @@ public class AdminProHandler {
 		request.setAttribute("result", result);
 		return new ModelAndView ("adm/pro/admModifyPro");
 	}
+	@RequestMapping("/admLogoutPro")
+	public String admLogoutPro(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().setAttribute("memid",null);
+		return "redirect:admLoginForm.jk";
+	}
+	
+	@RequestMapping("/changeQuantity")
+	public ModelAndView changeQuantity(HttpServletRequest request, HttpServletResponse response) {
+		String[] productCodes = request.getParameterValues("productCode");
+		String[] quantityMod = request.getParameterValues("quantityMod");
+			for(int i=0; i<productCodes.length; i ++) {
+				if( quantityMod[i] != null ) {
+					ProductDataBean productDto = new ProductDataBean();
+					productDto.setProductCode( productCodes[i] );
+					int [] quantity = new int[quantityMod.length];
+					quantity[i] = Integer.parseUnsignedInt( quantityMod[i] );
+					productDto.setProductQuantity( quantity[i] );
+					productDao.changeQuantity( productDto );
+			}
+		}
+			return new ModelAndView ("adm/pro/changeQuantity");
+	}
+	
+	
+	
 }
+		/*
+		String[] productCodes = request.getParameterValues("productCode");
+		String[] quantityMod = request.getParameterValues("quantityMod");
+			for(int i=0; i<productCodes.length; i ++) {
+				if( quantityMod[i] != null ) {
+					productDao.changeQuantity(productCodes[i]);
+			}
+		}*/

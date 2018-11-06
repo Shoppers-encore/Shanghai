@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
 
 <html>
 	<head>
@@ -89,7 +88,6 @@
 				<span class="carousel-control-next-icon"></span>
 			</a>
 		</header>
-	<c:set var="id" value="aaa" scope="session"/>
       	<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
@@ -101,7 +99,6 @@
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
-		<c:set var="id" value="aaa" scope="session"/>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
 					<p align="center">${msg_list_x}</p>
