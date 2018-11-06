@@ -4,7 +4,7 @@
     <nav class="col-sm-2 col-4" id="myScrollspy">
       <ul class="nav nav-pills flex-column">
          <li>
-            <a href="main.jk">main</a>
+            <a href="admMain.jk">main</a>
            <div class="card">
              <div class="card-body">
                <h4 class="card-title">${userDto.name} ${str_nim}</h4>
@@ -14,7 +14,7 @@
                </p>
                <a href="admModifyView.jk" class="btn btn-primary">${btn_myPage}</a>
                <input class="btn btn-primary" type="button" value="${btn_logout}"
-                 onclick="location='admLoginForm.jk'"><br>
+                 onclick="location='admLogoutPro.jk'"><br>
              </div>
            </div>        
          </li>

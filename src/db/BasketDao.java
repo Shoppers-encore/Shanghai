@@ -29,4 +29,12 @@ public class BasketDao {
 		return session.insert("User.inputBasket", basket);
 
 	}
+
+	public int getDupicateCheck(BasketDataBean basket) {
+		return session.selectOne("User.getDuplicateCheck", basket);
+	}
+
+	public int increaseBasketItem(BasketDataBean basket) {
+		return session.update("increaseBasketItemQuantity", basket);
+	}
 }

@@ -40,12 +40,12 @@
 					<p>
 			      	<br> ${str_mypage} <br>
 					</p>
-					<form name="admModform" action="admModifyPro.jsp" onsubmit="return admModcheck()">
+					<form name="admModForm" method="post" action="admModifyPro.jk" onsubmit="return admModcheck()">
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_id}</span>
 							</div>
-							<input type="text" name="id" class="form-control" value="${admin.id}" disabled>
+							<input type="text" name="id" class="form-control" value="${userDto.id}" disabled>
 						</div>
 	
 						<div class="input-group mb-2">
@@ -65,27 +65,27 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_name}</span>
 							</div>
-							<input type="text" name="name" class="form-control" value="${admin.name}" maxlength="12">
+							<input type="text" name="name" class="form-control" value="${userDto.name}" maxlength="12">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_tel}</span>
 							</div>
-							<input type="text" name="tel" class="form-control" value="${admin.tel}"
-							onkeyup="numberonly(event, admModform)" maxlength="11">
+							<input type="text" name="tel" class="form-control" value="${userDto.tel}"
+							onkeyup="numberonly(event, admModForm)" maxlength="11">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<span class="input-group-text">${str_email}</span>
 							</div>
-							<input type="text" name="email" class="form-control" value="${admin.email}" maxlength="30"/>
+							<input type="text" name="email" class="form-control" value="${userDto.email}" maxlength="30"/>
 						</div>
 						<div>
 	 			    		<input class="btn btn-outline-primary" type="button" value="${btn_confirmmail}"
 							onclick="confirmmail()"> <br><br>
 						</div>
 						<input class="btn btn-secondary" type="button" value="${btn_back}"
-									onclick="location='admMain.jk'">
+									onclick="history.back()">
 						<input class="btn btn-primary" type="submit" value="${btn_membermod}">
 					</form>
 					

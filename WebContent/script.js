@@ -8,6 +8,16 @@ var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 
 var tagdeleteerror = "태그를 삭제하지 못했습니다.\n잠시 후 다시 시도하세요.";
 var notagchecked = "삭제할 태그를 선택해주세요.";
 var commenterror = "댓글을 입력해 주세요.";
+var modifyerror = "수정에 실패했습니다.\n잠시 후 다시 시도하세요.";
+var nopasswderror = "비밀번호는 필수 입력사항입니다.";
+var nonameerror = "이름은 필수 입력사항입니다.";
+var notelerror = "전화번호는 필수 입력사항입니다.";
+var telerror = "전화번호 형식에 맞지 않습니다.";
+var noemailerror = "이메일은 필수 입력사항입니다.";
+var emailfmterror = "이메일 형식에 맞지 않습니다.";
+var onlynum = "숫자만 입력이 가능합니다.";
+var modcompleted = "수정이 완료되었습니다.";
+var adminonly = "관리자만 접근할 수 있습니다.";
 
 //Message-userLoginPro-User Login
 var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인하세요.";
@@ -159,30 +169,15 @@ function sample4_execDaumPostcode() {
 
 
 ///<Review>
-/*function reviewDelcheck() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
+function scoring() {
+	   var slider = document.getElementById("myRange");
+	   var output = document.getElementById("demo");
+	   output.innerHTML = slider.value;
 
-	  if( sessionId == writer ) {
-		   if ( confirm( delCheck ) ) {
-			   document.location.href = "reviewDeletePro.jk";
-		   } else {
-			   alert( cannotdelete );
-			   return false;
-		   }
+	   slider.oninput = function() {
+	     output.innerHTML = this.value;
 	   }
 	}
-
-function reviewModable() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
-	   if( sessionId == writer ){
-	      document.location.href = "reviewModifyForm.jk";
-	   } else {
-	      alert( cannotmodify );
-	      return false;
-	   }
-	}*/
 
 ///<Review Comment>
 function commentInsert(){
@@ -262,7 +257,10 @@ function commentUpdateProc(commentNo){
    $.ajax({
        url : 'commentUpdate.jk',
        type : 'post',
-       data : {'commentContent' : updateContent, 'commentNo' : commentNo},
+       data : {
+    	   'commentContent' : updateContent, 
+    	   'commentNo' : commentNo
+    	   },
        success : function(data){
            commentList(reviewNo); 
        }
@@ -286,6 +284,14 @@ function commentDelete(commentNo){
        }
    });
 }
+
+//Delete Photo
+function photoModify(photoNo){
+	var photoModify ='';
+	photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
+	   
+	$('.photo'+photoNo).html(photoModify);
+	}
 
 
 // BasketList
@@ -311,5 +317,59 @@ function isTagChecked() {
 		alert( notagchecked );
 		return false;
 	} 
+}
+
+// <mypage>
+function admModcheck() {
+	if( ! admModForm.passwd.value ) {
+		alert( nopasswderror );
+		admModForm.passwd.focus();
+		return false;
+	} else if( admModForm.passwd.value != admModForm.repasswd.value ) {
+		alert( loginpasswderror );
+		admModForm.repasswd.focus();
+		return false;
+	} 
+	/*   if( admModForm.passwd.value != admModForm.realpasswd.value ) {
+		   alert( passwderror );
+		   return false;
+   }*/
+	if( ! admModForm.name.value ) {
+		alert( nonameerror );
+		admModForm.name.focus;
+		return false;
+	}
+	if( ! admModForm.tel.value ) {
+		alert( notelerror );
+		admModForm.tel.focus;
+		return false;
+	} else if( admModForm.tel.value.length < 10 || admModForm.tel.value.length > 11 ) {
+		alert( telerror );
+		admModForm.tel.focus();
+		return false;
+	}
+
+	if( ! admModForm.email.value ) {
+		alert( noemailerror );
+		admModForm.email.focus();
+		return false;
+	} else if( admModForm.email.value.indexOf("@") == -1 || admModForm.email.value.indexOf(".") == -1) {
+		alert( emailfmterror );
+		admModForm.email.focus();
+		return false;
+	}
+}
+
+var editingKeycodes = [8, 46, 37, 39];   // keys for editing : backspace(8), delete(46), L/R arrows(37,39) 
+function numberonly( event, form ) {      // function for typing only numbers
+   var kc = event.keyCode;
+   if( ( kc >= 48 && kc <= 57) || ( kc >= 96 && kc <= 105) || editingKeycodes.indexOf(kc) != -1 ) {
+      // upper side number keycodes 48~57 // rihgt side number keycodes 96~105 // is the key one of the editing keys?
+      return;
+   } else {
+      alert( onlynum );
+      form.tel.value = form.tel.value.substr(0, form.tel.value.length-1);
+      return false;
+   }
 }
 

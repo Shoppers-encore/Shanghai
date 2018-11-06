@@ -1,5 +1,6 @@
 package handler;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.ProductDataBean;
@@ -18,11 +18,16 @@ import databean.UserDataBean;
 import db.ProductDao;
 import db.TagDao;
 import db.UserDao;
+import etc.HandlerHelper;
 
 @Controller
 public class AdminFormHandler {
-	@Resource 
+	@Resource
 	private UserDao userDao;
+	@Resource
+	private ProductDao productDao;
+	@Resource
+	private TagDao tagDao;
 	
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
@@ -30,16 +35,19 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("memid");
-		// System.out.println(request.getSession().getAttribute("memid"));
-		// System.out.println(request.getSession().getAttribute("id"));
+		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
 	}
+	
 	@RequestMapping("/admModifyView")
 	public ModelAndView admModifyView(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admModifyView");
 	}
 	@RequestMapping("/productInputForm")
@@ -67,6 +75,37 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productModifyForm")
 	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("adm/form/tagInputForm");
+		String id=(String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		if( userDto.getUserLevel() == 9 ) {
+			int ref = Integer.parseInt( request.getParameter("ref") );
+			List<ProductDataBean> list = productDao.getProductDetail( ref );
+			Map<String,Integer> colorMap = new HashMap<String,Integer>();
+			Map<String,Integer> sizeMap = new HashMap<String, Integer>();
+			HandlerHelper hh = new HandlerHelper();
+			int[] colors = hh.decodeColorCode(list);
+			int[] sizes = hh.decodeSizeCode(list);
+			for(int i=0;i<colors.length;i++) {
+				System.out.println("color" + colors[i]);
+				colorMap.put("col"+new Integer(colors[i]).toString(), colors[i]);
+			}
+			for(int i = 0 ; i<sizes.length;i++) {
+				System.out.println("size"+sizes[i]);
+				sizeMap.put("siz"+new Integer(sizes[i]).toString(), sizes[i]);
+			}
+
+			TagDao tagDao = new TagDao();
+			List <TagDataBean> tags = tagDao.getTags();
+			List<Integer> checkedTags = tagDao.getProductTagId(ref);
+
+			request.setAttribute("allTags", tags);
+			request.setAttribute("colorMap", colorMap);
+			request.setAttribute("sizeMap", sizeMap);
+			request.setAttribute("checkedTags", checkedTags);
+			request.setAttribute("products", list);
+			return new ModelAndView("adm/form/productModifyForm");
+		} else {
+			return new ModelAndView("user/view/userMain");
+		}
 	}
 }

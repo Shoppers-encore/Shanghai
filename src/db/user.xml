@@ -8,21 +8,34 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
+
 	<insert id="insertUser" parameterType="databean.UserDataBean">
 		insert into jk_user
 		values(#{id}, #{password}, #{name}, #{birthday}, #{tel}, #{email, jdbcType=VARCHAR}, #{gender}, 1,
 		#{height}, #{weight}, #{address}, #{addressDetail}, #{zipcode}) 
 	</insert>
-	
-	
+	<update id="deleteUser" parameterType="String">
+		UPDATE jk_user SET password='0', tel=0, email='0@a.com', name='0',userLevel=0, addressDetail='0' WHERE id=#{id}
+	</update>
+	<update id="modifyUser" parameterType="databean.UserDataBean">
+		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
+	</update>
+
 	<!-- Product DB -->
-	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
+	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'
 	</select>
-	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp3.* FROM(SELECT tmp2.*, rownum r FROM (SELECT tmp.* FROM ( SELECT list.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') list
-				<include refid="colorSearch"></include>) tmp WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp2 ) tmp3
+	<select id="getProductColorSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp4.*, r FROM(SELECT tmp3.*, rownum r
+		FROM (SELECT tmp2.* FROM ( SELECT tmp.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp
+				<include refid="colorSearch"></include>) tmp2 WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp3 ) tmp4
 		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
+	<select id="getProductSearchCount" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=TO_CHAR(ref)
+	</select>
+	<select id="getProductSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=TO_CHAR(ref)) tmp2) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
 		SELECT productName FROM jk_product WHERE productCode=#{productCode}
@@ -42,9 +55,18 @@
 	<select id="getProductNoSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
+	<select id="getProductQuantityCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM jk_product WHERE productCode=#{productList}
+	</select>
+	<select id="getProductQuantity" parameterType="String" resultType="int">
+		SELECT productQuantity FROM jk_product WHERE productCode=#{productList}
+	</select>
 	
 	
 	<!-- Review -->
+	<select id="getMaxReview" resultType="int">
+			SELECT max(reviewNo) FROM jk_review
+	</select>
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -54,7 +76,7 @@
 	</select>
 	<insert id="insertReview" parameterType="databean.ReviewDataBean">
 			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
-			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1, jdbcType=VARCHAR}, #{photo2, jdbcType=VARCHAR})
 	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE reviewNo=#{num}
@@ -74,8 +96,14 @@
 	<delete id="deleteReview" parameterType="int">
 			DELETE FROM jk_review WHERE reviewNo=#{num}
 	</delete>
+	<delete id="deleteRvComment" parameterType="int">
+		delete from jk_comment where reviewNo = #{num}
+	</delete>
+	<delete id="deleteReviewLikes" parameterType="int">
+		delete from jk_reviewScore where reviewNo = #{num}
+	</delete>
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
-			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
+			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating}, photo1=#{photo1, jdbcType=VARCHAR}, photo2=#{photo2, jdbcType=VARCHAR} WHERE reviewNo=#{reviewNo}
 	</update>
 	<insert id="insertComment" parameterType="databean.CommentDataBean">
 			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)
@@ -105,6 +133,12 @@
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
+	<select id="getDuplicateCheck" parameterType="databean.BasketDataBean" resultType="int">
+		SELECT count(*) FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
+	</select>
+	<update id="increaseBasketItemQuantity" parameterType="databean.BasketDataBean">
+		UPDATE jk_basket SET basketquantity=basketquantity+#{basketQuantity} WHERE id=#{id} AND productCode=#{productCode}
+	</update>
 	
 	
 	<!-- Order -->

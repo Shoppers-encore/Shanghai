@@ -6,8 +6,89 @@
 <html>
 	<head>
 		<title>메인 페이지</title>
+		<style>
+		   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+			 * {
+			   font-family: 'Nanum Gothic';
+			   }
+			 /* Make the image fully responsive */
+			 .carousel-inner img {
+			     width: 100%;
+			     height: 100%;
+			 }
+			 .nav-brand img {
+			width : 40px;
+			 }
+			   body {
+			      position: relative;
+			  }
+			  ul.nav-pills {
+			      top: 20px;
+			      position: fixed;
+			  }
+			  div.card {
+			 	text-align: center;
+			
+			  }
+			div#cart {
+				position: sticky;
+				top: 300px;
+				width: 0px;
+				height: 150px;
+				font-size: 20px;
+				float: right;
+			}
+			div#chat {
+				position: sticky;
+				top: 600px;
+				right: 120px;
+				float: right;
+			}
+			img#cartImg {
+				width: 80px;
+				height: 80px;
+			}
+			img#chatImg {
+				width: 40px;
+				height: 40px;
+			}
+			img#thumb {
+				width:80px;
+				height:120px;
+			}
+		</style>
 	</head>
 	<body class="container">
+	<header id="demo" class="carousel slide" data-ride="carousel">
+			
+			  <!-- Indicators -->
+			<ul class="carousel-indicators">
+				<li data-target="#demo" data-slide-to="0" class="active"></li>
+				<li data-target="#demo" data-slide-to="1"></li>
+				<li data-target="#demo" data-slide-to="2"></li>
+			</ul>
+			
+			<!-- The slideshow -->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="images/1809main02.png" alt="main01" width="767px" height="480px">
+				</div>
+				<div class="carousel-item">
+					<img src="images/1809main01.png" alt="main02">
+				</div>
+				<div class="carousel-item">
+					<img src="images/1809main03.png" alt="main03">
+				</div>
+			</div>
+			
+			<!-- Left and right controls -->
+			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</a>
+				<a class="carousel-control-next" href="#demo" data-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</a>
+		</header>
 	<c:set var="id" value="aaa" scope="session"/>
       	<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
@@ -171,7 +252,6 @@
 							type : 'POST',
 							url : 'cartInsert.jk',
 							data : $('form[name="' + targetname + '"]').serialize(),
-							dataType : 'xml',
 							success: setTimeout( function(){
 								show();
 							}, 1000 )
@@ -210,6 +290,8 @@
  							var add_cart = document.createElement( 'img' );
  							add_cart.setAttribute( 'id', 'add_cart' );
  		  					add_cart.setAttribute( 'src', '/Shanghai/images/add_cart.png' );
+ 		  					add_cart.setAttribute('width', '150px');
+ 		  					add_cart.setAttribute('height', '150px');
  		  					cartDiv.appendChild( add_cart );
 					}
 				}

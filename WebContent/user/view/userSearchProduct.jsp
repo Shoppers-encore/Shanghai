@@ -165,7 +165,6 @@
 		    visibility: visible;
 		    opacity: 0.7;
 		}
-				
 	  </style>
 	</head>
 	<body>
@@ -246,11 +245,11 @@
 						<span class="checkmark" id="skyblue"></span>
 						<span class="tooltiptext" id="skyblue">${str_color_sky}</span>
 					</label>
-					<%-- <label class="container form-control" id="colorcontainer">
+					<label class="container form-control" id="colorcontainer">
 						<input type="checkbox" name="color" value="ETC">
 						<span class="checkmark" id="etc"></span>
 						<span class="tooltiptext" id="etc">${str_color_etc}</span>
-					</label> --%>
+					</label>
 			   </div>
 				<br><br>
 			</form>
@@ -292,9 +291,9 @@
 						<c:if test="${selectedColors.contains('SK')}">
 							${msg_color_sky}
 						</c:if>
-						<%-- <c:if test="${selectedColors.contains('ETC')}">
+						 <c:if test="${selectedColors.contains('ETC')}">
 							${msg_color_etc}
-						</c:if> --%>
+						</c:if>
 					</p>
 				</c:if>
 				<div class="row">
@@ -302,8 +301,8 @@
 						<div class="col-md-3"  align="center"><br>
 							<img src="/WebProject/save/${product.thumbnail}" name="thumb"><br>
 							<!-- How to get image names from image_info DataBean -->
-							<a class="goodName" href="productDetail.jk?ref=${product.ref}">${product.productName}<br>
-							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.slae eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
+							<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">${product.productName}<br>
+							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.discount eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
 							<c:if test="${product.discount ne null and product.discount ne 0}"></c:if></a><br>
 						</div>
 					</c:forEach>

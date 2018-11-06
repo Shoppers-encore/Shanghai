@@ -15,11 +15,21 @@ public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
 
 	public int getProductCount(Map<String, String> map) {
-		return session.selectOne("User.getProductCount", map);
+		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
+			return session.selectOne("User.getProductColorSearchCount", map);
+		}else {
+			return session.selectOne("User.getProductSearchCount", map);
+		}
 	}
 	
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
-		return session.selectList("User.getProductList", map);
+		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
+			System.out.println("색잇음");
+			return session.selectList("User.getProductColorSearchList", map);
+		}else {
+			System.out.println("색없음");
+			return session.selectList("User.getProductSearchList", map);
+		}
 	}
 	
 	public String getProductName(String productCode) {
@@ -81,6 +91,19 @@ public class ProductDao{
 		return session.selectOne("User.getProductThumbnail", productCode);
 	}
 
+	public String getImgAddress( int ref ) {
+		return session.selectOne("Admin.getImgAddress", ref);
+	}
+	
+	public int getTagNo() {
+		int num = 0;
+		if(session.selectOne("Admin.maxTag") == null) {
+			num = 0;
+		}else {
+			num = session.selectOne("Admin.maxTag");
+		}
+		return num;
+	}
 	public int getProductNoSearchCount(Map<String, String> map) {
 		return session.selectOne("User.getProductNoSearch", map);
 	}
@@ -88,4 +111,27 @@ public class ProductDao{
 	public List<ProductDataBean> getNoSearchProductList(Map<String, String> map) {
 		return session.selectList("User.getProductNoSearchList", map);
 	}
+	public int getProductQuantityCount(String productList) {
+		return session.selectOne("User.getProductQuantityCount", productList);
+	}
+
+	public int getProductQuantity(String productList) {
+		return session.selectOne("User.getProductQuantity", productList);
+	}
+	public List<ProductDataBean> getProdDetail(int ref) {
+		return session.selectList("Admin.getProdDetail", ref);
+	}
+	
+	public List<ImageInfoDataBean> getImgDetail(int ref) {
+		return session.selectList("Admin.getImgDetail", ref);
+	}
+	
+	public int deleteImg(int ref) {
+		return session.delete("Admin.deleteImg", ref);
+	}
+	
+	public int deleteProd(int ref) {
+		return session.delete("Admin.deleteProd", ref);
+	}
+	
 }

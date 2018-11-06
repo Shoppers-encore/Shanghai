@@ -8,13 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.BasketDataBean;
 import databean.ReviewDataBean;
+import databean.UserDataBean;
 import db.BasketDao;
 import db.BoardDao;
 import db.ProductDao;
+import db.UserDao;
 
 @Controller
 public class UserFormHandler {
@@ -22,6 +26,8 @@ public class UserFormHandler {
 	private BoardDao boardDao;
 	@Resource
 	private BasketDao basketDao;
+	@Resource
+	private UserDao userDao;
 	
 	// User
 	@RequestMapping("/userInputForm")
@@ -38,6 +44,9 @@ public class UserFormHandler {
 	}
 	@RequestMapping( "/userModifyForm" )
 	public ModelAndView userModifyForm (HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean user = userDao.getUser(id);
+		request.setAttribute("user", user);
 		return new ModelAndView( "user/form/userModifyFrom" );
 	}
 	
@@ -48,10 +57,8 @@ public class UserFormHandler {
 		String id= (String)request.getSession().getAttribute("id");
 		if(id==null) {
 			return new UserViewHandler().main(request,response);
-		}else if(id.length()<=5) {
-			//admin?
-		}else {
-			String productCode = request.getParameter("chk");
+		} else {
+			String productCode = request.getParameter("productCode");
 			String productName = new ProductDao().getProductName(productCode);
 			request.setAttribute("productName", productName);
 			request.setAttribute("productCode", productCode);
@@ -79,10 +86,11 @@ public class UserFormHandler {
 			request.setAttribute("num",num);
 			return new ModelAndView("user/form/reviewModifyForm");
 		}else {
-			//failed to load?
+			//Admin
 			return new ModelAndView("#");
 		}
 	}
+
 	
 	// Order
 	@RequestMapping("/orderInputForm")

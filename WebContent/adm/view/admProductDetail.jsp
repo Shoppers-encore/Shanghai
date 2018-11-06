@@ -36,7 +36,7 @@
    <article class="col-sm-10 col-8 row">
    <!-- Good Picture -->
       <div class="col-sm-6" >
-         <img src="/WebProject/save/${imageList.get(0).imageAddress}" style="width: 595px; height: 836px; padding: 10%;">
+         <img src="/Shanghai/save/${productList.get(0).thumbnail}" style="width: 595px; height: 836px; padding: 10%;">
       </div>
       <!-- Good Detail -->
       <div class="col-sm-6" align="left" style="padding:10%;">
@@ -50,6 +50,10 @@
                <tr>
                   <td>${str_price}</td>
                   <td><fmt:formatNumber value="${productList.get(0).productPrice}"/></td>
+               </tr>
+               
+               <tr>
+                  <th colspan="2" style="width:400px;"><h4>${productList.get(0).productContent}</h4><br><br></th>
                </tr>
                <tr>
                   <td>${str_color}</td>
@@ -74,10 +78,10 @@
                   </td>
                </tr>
                <tr>
-                  <th colspan="2"><input type="button" class="btn-block" value="${btn_modify}" onclick="location='modifyGood.jk?ref=${ref}'"></th>
+                  <th colspan="2"><input type="button" class="btn-block" value="${btn_modify}" onclick="location='productModifyForm.jk?ref=${productList.get(0).ref}'"></th>
                </tr>
                <tr>
-                  <th colspan="2"><input type="button" class="btn-block" value="${btn_productDel}" onclick="location='deleteGood.jk?ref=${ref}'"></th>
+                  <th colspan="2"><input type="button" class="btn-block" value="${btn_productDel}" onclick="location='productDeletePro.jk?ref=${productList.get(0).ref}'"></th>
                </tr>
             </tbody>
          </table>
@@ -87,9 +91,9 @@
    
    <!-- Good Contents -->
    <div align="center" style="width:100%;">
-      ${productDto.productContent}
+
       <c:forEach var="img" items="${imageList}">
-      		<img src="/WebProject/save/${img.imageAddress}"><br>
+      		<img src="/Shanghai/save/${img.imageAddress}"><br>
       </c:forEach>
    </div>
    <hr><br><br><br>
