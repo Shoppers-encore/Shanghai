@@ -77,22 +77,29 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			////////////////////////////////////////
-			////////////////////////////////////////	 JH!
-			////////////////////////////////////////
 			count = productDao.getProductCount(map);
-			System.out.println("count : " + count);
+			if( count == 0 ) {
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("count", count);
+				return new ModelAndView("adm/view/admProductView");
+			} else {		
+				map = hh.makeCount(count, request);
+				map.put("searchWord", searchWord);
+				Map<String, String> cmap = hh.makeCount(count, request);
+				cmap.put("searchWord", searchWord);
+				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("productList", productList);
+				return new ModelAndView("adm/view/admProductView");
+			}
 		} else {										// IF there is NO input for searchWord
 			count = productDao.getProductNoSearchCount(map);
-			System.out.println("no query");
-			System.out.println("count : " + count);
+			map = hh.makeCount(count, request);
+			List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+			request.setAttribute("productCount", count);
+			request.setAttribute("productList", productList);
+			return new ModelAndView("adm/view/admProductView");
 		}
-		
-		map = hh.makeCount(count, request);
-		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		request.setAttribute("productCount", count);
-		request.setAttribute("productList", productList);
-		return new ModelAndView("adm/view/admProductView");
 	}
 	@RequestMapping("/admProductList")
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
@@ -127,19 +134,6 @@ public class AdminViewHandler {
 		request.setAttribute("sizes", sizes);
 		return new ModelAndView ( "adm/view/admProductDetail" );
 	}
-	/*@RequestMapping ( "/admSearchProduct" )
-	public ModelAndView searchProduct( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "adm/view/admSearchProduct" );
-	}*/
-	
-	/*@RequestMapping("/admMypage")
-	public ModelAndView admMypage(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
-		return new ModelAndView("adm/view/admMypage");
-	}*/
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");

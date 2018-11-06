@@ -15,8 +15,6 @@ public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
 
 	public int getProductCount(Map<String, String> map) {
-		/*System.out.println("getProductCount에서 넘기는 map : " + map);
-		return session.selectOne("User.getProductCount", map);*/
 		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
 			return session.selectOne("User.getProductColorSearchCount", map);
 		}else {
