@@ -232,5 +232,21 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admChatInput")
 	@ResponseBody
-	public void admChatInput(HttpServletRequest request, HttpServletResponse response)
+	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String chatContent = request.getParameter("chatContent");
+		ChatDataBean chat = new ChatDataBean();
+		chat.setSender("admin");
+		chat.setReceiver(id);
+		chat.setChatContent(chatContent);
+		chatDao.chatInput(chat);
+	}
+	@RequestMapping("/admChat")
+	@ResponseBody
+	public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		List<ChatDataBean> chatData = chatDao.getList(id);
+		request.setAttribute("chatData", chatData);
+		return chatData;
+	}
 }
