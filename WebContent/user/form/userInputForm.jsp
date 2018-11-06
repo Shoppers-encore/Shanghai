@@ -78,7 +78,7 @@
 			<div class="form-group row"><!--zip code -->
 					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=zipcode placeholder="${str_zipcode}" required>											
+						<input class="form-control" type="text" name=zipcode id="zipcode" placeholder="${str_zipcode}" required>											
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>					
@@ -87,7 +87,7 @@
 			<div class="form-group row"><!--address -->
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=address placeholder="${str_address}" required>											
+						<input class="form-control" type="text" name=address id="address" placeholder="${str_address}" required>											
 					</div>			
 			</div>
 			<div class="form-group row"><!--addressDetail -->
