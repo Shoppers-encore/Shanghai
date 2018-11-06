@@ -235,7 +235,7 @@ public class UserProHandler {
 	
 	// Review
 	@RequestMapping( "/reviewWritePro" )
-		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) {
+		public ModelAndView reviewWritePro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch ( UnsupportedEncodingException e ) {
@@ -244,12 +244,8 @@ public class UserProHandler {
 			ReviewDataBean reviewDto = new ReviewDataBean();
 			String path = request.getSession().getServletContext().getRealPath("/save");
 			MultipartRequest multi = null;
-			if(-1< request.getContentType().indexOf("multipart/form-data"))
-				try {
-					multi = new MultipartRequest(request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+			if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+		         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 			String systemName=null;
 			String[] photos = {null,null};
 			int i = 0;
@@ -296,7 +292,7 @@ public class UserProHandler {
 	}
 	
 	@RequestMapping( "/reviewModifyPro" )
-	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) {
+	public String reviewModifyPro (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding( "utf-8" );
 		} catch (UnsupportedEncodingException e) {
@@ -307,14 +303,11 @@ public class UserProHandler {
 		//photos
 		String path = request.getSession().getServletContext().getRealPath("/save");
 		MultipartRequest multi = null;
-		if(-1< request.getContentType().indexOf("multipart/form-data"))
-			try {
-				multi = new MultipartRequest(request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+	
 		String systemName=null;
-		String[] photos = {null,null};
+		String[] photos = {null, null};
 		int i = 0;
 		Enumeration<?> e = multi.getFileNames();
 		while(e.hasMoreElements()) {
@@ -333,18 +326,20 @@ public class UserProHandler {
 
 				photos[i] = systemName; 
 				i++;
+			} else {
+				photos[i] = "";
 			}
 		}
 			reviewDto.setPhoto1( photos[0] );
 			reviewDto.setPhoto2( photos[1] );
-		
-		reviewDto.setReviewNo( Integer.parseInt( request.getParameter( "reviewNo" ) ) );
-		reviewDto.setTitle( request.getParameter( "title" ) );
-		reviewDto.setReviewContent( request.getParameter( "reviewContent" ) );
+		reviewDto.setReviewNo( Integer.parseInt( multi.getParameter( "reviewNo" ) ) );
+		reviewDto.setTitle( multi.getParameter( "title" ) );
+		reviewDto.setReviewContent( multi.getParameter( "reviewContent" ) );
 		reviewDto.setId( (String)request.getSession().getAttribute("id"));
-		reviewDto.setProductCode( request.getParameter( "productCode" ) );
-		reviewDto.setRating( Double.parseDouble( request.getParameter( "rating" ) ) );
-		String pageNum = request.getParameter( "pageNum" );
+		reviewDto.setProductCode( multi.getParameter( "productCode" ) );
+		reviewDto.setRating( Double.parseDouble( multi.getParameter( "rating" ) ) );
+	
+		String pageNum = multi.getParameter( "pageNum" );
 		
 		int result = boardDao.modify( reviewDto );
 	

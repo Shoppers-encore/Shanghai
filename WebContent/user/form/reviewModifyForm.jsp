@@ -14,7 +14,7 @@
 	<article class="centered">
 	<br><br>
 	    <div id="writeform">
-			<form method="get" encType="multipart/form-data" action="reviewModidfyPro.jk" name="writeform">
+			<form method="post" encType="multipart/form-data" action="reviewModifyPro.jk" name="writeform">
 				<table class="table" >
 					<tr>
 						<th colspan="4">
@@ -40,7 +40,7 @@
 					</tr>
 					<tr>
 						<th > ${str_title} </th>
-						<td colspan="3"> <input class="input" type="text" name="subject" value="${reviewDto.title}" maxlength="50" style="width:500px;"></td>
+						<td colspan="3"> <input class="input" type="text" name="title" value="${reviewDto.title}" maxlength="50" style="width:500px;"></td>
 					</tr>			
 					<tr>
 						<th> ${str_content} </th>

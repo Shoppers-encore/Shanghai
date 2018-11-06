@@ -22,7 +22,7 @@ import db.UserDao;
 public class AdminFormHandler {
 	@Resource
 	private UserDao userDao;
-	
+
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
