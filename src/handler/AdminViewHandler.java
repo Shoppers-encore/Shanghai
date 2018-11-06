@@ -110,15 +110,45 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
-
-		int count = productDao.getProdCount();
-		Map<String,String> map = new HandlerHelper().makeCount(count, request);
-		List <ProductDataBean> products = productDao.getProdList(map);
-
-		request.setAttribute("products", products);
-		request.setAttribute("count", count);
-		return new ModelAndView("adm/view/admProductList");
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		
+		String searchWord = request.getParameter("searchWord");
+		HandlerHelper hh = new HandlerHelper();
+		Map<String, String> map = new HashMap<String,String>();
+		int count = 0;
+		
+		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
+			map.put("searchWord", searchWord);
+			count = productDao.getProductCount(map);
+			if( count == 0 ) {
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("count", count);
+				return new ModelAndView("adm/view/admProductView");
+			} else {		
+				map = hh.makeCount(count, request);
+				map.put("searchWord", searchWord);
+				Map<String, String> cmap = hh.makeCount(count, request);
+				cmap.put("searchWord", searchWord);
+				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("products", productList);
+				return new ModelAndView("adm/view/admProductList");
+			}
+		} else {										// IF there is NO input for searchWord
+			count = productDao.getProductNoSearchCount(map);
+			map = hh.makeCount(count, request);
+			List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+			request.setAttribute("productCount", count);
+			request.setAttribute("products", productList);
+			return new ModelAndView("adm/view/admProductList");
+		}
 	}
+	
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = (String)request.getSession().getAttribute("id");
