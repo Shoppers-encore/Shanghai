@@ -24,7 +24,7 @@
 	<div class="container" style="width: 800px">
 		<h4><b>회원가입</b></h4>
 		<br><br>
-		<form class="form-horizontal" method="post" action="userInputPro.go" name="inputform" onsubmit="return inputcheck()">		
+		<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputcheck()">		
 			<div class="form-group row"><!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
 					<div class="col-sm-8">
@@ -112,12 +112,12 @@
 			<div class="form-group row"><!--height / weight-->
 					<label for="height" class="col-sm-2 col-form-label">${str_height} / ${str_weight}</label>
 					<div class="col-sm-3">
-						<input class="form-control" type="number" name=height placeholder="height (optional)" maxlength="3">											
+						<input class="form-control" type="number" name="height" placeholder="height (optional)" onkeyup="return checkHeight()">											
 					</div>	
 					cm
 					<label class="col-sm-1 col-form-label"> &nbsp;&nbsp;/ </label>					
 					<div class="col-sm-3">
-						<input class="form-control" type="number" name=weight placeholder="weight (optional)" maxlength="3">									
+						<input class="form-control" type="number" name=weight placeholder="weight (optional)" onkeyup="return checkHeight()">									
 					</div>					
 					kg					
 			</div>

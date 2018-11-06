@@ -17,8 +17,8 @@ var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호
 var confirmerror = "아이디 중복확인 해 주세요";
 var error = "아이디 중복확인 실패";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
-var emailcheckerror = "이메일 인증 해 주세요";
-
+var emailcheckerror1 = "이메일 인증 해 주세요.";
+var emailcheckerror2 = "인증번호가 일치하지 않습니다."
 
 ////// <User>
 
@@ -67,7 +67,7 @@ function passwordCheckFunction() {
 //Input Validation: block special character input - Name
 function checkNumber() {
  var objEv = event.srcElement;
- var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";    //Write characters to block
+ var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";    //Write characters to block here
  event.returnValue = true;
  for (var i=0;i<objEv.value.length;i++) {
 	 if(-1 != num.indexOf(objEv.value.charAt(i)))
@@ -78,6 +78,14 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+function checkHeight(){
+	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
+    if((event.keyCode<48)||(event.keyCode>57) && (event.keyCode==num))  //input only numbers
+       event.returnValue=false;
+}
+
+
+출처: http://kmj1107.tistory.com/entry/javascript-input-textBox-숫자만-입력allow-only-number-in-textbox [토순이네집]
 //SMTP - Simple Mail Transfer Protocol
 function mailTransfer() {
 	if(inputform.email.value.indexOf("@")==-1){ //check proper email format
@@ -90,9 +98,9 @@ function mailTransfer() {
 }
 //Check authentication-key match
 function matchAuthKey() {
-    if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ) {
-        alert( emailcheckerror );
-    } else{
+    if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ){ //null 값 입력시 emailcheckerror1 메시지 뜨는처리도 추가하기
+    	 alert( emailcheckerror2 );
+    } else {
         alert( "인증 완료되었습니다" );
         self.close();
     }

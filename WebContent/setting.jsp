@@ -199,6 +199,7 @@
 <c:set var="btn_orderDetails" value="상세보기"/>
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
 <c:set var="btn_fold" value="접기"/>
+<c:set var="btn_userDelete" value="탈퇴"/>
 
 
 
@@ -218,6 +219,8 @@
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
 <c:set var="msg_emptyOrderList" value="주문 내역이 없습니다."/>
 <c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요."/>
+<c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요."/>
+<c:set var="msg_main_login" value="님 안녕하세요"/>
 
 
 

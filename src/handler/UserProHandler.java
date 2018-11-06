@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -65,21 +66,35 @@ public class UserProHandler {
 	/*Join Member*/
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		UserDataBean userDto = new UserDataBean();
-		//inputData-id(NN), password(NN), name(NN), birthday(NN), tel(NN), email(NN), gender, 
-		//userLevel=default 1(NN), height(3,0), weight(3,0), address(NN), addressDetail(NN), zipcode(NN)
+		//inputData-id varchar2(NN), password varchar2(NN), name varchar2(NN), birthday date(NN), tel varchar2(NN), email varchar2(NN), gender number, 
+		//userLevel=default 1(NN), height number(3,0), weight number(3,0), address varchar2(NN), addressDetail varchar2(NN), zipcode varchar2(NN)
 		userDto.setId(request.getParameter("id"));
 		userDto.setPassword(request.getParameter("password"));
 		userDto.setName(request.getParameter("name"));
-		userDto.setEmail(request.getParameter("email"));
+		userDto.setBirthday(request.getParameter("birthday"));
+		userDto.setTel(request.getParameter("tel"));
+		userDto.setEmail(request.getParameter("email"));	
 		int gender = Integer.parseInt(request.getParameter("gender"));
 		userDto.setGender(gender);
-		//birthday
-		//
+		int height = Integer.parseInt(request.getParameter("height"));
+		userDto.setHeight(height);
+		int weight = Integer.parseInt(request.getParameter("weight"));
+		userDto.setWeight(weight);
+		userDto.setZipcode(request.getParameter("zipcode"));
+		userDto.setAddress(request.getParameter("address"));
+		userDto.setAddressDetail(request.getParameter("addressDetail"));	
 		
 		//insertUser
-		//int result = userDao.insertUser(userDto);
-		
+		int result = userDao.insertUser(userDto);
+		request.setAttribute("result", result);
+		request.setAttribute("userDto", userDto);
 		
 		return new ModelAndView("user/pro/userInputPro");
 	}
