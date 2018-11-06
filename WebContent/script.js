@@ -17,6 +17,7 @@ var noemailerror = "이메일은 필수 입력사항입니다.";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var onlynum = "숫자만 입력이 가능합니다.";
 var modcompleted = "수정이 완료되었습니다.";
+var adminonly = "관리자만 접근할 수 있습니다.";
 
 //Message-userLoginPro-User Login
 var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인하세요.";

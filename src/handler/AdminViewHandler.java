@@ -10,14 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.ChatDataBean;
 import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import databean.ReviewDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
+import db.BoardDao;
+import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.TagDao;
@@ -31,9 +35,11 @@ public class AdminViewHandler {
 	@Resource
 	private UserDao userDao;
 	@Resource
-	private db.BoardDao boardDao;
+	private BoardDao boardDao;
 	@Resource
 	private ProductDao productDao;
+	@Resource
+	private ChatDao chatDao;
 
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
@@ -53,6 +59,10 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		String category = request.getParameter("category");
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("category",  category);
@@ -82,11 +92,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list =productDao.getProdDetail( ref );
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		//request.setAttribute("ref", ref);
 		request.setAttribute("productList", list);
 		request.setAttribute("imageList", imageList);
 		request.setAttribute("colors", colors);
@@ -195,4 +210,30 @@ public class AdminViewHandler {
 		request.setAttribute("tags", tags);
 		return new ModelAndView("adm/view/tagList");
 	}
-}
+	
+	//chat ajax
+	@RequestMapping("/admChatList")
+	@ResponseBody
+	public List<ChatDataBean> admChatList(HttpServletRequest request,HttpServletResponse response){
+		int count = chatDao.getChatListCount();
+		List<ChatDataBean> chatList = null;
+		if(count > 0) {
+			chatList = chatDao.getChatList();
+			request.setAttribute("chatList", chatList);
+		}
+		return chatList;
+	}
+
+	@RequestMapping("/admChatting")
+	public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		request.setAttribute("id", id);
+		return new ModelAndView("adm/view/admChatting");
+	}
+	
+	@RequestMapping("/admChatInput")
+	@ResponseBody
+	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
+	}
+	
+	
