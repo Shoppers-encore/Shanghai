@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,16 +58,34 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
-		String category = request.getParameter("category");
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch ( UnsupportedEncodingException e ) {
+			e.printStackTrace();
+		}
+		
+		String searchWord = request.getParameter("searchWord");
+		HandlerHelper hh = new HandlerHelper();
 		Map<String, String> map = new HashMap<String,String>();
-		map.put("category",  category);
-		int count = productDao.getProductNoSearchCount(map);
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("category", category);
+		int count = 0;
+		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
+			map.put("searchWord", searchWord);
+			////////////////////////////////////////
+			////////////////////////////////////////	 JH!
+			////////////////////////////////////////
+			count = productDao.getProductCount(map);
+			System.out.println("count : " + count);
+		} else {										// IF there is NO input for searchWord
+			count = productDao.getProductNoSearchCount(map);
+			System.out.println("no query");
+			System.out.println("count : " + count);
+		}
+		
+		map = hh.makeCount(count, request);
 		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
-		request.setAttribute("category", category);
 		return new ModelAndView("adm/view/admProductView");
 	}
 	@RequestMapping("/admProductList")
@@ -180,6 +199,7 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
+		
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));

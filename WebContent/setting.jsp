@@ -201,6 +201,7 @@
 <c:set var="btn_fold" value="접기"/>
 <c:set var="btn_x" value="삭제"/>
 <c:set var="btn_productModify" value="상품수정"/>
+<c:set var="btn_gotoUserMain" value="사용자메인"/>
 
 
 

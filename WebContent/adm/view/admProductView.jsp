@@ -46,7 +46,7 @@
     	<h4>${str_productList}</h4><br>
     	
     	<div class="col-sm-4 container-fluid" style="float:none; margin:0 auto;">
-	    	<form name="searchForm" action="./goodList.jk" method="post">
+	    	<form name="searchForm" action="admProductView.jk" method="post">
 					<div class="input-group">
 					    <input type="text" class="form-control" name="searchWord" style="width:60%">
 					    <input type="submit" class="form-control btn btn-danger" value="${btn_search}" style="width:20%">
