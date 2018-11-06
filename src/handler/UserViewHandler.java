@@ -352,7 +352,6 @@ public class UserViewHandler {
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
 		String id=(String)request.getSession().getAttribute("id");
-		int userLevel = userDao.getUserLevel( id );
 		
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
@@ -365,7 +364,6 @@ public class UserViewHandler {
 		}
 		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
 		
-		request.setAttribute( "userLevel", userLevel );
 		request.setAttribute( "number", number );
 		request.setAttribute( "pageNum", pageNum );
 		request.setAttribute( "reviewDto", reviewDto );

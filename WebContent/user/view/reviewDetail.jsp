@@ -61,7 +61,7 @@
 						<tr>
 							<th colspan="2">
 								${reviewDto.reviewScoreSum} ${msg_like}
-								<c:if test="${sessionScope.id ne null}">
+								<c:if test="${sessionScope.id ne null and sessionScope.id ne reviewDto.id}">
 									<c:if test="${reviewDto.checkedme eq false}">
 										<input class="btn btn-outline-danger" type="button" value="${btn_like}" onclick="location='like.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 									</c:if>
@@ -91,9 +91,6 @@
 							<th colspan="2">
 								<c:if test="${reviewDto.id eq sessionScope.id}">
 									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="location='reviewModifyForm.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
-									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
-								</c:if>
-								<c:if test="${userDto.userLevel eq 9}">
 									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk?pageNum=${pageNum}'">
