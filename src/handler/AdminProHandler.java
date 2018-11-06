@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -27,6 +29,7 @@ import databean.ProductDataBean;
 import databean.ProductTagDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
+import db.OrderDao;
 import db.ProductDao;
 import db.TagDao;
 import db.UserDao;
@@ -211,6 +214,13 @@ public class AdminProHandler {
 	}
 	@RequestMapping("/orderStatusChange")
 	public String orderStatusChange(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter( "id" );
+		OrderDao orderDao = new OrderDao();
+		String orderCode=request.getParameter("orderCode");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("orderCode", orderCode);
+		orderDao.changeStatus(map);
 		return "redirect:admOrderList.jk";
 	}
 	@RequestMapping("/admReviewDelete")

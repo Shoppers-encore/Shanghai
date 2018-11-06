@@ -102,4 +102,7 @@
 	<update id="admModify" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
 	</update>
+	<update id="changeStatus" parameterType="java.util.Map">
+	 	 UPDATE jk_orderList SET orderStatus=orderStatus+1 WHERE id=#{id} AND orderCode=TO_NUMBER(#{orderCode})
+	 </update>
 </mapper>

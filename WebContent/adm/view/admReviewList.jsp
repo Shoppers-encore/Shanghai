@@ -68,6 +68,7 @@
 					</c:if>
     			</tbody>
     		</table>
+    			<div align="center">
     			<c:if test="${count gt 0}">
 				<c:if test="${currentPage ne 1}">
 					<a href="reviewList.jk">[◀◀]</a>
@@ -90,7 +91,9 @@
 					<a href="reviewList.jk?pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 			</c:if>
+			</div>
 			<br>
+			<div align="center">
 			<form name="searchForm" action="reviewList.js" method="post">
 			     <select name="searchType">
 			       <option value="ttl">${str_searchTitle}</option>
@@ -101,6 +104,7 @@
 			   <input type="text" name="searchWord">
 			   <input type="submit" value="${btn_search}">
 			</form>
+			</div>
 	    </article>
 </body>
 </html>

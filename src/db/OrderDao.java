@@ -53,5 +53,8 @@ public class OrderDao {
 		return session.selectList("User.getOrderListByOrderCode", orderCode);
 	}
 	
+	public int changeStatus(Map<String, String> map) {
+		return session.update("Admin.changeStatus", map);
+	}
 }
 	
