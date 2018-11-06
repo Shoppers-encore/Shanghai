@@ -105,4 +105,14 @@
 	<select id="getProductTagId" parameterType="int" resultType="int">
 		SELECT tagId FROM jk_productTag WHERE ref=#{ref}
 	</select>
+	
+	<!-- chatData -->
+	<select id="getChatList" resultType="databean.ChatDataBean">
+		SELECT * FROM jk_chat
+		WHERE chatdate=(select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+	</select>
+	<select id="getChatListCount" resultType="int">
+		SELECT count(*) FROM jk_chat
+	</select>
+	
 </mapper>

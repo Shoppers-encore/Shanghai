@@ -19,12 +19,20 @@
 	</update>
 	
 	<!-- Product DB -->
-	<select id="getProductCount" parameterType="java.util.Map" resultType="int">
+	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'
 	</select>
-	<select id="getProductList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp3.*,r FROM(SELECT tmp2.*, rownum r FROM (SELECT tmp.* FROM ( SELECT list.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') list
-		<include refid="colorSearch"></include>) tmp WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp2 ) tmp3 WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	<select id="getProductColorSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp4.*, r FROM(SELECT tmp3.*, rownum r
+		FROM (SELECT tmp2.* FROM ( SELECT tmp.* FROM (SELECT * from jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp
+				<include refid="colorSearch"></include>) tmp2 WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR') tmp3 ) tmp4
+		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
+	<select id="getProductSearchCount" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=TO_CHAR(ref)
+	</select>
+	<select id="getProductSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=TO_CHAR(ref)) tmp2) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
 		SELECT productName FROM jk_product WHERE productCode=#{productCode}

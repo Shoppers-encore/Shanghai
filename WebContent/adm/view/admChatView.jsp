@@ -29,7 +29,7 @@
      float: right;
   }
   </style>
-  
+ 
 </head>
 <body class="container-fluid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 <!-- Admin Menu Bar -->
@@ -43,25 +43,41 @@
                <thead>
                   <tr>
                      <th>${str_id}</th>
+                     <th>${str_lastChat}</th>
+                     <th>${str_chatTime}</th>
                   </tr>
                </thead>
-               <tbody>
-               <c:if test="${count eq null or count eq 0}">   
-               <tr>
-                  <td align="center">
-                     ${msg_list_x}
-                  </td>
-               </tr>
-            </c:if>
-            <c:if test="${count ne 0}">
-                  <c:forEach var="member" items="${list}">
-                     <tr>
-                        <td><input type="button" name="id" value="${member}" onclick="admChatting('${member}')"></td>
-                        </tr>
-                  </c:forEach>
-               </c:if>
+               <tbody id="content">
+               
                </tbody>
             </table>
       </article>
 </body>
+ <script type="text/javascript">
+  	//<!--
+  		$(document).ready(
+  				function admChatList() {
+					$.ajax({
+						type : 'POST',
+						url : 'admChatList.jk',
+						data : { id : '${sessionScope.id}'},
+						success : function( data ){
+							$('#content').html('');
+							if( data.length > 0 ){
+								$.each(data, function(key, chatList){
+									var html = "<tr><th>"+chatList.sender+"</th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td><td>"
+									+"<input type='button' value='보기' onclick='window.open(admChatting.jk?id="+chatList.sender+")' ></td></tr>";
+										$('#content').append( html );
+							
+								});
+							}else{
+								var html="<th colspan='2'>목록이 존재하지 않습니다.</th>";
+								$('#content').append(html);
+							}
+						}
+					});
+  				}
+  		);
+  	//-->
+  </script>
 </html>
