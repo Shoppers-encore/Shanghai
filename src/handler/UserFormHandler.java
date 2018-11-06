@@ -90,13 +90,7 @@ public class UserFormHandler {
 			return new ModelAndView("#");
 		}
 	}
-	@RequestMapping(value = "/deletePhoto.jk", method = RequestMethod.POST)
-	@ResponseBody
-	private void commentDeleteProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		String fileName = request.getParameter("fileName");
-		boardDao.deletePhoto(reviewNo);
-	}
+
 	
 	// Order
 	@RequestMapping("/orderInputForm")

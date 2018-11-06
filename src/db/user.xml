@@ -85,6 +85,12 @@
 	<delete id="deleteReview" parameterType="int">
 			DELETE FROM jk_review WHERE reviewNo=#{num}
 	</delete>
+	<delete id="deleteRvComment" parameterType="int">
+		delete from jk_comment where reviewNo = #{num}
+	</delete>
+	<delete id="deleteReviewLikes" parameterType="int">
+		delete from jk_reviewScore where reviewNo = #{num}
+	</delete>
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
 			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating}, photo1=#{photo1, jdbcType=VARCHAR}, photo2=#{photo2, jdbcType=VARCHAR} WHERE reviewNo=#{reviewNo}
 	</update>
@@ -100,9 +106,6 @@
 	</update>
 	<delete id="deleteComment" parameterType="int">
 		delete from jk_comment where commentNo = #{commentNo}
-	</delete>
-	<delete id="deletePhoto" parameterType="int">
-		
 	</delete>
 	
 	

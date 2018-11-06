@@ -312,12 +312,12 @@ public class UserViewHandler {
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
-			request.setAttribute( "reviewLists", articles );
 			
-			/*int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
-			ReviewDataBean reviewDto = boardDao.get( num );
-			String productName = new ProductDao().getProductName(reviewDto.getProductCode());
-			request.setAttribute("productName", productName);*/
+			for( int i =0; i<articles.size(); i++ ) {
+				String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
+				articles.get(i).setProductName(productName);
+			}
+			request.setAttribute( "reviewLists", articles );
 		}
 		return new ModelAndView("user/view/reviewList");
 	}

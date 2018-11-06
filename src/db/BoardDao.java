@@ -44,11 +44,15 @@ public class BoardDao {
 	public int delete(int num) {
 		return session.delete("User.deleteReview", num);
 	}
+	public int deleteRvComment(int num) {
+		return session.delete("User.deleteRvComment", num);
+	}
+	public int deleteReviewLikes(int num) {
+		return session.delete("User.deleteReviewLikes", num);
+	}
+	
 	public int modify(ReviewDataBean reviewDto) {
 		return session.update("User.modifyReview", reviewDto);
-	}
-	public int deletePhoto( int reviewNo) {
-		return session.delete("User.deletePhoto", reviewNo);
 	}
 	
 	public int insertComment(CommentDataBean cmtDto) {

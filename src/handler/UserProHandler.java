@@ -307,12 +307,10 @@ public class UserProHandler {
 		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
 	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 	
-		String photo1 = multi.getParameter( "photo1" );
-		String photo2 = multi.getParameter( "photo2" );
-		System.out.println( photo1 );
-		System.out.println( photo2 );
+		String photo1 = multi.getParameter( "p1" );
+		String photo2 = multi.getParameter( "p2" );
 		String systemName=null;
-		String[] photos = {null, null};
+		String[] photos = {photo1, photo2};
 		int i = 0;
 		Enumeration<?> e = multi.getFileNames();
 		while(e.hasMoreElements()) {
@@ -328,11 +326,13 @@ public class UserProHandler {
 				BufferedImage tbuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 				Graphics g = tbuffer.getGraphics();
 				g.drawImage(sbuffer, 0, 0, width,height,null);
-
-				photos[i] = systemName; 
+				
+				if( photos[i] != systemName ) {
+					photos[i] = systemName;
+				} else {
+					photos[i] ="";
+				}
 				i++;
-			} else {
-				photos[i] = "";
 			}
 		}
 			reviewDto.setPhoto1( photos[0] );
@@ -364,7 +364,6 @@ public class UserProHandler {
 				if(id.equals(boardDao.get(num).getId())) {
 					int result = boardDao.delete( num );
 					request.setAttribute( "result", result );
-				
 				}else {
 					int result = 0;
 					request.setAttribute("result", result);
@@ -374,6 +373,8 @@ public class UserProHandler {
 				request.setAttribute( "result", result );
 			}
 		}
+		boardDao.deleteRvComment(num);
+		boardDao.deleteReviewLikes(num);
 		request.setAttribute( "pageNum", pageNum );
 		return new ModelAndView( "user/pro/reviewDeletePro" );
 	}
