@@ -1,5 +1,9 @@
 package handler;
 
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.sql.Timestamp;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-
-import databean.ReviewScoreDataBean;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.BasketDataBean;
 import databean.ChatDataBean;
@@ -29,8 +33,10 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import databean.TagDataBean;
+import db.UserDao;
+import databean.UserDataBean;
 import etc.HandlerHelper;
-
 
 @Controller
 public class UserViewHandler {
@@ -44,6 +50,8 @@ public class UserViewHandler {
 	private OrderDao orderDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private UserDao userDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -61,15 +69,14 @@ public class UserViewHandler {
 	}
 	
 	
-	// User
-	@RequestMapping( "/userMailCheck" )
-	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView( "user/view/userMailCheck" );
-	}
-	
-	@RequestMapping("/userMypage")
+	@RequestMapping("/userMyPage")
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/view/userMypage");
+		String id=(String)request.getSession().getAttribute("id");		
+		if(id!=null) {
+			UserDataBean userDto=userDao.getUser(id);
+			request.setAttribute("userDto", userDto);
+		}
+			return new ModelAndView("user/view/userMyPage");
 	}
 	
 	
@@ -163,28 +170,47 @@ public class UserViewHandler {
 	}
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> map = new HashMap<String, String>();
-		StringBuffer color = new StringBuffer();
-		int count = 0;
-		if(request.getParameterValues("color") != null || request.getParameter("searchWord")!=null) {
-			map.put("searchWord", request.getParameter("searchWord"));
-			String[] colors = request.getParameterValues("color");
-			if(colors !=null) {
-				for(int i = 0 ; i<colors.length ;i++) {
-					color.append(colors[i]+" ");
-				}
-			}
-			map.put("selectedColors", color.toString());
-			count = productDao.getProductCount(map);
+		try {
+			request.setCharacterEncoding( "utf-8" );
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("searchWord", request.getParameter("searchWord"));
-		map.put("selectedColors",color.toString());
-		List<ProductDataBean> productList = productDao.getProductList(map);
-		System.out.println(productList.get(0).getProductName());
-		request.setAttribute("productCount", count);
-		request.setAttribute("productList", productList);
-		return new ModelAndView("user/view/userSearchProduct");
+		String id = (String)request.getSession().getAttribute("id");
+		int count = 0;
+		String searchWord = request.getParameter("searchWord");
+		if(searchWord == null || "".equals(searchWord)) {
+			return new ModelAndView("user/view/userSearchProduct");
+		} else {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchWord", request.getParameter("searchWord"));
+			count = productDao.getProductCount(map);		
+			if( count == 0 ) {
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("count", count);
+				return new ModelAndView("user/view/userSearchProduct");
+			} else {		
+				HandlerHelper hh = new HandlerHelper();
+				count = productDao.getProductCount(map);
+				map = hh.makeCount(count, request);
+				map.put("searchWord", searchWord);
+				String[] selectedColors_temp = request.getParameterValues("color");
+				String selectedColors = "";
+				if( selectedColors_temp !=null)
+					for(int i=0; i<selectedColors_temp.length; i++) {
+						selectedColors += selectedColors_temp[i] + " ";
+					}
+				map.put("selectedColors", selectedColors);
+				count = productDao.getProductCount(map);
+				Map<String, String> cmap = hh.makeCount(count, request);
+				cmap.put("searchWord", searchWord);
+				cmap.put("selectedColors", selectedColors);
+				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("selectedColors", selectedColors);
+				request.setAttribute("productList", productList);
+				return new ModelAndView("user/view/userSearchProduct");
+			}
+		}
 	}
 	
 	
@@ -295,7 +321,6 @@ public class UserViewHandler {
 		
 		return new ModelAndView("user/view/userOrderList");
 	}
-
 	
 	// Review
 	@RequestMapping("/reviewList")
@@ -305,10 +330,14 @@ public class UserViewHandler {
 		search.put("searchWord", request.getParameter("searchWord"));
 		
 		int count = boardDao.getReviewCount();
-		
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
+			
+			for( int i =0; i<articles.size(); i++ ) {
+				String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
+				articles.get(i).setProductName(productName);
+			}
 			request.setAttribute( "reviewLists", articles );
 		}
 		return new ModelAndView("user/view/reviewList");

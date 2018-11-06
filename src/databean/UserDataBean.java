@@ -6,7 +6,7 @@ public class UserDataBean {
 	private String id;
 	private String password;
 	private String name;
-	private Date birthday;
+	private String birthday;
 	private String tel;
 	private String email;
 	private int gender;
@@ -34,10 +34,10 @@ public class UserDataBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getTel() {
