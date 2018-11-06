@@ -11,6 +11,6 @@
 		</script>
 	</c:if>
 	<c:if test="${result eq 1}">
-		<c:redirect url="orderInputForm.jsp?identifier=1"/>
+		<c:redirect url="orderInputForm.jk?identifier=1"/>
 	</c:if>
 </c:forEach>

@@ -95,13 +95,15 @@ public class UserFormHandler {
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userInfo=userDao.getUser(id);
+		request.setAttribute("userInfo", userInfo);
 		
-		 /*If this page is accessed from basketList, identifier=1; else identifier=null || identifier=""*/ 
+		/* If this page is accessed from basketList, identifier=1; else identifier=null || identifier="" */ 
 		String identifier=request.getParameter("identifier");
 		
 		if(identifier.equals("1")) {
 			List<BasketDataBean> basketList=basketDao.getBasketList(id);
-			request.setAttribute("basketList", basketList);
+			request.setAttribute("basket", basketList);
 			
 		} else {
 			if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
@@ -109,7 +111,9 @@ public class UserFormHandler {
 				int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
 				
 				BasketDataBean basketItem=new BasketDataBean();
-				
+				basketItem.setProductCode(productCode);
+				basketItem.setBasketQuantity(basketQuantity);
+				request.setAttribute("basket", basketItem);
 			}
 		}
 		return new ModelAndView("user/form/orderInputForm");

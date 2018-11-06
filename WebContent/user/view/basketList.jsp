@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
+<!-- Must be removed later -->
 <c:set var="id" value="aaa" scope="session"/>
 <html>
 	<head>

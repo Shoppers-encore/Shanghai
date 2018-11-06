@@ -22,7 +22,7 @@
 <c:set var="head_basketList" value="장바구니 상세 페이지"/>
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
-
+<c:set var="head_orderInputForm" value="주문 결제 페이지"/>
 
 
 

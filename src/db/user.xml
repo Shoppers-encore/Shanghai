@@ -130,6 +130,9 @@
 	<update id="increaseBasketItemQuantity" parameterType="databean.BasketDataBean">
 		UPDATE jk_basket SET basketquantity=basketquantity+#{basketQuantity} WHERE id=#{id} AND productCode=#{productCode}
 	</update>
+	<delete id="deleteBasketListById" parameterType="String">
+		DELETE FROM jk_basket WHERE id=#{id}
+	</delete>
 	
 	
 	<!-- Order -->

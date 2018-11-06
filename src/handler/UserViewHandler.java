@@ -76,6 +76,7 @@ public class UserViewHandler {
 	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
+		/* Must be removed later */
 		String id="aaa";
 		//String id=(String)request.getSession().getAttribute("id");
 		

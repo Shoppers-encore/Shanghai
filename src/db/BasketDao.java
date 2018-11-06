@@ -29,7 +29,9 @@ public class BasketDao {
 		return session.update("User.updateBasketList", updateReferences);
 	}
 	
-	
+	public int deleteBasketListById(String id) {
+		return session.delete("User.deleteBasketListById", id);
+	}
 	
 	
 	//basket input
