@@ -1,5 +1,8 @@
 package handler;
 
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.sql.Timestamp;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -17,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-
-import databean.ReviewScoreDataBean;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.BasketDataBean;
 import databean.ChatDataBean;
@@ -31,7 +34,6 @@ import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
 import etc.HandlerHelper;
-
 
 @Controller
 public class UserViewHandler {
@@ -315,7 +317,6 @@ public class UserViewHandler {
 		
 		return new ModelAndView("user/view/userOrderList");
 	}
-
 	
 	// Review
 	@RequestMapping("/reviewList")
@@ -325,10 +326,14 @@ public class UserViewHandler {
 		search.put("searchWord", request.getParameter("searchWord"));
 		
 		int count = boardDao.getReviewCount();
-		
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
+			
+			for( int i =0; i<articles.size(); i++ ) {
+				String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
+				articles.get(i).setProductName(productName);
+			}
 			request.setAttribute( "reviewLists", articles );
 		}
 		return new ModelAndView("user/view/reviewList");

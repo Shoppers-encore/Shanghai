@@ -230,6 +230,7 @@ public class AdminViewHandler {
 		request.setAttribute("id", id);
 		return new ModelAndView("adm/view/admChatting");
 	}
+	
 	@RequestMapping("/admChatInput")
 	@ResponseBody
 	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {

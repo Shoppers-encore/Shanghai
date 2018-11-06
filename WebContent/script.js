@@ -90,30 +90,15 @@ function checkNumber() {
 
 
 ///<Review>
-/*function reviewDelcheck() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
+function scoring() {
+	   var slider = document.getElementById("myRange");
+	   var output = document.getElementById("demo");
+	   output.innerHTML = slider.value;
 
-	  if( sessionId == writer ) {
-		   if ( confirm( delCheck ) ) {
-			   document.location.href = "reviewDeletePro.jk";
-		   } else {
-			   alert( cannotdelete );
-			   return false;
-		   }
+	   slider.oninput = function() {
+	     output.innerHTML = this.value;
 	   }
 	}
-
-function reviewModable() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
-	   if( sessionId == writer ){
-	      document.location.href = "reviewModifyForm.jk";
-	   } else {
-	      alert( cannotmodify );
-	      return false;
-	   }
-	}*/
 
 ///<Review Comment>
 function commentInsert(){
@@ -193,7 +178,10 @@ function commentUpdateProc(commentNo){
    $.ajax({
        url : 'commentUpdate.jk',
        type : 'post',
-       data : {'commentContent' : updateContent, 'commentNo' : commentNo},
+       data : {
+    	   'commentContent' : updateContent, 
+    	   'commentNo' : commentNo
+    	   },
        success : function(data){
            commentList(reviewNo); 
        }
@@ -217,6 +205,14 @@ function commentDelete(commentNo){
        }
    });
 }
+
+//Delete Photo
+function photoModify(photoNo){
+	var photoModify ='';
+	photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
+	   
+	$('.photo'+photoNo).html(photoModify);
+	}
 
 
 // BasketList

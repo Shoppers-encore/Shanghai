@@ -61,6 +61,9 @@
 	
 	
 	<!-- Review -->
+	<select id="getMaxReview" resultType="int">
+			SELECT max(reviewNo) FROM jk_review
+	</select>
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
@@ -70,7 +73,7 @@
 	</select>
 	<insert id="insertReview" parameterType="databean.ReviewDataBean">
 			INSERT INTO jk_review (reviewNo, title, reviewContent, reviewDate, id, productCode, rating, photo1, photo2) 
-			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1}, #{photo2})
+			VALUES (reviewNoSEQ.NEXTVAL, #{title}, #{reviewContent}, sysdate, #{id}, #{productCode}, #{rating}, #{photo1, jdbcType=VARCHAR}, #{photo2, jdbcType=VARCHAR})
 	</insert>
 	<select id="selectReview" parameterType="int" resultType="databean.ReviewDataBean">
 			SELECT * FROM jk_review WHERE reviewNo=#{num}
@@ -90,8 +93,14 @@
 	<delete id="deleteReview" parameterType="int">
 			DELETE FROM jk_review WHERE reviewNo=#{num}
 	</delete>
+	<delete id="deleteRvComment" parameterType="int">
+		delete from jk_comment where reviewNo = #{num}
+	</delete>
+	<delete id="deleteReviewLikes" parameterType="int">
+		delete from jk_reviewScore where reviewNo = #{num}
+	</delete>
 	<update id="modifyReview" parameterType="databean.ReviewDataBean">
-			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating} WHERE reviewNo=#{reviewNo}
+			UPDATE jk_review SET title=#{title}, reviewContent=#{reviewContent}, rating=#{rating}, photo1=#{photo1, jdbcType=VARCHAR}, photo2=#{photo2, jdbcType=VARCHAR} WHERE reviewNo=#{reviewNo}
 	</update>
 	<insert id="insertComment" parameterType="databean.CommentDataBean">
 			INSERT INTO jk_comment(reviewNo, commentNo, id, commentContent, commentDate)
