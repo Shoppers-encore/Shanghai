@@ -48,9 +48,12 @@ public class AdminProHandler {
 		String password = request.getParameter( "password" );
 		UserDataBean userDto = userDao.getUser(id);
 		int result = 0;
-		if( userDto.getUserLevel() == USERLEVEL && 
-				userDto.getPassword().equals( password ) ) {
+		if(userDto.getUserLevel() != USERLEVEL) {
+			result = -9;
+		} else if( userDto.getPassword().equals( password ) ) {
 			result = 1; 
+		} else if ( userDto.getPassword() != password ) {
+			result = -1;
 		}
 		request.setAttribute( "result", result );
 		request.getSession().setAttribute("id", id);
@@ -263,5 +266,10 @@ public class AdminProHandler {
 		int result = userDao.admModify(dto);
 		request.setAttribute("result", result);
 		return new ModelAndView ("adm/pro/admModifyPro");
+	}
+	@RequestMapping("/admLogoutPro")
+	public String admLogoutPro(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().setAttribute("memid",null);
+		return "redirect:admLoginForm.jk";
 	}
 }

@@ -23,6 +23,8 @@
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
 
+<c:set var="head_productModify" value="상품수정"/>
+
 
 
 
@@ -198,6 +200,7 @@
 <c:set var="btn_writeReview" value="리뷰쓰기"/>
 <c:set var="btn_fold" value="접기"/>
 <c:set var="btn_x" value="삭제"/>
+<c:set var="btn_productModify" value="상품수정"/>
 
 
 
@@ -216,6 +219,8 @@
 <c:set var="msg_addTag" value="추가할 태그를 입력하세요."/>
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
 <c:set var="msg_emptyOrderList" value="주문 내역이 없습니다." />
+<c:set var="msg_gotoProductList" value="수정은 상품관리에서 가능합니다." />
+
 
 
 

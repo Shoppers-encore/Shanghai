@@ -1,5 +1,6 @@
 package handler;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +18,16 @@ import databean.UserDataBean;
 import db.ProductDao;
 import db.TagDao;
 import db.UserDao;
+import etc.HandlerHelper;
 
 @Controller
 public class AdminFormHandler {
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private ProductDao productDao;
+	@Resource
+	private TagDao tagDao;
 	
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
@@ -69,6 +75,37 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productModifyForm")
 	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("adm/form/tagInputForm");
+		String id=(String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		if( userDto.getUserLevel() == 9 ) {
+			int ref = Integer.parseInt( request.getParameter("ref") );
+			List<ProductDataBean> list = productDao.getProductDetail( ref );
+			Map<String,Integer> colorMap = new HashMap<String,Integer>();
+			Map<String,Integer> sizeMap = new HashMap<String, Integer>();
+			HandlerHelper hh = new HandlerHelper();
+			int[] colors = hh.decodeColorCode(list);
+			int[] sizes = hh.decodeSizeCode(list);
+			for(int i=0;i<colors.length;i++) {
+				System.out.println("color" + colors[i]);
+				colorMap.put("col"+new Integer(colors[i]).toString(), colors[i]);
+			}
+			for(int i = 0 ; i<sizes.length;i++) {
+				System.out.println("size"+sizes[i]);
+				sizeMap.put("siz"+new Integer(sizes[i]).toString(), sizes[i]);
+			}
+
+			TagDao tagDao = new TagDao();
+			List <TagDataBean> tags = tagDao.getTags();
+			List<Integer> checkedTags = tagDao.getProductTagId(ref);
+
+			request.setAttribute("allTags", tags);
+			request.setAttribute("colorMap", colorMap);
+			request.setAttribute("sizeMap", sizeMap);
+			request.setAttribute("checkedTags", checkedTags);
+			request.setAttribute("products", list);
+			return new ModelAndView("adm/form/productModifyForm");
+		} else {
+			return new ModelAndView("user/view/userMain");
+		}
 	}
 }
