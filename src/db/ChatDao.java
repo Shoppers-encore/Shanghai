@@ -17,4 +17,12 @@ public class ChatDao {
 	public int chatInput(ChatDataBean chat) {
 		return session.insert("User.chatInput", chat);
 	}
+
+	public List<ChatDataBean> getChatList() {
+		return session.selectList("Admin.getChatList");
+	}
+
+	public int getChatListCount() {
+		return session.selectOne("Admin.getChatListCount");
+	}
 }

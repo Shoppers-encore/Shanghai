@@ -14,7 +14,7 @@
 	<!-- Review Write Form -->
 	<article><br><br>
 	    <div id="writeForm">
-			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform" onsubmit="return Rvwritecheck()" >
+			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform">
 				<table class="table" >
 					<tr>
 						<th colspan="4">${str_writeReview}</th>
@@ -28,7 +28,7 @@
 						<td style="width:30%">
 							<input class="input" type="text" name="productName" value="${productName}" disabled>
 							<!-- 주문내역 배송완료 목록에서 받아온 상품명 값을 입력해줌 -->
-							<input type="hidden" name="productCode" value="${productCode}">
+							<input type="text" name="productCode" value="${productCode}">
 						</td>		
 						<th style="width:20%">${str_rating}</th>
 						<td style="width:30%">
@@ -38,7 +38,7 @@
 					</tr>
 					<tr>
 						<th>${str_title}</th>
-						<td colspan="3"><input class="input" type="text" name="subject" maxlength="50" style="width:500px;"></td>
+						<td colspan="3"><input class="input" type="text" name="title" maxlength="50" style="width:500px;"></td>
 					</tr>			
 					<tr>
 						<th> ${str_content} </th>
@@ -57,8 +57,7 @@
 						<th colspan="4">
 							<input class="btn btn-primary" type="submit" value="${btn_write}">
 							<input class="btn btn-secondary" type="reset" value="${btn_cancel}">
-							<input class="btn btn-secondary" type="button" value="${btn_list}"
-								onclick="location='reviewList.jk'">
+							<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk'">
 						</th>
 					</tr>			
 				</table>		

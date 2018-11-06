@@ -15,12 +15,23 @@ public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
 
 	public int getProductCount(Map<String, String> map) {
-		System.out.println("getProductCount에서 넘기는 map : " + map);
-		return session.selectOne("User.getProductCount", map);
+		/*System.out.println("getProductCount에서 넘기는 map : " + map);
+		return session.selectOne("User.getProductCount", map);*/
+		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
+			return session.selectOne("User.getProductColorSearchCount", map);
+		}else {
+			return session.selectOne("User.getProductSearchCount", map);
+		}
 	}
 	
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
-		return session.selectList("User.getProductList", map);
+		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
+			//System.out.println("색잇음");
+			return session.selectList("User.getProductColorSearchList", map);
+		}else {
+			//System.out.println("색없음");
+			return session.selectList("User.getProductSearchList", map);
+		}
 	}
 	
 	public String getProductName(String productCode) {
