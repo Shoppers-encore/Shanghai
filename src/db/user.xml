@@ -20,7 +20,8 @@
 	<update id="modifyUser" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
 	</update>
-
+	
+	
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'

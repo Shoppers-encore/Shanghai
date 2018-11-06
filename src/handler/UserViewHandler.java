@@ -33,8 +33,8 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
-import databean.TagDataBean;
 import db.UserDao;
+import databean.TagDataBean;
 import databean.UserDataBean;
 import etc.HandlerHelper;
 
@@ -352,7 +352,7 @@ public class UserViewHandler {
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
 		String id=(String)request.getSession().getAttribute("id");
-
+		
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(num).toString());
