@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.ImageInfoDataBean;
-import databean.OrderListDataBean;
 import databean.ProductDataBean;
 
 
@@ -122,6 +121,10 @@ public class ProductDao{
 	
 	public int deleteProd(int ref) {
 		return session.delete("Admin.deleteProd", ref);
+	}
+	
+	public ProductDataBean getProductDetailsByProductCode(String productCode) {
+		return session.selectOne("User.getProductDetailsByProductCode", productCode);
 	}
 	
 }

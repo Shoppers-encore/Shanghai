@@ -129,7 +129,7 @@
 <c:set var="str_cart" value="장바구니"/>
 <c:set var="str_select" value="선택"/>
 <c:set var="str_currencyUnit" value="원"/>
-
+<c:set var="str_saveToBasket" value="장바구니에 저장"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -224,7 +224,7 @@
 <c:set var="msg_pay" value="결제하기"/>
 <c:set var="msg_selectColor" value="상품 색상을 선택해 주세요."/>
 <c:set var="msg_selectSize" value="상품 사이즈를 선택해 주세요."/>
-
+<c:set var="msg_saveSuccess" value="해당 상품을 장바구니에 저장했습니다."/>
 
 
 <!-- url -->

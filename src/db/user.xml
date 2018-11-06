@@ -51,7 +51,7 @@
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productList}
 	</select>
 	<select id="getProductDetailsByProductCode" parameterType="String" resultType="databean.ProductDataBean">
-		SELECT productName, thumbnail, productPrice FROM jk_product WHERE productCode=#{productList}
+		SELECT productName, thumbnail, productPrice FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	
 	
