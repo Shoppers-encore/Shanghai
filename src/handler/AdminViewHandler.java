@@ -223,4 +223,14 @@ public class AdminViewHandler {
 		}
 		return chatList;
 	}
+
+	@RequestMapping("/admChatting")
+	public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		request.setAttribute("id", id);
+		return new ModelAndView("adm/view/admChatting");
+	}
+	@RequestMapping("/admChatInput")
+	@ResponseBody
+	public void admChatInput(HttpServletRequest request, HttpServletResponse response)
 }
