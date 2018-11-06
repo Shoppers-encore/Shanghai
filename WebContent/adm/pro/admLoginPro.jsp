@@ -12,6 +12,13 @@
 		//-->
 	</script>
 </c:if>
+<c:if test="${result eq -9}">
+	<script type="text/javascript">
+		//<!-- user is not admin
+		erroralert( adminonly );
+		//-->
+	</script>
+</c:if>
 <c:if test="${result eq -1}">
 	<script type="text/javascript">
 		//<!-- password does not match ID

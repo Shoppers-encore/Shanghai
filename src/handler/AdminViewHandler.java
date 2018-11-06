@@ -37,11 +37,14 @@ public class AdminViewHandler {
 	private ProductDao productDao;
 
 	@RequestMapping("/userList")
-	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {		
 		String id = (String)request.getSession().getAttribute("id");
+		int count = userDao.getUserListCount();
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<UserDataBean> members = userDao.getList(100, map);
 		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
+		request.setAttribute("members", members);
+		request.setAttribute("userDto", userDto);
 		return new ModelAndView("adm/view/userList");
 	}
 	@RequestMapping("/admChatView")
@@ -54,6 +57,10 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		String category = request.getParameter("category");
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("category",  category);
@@ -72,22 +79,27 @@ public class AdminViewHandler {
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
-		
-		ProductDao productDao = new ProductDao();
+
 		int count = productDao.getProdCount();
 		Map<String,String> map = new HandlerHelper().makeCount(count, request);
 		List <ProductDataBean> products = productDao.getProdList(map);
+
 		request.setAttribute("products", products);
 		request.setAttribute("count", count);
 		return new ModelAndView("adm/view/admProductList");
 	}
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list =productDao.getProdDetail( ref );
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		//request.setAttribute("ref", ref);
 		request.setAttribute("productList", list);
 		request.setAttribute("imageList", imageList);
 		request.setAttribute("colors", colors);

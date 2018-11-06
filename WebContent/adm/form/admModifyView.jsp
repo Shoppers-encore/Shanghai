@@ -72,7 +72,7 @@
 								<span class="input-group-text">${str_tel}</span>
 							</div>
 							<input type="text" name="tel" class="form-control" value="${userDto.tel}"
-							onkeyup="numberonly(event, admModform)" maxlength="11">
+							onkeyup="numberonly(event, admModForm)" maxlength="11">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
@@ -85,7 +85,7 @@
 							onclick="confirmmail()"> <br><br>
 						</div>
 						<input class="btn btn-secondary" type="button" value="${btn_back}"
-									onclick="location='admMain.jk'">
+									onclick="history.back()">
 						<input class="btn btn-primary" type="submit" value="${btn_membermod}">
 					</form>
 					

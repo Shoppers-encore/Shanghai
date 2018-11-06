@@ -124,8 +124,12 @@ public class ProductDao{
 		return session.delete("Admin.deleteProd", ref);
 	}
 	
-	public String getProdName(String productCode ) {
+	public String getProdName(String productCode) {
 		return session.selectOne("Admin.getProdName", productCode);
 	}
 	
+	public int changeQuantity(ProductDataBean productDto) {
+		return session.update("Admin.changeQuantity", productDto);
+	}
+
 }
