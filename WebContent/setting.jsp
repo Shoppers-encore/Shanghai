@@ -226,6 +226,7 @@
 <c:set var="msg_selectSize" value="상품 사이즈를 선택해 주세요."/>
 
 
+
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum="/>
 <c:set var="url_searchType" value="&searchType="/>

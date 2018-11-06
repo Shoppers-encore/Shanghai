@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -236,20 +235,16 @@ public class UserProHandler {
 	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
 		String id=(String)request.getSession().getAttribute("id");
 		
-		/* Get old items from jk_basket using id */
+		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
 		
-		/* Create an array list to hold result values */
-		List<Integer> resultSet=new ArrayList<Integer>();
-		
-		/* Get new options for each item in the basket */
 		for(BasketDataBean basketItem:basketList) {
 			String productCode=request.getParameter(basketItem.getProductCode());
 			int basketQuantity=Integer.parseInt(request.getParameter("basketQuantity_"+productCode));
 			String colorSelected=request.getParameter("selectColorOptions_"+productCode);
-			String sizeSelected=request.getParameter("selectSizeOptions_"+productCode);
+			String sizeSelected=request.getParameter("selectedSizeOptions_"+productCode);
 			String ref;
-			if(productCode.length()>4) {
+			if(productCode.length()>5) {
 				ref=productCode.substring(2, productCode.length()-2);
 			} else {
 				ref=productCode;
@@ -257,22 +252,16 @@ public class UserProHandler {
 			
 			String newProductCode=colorSelected+ref+sizeSelected;
 			
-			/* Make  a map (can't use BasketDataBean because the productCode must be updated with a new one) */
-			/* Map<String, Object> so we can put both String and int */ 
 			Map<String, Object> updateReferences=new HashMap<String, Object>();
 			updateReferences.put("newProductCode", newProductCode);
 			updateReferences.put("basketQuantity", basketQuantity);
 			updateReferences.put("id", id);
 			updateReferences.put("productCode", productCode);
 			
-			/* Get the result in int; result=1 when successfully updated */
 			int result = basketDao.updateBasketList(updateReferences);
-			
-			/* Add the int result to the array list */ 
-			resultSet.add(result);
+			System.out.println(result);
 		}
 		
-		request.setAttribute("results", resultSet);
 		return new ModelAndView( "user/pro/basketListPro" );
 	}
 	

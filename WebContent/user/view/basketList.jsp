@@ -52,13 +52,11 @@
 						</div>
 					</div>
 					
-					<script type="text/javascript">
-						var prodCode=[];
-					</script>
 					<form class="form basketListForm" name="basketListForm" method="post" action="basketListPro.jk">
 						<c:forEach var="basketList" items="${basketList}">					
 							<div class="form-group row border text-center" id="${basketList.productCode}">
 								<script type="text/javascript">
+									var prodCode=[];
 									prodCode.push('${basketList.productCode}');
 								</script>
 								<input type="hidden" name="${basketList.productCode}" value="${basketList.productCode}">
@@ -74,7 +72,7 @@
 										var key='${basketList.productCode}';
 										var prodColors=JSON.parse('${colorOptions}')[key];
 										for(var color in prodColors) {
-											if('${basketList.productCode}'.length>4) {
+											if('${basketList.productCode}'.length>3) {
 												if('${basketList.productCode}'.substring(0,2)==prodColors[color]) {
 													$('#selectColorOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
@@ -93,7 +91,7 @@
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
 										
 										for(var size in prodSizes) {
-											if('${basketList.productCode}'.length>4) {
+											if('${basketList.productCode}'.length>3) {
 												if('${basketList.productCode}'.substring('${basketList.productCode}'.length-2,'${basketList.productCode}'.length)==prodSizes[size]) {
 													$('#selectSizeOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
