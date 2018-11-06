@@ -26,6 +26,8 @@ public class AdminFormHandler {
 	private UserDao userDao;
 	@Resource
 	private ProductDao productDao;
+	@Resource
+	private TagDao tagDao;
 	
 	@RequestMapping("/admLoginForm")
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
@@ -75,8 +77,8 @@ public class AdminFormHandler {
 	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
 		String id=(String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
-		int ref = Integer.parseInt( request.getParameter("ref") );
 		if( userDto.getUserLevel() == 9 ) {
+			int ref = Integer.parseInt( request.getParameter("ref") );
 			List<ProductDataBean> list = productDao.getProductDetail( ref );
 			Map<String,Integer> colorMap = new HashMap<String,Integer>();
 			Map<String,Integer> sizeMap = new HashMap<String, Integer>();
@@ -91,14 +93,17 @@ public class AdminFormHandler {
 				System.out.println("size"+sizes[i]);
 				sizeMap.put("siz"+new Integer(sizes[i]).toString(), sizes[i]);
 			}
-			request.setAttribute("ref", ref);
+
+			TagDao tagDao = new TagDao();
+			List <TagDataBean> tags = tagDao.getTags();
+			List<Integer> checkedTags = tagDao.getProductTagId(ref);
+
+			request.setAttribute("allTags", tags);
 			request.setAttribute("colorMap", colorMap);
 			request.setAttribute("sizeMap", sizeMap);
-			request.setAttribute("colors", hh.colorArr());
-			request.setAttribute("sizes", new String[]{"SS", "MM", "LL", "XL", "FR"});
-			request.setAttribute("goods", list);
-			//request.setAttribute("admin", new LogonDBBean().getAdm(id));
-			return new ModelAndView("admGood/goodModifyForm");
+			request.setAttribute("checkedTags", checkedTags);
+			request.setAttribute("products", list);
+			return new ModelAndView("adm/form/productModifyForm");
 		} else {
 			return new ModelAndView("user/view/userMain");
 		}

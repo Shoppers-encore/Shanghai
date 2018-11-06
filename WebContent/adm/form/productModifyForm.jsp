@@ -226,7 +226,7 @@ function deletePhoto(tb_no,photo_id,start){
                   <tr>
                      <th style="width :10%"> ${str_productCode} </th>
                      <td style="width :20%">
-                        <input type="text" name="product_code" class="form-control" readonly value="${ref}">
+                        <input type="text" name="product_code" class="form-control" readonly value="${products.get(0).ref}">
                      </td>
                      <th style="width :10%"> ${str_size} </th>
                      <td style="width :30%">
@@ -240,18 +240,18 @@ function deletePhoto(tb_no,photo_id,start){
                       <th style="width :10%"> ${str_category} </th>
                       <td style="width :20%">
                       <select name="category">
-                                 <option value="1" ${goods.get(0).category==1?'selected':''}>${str_out}${str_cot}</option>
-                                 <option value="2" ${goods.get(0).category==2?'selected':''}>${str_out}${str_jkt}</option>
-                                 <option value="3" ${goods.get(0).category==3?'selected':''}>${str_out}${str_jpr}</option>
-                                 <option value="4" ${goods.get(0).category==4?'selected':''}>${str_out}${str_cdg}</option>
-                                 <option value="5" ${goods.get(0).category==5?'selected':''}>${str_tst}${str_lst}</option>
-                                 <option value="6" ${goods.get(0).category==6?'selected':''}>${str_tst}${str_sst}</option>
-                                 <option value="7" ${goods.get(0).category==7?'selected':''}>${str_tst}${str_mtm}</option>
-                                 <option value="8" ${goods.get(0).category==8?'selected':''}>${str_tst}${str_hdt}</option>
-                                 <option value="9" ${goods.get(0).category==9?'selected':''}>${str_sht}${str_lss}</option>
-                                 <option value="10" ${goods.get(0).category==10?'selected':''}>${str_sht}${str_sss}</option>
-                                 <option value="11" ${goods.get(0).category==11?'selected':''}>${str_btm}${str_lpt}</option>
-                                 <option value="12" ${goods.get(0).category==12?'selected':''}>${str_btm}${str_spt}</option>
+                                 <option value="1" ${products.get(0).productCategory==1?'selected':''}>${str_out}${str_cot}</option>
+                                 <option value="2" ${products.get(0).productCategory==2?'selected':''}>${str_out}${str_jkt}</option>
+                                 <option value="3" ${products.get(0).productCategory==3?'selected':''}>${str_out}${str_jpr}</option>
+                                 <option value="4" ${products.get(0).productCategory==4?'selected':''}>${str_out}${str_cdg}</option>
+                                 <option value="5" ${products.get(0).productCategory==5?'selected':''}>${str_tst}${str_lst}</option>
+                                 <option value="6" ${products.get(0).productCategory==6?'selected':''}>${str_tst}${str_sst}</option>
+                                 <option value="7" ${products.get(0).productCategory==7?'selected':''}>${str_tst}${str_mtm}</option>
+                                 <option value="8" ${products.get(0).productCategory==8?'selected':''}>${str_tst}${str_hdt}</option>
+                                 <option value="9" ${products.get(0).productCategory==9?'selected':''}>${str_sht}${str_lss}</option>
+                                 <option value="10" ${products.get(0).productCategory==10?'selected':''}>${str_sht}${str_sss}</option>
+                                 <option value="11" ${products.get(0).productCategory==11?'selected':''}>${str_btm}${str_lpt}</option>
+                                 <option value="12" ${products.get(0).productCategory==12?'selected':''}>${str_btm}${str_spt}</option>
                            </select>
                         </td>
                      
@@ -259,9 +259,9 @@ function deletePhoto(tb_no,photo_id,start){
                   <tr>
                   	<th> ${str_style} </th>
                   <td colspan="5">
-                  		<c:forEach var="tag" items="${tags}">   
+                  		<c:forEach var="tag" items="${allTags}">   
 							<label class="btn btn-info">
-                  	 		 	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}
+                  	 		 	<input type="checkbox" name="tag" value="${tag.tagId}" ${checkedTags.contains(tag.tagId)?'checked':''}>${tag.tagName}
                  		    </label>
                  		</c:forEach>
                   	</td>
@@ -269,7 +269,7 @@ function deletePhoto(tb_no,photo_id,start){
                   <tr>
                      <th> ${str_productName} </th>
                      <td colspan="5"> 
-                        <input type="text" name="product_name" class="form-control">
+                        <input type="text" name="product_name" class="form-control" value="${products.get(0).productName}">
                      </td>
                                
                   </tr>
@@ -277,72 +277,72 @@ function deletePhoto(tb_no,photo_id,start){
                      <th> ${str_color} </th>
                      <td colspan="5">
                          <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="0">
+						     <input type="checkbox" name="color" value="0" ${colorMap.col0==0?'checked':''}>
 						     <span class="checkmark" id="white"></span>
 						     <span class="tooltiptext" id="white">${msg_color_wht}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="1">
+						     <input type="checkbox" name="color" value="1" ${colorMap.col1==1?'checked':''}>
 						     <span class="checkmark" id="black"></span>
 						     <span class="tooltiptext" id="black">${msg_color_blk}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="2">
+						     <input type="checkbox" name="color" value="2" ${colorMap.col2==2?'checked':''}>
 						     <span class="checkmark" id="red"></span>
 						     <span class="tooltiptext" id="red">${msg_color_red}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="3">
+						     <input type="checkbox" name="color" value="3" ${colorMap.col3==3?'checked':''}>
 						     <span class="checkmark" id="orange"></span>
 						     <span class="tooltiptext" id="orange">${msg_color_org}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="4">
+						     <input type="checkbox" name="color" value="4" ${colorMap.col4==4?'checked':''}>
 						     <span class="checkmark" id="yellow"></span>
 						     <span class="tooltiptext" id="yellow">${msg_color_ylw}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="5">
+						     <input type="checkbox" name="color" value="5" ${colorMap.col5==5?'checked':''}>
 						     <span class="checkmark" id="green"></span>
 						     <span class="tooltiptext" id="green">${msg_color_grn}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="6">
+						     <input type="checkbox" name="color" value="6" ${colorMap.col6==6?'checked':''}>
 						     <span class="checkmark" id="blue"></span>
 						     <span class="tooltiptext" id="blue">${msg_color_blu}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="7">
+						     <input type="checkbox" name="color" value="7" ${colorMap.col7==7?'checked':''}>
 						     <span class="checkmark" id="skyblue"></span>
 						     <span class="tooltiptext" id="skyblue">${msg_color_sky}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="8">
+						     <input type="checkbox" name="color" value="8" ${colorMap.col8==8?'checked':''}>
 						     <span class="checkmark" id="navy"></span>
 						     <span class="tooltiptext" id="navy">${msg_color_nvy}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="9">
+						     <input type="checkbox" name="color" value="9" ${colorMap.col9==9?'checked':''}>
 						     <span class="checkmark" id="purple"></span>
 						     <span class="tooltiptext" id="purple">${msg_color_ppl}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="10">
+						     <input type="checkbox" name="color" value="10" ${colorMap.col10==10?'checked':''}>
 						     <span class="checkmark" id="brown"></span>
 						     <span class="tooltiptext" id="brown">${msg_color_brn}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="11">
+						     <input type="checkbox" name="color" value="11" ${colorMap.col11==11?'checked':''}>
 						     <span class="checkmark" id="gray"></span>
 						     <span class="tooltiptext" id="gray">${msg_color_gry}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="12">
+						     <input type="checkbox" name="color" value="12" ${colorMap.col12==12?'checked':''}>
 						     <span class="checkmark" id="beige"></span>
 						     <span class="tooltiptext" id="beige">${msg_color_beg}</span>
 						   </label>
 						   <label class="container" id="colorcontainer">
-						     <input type="checkbox" name="color" value="13">
+						     <input type="checkbox" name="color" value="13" ${colorMap.col13==13?'checked':''}>
 						     <span class="checkmark" id="pink"></span>
 						     <span class="tooltiptext" id="pink">${msg_color_pnk}</span>
 						   </label>
@@ -351,36 +351,35 @@ function deletePhoto(tb_no,photo_id,start){
                   <tr>
                         <th> ${str_price} </th>
                         <td>
-                           <input type="text" name="price" class="form-control">
+                           <input type="text" name="price" class="form-control" value="${products.get(0).productPrice}">
                         </td>
                         <th> ${str_salePercent} </th>
                         <td>
-                           <input type="text" name="sale" class="form-control">
+                           <input type="text" name="sale" class="form-control" value="${products.get(0).discount}">
                         </td>
                        	<th> ${str_productQuantity} </th>
                     	<td> 
-                        <input type="text" name="quantity" class="form-control">
+                        <input type="text" name="quantity" class="form-control" readonly value="${msg_gotoProductList}">
                     	</td> 
                   </tr>
                   <tr>
                      <th colspan="6">
-                     <input class="btn btn-danger" type="file" name="upload1">
-                     <input class="btn btn-danger" type="file" name="upload2">     
+                     	
+                     	<!-- //////////////////////  사진 수정 들어갈 자리  ////////////////////////// -->
+                     	
                      </th>
                   </tr>
-		                     	
 
                   <tr>
                         <th> ${str_content} </th>
                         <td colspan="5">
-                           <textarea id="productContent" name="good_content" class="form-control" rows="15"></textarea>
+                           <textarea id="productContent" name="good_content" class="form-control" rows="15"> ${products.get(0).productContent}</textarea>
                         </td>
                   </tr>
                   <tr>
                         <th colspan="6" align="center">
-                           <input class="btn btn-primary" type="submit" value="${btn_productInput}">
-                           <input class="btn btn-secondary" type="button" value="${btn_back}" onclick="location='admProductList.jk'">
-                           <input class="btn btn-secondary" type="reset" value="${btn_cancel}">
+                           <input class="btn btn-primary" type="submit" value="${btn_productModify}">
+                           <input class="btn btn-secondary" type="button" value="${btn_back}" onclick="history.back()">
                         </th>
                   </tr>
                </table>

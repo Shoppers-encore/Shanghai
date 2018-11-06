@@ -69,12 +69,9 @@ $('input[name=btid]').attr('value', result)
                <c:if test="${count ne 0}">
                   <c:forEach var="order" items="${orders}"> 
                      <tr>
-                        <td><a href="admOrderDetail.jk?orderCode=${order.orderCode}&order_id=${order.id}">${order.orderCode}</a></td>
-                        <td>${order.id}</td>
-                        <!-- <td>
-							<input type="hidden" name="productCode" value="${order.productCode}">
-                      		${order.productName}
-						</td>-->
+                        <td><a href="admOrderDetail.jk?orderCode=${order.orderCode}&order_id=${order.id}">${order.orderCode}</a> 
+                        <input type="hidden" name="orderCode" value="${order.orderCode}"></td>
+                        <td>${order.id}<input type="hidden" name="id" value="${order.id}"></td>
                         <td><c:choose>
 	                        	<c:when test="${order.orderStatus eq 0}">
 	                        		<input type="text" value="${order.orderStatus}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
