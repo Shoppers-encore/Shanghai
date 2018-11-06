@@ -53,25 +53,31 @@
 						<td colspan="3">
 							<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 ne null}"> 
 								<div class="input-group photo1">
-									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">
+									<img src="/Shanghai/save/${reviewDto.photo1}">
+									<input type="hidden" name="photo1" value="${reviewDto.photo1}">
 									<button class="btn btn-outline-primary btn-sm" onclick="photoModify(1)">${btn_delete}</button> 
 								</div>
 								<div class="input-group photo2">	
-									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+									<img src="/Shanghai/save/${reviewDto.photo2}">
+									<input type="hidden" name="photo1" value="${reviewDto.photo2}">
 									<button class="btn btn-outline-primary btn-sm" onclick="photoModify(2)">${btn_delete}</button>
 								</div>
 							</c:if>
 							<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 eq null}">
 								<div class="input-group photo1">
-									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">
+									<img src="/Shanghai/save/${reviewDto.photo1}">
+									<input type="hidden" name="photo1" value="${reviewDto.photo1}">
 									<button class="btn btn-outline-primary btn-sm" onclick="photoModify(1)">${btn_delete}</button> 
-								</div>	
+								</div>
+								<input class="btn btn-outline-danger" type="file" name="photo2">
 							</c:if>
 							<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 ne null}">
 								<div class="input-group photo2">	
-									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+									<img src="/Shanghai/save/${reviewDto.photo2}">
+									<input type="hidden" name="photo1" value="${reviewDto.photo2}">
 									<button class="btn btn-outline-primary btn-sm" onclick="photoModify(2)">${btn_delete}</button>
 								</div>
+								<input class="btn btn-outline-danger" type="file" name="photo1">
 							</c:if>
 							<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 eq null}">
 								<input class="btn btn-outline-danger" type="file" name="photo1">

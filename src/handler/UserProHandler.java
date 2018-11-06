@@ -16,6 +16,7 @@ import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -306,6 +307,10 @@ public class UserProHandler {
 		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
 	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
 	
+		String photo1 = multi.getParameter( "photo1" );
+		String photo2 = multi.getParameter( "photo2" );
+		System.out.println( photo1 );
+		System.out.println( photo2 );
 		String systemName=null;
 		String[] photos = {null, null};
 		int i = 0;

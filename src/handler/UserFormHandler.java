@@ -57,10 +57,8 @@ public class UserFormHandler {
 		String id= (String)request.getSession().getAttribute("id");
 		if(id==null) {
 			return new UserViewHandler().main(request,response);
-		}else if(id.length()<=5) {
-			//admin?
-		}else {
-			String productCode = request.getParameter("chk");
+		} else {
+			String productCode = request.getParameter("productCode");
 			String productName = new ProductDao().getProductName(productCode);
 			request.setAttribute("productName", productName);
 			request.setAttribute("productCode", productCode);

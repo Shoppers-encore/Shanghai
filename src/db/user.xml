@@ -53,6 +53,9 @@
 	
 	
 	<!-- Review -->
+	<select id="getMaxReview" resultType="int">
+			SELECT max(reviewNo) FROM jk_review
+	</select>
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>

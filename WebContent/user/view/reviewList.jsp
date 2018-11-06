@@ -11,7 +11,7 @@
 <c:set var="id" value="aaa" scope="session"/>
 <body class="container">
 	<!-- User Header -->
-<%-- 	<%@ include file="../../user/form/userHeader.jsp" %> --%>
+<%@ include file="../../user/form/userHeader.jsp" %>
 	<!-- Review Board List -->
 	<article><br><br>
 	    	<h4>${str_review}</h4>
@@ -40,11 +40,11 @@
 									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
 										
 										<c:if test="${reviewlist.photo1 ne null}">
-											<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
+											<img src="/Shanghai/save/${reviewlist.photo1}" style="width:50px; height:50px;">
 											${reviewlist.title}
 										</c:if>
 										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 ne null}">
-											<img src="${reviewlist.photo2}" style="width:50px; height:50px;">
+											<img src="/Shanghai/save/${reviewlist.photo2}" style="width:50px; height:50px;">
 											${reviewlist.title}
 										</c:if>
 										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 eq null}">

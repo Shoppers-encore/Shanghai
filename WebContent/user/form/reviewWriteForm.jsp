@@ -28,7 +28,7 @@
 						<td style="width:30%">
 							<input class="input" type="text" name="productName" value="${productName}" disabled>
 							<!-- 주문내역 배송완료 목록에서 받아온 상품명 값을 입력해줌 -->
-							<input type="hidden" name="productCode" value="${productCode}">
+							<input type="text" name="productCode" value="${productCode}">
 						</td>		
 						<th style="width:20%">${str_rating}</th>
 						<td style="width:30%">
@@ -38,7 +38,7 @@
 					</tr>
 					<tr>
 						<th>${str_title}</th>
-						<td colspan="3"><input class="input" type="text" name="subject" maxlength="50" style="width:500px;"></td>
+						<td colspan="3"><input class="input" type="text" name="title" maxlength="50" style="width:500px;"></td>
 					</tr>			
 					<tr>
 						<th> ${str_content} </th>
