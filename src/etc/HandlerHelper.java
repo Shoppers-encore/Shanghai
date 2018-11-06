@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
+import databean.TagDataBean;
 import db.ProductDao;
+import db.TagDao;
 
 
 
@@ -112,6 +114,12 @@ public class HandlerHelper {
 		return sizes;
 	}
 	
+	public List <TagDataBean> tagList() {
+		TagDao tagDao = new TagDao();
+		List <TagDataBean> tags = tagDao.getTags();
+		return tags;
+	}
+
 	public int[] removeDuplicate(int[] numbers){
 		List<Integer> resultList = new ArrayList<Integer>();
 		for(int i=0; i<numbers.length ; i++) {

@@ -102,4 +102,7 @@
 	<update id="admModify" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
 	</update>
+	<select id="getProductTagId" parameterType="int" resultType="int">
+		SELECT tagId FROM jk_productTag WHERE ref=#{ref}
+	</select>
 </mapper>

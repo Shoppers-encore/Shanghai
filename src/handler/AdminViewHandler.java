@@ -53,6 +53,10 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		String category = request.getParameter("category");
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("category",  category);
@@ -82,11 +86,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list =productDao.getProdDetail( ref );
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		//request.setAttribute("ref", ref);
 		request.setAttribute("productList", list);
 		request.setAttribute("imageList", imageList);
 		request.setAttribute("colors", colors);

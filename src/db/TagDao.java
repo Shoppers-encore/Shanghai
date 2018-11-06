@@ -24,4 +24,7 @@ public class TagDao {
 	public int insertProdTag(ProductTagDataBean productTagDto) {
 		return session.insert("Admin.insertProdTag", productTagDto);
 	}
+	public List<Integer> getProductTagId(int ref) {
+		return session.selectList("Admin.getProductTagId", ref);
+	}
 }
