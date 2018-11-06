@@ -233,7 +233,6 @@ public class AdminViewHandler {
 	
 	@RequestMapping("/admChatInput")
 	@ResponseBody
-	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
+	public void admChatInput(HttpServletRequest request, HttpServletResponse response)
 	}
-	
 	

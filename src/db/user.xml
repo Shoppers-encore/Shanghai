@@ -17,6 +17,9 @@
 	<update id="modifyUser" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
 	</update>
+	<select id="getUserLevel" parameterType="String" resultType="int">
+		SELECT userLevel FROM jk_user WHERE id=#{id}
+	</select>
 	
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">

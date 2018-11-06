@@ -89,8 +89,11 @@
 							<!-- comment -->
 						<tr>
 							<th colspan="2">
-								<c:if test="${sessionScope.id.length() le 5 || reviewDto.id eq sessionScope.id}">
+								<c:if test="${reviewDto.id eq sessionScope.id}">
 									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="location='reviewModifyForm.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
+									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
+								</c:if>
+								<c:if test="${userDto.userLevel eq 9}">
 									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='reviewList.jk?pageNum=${pageNum}'">

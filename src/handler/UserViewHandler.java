@@ -33,6 +33,7 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import db.UserDao;
 import etc.HandlerHelper;
 
 @Controller
@@ -47,6 +48,8 @@ public class UserViewHandler {
 	private OrderDao orderDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private UserDao userDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -348,7 +351,8 @@ public class UserViewHandler {
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
 		String id=(String)request.getSession().getAttribute("id");
-
+		int userLevel = userDao.getUserLevel( id );
+		
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(num).toString());
@@ -360,6 +364,7 @@ public class UserViewHandler {
 		}
 		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
 		
+		request.setAttribute( "userLevel", userLevel );
 		request.setAttribute( "number", number );
 		request.setAttribute( "pageNum", pageNum );
 		request.setAttribute( "reviewDto", reviewDto );

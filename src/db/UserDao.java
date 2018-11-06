@@ -67,4 +67,7 @@ public class UserDao{
 	public int admModify(UserDataBean dto) {
 		return session.update("Admin.admModify", dto);
 	}
+	public int getUserLevel(String id) {
+		return session.selectOne("User.getUserLevel", id);
+	}
 }
