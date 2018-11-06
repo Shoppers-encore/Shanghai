@@ -76,7 +76,8 @@ public class UserViewHandler {
 	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
-		String id=(String)request.getSession().getAttribute("id");
+		String id="aaa";
+		//String id=(String)request.getSession().getAttribute("id");
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -97,7 +98,7 @@ public class UserViewHandler {
 			String productCode=product.getProductCode();
 			String ref;
 			// 1-2) Check if productCode=ref (=options not selected)
-			if(productCode.length()<7) {
+			if(productCode.length()<5) {
 				ref=productCode;
 			} else {
 				ref=productCode.substring(2,productCode.length()-2);

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
+<c:set var="id" value="aaa" scope="session"/>
 <html>
 	<head>
 		<title>${head_basketList}</title>
@@ -52,11 +53,13 @@
 						</div>
 					</div>
 					
+					<script type="text/javascript">
+						var prodCode=[];
+					</script>
 					<form class="form basketListForm" name="basketListForm" method="post" action="basketListPro.jk">
 						<c:forEach var="basketList" items="${basketList}">					
 							<div class="form-group row border text-center" id="${basketList.productCode}">
 								<script type="text/javascript">
-									var prodCode=[];
 									prodCode.push('${basketList.productCode}');
 								</script>
 								<input type="hidden" name="${basketList.productCode}" value="${basketList.productCode}">
@@ -150,26 +153,6 @@
 							</div>
 						</c:forEach>
 						<div class="text-right">
-							<h5>${str_totalPrice}: <span id="totalPrice"></span>${str_currencyUnit}</h5>
-							<script type="text/javascript">
-								/* for(product in prodCode) {
-									alert(prodCode[product])
-								}
-								var prodQtyId='basketQuantity_${basketList.productCode}';
-								var productQty=document.getElementById(prodQtyId).value;
-								var productPrice=eval('${basketList.productPrice}'*productQty);
-								$('#totalPRice').text('productPrice');
-								
-								$('#basketQuantity_${basketList.productCode}').on(
-									'change',
-									function(event) {
-										productQty=document.getElementById(prodQtyId).value;
-										productPrice=eval('${basketList.productPrice}'*productQty);
-										$('#productPrice').text(productPrice);
-									}
-								); */
-							</script>
-							
 							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${msg_pay}</button>
 							<script type="text/javascript">
