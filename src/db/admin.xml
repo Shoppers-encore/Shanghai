@@ -103,6 +103,15 @@
 		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
 	</update>
 	<update id="changeStatus" parameterType="java.util.Map">
-	 	 UPDATE jk_orderList SET orderStatus=orderStatus+1 WHERE id=#{id} AND orderCode=TO_NUMBER(#{orderCode})
+	 	UPDATE jk_orderList SET orderStatus=orderStatus+1 WHERE id=#{id} AND orderCode=TO_NUMBER(#{orderCode})
 	 </update>
+	 <select id="getRvList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+	<select id="getProdName" parameterType="String" resultType="String">
+		SELECT productName from jk_product WHERE productCode=#{productCode}
+	</select>
+	<delete id="reviewDelete" parameterType="int">
+		DELETE FROM jk_review WHERE reviewNo=#{reviewNo}
+	</delete>
 </mapper>

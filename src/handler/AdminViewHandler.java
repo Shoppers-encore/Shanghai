@@ -18,6 +18,7 @@ import databean.ProductDataBean;
 import databean.ReviewDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
+import db.BoardDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.TagDao;
@@ -137,29 +138,22 @@ public class AdminViewHandler {
 	
 	@RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
-		/*String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );*/
-		
-		int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
+		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
 		String number = request.getParameter( "number" );
+		String productCode = request.getParameter( "productCode" );
+		ProductDao productDao = new ProductDao();
+		String productName = productDao.getProdName( productCode );
 		
-		ReviewDataBean reviewDto = boardDao.get( num );
-		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
+		ReviewDataBean reviewDto = boardDao.get( reviewNo );
 		String id = (String)request.getSession().getAttribute("id");
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
-			map.put("reviewNo", new Integer(num).toString());
+			map.put("reviewNo", new Integer(reviewNo).toString());
 			map.put("id", id);
-			int me = boardDao.getReviewLike(map);
-			if(me>0) {
-				reviewDto.setCheckedme( true );
-			}
 		}
-		reviewDto.setProductName(new ProductDao().getProductName(reviewDto.getProductCode()));
 		
+		request.setAttribute( "productName", productName );
 		request.setAttribute( "number", number );
 		request.setAttribute( "pageNum", pageNum );
 		request.setAttribute( "reviewDto", reviewDto );
@@ -167,6 +161,7 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admReviewList")
 	public ModelAndView admReviewList(HttpServletRequest request, HttpServletResponse response) {
+		BoardDao boardDao = new BoardDao();
 		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute( "id", id );
@@ -179,8 +174,8 @@ public class AdminViewHandler {
 		
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
-			List <ReviewDataBean> articles = boardDao.getReviewList( map );
-			request.setAttribute( "reviewLists", articles );
+			List <ReviewDataBean> reviewList = boardDao.getRvList( map );
+			request.setAttribute( "reviewList", reviewList );
 		}
 		return new ModelAndView("adm/view/admReviewList");
 	}

@@ -29,6 +29,7 @@ import databean.ProductDataBean;
 import databean.ProductTagDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
+import db.BoardDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.TagDao;
@@ -44,6 +45,8 @@ public class AdminProHandler {
 	public static final int USERLEVEL=9;
 	@Resource
 	private ProductDao productDao;
+	@Resource
+	private BoardDao boardDao;
 	
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
@@ -225,6 +228,11 @@ public class AdminProHandler {
 	}
 	@RequestMapping("/admReviewDelete")
 	public ModelAndView admReviewDelete(HttpServletRequest request, HttpServletResponse response) {
+		
+		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
+		int result = boardDao.reviewDelete( reviewNo );
+		
+		request.setAttribute( "result", result );
 		return new ModelAndView("adm/pro/admReviewDelete");
 	}
 	@RequestMapping("/tagInputPro")

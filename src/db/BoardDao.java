@@ -60,5 +60,11 @@ public class BoardDao {
 	public int deleteComment( int commentNo ) {
 		return session.delete("User.deleteComment", commentNo);
 	}
+	public List <ReviewDataBean> getRvList(Map<String, String> map) {
+		return session.selectList("Admin.getRvList", map);
+	}
+	public int reviewDelete( int reviewNo ) {
+		return session.delete( "Admin.reviewDelete", reviewNo );
+	}
 	
 }

@@ -124,4 +124,8 @@ public class ProductDao{
 		return session.delete("Admin.deleteProd", ref);
 	}
 	
+	public String getProdName(String productCode ) {
+		return session.selectOne("Admin.getProdName", productCode);
+	}
+	
 }

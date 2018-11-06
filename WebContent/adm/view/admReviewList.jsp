@@ -55,14 +55,14 @@
 						</tr>
 					</c:if>
 					<c:if test="${count ne 0}">
-						<c:forEach var="reviewlist" items="${articles}">
+						<c:forEach var="reviewList" items="${reviewList}">
 							<tr>
-								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
-								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}">
-									<img src="${reviewlist.photo1}" style="width:50px; height:50px;">
-									${reviewlist.title}</a></td>
-								<td>${reviewlist.id}</td>
-								<td>${reviewlist.reviewDate}</td>
+								<td><a href="userProductDetail.jk?productCode=${reviewList.productCode}">${reviewList.productCode}</a>
+								</td>
+								<td><a href="admReviewDetail.jk?reviewNo=${reviewList.reviewNo}&productCode=${reviewList.productCode}">
+									${reviewList.title}</a></td>
+								<td>${reviewList.id}</td>
+								<td>${reviewList.reviewDate}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -71,9 +71,9 @@
     			<div align="center">
     			<c:if test="${count gt 0}">
 				<c:if test="${currentPage ne 1}">
-					<a href="reviewList.jk">[◀◀]</a>
+					<a href="admReviewList.jk">[◀◀]</a>
 				<c:if test="${startPage gt pageBlock}">
-					<a href="reviewList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+					<a href="admReviewList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
 					</c:if>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -81,14 +81,14 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="reviewwList.jk?pageNum=${i}">[${i}]</a>
+					<a href="admReviewList.jk?pageNum=${i}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
 					<c:if test="${pageCount>endPage}">
-					<a href="reviewList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+					<a href="admReviewList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
 					</c:if>
-					<a href="reviewList.jk?pageNum=${pageCount}">[▶▶]</a>
+					<a href="admReviewList.jk?pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 			</c:if>
 			</div>
