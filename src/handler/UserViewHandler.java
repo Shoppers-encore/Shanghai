@@ -33,6 +33,9 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import databean.TagDataBean;
+import db.UserDao;
+import databean.UserDataBean;
 import etc.HandlerHelper;
 
 @Controller
@@ -47,6 +50,8 @@ public class UserViewHandler {
 	private OrderDao orderDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private UserDao userDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -64,15 +69,14 @@ public class UserViewHandler {
 	}
 	
 	
-	// User
-	@RequestMapping( "/userMailCheck" )
-	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView( "user/view/userMailCheck" );
-	}
-	
-	@RequestMapping("/userMypage")
+	@RequestMapping("/userMyPage")
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/view/userMypage");
+		String id=(String)request.getSession().getAttribute("id");		
+		if(id!=null) {
+			UserDataBean userDto=userDao.getUser(id);
+			request.setAttribute("userDto", userDto);
+		}
+			return new ModelAndView("user/view/userMyPage");
 	}
 	
 	

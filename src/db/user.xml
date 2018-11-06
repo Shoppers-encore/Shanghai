@@ -8,16 +8,19 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 		select count(*) from jk_user where id=#{id} 
 	</select>
-	<select id="getUserId" parameterType="String" resultType="databean.UserDataBean">
-		select * from jk_user where id=#{id}
-	</select>
+
+	<insert id="insertUser" parameterType="databean.UserDataBean">
+		insert into jk_user
+		values(#{id}, #{password}, #{name}, #{birthday}, #{tel}, #{email, jdbcType=VARCHAR}, #{gender}, 1,
+		#{height}, #{weight}, #{address}, #{addressDetail}, #{zipcode}) 
+	</insert>
 	<update id="deleteUser" parameterType="String">
 		UPDATE jk_user SET password='0', tel=0, email='0@a.com', name='0',userLevel=0, addressDetail='0' WHERE id=#{id}
 	</update>
 	<update id="modifyUser" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
 	</update>
-	
+
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'

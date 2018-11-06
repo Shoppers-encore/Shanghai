@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import databean.BasketDataBean;
 import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
+import etc.SendMail;
 import db.BasketDao;
 import db.BoardDao;
 import db.OrderDao;
@@ -62,29 +64,43 @@ public class UserProHandler {
 
 	
 	//////////////////// User /////////////////////	
-
+	/*Join Member*/
 	@RequestMapping( "/userInputPro" )
 	public ModelAndView userInputPro (HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		UserDataBean userDto = new UserDataBean();
-		//inputData-id(NN), password(NN), name(NN), birthday(NN), tel(NN), email(NN), gender, 
-		//userLevel=default 1(NN), height(3,0), weight(3,0), address(NN), addressDetail(NN), zipcode(NN)
+		//inputData-id varchar2(NN), password varchar2(NN), name varchar2(NN), birthday date(NN), tel varchar2(NN), email varchar2(NN), gender number, 
+		//userLevel=default 1(NN), height number(3,0), weight number(3,0), address varchar2(NN), addressDetail varchar2(NN), zipcode varchar2(NN)
 		userDto.setId(request.getParameter("id"));
 		userDto.setPassword(request.getParameter("password"));
 		userDto.setName(request.getParameter("name"));
-		userDto.setEmail(request.getParameter("email"));
+		userDto.setBirthday(request.getParameter("birthday"));
+		userDto.setTel(request.getParameter("tel"));
+		userDto.setEmail(request.getParameter("email"));	
 		int gender = Integer.parseInt(request.getParameter("gender"));
 		userDto.setGender(gender);
-		//birthday
-		//
+		int height = Integer.parseInt(request.getParameter("height"));
+		userDto.setHeight(height);
+		int weight = Integer.parseInt(request.getParameter("weight"));
+		userDto.setWeight(weight);
+		userDto.setZipcode(request.getParameter("zipcode"));
+		userDto.setAddress(request.getParameter("address"));
+		userDto.setAddressDetail(request.getParameter("addressDetail"));	
 		
 		//insertUser
-		//int result = userDao.insertUser(userDto);
-		
+		int result = userDao.insertUser(userDto);
+		request.setAttribute("result", result);
+		request.setAttribute("userDto", userDto);
 		
 		return new ModelAndView("user/pro/userInputPro");
 	}
 
-	/////Ajax User-ConfirmId 
+	//Ajax User-ConfirmId 
 	@RequestMapping(value = "/confirmId.jk", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> idCheck(@RequestBody String id) {
@@ -97,8 +113,32 @@ public class UserProHandler {
 
 		return map;
 	}
-	/////Log-in process
 	
+	// SMTP - Simple Mail Transfer Protocol
+	@RequestMapping( "/userMailCheck" )
+	public ModelAndView userMailCheck (HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("email");  
+        String number = null; 										//Variable for authentication-key 
+        try {														//Create authentication-key
+           StringBuffer num = new StringBuffer();
+           for(int i =0;i<6;i++) {
+              num.append((int)(Math.random()*10));
+           }
+           number = num.toString();									//End-of-creation: set StringBuffer to String 
+           Map<String, String> info = new HashMap<String,String>(); //parameter for SendMail.java
+           info.put("sender", "hkk9331@gmail.com");
+           info.put("receiver", email);
+           info.put("subject", "Shanghai 쇼핑몰 가입인증 메일입니다.");
+           info.put("content", "인증번호 : "+ "[" + number + "]");
+           new SendMail().sendMail(info);
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        request.setAttribute("num", number);						//set to confirm match authentication key			
+		return new ModelAndView( "user/view/userMailCheck" );
+	}	
+	
+	/*Log-in process*/	
 	@RequestMapping( "/userLoginPro" )
 	public ModelAndView userLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter("id");
@@ -114,6 +154,7 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
+
 	
 //	@RequestMapping( "/findId" )
 //	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
