@@ -65,11 +65,12 @@
 							$('#content').html('');
 							if( data.length > 0 ){
 								$.each(data, function(key, chatList){
-									var html = "<tr><th>"+chatList.sender+"</th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td><td>"
-									+"<input type='button' value='보기' onclick='viewChatting("+chatList.sender+")' ></td></tr>";
+									var html = "<tr><th><a href='admChatting.jk?id="+chatList.sender+"''>"+chatList.sender+"</a></th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td></tr>";
 										$('#content').append( html );
 							
 								});
+
+				  				$("a").attr('target','_blank');
 							}else{
 								var html="<th colspan='2'>목록이 존재하지 않습니다.</th>";
 								$('#content').append(html);
@@ -77,10 +78,9 @@
 						}
 					});
   				}
+
   		);
-	  	function viewChatting(id){
-	  		window.open("admChatting.jk?id="+id);
-	  	}
+	  	
   	//-->
   </script>
 </html>

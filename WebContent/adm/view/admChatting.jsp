@@ -5,7 +5,7 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>1:1상담</title>
+		<title>${id}1:1상담</title>
 			
 	</head>
 	<body onload="messagefocus()">
@@ -18,7 +18,8 @@
 			<tr>
 				<td>
 					<form class="row" name="msgInputForm" onsubmit="return enterChat()"> 
-						<input type="text" class="form-control" id="message" name="message" style="margin:0px 15px; width:240px">
+						<input type="hidden" name="id" value="${id}">
+						<input type="text" class="form-control" id="message" name="chatContent" style="margin:0px 15px; width:240px">
 						<input type="submit" class="btn btn-default" value="${btn_send}" style="width:50px">
 					</form>
 				</td> 

@@ -20,9 +20,13 @@ public class UserDao{
 	}
 
 	public UserDataBean getUser(String id) {
-	return session.selectOne("Admin.getUser", id);
+		return session.selectOne("Admin.getUser", id);
 	}
-
+	
+	public int insertUser( UserDataBean UserDto ) {
+		return session.insert("User.insertUser", UserDto);
+	}
+	
 	public int check(String id, String password) {
 		int result = 0;
 		if( check(id) > 0) {
