@@ -110,7 +110,7 @@
 									<input type="number" name="basketQuantity_${basketList.productCode}" id="basketQuantity_${basketList.productCode}"
 									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="99">
 								</div>
-								<div class="col-lg-2 pt-5" id="productPrice_${basketList.productPrice}">
+								<div class="col-lg-2 pt-5" id="productPrice_${basketList.productCode}">
 									${basketList.productPrice}
 								</div>
 								<div class="col-lg-1 pt-5">
@@ -154,7 +154,7 @@
 						<div class="text-right">
 							<h5>${str_totalPrice}: <span id="totalPrice"></span>${str_currencyUnit}</h5>
 							<script type="text/javascript">
-								for(product in prodCode) {
+								/* for(product in prodCode) {
 									alert(prodCode[product])
 								}
 								var prodQtyId='basketQuantity_${basketList.productCode}';
@@ -169,7 +169,7 @@
 										productPrice=eval('${basketList.productPrice}'*productQty);
 										$('#productPrice').text(productPrice);
 									}
-								);
+								); */
 							</script>
 							
 							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
