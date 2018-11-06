@@ -66,7 +66,7 @@
 							if( data.length > 0 ){
 								$.each(data, function(key, chatList){
 									var html = "<tr><th>"+chatList.sender+"</th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td><td>"
-									+"<input type='button' value='보기' onclick='window.open(admChatting.jk?id="+chatList.sender+")' ></td></tr>";
+									+"<input type='button' value='보기' onclick='viewChatting("+chatList.sender+")' ></td></tr>";
 										$('#content').append( html );
 							
 								});
@@ -78,6 +78,9 @@
 					});
   				}
   		);
+	  	function viewChatting(id){
+	  		window.open("admChatting.jk?id="+id);
+	  	}
   	//-->
   </script>
 </html>
