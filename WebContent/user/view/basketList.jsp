@@ -161,9 +161,11 @@
 											if(colorSelection.value=='unselected') {
 												event.preventDefault();
 												alert('${msg_selectColor}');
+												break;
 											} else if(sizeSelection.value=='unselected') {
 												event.preventDefault();
 												alert('${msg_selectSize}');
+												break;
 											}
 										}
 									}
