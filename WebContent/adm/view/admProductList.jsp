@@ -38,17 +38,16 @@
 			<a href="tagList.jk" class="btn btn-info">${btn_manageTag}</a>
 			<a href="productInputForm.jk" class="btn btn-primary">${btn_goodInput}</a><br><br>
 		</div>
-	<form method="post" action="changeVar.jk">
+	<form method="post" action="changeQuantity.jk">
 		<table class="table">
 			<thead class="thead-light">
-				<tr>
-					<th><input type="checkbox" name="all" id="all" onclick="checkAll();"></th>
+				<tr align="center">
 					<th>${str_productCode}</th>
 					<th>${str_productName}</th>
 					<th>${str_salePercent}</th>
 					<th>${str_price}</th>
 					<th>${str_var}</th>
-					<!-- <th>${str_varPlus}</th> -->
+					<th>${str_quantityMod}</th>
    				</tr>
 			</thead>
 			<tbody>
@@ -61,17 +60,23 @@
 				</c:if>
 				<c:if test="${count ne 0}">
 					<c:forEach var="product" items="${products}">   
-						<tr>
-							<td><input type="checkbox" class="form-check-input" id="check" name="check"></td>
-							<td>${product.productCode}</td>
+						<tr align="center">
+							<td>
+							${product.productCode}
+							<input type="hidden" name="productCode" value="${product.productCode}">
+							</td>
 							<td>${product.productName}</td>
 							<td>${product.discount}</td>
 							<td>${product.productPrice}</td>
-							<td>${product.productQuantity}</td>
+							<td>
+							${product.productQuantity}
+							<input type="hidden" name="quantity" value="${product.productQuantity}">
+							</td>
+							<td><input type="text" name="quantityMod" style="width:50px;"></td>
 						</tr>
 					</c:forEach>
 						<tr>
-							<td colspan="6" align="right">
+							<td colspan="7" align="right">
 							<input type="submit" class="btn btn-danger" value="${btn_save}">
 							<input type="reset" class="btn btn-secondary" value="${btn_cancel}">
 							</td>

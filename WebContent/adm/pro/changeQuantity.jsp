@@ -5,10 +5,10 @@
 <c:if test="${result eq 0}">
 	<script type="text/javascript">
 		// <!--
-		erroralert( inputerror );
+		erroralert( modifyerror );
 		//-->
 	</script>		
 </c:if>
 <c:if test="${result ne 0}">
-	<c:redirect url="admProductView.jk"/>
+	<c:redirect url="admProductList.jk"/>
 </c:if>
