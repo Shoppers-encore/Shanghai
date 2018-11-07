@@ -324,12 +324,17 @@ public class UserViewHandler {
 	
 	// Review
 	@RequestMapping("/reviewList")
-	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {		
+	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) {	
+		try {
+	         request.setCharacterEncoding( "utf-8" );
+	      } catch (UnsupportedEncodingException e) {
+	         e.printStackTrace();
+	      }
 		Map<String,String> search = new HashMap<String,String>();
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
 		
-		int count = boardDao.getReviewCount();
+		int count = boardDao.getSearchReviewCount(search);
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );

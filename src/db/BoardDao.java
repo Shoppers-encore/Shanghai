@@ -11,6 +11,9 @@ import databean.ReviewDataBean;
 public class BoardDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
+	public int getSearchReviewCount(Map<String, String> map) {
+		return session.selectOne("User.getSearchReviewCount", map);
+	}
 	public int getReviewCount() {
 		return session.selectOne("User.getReviewCount");
 	}

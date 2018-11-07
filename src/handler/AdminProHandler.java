@@ -154,7 +154,7 @@ public class AdminProHandler {
 		               		+ "VALUES (" + ref + "," + tagId + " );";
 	              new HandlerHelper().fileWriter(sql);
 		  	   }
-	      }
+	      	}
 	      }
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	      ProductDataBean productDto = new ProductDataBean();

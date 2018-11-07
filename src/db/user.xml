@@ -68,8 +68,11 @@
 	<select id="getMaxReview" resultType="int">
 			SELECT max(reviewNo) FROM jk_review
 	</select>
-	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
+	<select id="getSearchReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
+	</select>
+	<select id="getReviewCount" resultType="int">
+		SELECT count(*) From jk_review
 	</select>
 	<select id="getReviewList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
@@ -164,6 +167,7 @@
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
   	
+  	
   	<!-- chatting -->
   	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">
   		SELECT * FROM jk_chat WHERE sender=#{id} OR receiver=#{id} ORDER BY chatdate desc
@@ -171,6 +175,7 @@
   	<insert id="chatInput" parameterType="databean.ChatDataBean">
   		INSERT INTO jk_chat VALUES(#{sender}, #{receiver}, #{chatContent}, sysdate)
   	</insert>
+  	
   	
   	<!-- Search -->
 	<sql id="search">
@@ -188,7 +193,6 @@
               WHERE id LIKE '%'||#{searchWord}||'%'
            </when>
            <otherwise>
-               
            </otherwise>
         </choose>
      </sql>
