@@ -27,7 +27,7 @@
 			<div class="form-group row"><!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
 					<div class="col-sm-8">
-						<h4>${user.id}</h4>									
+						${user.id}								
 					</div>			
 			</div>
 			<div class="form-group row pass"><!-- password -->
@@ -52,7 +52,7 @@
 			<div class="form-group row"><!-- birthday -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
 					<div class="col-sm-8">
-						<h4><fmt:formatDate var="birthday" value="${user.birthday}" type="date"/></h4>
+						<h4><fmt:formatDate var="birthday" value="${user.birthday}" type="string"/></h4>
 					</div>		
 			</div>
 			<div class="form-group row"><!-- tel -->
