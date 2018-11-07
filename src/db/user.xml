@@ -120,7 +120,7 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice, p.productQuantity 
 		FROM jk_basket b, jk_product p 
 		WHERE b.id=#{id} 
 		AND p.productCode=b.productCode 

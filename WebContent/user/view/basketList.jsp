@@ -132,14 +132,10 @@
 													$('input[type=checkbox]').removeAttr('checked');
 													$('input[type=checkbox]').attr('disabled', true);
 												} else if('${basketList.productQuantity}'<5) {
-													$('#basketQuantity_${basketList.productCode}').prop('min', 1);
 													$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: ${basketList.productQuantity}');						
-												} else {
-													$('#basketQuantity_${basketList.productCode}').prop('min', 1);
 												}
 											}
 										);
-											
 									</script>
 								</div>
 								<div class="col-lg-2 pt-5">
@@ -205,20 +201,19 @@
 						</c:forEach>
 						<div class="col-lg-12 text-right mb-3"><h5 id="totalPrice"></h5></div>
 						<script type="text/javascript">
-							var grandTotal=0;
 							$(window).on(
 								'load',
 								function(e) {
+									var grandTotal=0;
 									for(product in prodCode) {
 										var eachPrice=$('.prodPrice')[product].innerHTML;
 										var price=eval(eachPrice.substring(0, eachPrice.length-1));
 										grandTotal=grandTotal+price;
 									}
+									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
 								}
 							);
 								
-							$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
-							
 							$('.basketListForm').change(function(event) {
 								var grandTotal=0;
 								
