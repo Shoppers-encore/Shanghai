@@ -111,12 +111,37 @@
 										}
 									</script>
 								</div>
-								<div class="col-lg-1 pt-5">
+								<div class="col-lg-1 pt-5 d-flex flex-column">
 									<input type="number" name="basketQuantity_${basketList.productCode}" id="basketQuantity_${basketList.productCode}"
-									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="99">
+									class="form-control form-control-sm" value="${basketList.basketQuantity}" min="1" max="${basketList.productQuantity}">
+									<small id="soldOut_${basketList.productCode}"></small>
+									<script type="text/javascript">
+										if('${basketList.productQuantity}'<5) {
+											$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: ${basketList.productQuantity}');
+										} else if('${basketList.productQuantity}'==0) {
+											$('#basketQuantity_${basketList.productCode}').attr('min', 0);
+											$('#soldOut_${basketList.productCode}').text('${str_soldOut}');							
+										}
+									</script>
 								</div>
-								<div class="col-lg-2 pt-5" id="productPrice_${basketList.productCode}">
-									${basketList.productPrice}
+								<div class="col-lg-2 pt-5">
+									<div class="prodPrice" id="productPrice_${basketList.productCode}"></div>
+									<script type="text/javascript">
+										var qty='${basketList.basketQuantity}';
+										var unitPrice='${basketList.productPrice}';
+										var productPrice=qty*unitPrice;
+
+										$('#productPrice_${basketList.productCode}').text(productPrice+'${str_currencyUnit}');
+									
+										$('#basketQuantity_${basketList.productCode}').on(
+											'change',
+											function(event) {
+												var changedQty=$('#basketQuantity_${basketList.productCode}').val();
+												var newProductPrice=changedQty*unitPrice;
+												$('#productPrice_${basketList.productCode}').text(newProductPrice+'${str_currencyUnit}');
+											}
+										);
+									</script>
 								</div>
 								<div class="col-lg-1 pt-5">
 									<button class="btn" id="basketItemDeleteBtn_${basketList.productCode}">${btn_delete}</button>
@@ -159,6 +184,29 @@
 								</div>
 							</div>
 						</c:forEach>
+						<div class="col-lg-12 text-right mb-3"><h5 id="totalPrice"></h5></div>
+						<script type="text/javascript">
+							var grandTotal=0;
+							for(product in prodCode) {
+								var eachPrice=$('.prodPrice')[product].innerHTML;
+								var price=eval(eachPrice.substring(0, eachPrice.length-1));
+								grandTotal=grandTotal+price;
+							}
+							$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
+							
+							$('.basketListForm').change(function(event) {
+								var grandTotal=0;
+								
+								for(product in prodCode) {
+									eachPrice=$('.prodPrice')[product].innerHTML;
+									price=eval(eachPrice.substring(0, eachPrice.length-1));
+									grandTotal=grandTotal+price;
+								}
+								
+								$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
+							});
+							
+						</script>
 						<div class="text-right">
 							<button type="button" class="btn mr-1" onclick="returnToList()">${btn_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_orderCheckedItems}</button>

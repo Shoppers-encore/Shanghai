@@ -133,6 +133,8 @@
 <c:set var="str_quantityMod" value="재고수정"/>
 <c:set var="str_lastChat" value="마지막 내용"/>
 <c:set var="str_chatTime" value="시간"/>
+<c:set var="str_soldOut" value="품절"/>
+<c:set var="str_remainingProdQty" value="재고"/>
 
 
 <!-- color -->
