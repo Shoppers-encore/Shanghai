@@ -86,7 +86,7 @@
 							${product.productQuantity}
 							<input type="hidden" name="quantity" value="${product.productQuantity}">
 							</td>
-							<td><input type="text" name="quantityMod" style="width:50px;"></td>
+							<td><input type="text" name="quantityMod" value="0" style="width:50px;"></td>
 						</tr>
 					</c:forEach>
 						<tr>

@@ -291,32 +291,29 @@ public class AdminProHandler {
 		request.getSession().setAttribute("memid",null);
 		return "redirect:admLoginForm.jk";
 	}
-	
+
 	@RequestMapping("/changeQuantity")
-	   public String changeQuantity(HttpServletRequest request, HttpServletResponse response) {
+	 public String changeQuantity(HttpServletRequest request, HttpServletResponse response) {
 	      String[] productCodes = request.getParameterValues("productCode");
-	      String quantityCheck = request.getParameter("quantityMod");
+	      String[] quantityCheck = request.getParameterValues("quantityMod");
 	      //int quantityMod = Integer.parseInt( request.getParameter("quantityMod") );
 	      ProductDataBean productDto = new ProductDataBean();
-	      int total = 0;
 	         for(int i=0; i<productCodes.length; i ++) {
-	        	 int quantityMod = Integer.parseInt( request.getParameter("quantityMod") );
-	           /* if( quantityMod[i] != null ) {
-	            	int [] quantity = new int[quantityMod.length];
-	        		for(i=0; i<quantityMod.length; i++) {
-	        		quantity[i] = Integer.parseInt( quantityMod[i] );
-	        		}*/
-	        	 	
-	        	   if( quantityCheck == null || quantityCheck.equals("") ) {
-	        		   total = productDao.getProdQuantity( productCodes[i] );
+	            	int [] quantity = new int[quantityCheck.length];
+	        		for(i=0; i<quantityCheck.length; i++) {
+	        		quantity[i] = Integer.parseInt( quantityCheck[i] );
+	        		int quan = 0;
+	        	   if( quantity[i] > 0  ) {
+	        		   quan = productDao.getProdQuantity( productCodes[i] ) + quantity[i];
 	        	   } else { 
-		               total= productDao.getProdQuantity( productCodes[i] ) + quantityMod;
+	        		   quan = productDao.getProdQuantity( productCodes[i] );
 	        	   }
+	        	   productDto.setProductQuantity( quan ); 
 	        	   productDto.setProductCode( productCodes[i] );
-	        	   productDto.setProductQuantity( total );   
+	        	   
 	        	   productDao.changeQuantity( productDto );
-	         }    
-	         
+	        		}    
+	         }
 	         return "redirect:admProductList.jk";
 	   }
 }
