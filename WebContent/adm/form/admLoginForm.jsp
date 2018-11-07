@@ -51,6 +51,7 @@
 							<input type="password" name="password" class="form-control" maxlength="10">
 						</div>
 						<input class="btn btn-primary" type="submit" value="${btn_login}" onclick="location='admMain.jk'">
+						<input class="btn btn-secondary" type="button" value="${btn_gotoUserMain}" onclick="location='main.jk'">
 					</form>
 			 </div>
 		</div>
