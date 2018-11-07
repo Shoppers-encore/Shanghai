@@ -29,10 +29,12 @@ import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
+import databean.UserDataBean;
 import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import db.UserDao;
 import etc.HandlerHelper;
 
 @Controller
@@ -47,6 +49,8 @@ public class UserViewHandler {
 	private OrderDao orderDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private UserDao userDao;
   
 	//Main
 	@RequestMapping("/main")
@@ -64,9 +68,14 @@ public class UserViewHandler {
 	}
 	
 	
-	@RequestMapping("/userMypage")
+	@RequestMapping("/userMyPage")
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("user/view/userMypage");
+		String id=(String)request.getSession().getAttribute("id");		
+		if(id!=null) {
+			UserDataBean userDto= userDao.getUser(id);
+			request.setAttribute("userDto", userDto);
+		}
+		return new ModelAndView("user/view/userMyPage");
 	}
 	
 	
