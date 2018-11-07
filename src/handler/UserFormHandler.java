@@ -50,7 +50,7 @@ public class UserFormHandler {
 		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean user = userDao.getUser(id);
 		request.setAttribute("user", user);
-		return new ModelAndView( "user/form/userModifyFrom" );
+		return new ModelAndView( "user/form/userModifyForm" );
 	}
 	
 	

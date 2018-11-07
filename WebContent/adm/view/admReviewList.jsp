@@ -30,7 +30,7 @@
 
   </style>
 </head>
-<body class="container-fulid row">
+<body class="container-fulid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 <!-- Admin Menu Bar -->
 <%@ include file="../view/admMenubar.jsp"%>
 	    

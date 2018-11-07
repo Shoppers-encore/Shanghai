@@ -150,7 +150,10 @@ public class UserProHandler {
 		int result = userDao.check(id, password);
 		request.setAttribute("result", result);
 		request.setAttribute("id", id);
-		
+		if (result == 1) {	//bring userLevel to check member status in userLoginPro
+			int userLevel = userDao.getUserLevel(id);
+			request.setAttribute("userLevel", userLevel);
+		}
 		if (result != -1) {
 			request.setAttribute("userDto", userDto);
 		}
@@ -188,7 +191,7 @@ public class UserProHandler {
 		}
 		user.setWeight(weight);
 		userDao.modifyUser(user);
-		return "redirect:userMypage.jk";
+		return "redirect:userMyPage.jk";
 	}
 	@RequestMapping( "/userDeletePro" )
 	public ModelAndView userDeletePro (HttpServletRequest request, HttpServletResponse response) {

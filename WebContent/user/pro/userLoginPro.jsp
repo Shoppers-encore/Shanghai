@@ -19,6 +19,20 @@
 	</script>
 </c:if>
 <c:if test="${result eq 1}">
-	${sessionScope.id = id}
+	<c:if test="${userLevel eq 9}">
+		${sessionScope.userLevel = userLevel}
+		${sessionScope.id = id}
+		<c:redirect url="admMain.jk"/>
+	</c:if>
+	<c:if test="${userLevel eq 0}">
+		<script type="text/javascript">
+			<!--
+			erroralert( rejoinmsg );
+			//-->
+		</script>
+	</c:if>
+	<c:if test="${userLevel eq 1}">
+		${sessionScope.id = id}
 	<c:redirect url="main.jk"/>
+	</c:if>
 </c:if>
