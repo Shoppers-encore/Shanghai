@@ -15,7 +15,7 @@
 		<h4><b>내 정보</b></h4>
 		<br><br>
 		<div class="text-center">
-			<h2>${userDto.id} &nbsp; ${msg_main_login}</h2>
+			<h4>${userDto.id} &nbsp; ${msg_main_login}</h4>
 		</div>
 		<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputcheck()">		
 			<div class="form-group row"><!-- Id -->
@@ -88,7 +88,7 @@
 					kg					
 			</div>
 			<div class="col-sm-12 text-center mt-4"><!-- button -->
-	            <button class="btn" type="submit" onclick="location='#.jk'">${btn_modify}</button>
+	            <button class="btn" type="submit" onclick="location='userModifyForm.jk'">${btn_modify}</button>
 	            <button class="btn" type="button" onclick="location='userDeletePro.jk'">${btn_userDelete}</button>
 	            <button class="btn" type="button" onclick="location='logout.jk'">${btn_logout}</button>
       	    </div>			
