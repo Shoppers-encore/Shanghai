@@ -107,8 +107,8 @@
 							</div>
 						</div>
 						<div class="text-right mt-2">
-							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
-							<button type="submit" class="btn" id="basketListFormSubmitBtn">${msg_pay}</button>
+							<button type="button" class="btn" onclick="returnToList()">${btn_continueShopping}</button>
+							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_pay}</button>
 						</div>
 						
 					</c:if>

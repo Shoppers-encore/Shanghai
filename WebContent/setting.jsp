@@ -206,7 +206,9 @@
 <c:set var="btn_userDelete" value="탈퇴"/>
 <c:set var="btn_x" value="삭제"/>
 <c:set var="btn_productModify" value="상품수정"/>
-
+<c:set var="btn_orderCheckedItems" value="선택 상품 주문"/>
+<c:set var="btn_continueShopping" value="쇼핑 계속하기"/>
+<c:set var="btn_pay" value="결제하기"/>
 
 
 
@@ -230,8 +232,6 @@
 <c:set var="msg_success" value="성공"/>
 <c:set var="msg_failure" value="실패"/>
 <c:set var="msg_systemFailure" value="시스템 점검 중 입니다. 잠시 후 다시 시도해 주세요."/>
-<c:set var="msg_continueShopping" value="쇼핑 계속하기"/>
-<c:set var="msg_pay" value="결제하기"/>
 <c:set var="msg_selectColor" value="상품 색상을 선택해 주세요."/>
 <c:set var="msg_selectSize" value="상품 사이즈를 선택해 주세요."/>
 <c:set var="msg_saveSuccess" value="해당 상품을 장바구니에 저장했습니다."/>

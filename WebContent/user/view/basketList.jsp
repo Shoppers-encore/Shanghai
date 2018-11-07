@@ -32,10 +32,13 @@
 				<!-- If Basket has items -->
 				<c:if test="${basketCount ne 0}">
 					<div class="row font-weight-bold text-center pt-5">
+						<div class="col-lg-1">
+							${str_select}
+						</div>
 						<div class="col-lg-2">
 							${str_productImage}
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							${str_productName}
 						</div>
 						<div class="col-lg-1">
@@ -58,16 +61,18 @@
 						var prodCode=[];
 					</script>
 					<form class="form basketListForm" name="basketListForm" method="post" action="basketListPro.jk">
-						<c:forEach var="basketList" items="${basketList}">					
+						<c:forEach var="basketList" items="${basketList}">				
 							<div class="form-group row border text-center" id="${basketList.productCode}">
 								<script type="text/javascript">
 									prodCode.push('${basketList.productCode}');
 								</script>
-								<input type="hidden" name="${basketList.productCode}" value="${basketList.productCode}">
+								<div class="col-lg-1 pt-5">
+									<input type="checkbox" name="checked1234" value="${basketList.productCode}" checked>
+								</div>
 								<div class="col-lg-2">
 									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
 								</div>
-								<div class="col-lg-4 pt-5">
+								<div class="col-lg-3 pt-5">
 									${basketList.productName}
 								</div>
 								<div class="col-lg-1 pt-5">
@@ -154,17 +159,22 @@
 							</div>
 						</c:forEach>
 						<div class="text-right">
-							<button type="button" class="btn" onclick="returnToList()">${msg_continueShopping}</button>
-							<button type="submit" class="btn" id="basketListFormSubmitBtn">${msg_pay}</button>
+							<button type="button" class="btn mr-1" onclick="returnToList()">${btn_continueShopping}</button>
+							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_orderCheckedItems}</button>
 							<script type="text/javascript">
+										
 								$('#basketListFormSubmitBtn').on(
 									'click',
 									function(event) {
 										for(product in prodCode) {
 											sizeSelector='selectSizeOptions_'+prodCode[product];
 											colorSelector='selectColorOptions_'+prodCode[product];
+											/* checkSelector='checked'; */
+											
 											sizeSelection=document.getElementById(sizeSelector);
 											colorSelection=document.getElementById(colorSelector);
+											checked=document.getElementById(checkSelector);
+											/* alert(checked); */
 											
 											if(colorSelection.value=='unselected') {
 												event.preventDefault();
