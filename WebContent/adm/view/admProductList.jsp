@@ -34,6 +34,20 @@
        <!-- Admin Good List View Page -->
 	<article class="col-sm-10 col-8" ><br><br>
 		<h4>${str_admProductList}</h4>
+		<div class="col-sm-4 container-fluid" style="float:none; margin:0 auto;">
+	    	<form name="searchForm" action="admProductList.jk" method="post">
+					<div class="input-group">
+					    <input type="text" class="form-control" name="searchWord" style="width:60%">
+					    <input type="submit" class="form-control btn btn-danger" value="${btn_search}" style="width:20%">
+				  	</div>
+			</form>
+		</div>
+		<c:if test="${ searchWord ne null and count eq 0 }"> <!-- IF searchWord exists BUT no result for the query -->
+					<br><p><b>${searchWord}</b> ${msg_noSearchResult}</p>
+			</c:if>
+			<c:if test="${searchWord ne null and searchWord != '' and count ne 0}"> <!-- IF searchWord exists AND result(s) also exist -->
+				<br><p>${count} ${msg_searchResult} <b>${searchWord}</b></p><br>
+		</c:if>
 		<div class="buttons">
 			<a href="tagList.jk" class="btn btn-info">${btn_manageTag}</a>
 			<a href="productInputForm.jk" class="btn btn-primary">${btn_goodInput}</a><br><br>
@@ -88,9 +102,9 @@
          <div align="center">
                <c:if test="${count gt 0}">
                <c:if test="${currentPage ne 1}">
-                  <a href="admProductList.jk">[◀◀]</a>
+                  <a href="admProductList.jk${url_pageNum}1${url_searchWord}${searchWord}">[◀◀]</a>
                <c:if test="${startPage gt pageBlock}">
-                  <a href="admProductList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+                  <a href="admProductList.jk${url_pageNum}${startPage-pageBlock}${url_searchWord}${searchWord}">[◀]</a>
                   </c:if>
                </c:if>
                <c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -98,14 +112,14 @@
                   <span>[${i}]</span>
                   </c:if>
                   <c:if test="${i ne currentPage}">
-                  <a href="admProductList.jk?pageNum=${i}">[${i}]</a>
+                  <a href="admProductList.jk${url_pageNum}${i}${url_searchWord}${searchWord}">[${i}]</a>
                   </c:if>
                </c:forEach>
                <c:if test="${currentPage ne pageCount}">
                   <c:if test="${pageCount>endPage}">
-                  <a href="admProductList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+                  <a href="admProductList.jk${url_pageNum}${startPage+pageBlock}${url_searchWord}${searchWord}">[▶]</a>
                   </c:if>
-                  <a href="admProductList.jk?pageNum=${pageCount}">[▶▶]</a>
+                  <a href="admProductList.jk${url_pageNum}${pageCount}${url_searchWord}${searchWord}">[▶▶]</a>
                </c:if>
             </c:if>
 		</div>

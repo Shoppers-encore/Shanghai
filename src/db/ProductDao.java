@@ -24,10 +24,10 @@ public class ProductDao{
 	
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
 		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
-			System.out.println("색잇음");
+			//System.out.println("색잇음");
 			return session.selectList("User.getProductColorSearchList", map);
 		}else {
-			System.out.println("색없음");
+			//System.out.println("색없음");
 			return session.selectList("User.getProductSearchList", map);
 		}
 	}
