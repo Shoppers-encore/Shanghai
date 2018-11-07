@@ -57,7 +57,7 @@
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productList}
 	</select>
 	<select id="getProductDetailsByProductCode" parameterType="String" resultType="databean.ProductDataBean">
-		SELECT productName, thumbnail, productPrice FROM jk_product WHERE productCode=#{productCode}
+		SELECT productName, thumbnail, productPrice, discount, productQuantity FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	
 	
@@ -120,7 +120,7 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice, p.productQuantity, p.discount 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice 
 		FROM jk_basket b, jk_product p 
 		WHERE b.id=#{id} 
 		AND p.productCode=b.productCode 

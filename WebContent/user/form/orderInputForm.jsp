@@ -52,7 +52,13 @@
 								<img class="w-50" src="/Shanghai/images/${product.thumbnail}" alt="Product Img">
 							</div>
 							<div class="col-lg-4 pt-5">
-								${product.productName}
+								${product.productName}<br>
+								<small id="discount_${basket.productCode}"></small>
+								<script type="text/javascript">
+									if('${product.discount}'!=0) {
+										$('#discount_${basket.productCode}').text('${product.discount}${str_discount}');
+									}
+								</script>
 							</div>
 							<div class="col-lg-1 pt-5" id="color">
 								<script type="text/javascript">
@@ -69,12 +75,17 @@
 							</div>
 							<div class="col-lg-1 pt-5">
 								${basket.basketQuantity}
+								<script type="text/javascript">
+									var qty='${basket.basketQuantity}';
+								</script>
 								<input type="hidden" name="basketQuantity" value="${basket.basketQuantity}">
 							</div>
 							<div class="col-lg-1 pt-5" id="productPrice">
 								<script type="text/javascript">
-									var price='${product.productPrice}'*'${basket.basketQuantity}'
-									$('#productPrice').text(price);
+									var discount=(100-'${product.discount}')/100;
+									var unitPrice='${product.productPrice}'
+									var price=qty*unitPrice*discount;
+									$('#productPrice').text(price+'${str_currencyUnit}');
 								</script>
 							</div>
 							<div class="col-lg-2 pt-5">
