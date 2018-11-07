@@ -23,6 +23,7 @@ var adminonly = "관리자만 접근할 수 있습니다.";
 var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인하세요.";
 var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호를 다시 확인하세요.";
 var rejoinmsg = "탈퇴된 계정입니다.\n회원가입 해주세요. ";
+
 //Message-userInputForm-Join Member
 var confirmerror = "아이디 중복확인 해 주세요";
 var error = "아이디 중복확인 실패";

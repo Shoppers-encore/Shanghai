@@ -23,6 +23,10 @@ public class UserDao{
 		return session.selectOne("Admin.getUser", id);
 	}
 	
+	public int getUserLevel(String id) {
+		return session.selectOne("User.getUserLevel", id);
+	}
+	
 	public int insertUser( UserDataBean UserDto ) {
 		return session.insert("User.insertUser", UserDto);
 	}
@@ -71,4 +75,5 @@ public class UserDao{
 	public int admModify(UserDataBean dto) {
 		return session.update("Admin.admModify", dto);
 	}
+
 }
