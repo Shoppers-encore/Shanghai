@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../setting.jsp" %>
 
-<h2>${page_login}</h2>
 
 <c:if test="${result eq 0}">
 	<script type="text/javascript">

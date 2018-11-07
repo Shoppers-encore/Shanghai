@@ -120,7 +120,22 @@
 	<update id="changeQuantity" parameterType="databean.ProductDataBean">
 		UPDATE jk_product SET productQuantity=${productQuantity} WHERE productCode=#{productCode}
 	</update>
+<<<<<<< HEAD
 	<select id="getProdQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
 	</select>
+=======
+
+	
+	<!-- chatData -->
+	<select id="getChatList" resultType="databean.ChatDataBean">
+		SELECT * FROM jk_chat
+		WHERE chatdate=(select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+	</select>
+	<select id="getChatListCount" resultType="int">
+		SELECT count(*) FROM jk_chat
+	</select>
+	
+
+>>>>>>> 6ffc9d0ca48ee2eaa6d1993f11077ac0a1e7d20b
 </mapper>

@@ -26,7 +26,9 @@ var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호
 //Message-userInputForm-Join Member
 var confirmerror = "아이디 중복확인 해 주세요";
 var error = "아이디 중복확인 실패";
-
+var emailfmterror = "이메일 형식에 맞지 않습니다.";
+var emailcheckerror1 = "이메일 인증 해 주세요.";
+var emailcheckerror2 = "인증번호가 일치하지 않습니다."
 
 ////// <User>
 
@@ -75,7 +77,7 @@ function passwordCheckFunction() {
 //Input Validation: block special character input - Name
 function checkNumber() {
  var objEv = event.srcElement;
- var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";    //Write characters to block
+ var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";    //Write characters to block here
  event.returnValue = true;
  for (var i=0;i<objEv.value.length;i++) {
 	 if(-1 != num.indexOf(objEv.value.charAt(i)))
@@ -86,34 +88,96 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+function checkHeight(){
+	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
+    if((event.keyCode<48)||(event.keyCode>57) && (event.keyCode==num))  //input only numbers
+       event.returnValue=false;
+}
 
+
+출처: http://kmj1107.tistory.com/entry/javascript-input-textBox-숫자만-입력allow-only-number-in-textbox [토순이네집]
+//SMTP - Simple Mail Transfer Protocol
+function mailTransfer() {
+	if(inputform.email.value.indexOf("@")==-1){ //check proper email format
+	      alert(emailfmterror);
+	      return false;
+	 }
+	var url = "userMailCheck.jk?email="+inputform.email.value;	//direct to UserProHandler.java with email value
+	//open(URL, name, specs, replace)
+	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=400, height=250, top=180, left=630" );
+}
+//Check authentication-key match
+function matchAuthKey() {
+    if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ){ //null 값 입력시 emailcheckerror1 메시지 뜨는처리도 추가하기
+    	 alert( emailcheckerror2 );
+    } else {
+        alert( "인증 완료되었습니다" );
+        self.close();
+    }
+}
+//Find address through zip-code : http://postcode.map.daum.net/guide#sample
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+        	
+            // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+            if(fullRoadAddr !== ''){
+                fullRoadAddr += extraRoadAddr;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('address').value = data.address;
+
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+            } else {
+                document.getElementById('guide').innerHTML = '';
+            }
+        }
+    }).open();
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 
 ///<Review>
-/*function reviewDelcheck() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
+function scoring() {
+	   var slider = document.getElementById("myRange");
+	   var output = document.getElementById("demo");
+	   output.innerHTML = slider.value;
 
-	  if( sessionId == writer ) {
-		   if ( confirm( delCheck ) ) {
-			   document.location.href = "reviewDeletePro.jk";
-		   } else {
-			   alert( cannotdelete );
-			   return false;
-		   }
+	   slider.oninput = function() {
+	     output.innerHTML = this.value;
 	   }
 	}
-
-function reviewModable() {
-	   var writer = document.detailForm.id.value;
-	   var sessionId = document.detailForm.sessionId.value;
-	   if( sessionId == writer ){
-	      document.location.href = "reviewModifyForm.jk";
-	   } else {
-	      alert( cannotmodify );
-	      return false;
-	   }
-	}*/
 
 ///<Review Comment>
 function commentInsert(){
@@ -193,7 +257,10 @@ function commentUpdateProc(commentNo){
    $.ajax({
        url : 'commentUpdate.jk',
        type : 'post',
-       data : {'commentContent' : updateContent, 'commentNo' : commentNo},
+       data : {
+    	   'commentContent' : updateContent, 
+    	   'commentNo' : commentNo
+    	   },
        success : function(data){
            commentList(reviewNo); 
        }
@@ -217,6 +284,14 @@ function commentDelete(commentNo){
        }
    });
 }
+
+//Delete Photo
+function photoModify(photoNo){
+	var photoModify ='';
+	photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
+	   
+	$('.photo'+photoNo).html(photoModify);
+	}
 
 
 // BasketList

@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="bbb" scope="session"/>
+<c:set var="id" value="aaa" scope="session"/>
 <body class="container" onload="commentList(${reviewDto.reviewNo})">
 	<article class="centered">
 	<br><br>
@@ -43,8 +43,19 @@
 						</tr>
 						</table>
 							<div style="align:center;">
-								<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
-								<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 ne null}"> 
+									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
+									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								</c:if>
+								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 eq null}">
+									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
+								</c:if>
+								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 ne null}">
+									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								</c:if>
+								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 eq null}">
+									${msg_noPhoto}
+								</c:if>
 							</div>
 						<table class="table">
 						<tr>
@@ -78,7 +89,7 @@
 							<!-- comment -->
 						<tr>
 							<th colspan="2">
-								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
+								<c:if test="${sessionScope.id.length() le 5 || reviewDto.id eq sessionScope.id}">
 									<input class="btn btn-primary" type="button" value="${btn_modify}" onclick="location='reviewModifyForm.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='reviewDeletePro.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
 								</c:if>
