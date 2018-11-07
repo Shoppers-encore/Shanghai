@@ -40,7 +40,7 @@
 	    	<table class="table table-striped">
 	   			<thead>
 	   				<tr>
-	   					<th>${str_productName}</th>
+	   					<th>${str_productCode}</th>
 	   					<th>${str_title}</th>
 	   					<th>${str_writer}</th>
 	   					<th>${str_reviewDate}</th>
@@ -57,7 +57,7 @@
 					<c:if test="${count ne 0}">
 						<c:forEach var="reviewList" items="${reviewList}">
 							<tr>
-								<td><a href="userProductDetail.jk?productCode=${reviewList.productCode}">${reviewList.productCode}</a>
+								<td><a href="admProductDetail.jk?ref=${reviewList.productCode}">${reviewList.productCode}</a>
 								</td>
 								<td><a href="admReviewDetail.jk?reviewNo=${reviewList.reviewNo}&productCode=${reviewList.productCode}">
 									${reviewList.title}</a></td>
