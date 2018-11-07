@@ -75,9 +75,9 @@
 	   		<div align="center">
 		   		<c:if test="${count gt 0}">
 				<c:if test="${currentPage ne 1}">
-					<a href="userList.do">[◀◀]</a>
+					<a href="userList.jk">[◀◀]</a>
 				<c:if test="${startPage gt pageBlock}">
-					<a href="userList.do?pageNum=${startPage-pageBlock}">[◀]</a>
+					<a href="userList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
 					</c:if>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -85,14 +85,14 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="userList.do?pageNum=${i}">[${i}]</a>
+					<a href="userList.jk?pageNum=${i}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
 					<c:if test="${pageCount>endPage}">
-					<a href="userList.do?pageNum=${startPage+pageBlock}">[▶]</a>
+					<a href="userList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
 					</c:if>
-					<a href="userList.do?pageNum=${pageCount}">[▶▶]</a>
+					<a href="userList.jk?pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 				</c:if>
 			</div>
