@@ -208,7 +208,52 @@ public class AdminProHandler {
 	   }
 	   
 	@RequestMapping ( "/productModifyPro" )
-	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
+	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+		String path =  request.getSession().getServletContext().getRealPath( "/save" );
+	    MultipartRequest multi = null;
+	    new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
+	    if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+	    	multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+	    int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
+	    String systemName = null;
+	      Enumeration<?> e = multi.getFileNames();
+	      
+	      while( e.hasMoreElements() ) {
+	         String inputName = (String) e.nextElement();
+	         //String originName = multi.getOriginalFileName( inputName );
+	          systemName = multi.getFilesystemName( inputName );
+	         
+	         String sname = path + "\\" + systemName;
+	         String tname = path + "\\t" + systemName;
+	         RenderedOp op = JAI.create("fileload", sname);
+	         BufferedImage sbuffer = op.getAsBufferedImage();
+	         
+	         int SIZE = 3;
+	         int width = sbuffer.getWidth() / SIZE;
+	         int height = sbuffer.getHeight() / SIZE;
+	         
+	         BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
+	         Graphics g = tbuffer.getGraphics();
+	         g.drawImage(sbuffer, 0, 0, width, height, null );   
+	   
+	            ImageIO.write( tbuffer, "jpg", new File( tname ) );   
+	            ImageIO.write( tbuffer, "png", new File( tname ) );
+	            ImageIO.write( tbuffer, "gif", new File( tname ) );
+	        
+	          ImageInfoDataBean imgDto = new ImageInfoDataBean();
+	          int imageNo = productDao.getImgNo()+1;
+	  	      imgDto.setImageNo(imageNo);
+	  	      imgDto.setRef( ref );
+	  	      imgDto.setImageAddress(systemName);
+	  	      int result = productDao.insertImgInfo(imgDto);
+	  	      
+		  	   if( result == 1 ) {
+		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
+		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
+	              new HandlerHelper().fileWriter(sql);
+		  	   }
+		  	 request.setAttribute( "systemName", systemName );
+			}
 		return "redirect:productDetail.jk";
 	}
 	@RequestMapping("/productDeletePro")
