@@ -8,6 +8,7 @@ public class BasketDataBean {
 	private int basketQuantity;
 	private int productPrice;
 	private int productQuantity;
+	private int discount;
 	public String getId() {
 		return id;
 	}
@@ -49,5 +50,11 @@ public class BasketDataBean {
 	}
 	public void setProductQuantity(int productQuantity) {
 		this.productQuantity = productQuantity;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 }

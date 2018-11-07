@@ -135,6 +135,7 @@
 <c:set var="str_chatTime" value="시간"/>
 <c:set var="str_soldOut" value="품절"/>
 <c:set var="str_remainingProdQty" value="재고"/>
+<c:set var="str_discount" value="% 할인 중"/>
 
 
 <!-- color -->

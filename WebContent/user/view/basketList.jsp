@@ -71,7 +71,13 @@
 									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
 								</div>
 								<div class="col-lg-3 pt-5">
-									${basketList.productName}
+									${basketList.productName}<br>
+									<small id="discount_${basketList.productCode}"></small>
+									<script type="text/javascript">
+										if('${basketList.discount}'!=0) {
+											$('#discount_${basketList.productCode}').text('${basketList.discount}${str_discount}');
+										}
+									</script>
 								</div>
 								<div class="col-lg-1 pt-5">
 									<select class="" id="selectColorOptions_${basketList.productCode}" name="selectColorOptions_${basketList.productCode}"><option value="unselected" selected>${str_select}</option></select>
@@ -129,7 +135,8 @@
 									<script type="text/javascript">
 										var qty='${basketList.basketQuantity}';
 										var unitPrice='${basketList.productPrice}';
-										var productPrice=qty*unitPrice;
+										var discount=(100-'${basketList.discount}')/100;
+										var productPrice=qty*unitPrice*discount;
 
 										$('#productPrice_${basketList.productCode}').text(productPrice+'${str_currencyUnit}');
 									
@@ -137,7 +144,7 @@
 											'change',
 											function(event) {
 												var changedQty=$('#basketQuantity_${basketList.productCode}').val();
-												var newProductPrice=changedQty*unitPrice;
+												var newProductPrice=changedQty*unitPrice*discount;
 												$('#productPrice_${basketList.productCode}').text(newProductPrice+'${str_currencyUnit}');
 											}
 										);

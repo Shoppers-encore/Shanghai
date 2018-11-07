@@ -8,10 +8,7 @@
 	</head>
 	<body>
 		<%@ include file="../form/userHeader.jsp" %>
-		
-		<!-- Must be removed later -->
-		<c:set var="id" value="aaa" scope="session"/>
-		
+				
 		<!-- If not logged in, redirect to login page -->
 		<c:if test="${id eq null}">
 			<c:redirect url="userLoginForm.jk"/>
@@ -74,8 +71,11 @@
 								${basket.basketQuantity}
 								<input type="hidden" name="basketQuantity" value="${basket.basketQuantity}">
 							</div>
-							<div class="col-lg-1 pt-5">
-								${product.productPrice}
+							<div class="col-lg-1 pt-5" id="productPrice">
+								<script type="text/javascript">
+									var price='${product.productPrice}'*'${basket.basketQuantity}'
+									$('#productPrice').text(price);
+								</script>
 							</div>
 							<div class="col-lg-2 pt-5">
 								<button type="button" class="btn" id="saveToBasket">${btn_save}</button>
