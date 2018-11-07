@@ -165,9 +165,12 @@ public class UserViewHandler {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String id = (String)request.getSession().getAttribute("id");
 		int count = 0;
-		String searchWord = request.getParameter("searchWord");String[] selectedColors_temp = request.getParameterValues("color");
+		String searchWord = request.getParameter("searchWord");
+		if(searchWord ==null || "".equals(searchWord)) {
+			searchWord = " ";
+		}
+		String[] selectedColors_temp = request.getParameterValues("color");
 		String selectedColors = "";
 		if( selectedColors_temp !=null)
 			for(int i=0; i<selectedColors_temp.length; i++) {

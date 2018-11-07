@@ -227,7 +227,7 @@
 			productCode LIKE 'PP'||'%' OR
 			productCode LIKE 'OR'||'%' OR
 		</if>
-		<if test="selectedColors==null">
+		<if test="selectedColors==null || selectedColors==''">
 			productCode LIKE '' || '%' OR
 		</if>
 		productCode LIKE '0000'||'%'

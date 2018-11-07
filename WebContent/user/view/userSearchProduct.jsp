@@ -168,9 +168,6 @@
 	  </style>
 	</head>
 	<body>
-		<div id="cart">
-			<img id="cartImg" src="images/cart_red.png">
-		</div>
 		<div class="container">
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
