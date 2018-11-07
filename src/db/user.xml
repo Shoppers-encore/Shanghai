@@ -24,7 +24,7 @@
 	
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM (SELECT tmp1.* FROM (SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> ) WHERE productCode LIKE '%'||'MM' OR productCode LIKE '%'||'FR'
+		SELECT count(*) FROM jkProduct WHERE productCode=TO_CHAR(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%') tmp1 <include refid="colorSearch"></include> GROUP BY ref)
 	</select>
 	<select id="getProductColorSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp4.*, r FROM(SELECT tmp3.*, rownum r
