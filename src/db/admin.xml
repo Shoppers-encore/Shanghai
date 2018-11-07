@@ -125,7 +125,7 @@
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
-		WHERE chatdate=(select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+		WHERE chatdate IN (select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
 	</select>
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat
