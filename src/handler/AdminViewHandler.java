@@ -41,6 +41,8 @@ public class AdminViewHandler {
 	private ProductDao productDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private OrderDao orderDao;
 
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {		
@@ -140,10 +142,12 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		request.setAttribute( "id", id );
-		request.setAttribute( "userDto", userDto );
+		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
+		int count = orderDao.prodFromOrder(orderCode);
+		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
+		
+		request.setAttribute("count", count);
+		request.setAttribute("orderDetailList", orderDetailList);
 		return new ModelAndView("adm/view/admOrderDetail");
 	}
 	
@@ -165,8 +169,6 @@ public class AdminViewHandler {
 		return new ModelAndView("adm/view/admOrderList");
 	}	
 	
-
-	
 	@RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
 		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
@@ -183,18 +185,23 @@ public class AdminViewHandler {
 			map.put("reviewNo", new Integer(reviewNo).toString());
 			map.put("id", id);
 		}
-		
 		request.setAttribute( "productName", productName );
 		request.setAttribute( "number", number );
 		request.setAttribute( "pageNum", pageNum );
 		request.setAttribute( "reviewDto", reviewDto );
 		return new ModelAndView("adm/view/admReviewDetail");
 	}
+
 	@RequestMapping("/admReviewList")
 	public ModelAndView admReviewList(HttpServletRequest request, HttpServletResponse response) {
 		BoardDao boardDao = new BoardDao();
 		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
+		//String[] productCodes = request.getParameterValues( "productCode" );
+		/*for(int i = 0; i<productCodes.length; i++) {
+			int ref = boardDao.getRefNo( productCodes[i] );
+			request.setAttribute( "ref", ref );
+		}*/
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		

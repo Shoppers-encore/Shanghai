@@ -159,8 +159,7 @@ public class AdminProHandler {
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	      ProductDataBean productDto = new ProductDataBean();
 	      String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
-	      //String product_code[] = this.makeProductCode( int colors[], int sizes[] );
-	      
+	     
 	      for( int i=0; i<product_codes.length; i++ ) {
 	    	  
 	    	 ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
@@ -296,7 +295,6 @@ public class AdminProHandler {
 	 public String changeQuantity(HttpServletRequest request, HttpServletResponse response) {
 	      String[] productCodes = request.getParameterValues("productCode");
 	      String[] quantityCheck = request.getParameterValues("quantityMod");
-	      //int quantityMod = Integer.parseInt( request.getParameter("quantityMod") );
 	      ProductDataBean productDto = new ProductDataBean();
 	         for(int i=0; i<productCodes.length; i ++) {
 	            	int [] quantity = new int[quantityCheck.length];
