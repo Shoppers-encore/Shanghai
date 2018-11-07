@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
-<!-- Must be removed later -->
-<c:set var="id" value="aaa" scope="session"/>
 <html>
 	<head>
 		<title>${head_basketList}</title>
@@ -67,7 +65,7 @@
 									prodCode.push('${basketList.productCode}');
 								</script>
 								<div class="col-lg-1 pt-5">
-									<input type="checkbox" name="checked1234" value="${basketList.productCode}" checked>
+									<input type="checkbox" id="itemChecked" name="itemChecked" value="${basketList.productCode}" checked>
 								</div>
 								<div class="col-lg-2">
 									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -142,6 +140,9 @@
 															console.log('basket update ${msg_success}');
 															$('#${basketList.productCode}').remove()
 															basketCount--;
+															prodCode=prodCode.filter(function(item) {
+																return item!='${basketList.productCode}'
+															})
 															$('#totalNumberOfItems').text('${str_itemsTotal}'+basketCount+'${str_quantityUnit}');
 														} else {
 															alert('${msg_tryLater}');
@@ -166,25 +167,31 @@
 								$('#basketListFormSubmitBtn').on(
 									'click',
 									function(event) {
-										for(product in prodCode) {
-											sizeSelector='selectSizeOptions_'+prodCode[product];
-											colorSelector='selectColorOptions_'+prodCode[product];
-											/* checkSelector='checked'; */
-											
-											sizeSelection=document.getElementById(sizeSelector);
-											colorSelection=document.getElementById(colorSelector);
-											checked=document.getElementById(checkSelector);
-											/* alert(checked); */
-											
-											if(colorSelection.value=='unselected') {
-												event.preventDefault();
-												alert('${msg_selectColor}');
-												break;
-											} else if(sizeSelection.value=='unselected') {
-												event.preventDefault();
-												alert('${msg_selectSize}');
-												break;
-											}
+										if($('#itemChecked:checked').length=='0') {
+											event.preventDefault();
+											alert('${msg_selectItemsToOrder}');
+										} else {
+											$('#itemChecked:checked').each(function(e) {
+												for(product in prodCode) {
+													var sizeSelector='selectSizeOptions_'+prodCode[product];
+													var colorSelector='selectColorOptions_'+prodCode[product];
+													
+													var sizeSelection=document.getElementById(sizeSelector);
+													var colorSelection=document.getElementById(colorSelector);
+													
+													if(prodCode[product]==this.value) {
+														if(colorSelection.value=='unselected') {
+															event.preventDefault();
+															alert('${msg_selectColor}');
+															break;
+														} else if(sizeSelection.value=='unselected') {
+															event.preventDefault();
+															alert('${msg_selectSize}');
+															break;
+														}
+													}	
+												}
+											});
 										}
 									}
 								);

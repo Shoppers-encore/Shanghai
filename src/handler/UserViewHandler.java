@@ -82,9 +82,7 @@ public class UserViewHandler {
 	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
-		/* Must be removed later */
-		String id="aaa";
-		//String id=(String)request.getSession().getAttribute("id");
+		String id=(String)request.getSession().getAttribute("id");
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -92,7 +90,7 @@ public class UserViewHandler {
 		/* Total number of items in the basket */
 		int basketCount=basketDao.getBasketCount(id);
 		
-		/* Create a HashMap that can hold color and size options for each item in the basket */
+		/* Create HashMaps that can hold color and size options for each item in the basket */
 		Map<String, HashSet<String>> prodColors=new HashMap<String, HashSet<String>>();
 		Map<String, HashSet<String>> prodSizes=new HashMap<String, HashSet<String>>();
 		
@@ -116,10 +114,11 @@ public class UserViewHandler {
 			
 			// 3) Get color and size options using the productCodes
 			for(ProductDataBean prodCode:prodCodesFromRef) {
-				String color=prodCode.getProductCode().substring(0,2);
+				String code=prodCode.getProductCode();
+				String color=code.substring(0,2);
 				colors.add(color);
 					
-				String size=prodCode.getProductCode().substring(prodCode.getProductCode().length()-2,prodCode.getProductCode().length());
+				String size=code.substring(code.length()-2,code.length());
 				sizes.add(size);
 			}
 
