@@ -221,23 +221,46 @@ public class AdminViewHandler {
    }
    @RequestMapping("/admReviewList")
    public ModelAndView admReviewList(HttpServletRequest request, HttpServletResponse response) {
-      BoardDao boardDao = new BoardDao();
+	   try {
+	         request.setCharacterEncoding("utf-8");
+	      } catch ( UnsupportedEncodingException e ) {
+	         e.printStackTrace();
+	      }
+	  BoardDao boardDao = new BoardDao();
       String id = (String)request.getSession().getAttribute("id");
       UserDataBean userDto = userDao.getUser(id);
       request.setAttribute( "id", id );
       request.setAttribute( "userDto", userDto );
       
-      Map<String,String> search = new HashMap<String,String>();
-      search.put("searchType", request.getParameter("searchType"));
-      search.put("searchWord", request.getParameter("searchWord"));
-      
-      int count = boardDao.getReviewCount();
-      
-      if( count > 0 ) {
-         Map<String, String> map = new HandlerHelper().makeCount( count, request );
-         List <ReviewDataBean> reviewList = boardDao.getRvList( map );
-         request.setAttribute( "reviewList", reviewList );
+      String searchWord = request.getParameter("searchWord");
+      String searchType = request.getParameter("searchType");
+      int count = 0;
+      if( searchWord == "" || searchWord == null ) {
+          // No query
+    	  count = boardDao.getReviewCount();
+          if( count > 0 ) {
+             Map<String, String> map = new HandlerHelper().makeCount( count, request );
+             List <ReviewDataBean> reviewList = boardDao.getRvList( map );
+             request.setAttribute( "reviewList", reviewList );
+          }
+      } else {
+    	  // Yes query
+          Map<String,String> search = new HashMap<String,String>();
+          search.put("searchType", searchType);
+          search.put("searchWord", searchWord);
+          count = boardDao.getReviewSearchCount(search);
+          //System.out.println("getReviewSearchCount : " + count);
+
+          Map<String, String> map = new HandlerHelper().makeCount(count, request);
+          map.put("searchType", searchType);
+          map.put("searchWord", searchWord);
+		  List <ReviewDataBean> review = boardDao.getRvSearchList( map );
+		  //request.setAttribute("searchType", searchType);
+		  request.setAttribute("searchWord", searchWord);
+		  request.setAttribute( "reviewList", review );
       }
+      
+      
       return new ModelAndView("adm/view/admReviewList");
    }
    @RequestMapping("/tagList")

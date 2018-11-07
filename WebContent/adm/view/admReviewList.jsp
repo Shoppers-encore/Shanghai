@@ -73,7 +73,7 @@
 				<c:if test="${currentPage ne 1}">
 					<a href="admReviewList.jk">[◀◀]</a>
 				<c:if test="${startPage gt pageBlock}">
-					<a href="admReviewList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+					<a href="admReviewList.jk?pageNum=${startPage-pageBlock}${url_searchWord}${searchWord}">[◀]</a>
 					</c:if>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -81,20 +81,20 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="admReviewList.jk?pageNum=${i}">[${i}]</a>
+					<a href="admReviewList.jk?pageNum=${i}${url_searchWord}${searchWord}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
 					<c:if test="${pageCount>endPage}">
-					<a href="admReviewList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+					<a href="admReviewList.jk?pageNum=${startPage+pageBlock}${url_searchWord}${searchWord}">[▶]</a>
 					</c:if>
-					<a href="admReviewList.jk?pageNum=${pageCount}">[▶▶]</a>
+					<a href="admReviewList.jk?pageNum=${pageCount}${url_searchWord}${searchWord}">[▶▶]</a>
 				</c:if>
 			</c:if>
 			</div>
 			<br>
 			<div align="center">
-			<form name="searchForm" action="reviewList.js" method="post">
+			<form name="searchForm" action="admReviewList.jk" method="post">
 			     <select name="searchType">
 			       <option value="ttl">${str_searchTitle}</option>
 			       <option value="ctt">${str_content}</option>
