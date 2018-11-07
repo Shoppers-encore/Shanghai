@@ -52,7 +52,7 @@
 			<div class="form-group row"><!-- birthday -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
 					<div class="col-sm-8">
-						<h4><fmt:formatDate var="birthday" value="${user.birthDay}" type="date"/></h4>
+						<h4><fmt:formatDate var="birthday" value="${user.birthday}" type="date"/></h4>
 					</div>		
 			</div>
 			<div class="form-group row"><!-- tel -->

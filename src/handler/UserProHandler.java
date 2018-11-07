@@ -186,7 +186,7 @@ public class UserProHandler {
 		}
 		user.setWeight(weight);
 		userDao.modifyUser(user);
-		return "redirect:userMypage.jk";
+		return "redirect:userMyPage.jk";
 	}
 	@RequestMapping( "/userDeletePro" )
 	public ModelAndView userDeletePro (HttpServletRequest request, HttpServletResponse response) {
