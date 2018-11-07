@@ -120,4 +120,7 @@
 	<update id="changeQuantity" parameterType="databean.ProductDataBean">
 		UPDATE jk_product SET productQuantity=${productQuantity} WHERE productCode=#{productCode}
 	</update>
+	<select id="getProdQuantity" parameterType="String" resultType="int">
+		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
+	</select>
 </mapper>

@@ -59,7 +59,7 @@
 				</tr>
 				</c:if>
 				<c:if test="${count ne 0}">
-					<c:forEach var="product" items="${products}">   
+					<c:forEach var="product" items="${products}">  
 						<tr align="center">
 							<td>
 							${product.productCode}
