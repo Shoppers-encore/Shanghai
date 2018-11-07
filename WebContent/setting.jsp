@@ -209,6 +209,7 @@
 <c:set var="btn_userDelete" value="탈퇴"/>
 <c:set var="btn_x" value="삭제"/>
 <c:set var="btn_productModify" value="상품수정"/>
+<c:set var="btn_gotoUserMain" value="사용자메인"/>
 
 
 
@@ -227,6 +228,7 @@
 <c:set var="msg_like" value="명이 공감한 게시물입니다."/>
 <c:set var="msg_addTag" value="추가할 태그를 입력하세요."/>
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
+<c:set var="msg_searchResult" value="개의 검색결과가 있습니다. 검색어 : "/>
 
 <c:set var="msg_emptyOrderList" value="주문 내역이 없습니다."/>
 <c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요."/>
