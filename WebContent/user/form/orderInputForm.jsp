@@ -259,7 +259,7 @@
 									</script>
 								
 								<div class="col-lg-2 pt-5">
-									<div id="orderPrice_${basket.productCode}"></div>
+									<div class="orderPrice" id="orderPrice_${basket.productCode}"></div>
 									<input type="hidden" name="orderPrice_${basket.productCode}" value="orderPrice_${basket.productCode}">
 									<script type="text/javascript">
 										var qty='${basket.basketQuantity}';
@@ -271,8 +271,8 @@
 									</script>
 								</div>
 							</div>
-						</c:forEach>
-											
+						</c:forEach>		
+						
 						<div class="col-sm-8">
 							<div class="form-group row mt-3"><!-- Id -->
 								<label for="id" class="col-sm-3 col-form-label"><strong>${str_orderId}</strong></label>
@@ -313,16 +313,32 @@
 								<label for="address" class="col-sm-3 col-form-label"><strong>${str_address}*</strong></label>
 								<div class="col-sm-6">
 									<input class="form-control text-center" type="text" name=address id="address" value="${userInfo.address}" required>											
-								</div>
-								<div class="col-sm-3 text-right"><h4>${str_totalPrice}: </h4></div>		
+								</div>	
 							</div>
 							<div class="form-group row"><!--addressDetail -->
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6">
 									<input class="form-control text-center" type="text" name=addressDetail value="${userInfo.addressDetail}" required>											
-								</div>		
+								</div>
+								<div class="col-sm-3 text-right"><h4 id="totalPrice"></h4></div>		
 							</div>
 						</div>
+						
+						<script type="text/javascript">
+							$(window).on(
+								'load',
+								function(e) {
+									var grandTotal=0;
+							
+									for(i=0; i<$('.orderPrice').length; i++) {
+										var eachPrice=$('.orderPrice')[i].innerHTML;
+										var price=eval(eachPrice.substring(0, eachPrice.length-1));
+										grandTotal=grandTotal+price;
+									}
+									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
+								}
+							);
+						</script>		
 						
 						<div class="col-sm-12">
 							<div class="text-right mt-2">

@@ -166,6 +166,8 @@
 											function(event) {
 												event.preventDefault();
 												var basketCount='${basketCount}';
+												alert(prodPrice.val())
+												alert(price);
 												$.ajax({
 													url: 'deleteBasketItemAjax.jk',
 													contentType: 'application/json; charset="UTF-8"',
@@ -180,6 +182,7 @@
 															console.log('basket update ${msg_success}');
 															$('#${basketList.productCode}').remove()
 															basketCount--;
+															newProductPrice;
 															prodCode=prodCode.filter(function(item) {
 																return item!='${basketList.productCode}'
 															})
