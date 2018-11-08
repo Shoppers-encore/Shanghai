@@ -56,5 +56,14 @@ public class OrderDao {
 	public int changeStatus(Map<String, String> map) {
 		return session.update("Admin.changeStatus", map);
 	}
+	
+	public int prodFromOrder(int orderCode) {
+		return session.update("Admin.prodFromOrder", orderCode);
+	}
+
+	public List<OrderListDataBean> getOrderDetail(int orderCode) {
+		return session.selectList("Admin.getOrderDetail", orderCode);
+	}
+	
 }
 	

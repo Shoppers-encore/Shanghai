@@ -136,7 +136,8 @@
 <c:set var="str_soldOut" value="품절"/>
 <c:set var="str_remainingProdQty" value="재고"/>
 <c:set var="str_discount" value="% 할인 중"/>
-
+<c:set var="str_quantityMod" value="추가할 수량"/>
+<c:set var="str_productCode" value="상품코드"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -244,6 +245,7 @@
 <c:set var="msg_noPhoto" value="사진을 등록해주세요!"/>
 <c:set var="msg_gotoProductList" value="수정은 상품관리에서 가능합니다." />
 <c:set var="msg_selectItemsToOrder" value="주문하실 상품을 선택해 주세요."/>
+
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum="/>
 <c:set var="url_searchType" value="&searchType="/>

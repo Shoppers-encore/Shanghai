@@ -172,9 +172,10 @@
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
   	
-  	
-  	
-  	
+	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+
   	
   	<!-- chatting -->
   	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">
