@@ -160,8 +160,7 @@ public class AdminProHandler {
 	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 	      ProductDataBean productDto = new ProductDataBean();
 	      String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
-	      //String product_code[] = this.makeProductCode( int colors[], int sizes[] );
-	      
+	     
 	      for( int i=0; i<product_codes.length; i++ ) {
 	    	  
 	    	 ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
@@ -370,32 +369,28 @@ public class AdminProHandler {
 		request.getSession().setAttribute("memid",null);
 		return "redirect:admLoginForm.jk";
 	}
-	
+
 	@RequestMapping("/changeQuantity")
-	public ModelAndView changeQuantity(HttpServletRequest request, HttpServletResponse response) {
-		String[] productCodes = request.getParameterValues("productCode");
-		String[] quantityMod = request.getParameterValues("quantityMod");
-			for(int i=0; i<productCodes.length; i ++) {
-				if( quantityMod[i] != null ) {
-					ProductDataBean productDto = new ProductDataBean();
-					productDto.setProductCode( productCodes[i] );
-					int [] quantity = new int[quantityMod.length];
-					quantity[i] = Integer.parseUnsignedInt( quantityMod[i] );
-					productDto.setProductQuantity( quantity[i] );
-					productDao.changeQuantity( productDto );
-			}
-		}
-			return new ModelAndView ("adm/pro/changeQuantity");
-	}
-	
-	
-	
+	 public String changeQuantity(HttpServletRequest request, HttpServletResponse response) {
+	      String[] productCodes = request.getParameterValues("productCode");
+	      String[] quantityCheck = request.getParameterValues("quantityMod");
+	      ProductDataBean productDto = new ProductDataBean();
+	         for(int i=0; i<productCodes.length; i ++) {
+	            	int [] quantity = new int[quantityCheck.length];
+	        		for(i=0; i<quantityCheck.length; i++) {
+	        		quantity[i] = Integer.parseInt( quantityCheck[i] );
+	        		int quan = 0;
+	        	   if( quantity[i] > 0  ) {
+	        		   quan = productDao.getProdQuantity( productCodes[i] ) + quantity[i];
+	        	   } else { 
+	        		   quan = productDao.getProdQuantity( productCodes[i] );
+	        	   }
+	        	   productDto.setProductQuantity( quan ); 
+	        	   productDto.setProductCode( productCodes[i] );
+	        	   
+	        	   productDao.changeQuantity( productDto );
+	        		}    
+	         }
+	         return "redirect:admProductList.jk";
+	   }
 }
-		/*
-		String[] productCodes = request.getParameterValues("productCode");
-		String[] quantityMod = request.getParameterValues("quantityMod");
-			for(int i=0; i<productCodes.length; i ++) {
-				if( quantityMod[i] != null ) {
-					productDao.changeQuantity(productCodes[i]);
-			}
-		}*/

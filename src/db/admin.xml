@@ -131,8 +131,9 @@
 	<delete id="deleteProduct" parameterType="String">
 		DELETE FROM jk_product WHERE productCode=#{product}
 	</delete>
-
-	
+	<select id="getProdQuantity" parameterType="String" resultType="int">
+		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
+	</select>
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
@@ -141,6 +142,13 @@
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat
 	</select>
-	
-
+	<select id="getRefNo" parameterType="String" resultType="int">
+		SELECT ref FROM jk_product WHERE productCode=#{productCode}
+	</select>
+	<select id="prodFromOrder" parameterType="int" resultType="int">
+		SELECT count(productCode) FROM jk_orderList WHERE orderCode=#{orderCode}
+	</select>
+	<select id="getOrderDetail" parameterType="int" resultType="databean.OrderListDataBean">
+		SELECT * FROM jk_orderList WHERE orderCode=#{orderCode}
+	</select>
 </mapper>
