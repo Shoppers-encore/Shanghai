@@ -131,4 +131,16 @@ public class ProductDao{
 		return session.update("Admin.changeQuantity", productDto);
 	}
 
+	public List<String> getProductCodeList(int ref) {
+		return session.selectList("Admin.getProductCodeList",ref);
+	}
+
+	public int modifyProduct(ProductDataBean product) {
+		return session.update("Admin.modifyProduct", product);
+	}
+
+	public int deleteProduct(String product) {
+		return session.delete("Admin.deleteProduct", product);
+	}
+
 }

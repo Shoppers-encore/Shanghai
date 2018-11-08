@@ -120,6 +120,17 @@
 	<update id="changeQuantity" parameterType="databean.ProductDataBean">
 		UPDATE jk_product SET productQuantity=${productQuantity} WHERE productCode=#{productCode}
 	</update>
+	<select id="getProductCodeList" parameterType="int" resultType="String">
+		SELECT productCode FROM jk_product WHERE ref=#{ref}
+	</select>
+	<update id="modifyProduct" parameterType="databean.ProductDataBean">
+		MERGE INTO jk_product USING DUAL ON (productCode = #{productCode}) WHEN MATCHED THEN UPDATE SET productContent=#{productContent}, discount=#{discount, jdbcType=INTEGER},  productPrice=#{productPrice}, productCategory=#{productCategory} WHERE productCode=#{productCode}
+		WHEN NOT MATCHED THEN INSERT (ref, productCode, productCategory, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail) 
+		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},'abc.jpg')
+	</update>
+	<delete id="deleteProduct" parameterType="String">
+		DELETE FROM jk_product WHERE productCode=#{product}
+	</delete>
 
 	
 	<!-- chatData -->

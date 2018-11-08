@@ -373,7 +373,7 @@ function deletePhoto(tb_no,photo_id,start){
                   <tr>
                         <th> ${str_content} </th>
                         <td colspan="5">
-                           <textarea id="productContent" name="good_content" class="form-control" rows="15"> ${products.get(0).productContent}</textarea>
+                           <textarea id="productContent" name="productContent" class="form-control" rows="15"> ${products.get(0).productContent}</textarea>
                         </td>
                   </tr>
                   <tr>
