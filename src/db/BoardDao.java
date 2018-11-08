@@ -74,7 +74,7 @@ public class BoardDao {
 		return session.delete( "Admin.reviewDelete", reviewNo );
 	}
 
-	//////// 1107 added by JH
+	//////// 1107 added by JH ^^
 	public int getReviewSearchCount(Map<String,String> map) {
 		return session.selectOne("User.getReviewCount", map);
 	}
