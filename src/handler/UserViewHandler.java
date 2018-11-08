@@ -29,13 +29,12 @@ import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
+import databean.UserDataBean;
 import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
 import db.UserDao;
-import databean.TagDataBean;
-import databean.UserDataBean;
 import etc.HandlerHelper;
 
 @Controller
@@ -73,10 +72,10 @@ public class UserViewHandler {
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
 		String id=(String)request.getSession().getAttribute("id");		
 		if(id!=null) {
-			UserDataBean userDto=userDao.getUser(id);
+			UserDataBean userDto= userDao.getUser(id);
 			request.setAttribute("userDto", userDto);
 		}
-			return new ModelAndView("user/view/userMyPage");
+		return new ModelAndView("user/view/userMyPage");
 	}
 	
 	
@@ -175,14 +174,23 @@ public class UserViewHandler {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String id = (String)request.getSession().getAttribute("id");
 		int count = 0;
 		String searchWord = request.getParameter("searchWord");
+		if(searchWord ==null || "".equals(searchWord)) {
+			searchWord = " ";
+		}
+		String[] selectedColors_temp = request.getParameterValues("color");
+		String selectedColors = "";
+		if( selectedColors_temp !=null)
+			for(int i=0; i<selectedColors_temp.length; i++) {
+				selectedColors += selectedColors_temp[i] + " ";
+			}
 		if(searchWord == null || "".equals(searchWord)) {
 			return new ModelAndView("user/view/userSearchProduct");
 		} else {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("searchWord", request.getParameter("searchWord"));
+			map.put("selectedColors", selectedColors);
 			count = productDao.getProductCount(map);		
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
@@ -193,12 +201,6 @@ public class UserViewHandler {
 				count = productDao.getProductCount(map);
 				map = hh.makeCount(count, request);
 				map.put("searchWord", searchWord);
-				String[] selectedColors_temp = request.getParameterValues("color");
-				String selectedColors = "";
-				if( selectedColors_temp !=null)
-					for(int i=0; i<selectedColors_temp.length; i++) {
-						selectedColors += selectedColors_temp[i] + " ";
-					}
 				map.put("selectedColors", selectedColors);
 				count = productDao.getProductCount(map);
 				Map<String, String> cmap = hh.makeCount(count, request);
@@ -357,7 +359,7 @@ public class UserViewHandler {
 		ReviewDataBean reviewDto = boardDao.get( num );
 		reviewDto.setReviewScoreSum( boardDao.getReviewLikes(num) );
 		String id=(String)request.getSession().getAttribute("id");
-		
+
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(num).toString());
