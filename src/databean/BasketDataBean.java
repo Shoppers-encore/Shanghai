@@ -6,6 +6,9 @@ public class BasketDataBean {
 	private String productCode;
 	private String productName;
 	private int basketQuantity;
+	private int productPrice;
+	private int productQuantity;
+	private int discount;
 	public String getId() {
 		return id;
 	}
@@ -35,5 +38,23 @@ public class BasketDataBean {
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+	public int getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+	public int getProductQuantity() {
+		return productQuantity;
+	}
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 }

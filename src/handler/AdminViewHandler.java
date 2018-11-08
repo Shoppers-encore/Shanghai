@@ -29,11 +29,8 @@ import db.TagDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
-
-
 @Controller
 public class AdminViewHandler {
-
 	@Resource
 	private UserDao userDao;
 	@Resource
@@ -212,7 +209,6 @@ public class AdminViewHandler {
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
-		//request.setAttribute("ref", ref);
 		request.setAttribute("productList", list);
 		request.setAttribute("imageList", imageList);
 		request.setAttribute("colors", colors);
@@ -247,7 +243,6 @@ public class AdminViewHandler {
 		request.setAttribute("count", count);
 		return new ModelAndView("adm/view/admOrderList");
 	}	
-
 	//chat ajax
 	@RequestMapping("/admChatList")
 	@ResponseBody
@@ -286,4 +281,5 @@ public class AdminViewHandler {
       request.setAttribute("chatData", chatData);
       return chatData;
    }
+
 }
