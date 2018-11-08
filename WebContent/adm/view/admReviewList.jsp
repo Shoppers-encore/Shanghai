@@ -57,8 +57,9 @@
 					<c:if test="${count ne 0}">
 						<c:forEach var="reviewList" items="${reviewList}">
 							<tr>
-								<td><a href="admProductDetail.jk?ref=${ref}">${reviewList.productCode}</a>
-								<input type="hidden" name="productCode" value="${reviewList.productCode}">
+								<td><a href="admProductDetail.jk?ref=${ref}">
+								<input type="hidden" name="productCode" id="productCode" value="${reviewList.productCode}">
+								${reviewList.productCode}</a>
 								</td>
 								<td><a href="admReviewDetail.jk?reviewNo=${reviewList.reviewNo}&productCode=${reviewList.productCode}">
 									${reviewList.title}</a></td>

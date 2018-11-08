@@ -34,7 +34,7 @@
 	<select id="getOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
-		(SELECT * FROM jk_orderList ORDER BY id desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_orderList ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
  	<select id="getOrder" parameterType="String" resultType="databean.OrderListDataBean">
 		SELECT * FROM jk_orderList WHERE id=#{id}
@@ -126,7 +126,7 @@
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
-		WHERE chatdate=(select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+		WHERE chatdate IN (select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
 	</select>
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat

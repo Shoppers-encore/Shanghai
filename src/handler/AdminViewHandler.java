@@ -29,8 +29,6 @@ import db.TagDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
-
-
 @Controller
 public class AdminViewHandler {
 	@Resource
@@ -133,7 +131,6 @@ public class AdminViewHandler {
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
-		//request.setAttribute("ref", ref);
 		request.setAttribute("productList", list);
 		request.setAttribute("imageList", imageList);
 		request.setAttribute("colors", colors);
@@ -192,16 +189,13 @@ public class AdminViewHandler {
 		return new ModelAndView("adm/view/admReviewDetail");
 	}
 
+	
 	@RequestMapping("/admReviewList")
 	public ModelAndView admReviewList(HttpServletRequest request, HttpServletResponse response) {
 		BoardDao boardDao = new BoardDao();
 		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean userDto = userDao.getUser(id);
-		//String[] productCodes = request.getParameterValues( "productCode" );
-		/*for(int i = 0; i<productCodes.length; i++) {
-			int ref = boardDao.getRefNo( productCodes[i] );
-			request.setAttribute( "ref", ref );
-		}*/
+		
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		
@@ -241,32 +235,5 @@ public class AdminViewHandler {
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;
-	}
-
-	@RequestMapping("/admChatting")
-	public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		request.setAttribute("id", id);
-		return new ModelAndView("adm/view/admChatting");
-	}
-	
-	@RequestMapping("/admChatInput")
-	@ResponseBody
-	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		String chatContent = request.getParameter("chatContent");
-		ChatDataBean chat = new ChatDataBean();
-		chat.setSender("admin");
-		chat.setReceiver(id);
-		chat.setChatContent(chatContent);
-		chatDao.chatInput(chat);
-	}
-	@RequestMapping("/admChat")
-	@ResponseBody
-	public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
-		String id = request.getParameter("id");
-		List<ChatDataBean> chatData = chatDao.getList(id);
-		request.setAttribute("chatData", chatData);
-		return chatData;
 	}
 }

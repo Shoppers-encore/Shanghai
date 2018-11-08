@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
 import databean.ImageInfoDataBean;
-import databean.OrderListDataBean;
 import databean.ProductDataBean;
 
 
@@ -15,21 +14,11 @@ public class ProductDao{
 	private SqlSession session = SqlMapClient.getSession();
 
 	public int getProductCount(Map<String, String> map) {
-		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
-			return session.selectOne("User.getProductColorSearchCount", map);
-		}else {
-			return session.selectOne("User.getProductSearchCount", map);
-		}
+		return session.selectOne("User.getProductColorSearchCount", map);
 	}
 	
 	public List<ProductDataBean> getProductList(Map<String, String> map) {
-		if(map.get("selectedColors")!=null && !"".equals(map.get("selectedColors"))) {
-			//System.out.println("색잇음");
-			return session.selectList("User.getProductColorSearchList", map);
-		}else {
-			//System.out.println("색없음");
-			return session.selectList("User.getProductSearchList", map);
-		}
+		return session.selectList("User.getProductColorSearchList", map);
 	}
 	
 	public String getProductName(String productCode) {

@@ -73,5 +73,8 @@ public class BoardDao {
 	public int reviewDelete( int reviewNo ) {
 		return session.delete( "Admin.reviewDelete", reviewNo );
 	}
+	public int getRefNo( String productCode ) {
+		return session.selectOne( "Admin.getRefNo", productCode );
+	}
 
 }
