@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import databean.BasketDataBean;
+import databean.ProductDataBean;
 import databean.ReviewDataBean;
 import databean.UserDataBean;
 import db.BasketDao;
@@ -28,6 +29,8 @@ public class UserFormHandler {
 	private BasketDao basketDao;
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private ProductDao productDao;
 	
 	// User
 	@RequestMapping("/userInputForm")
@@ -96,15 +99,41 @@ public class UserFormHandler {
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
-		List<BasketDataBean> baskets = basketDao.getBasketList(id);
-		if(request.getParameter("productCode")!=null || "".equals(request.getParameter("productCode"))) {
-			String productCode = request.getParameter("productCode");
-			int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
-			BasketDataBean basket = new BasketDataBean();
-			basket.setId(id);
-			basket.setProductCode(productCode);
-			basket.setBasketQuantity(basketQuantity);
-			baskets.add(basket);
+		UserDataBean userInfo=userDao.getUser(id);
+		request.setAttribute("userInfo", userInfo);
+		
+		/* If this page is accessed from basketList, identifier=1; else identifier=null || identifier="" */ 
+		String identifier=request.getParameter("identifier");
+
+		if("".equals(identifier) || identifier==null) {
+			identifier="0";
+		}
+		
+		if(identifier.equals("1")) {
+			List<BasketDataBean> basketList=basketDao.getBasketList(id);
+			identifier="1";
+			
+			request.setAttribute("identifier", identifier);
+			request.setAttribute("basket", basketList);
+			
+		} else {
+			if(request.getParameter("productCode")!=null || ! "".equals(request.getParameter("productCode"))) {
+				String productCode = request.getParameter("productCode");
+				int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
+
+				BasketDataBean basketItem=new BasketDataBean();
+				basketItem.setProductCode(productCode);
+				basketItem.setBasketQuantity(basketQuantity);
+				
+				ProductDataBean product=productDao.getProductDetailsByProductCode(productCode);
+				
+				request.setAttribute("product", product);
+				request.setAttribute("identifier", identifier);
+				request.setAttribute("basket", basketItem);
+			} else {
+				identifier="2";
+				request.setAttribute("identifier", identifier);
+			}
 		}
 		return new ModelAndView("user/form/orderInputForm");
 	}

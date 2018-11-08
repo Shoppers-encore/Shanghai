@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -249,23 +251,21 @@ public class UserProHandler {
 	@ResponseBody
 	public String deleteBasketItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		
-		// 1) Get id from session
-		/*String id=(String)request.getSession().getAttribute("id");*/
-		// For now, id is directly set here
-		String id="aaa";
+		/* Get id from session */
+		String id=(String)request.getSession().getAttribute("id");
 		
-		// 2) Get productCode from Ajax data
+		/* Get productCode from Ajax data */
 		String productCode=request.getParameter("productCode");
 		
-		// 3) Add id and productCode to BasketDataBean
+		/* Add id and productCode to BasketDataBean */
 		BasketDataBean deleteReferences=new BasketDataBean();
 		deleteReferences.setId(id);
 		deleteReferences.setProductCode(productCode);
 		
-		// 4) Delete the item and get the result
+		/* Delete the item and get the result */
 		int deleteResult=basketDao.deleteBasketItem(deleteReferences);
 		
-		// 5) If the result returns 1, the item is deleted from jk_basket
+		/* If the result returns 1, the item is deleted from jk_basket */
 		String itemDeleted;
 		if(deleteResult==1) {
 			itemDeleted="true";
@@ -273,9 +273,57 @@ public class UserProHandler {
 			itemDeleted="false";
 		}
 		
-		// 6) Convert Java String to JSON and return
+		/* Convert Java String to JSON and return */
 		String isItemDeleted=new Gson().toJson(itemDeleted);
 		return isItemDeleted;
+	}
+	
+	@RequestMapping("/basketListPro")
+	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
+		String id=(String)request.getSession().getAttribute("id");
+		String[] checkedItems=request.getParameterValues("itemChecked");
+		
+		/* Get items from jk_basket using id */
+		List<BasketDataBean> basketList=basketDao.getBasketList(id);
+		List<Integer> resultSet=new ArrayList<Integer>();
+		
+		for(String item:checkedItems) {
+			for(BasketDataBean basketItem:basketList) {
+				if(item.equals(basketItem.getProductCode())) {
+					String productCode=item;
+
+					int basketQuantity=Integer.parseInt(request.getParameter("basketQuantity_"+productCode));
+					String colorSelected=request.getParameter("selectColorOptions_"+productCode);
+					String sizeSelected=request.getParameter("selectSizeOptions_"+productCode);
+					
+					String ref;
+					if(productCode.length()>5) {
+						ref=productCode.substring(2, productCode.length()-2);
+					} else {
+						ref=productCode;
+					}
+				
+					String newProductCode=colorSelected+ref+sizeSelected;
+
+					/* Make  a map (can't use BasketDataBean because the productCode must be updated with a new one) */
+					/* Map<String, Object> so we can put both String and int */ 
+					Map<String, Object> updateReferences=new HashMap<String, Object>();
+					updateReferences.put("newProductCode", newProductCode);
+					updateReferences.put("basketQuantity", basketQuantity);
+					updateReferences.put("id", id);
+					updateReferences.put("productCode", productCode);
+					
+					/* Get the result in int; result=1 when successfully updated */
+					int result = basketDao.updateBasketList(updateReferences);
+					
+					/* Add the int result to the array list */
+					resultSet.add(result);
+				}
+			}
+		}
+
+		request.setAttribute("results", resultSet);
+		return new ModelAndView( "user/pro/basketListPro" );
 	}
 	
 	// Review

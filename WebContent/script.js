@@ -301,8 +301,6 @@ function returnToList() {
 }
 
 
-
-
 //////<Admin>
 //<tag>
 function tagPopup() {

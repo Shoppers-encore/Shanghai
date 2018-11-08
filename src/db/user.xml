@@ -56,6 +56,9 @@
 	<select id="getProductQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productList}
 	</select>
+	<select id="getProductDetailsByProductCode" parameterType="String" resultType="databean.ProductDataBean">
+		SELECT productName, thumbnail, productPrice, discount, productQuantity FROM jk_product WHERE productCode=#{productCode}
+	</select>
 	
 	
 	<!-- Review -->
@@ -117,7 +120,10 @@
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
-		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail FROM jk_basket b, jk_product p WHERE b.id=#{id} AND p.productCode=b.productCode 
+		SELECT b.productCode, b.basketQuantity, p.productName, p.thumbnail, p.productPrice, p.productQuantity 
+		FROM jk_basket b, jk_product p 
+		WHERE b.id=#{id} 
+		AND p.productCode=b.productCode 
 	</select>
 	<select id="getBasketCount" parameterType="String" resultType="int">
 		SELECT count(*) FROM jk_basket WHERE id=#{id}
@@ -128,12 +134,20 @@
 	<insert id="inputBasket" parameterType="databean.BasketDataBean">
 		INSERT INTO jk_basket VALUES (#{id}, #{productCode}, #{basketQuantity})
 	</insert>
+	<update id="updateBasketList" parameterType="java.util.Map">
+		UPDATE jk_basket 
+		SET productCode=#{newProductCode}, basketQuantity=#{basketQuantity} 
+		WHERE id=#{id} AND productCode=#{productCode} 
+	</update>
 	<select id="getDuplicateCheck" parameterType="databean.BasketDataBean" resultType="int">
 		SELECT count(*) FROM jk_basket WHERE id=#{id} AND productCode=#{productCode}
 	</select>
 	<update id="increaseBasketItemQuantity" parameterType="databean.BasketDataBean">
 		UPDATE jk_basket SET basketquantity=basketquantity+#{basketQuantity} WHERE id=#{id} AND productCode=#{productCode}
 	</update>
+	<delete id="deleteBasketListById" parameterType="String">
+		DELETE FROM jk_basket WHERE id=#{id}
+	</delete>
 	
 	
 	<!-- Order -->
@@ -157,11 +171,12 @@
   		FROM jk_orderList o, jk_product p 
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
-	 <select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+
+	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
-	
-	
+
+  	
   	<!-- chatting -->
   	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">
   		SELECT * FROM jk_chat WHERE sender=#{id} OR receiver=#{id} ORDER BY chatdate desc
