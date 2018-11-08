@@ -133,7 +133,7 @@
 <c:set var="str_quantityMod" value="추가할 수량"/>
 <c:set var="str_lastChat" value="마지막 내용"/>
 <c:set var="str_chatTime" value="시간"/>
-
+<c:set var="str_productCode" value="상품코드"/>
 
 
 
