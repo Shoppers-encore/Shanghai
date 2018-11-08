@@ -231,7 +231,7 @@ public class AdminViewHandler {
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
 		
-		int count = boardDao.getReviewCount();
+		int count = boardDao.getReviewCount(search);
 		
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );

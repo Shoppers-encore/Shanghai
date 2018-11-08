@@ -310,10 +310,13 @@ public class UserProHandler {
 					i++;
 				}
 			}
-				reviewDto.setPhoto1( photos[0] );
-				reviewDto.setPhoto2( photos[1] );
+			reviewDto.setPhoto1( photos[0] );
+			reviewDto.setPhoto2( photos[1] );
 
-			int count = boardDao.getReviewCount();
+			Map<String,String> search = new HashMap<String,String>();
+			search.put("searchType", request.getParameter("searchType"));
+			search.put("searchWord", request.getParameter("searchWord"));
+			int count = boardDao.getReviewCount(search);
 			int reviewNo = 1;
 			if(count >0) {
 				reviewNo = boardDao.getMaxReview()+1;

@@ -68,11 +68,8 @@
 	<select id="getMaxReview" resultType="int">
 			SELECT max(reviewNo) FROM jk_review
 	</select>
-	<select id="getSearchReviewCount" parameterType="java.util.Map" resultType="int">
+	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
-	</select>
-	<select id="getReviewCount" resultType="int">
-		SELECT count(*) From jk_review
 	</select>
 	<select id="getReviewList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM

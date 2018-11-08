@@ -334,7 +334,7 @@ public class UserViewHandler {
 		search.put("searchType", request.getParameter("searchType"));
 		search.put("searchWord", request.getParameter("searchWord"));
 		
-		int count = boardDao.getSearchReviewCount(search);
+		int count = boardDao.getReviewCount(search);
 		if( count > 0 ) {
 			Map<String, String> map = new HandlerHelper().makeCount( count, request );
 			List <ReviewDataBean> articles = boardDao.getReviewList( map );
