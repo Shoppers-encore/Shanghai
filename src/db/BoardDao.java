@@ -73,5 +73,5 @@ public class BoardDao {
 	public int reviewDelete( int reviewNo ) {
 		return session.delete( "Admin.reviewDelete", reviewNo );
 	}
-	
+
 }

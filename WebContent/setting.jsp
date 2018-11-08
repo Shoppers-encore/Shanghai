@@ -130,7 +130,7 @@
 <c:set var="str_productPrice" value="가격"/>
 <c:set var="str_cart" value="장바구니"/>
 
-<c:set var="str_quantityMod" value="재고수정"/>
+<c:set var="str_quantityMod" value="추가할 수량"/>
 <c:set var="str_lastChat" value="마지막 내용"/>
 <c:set var="str_chatTime" value="시간"/>
 
