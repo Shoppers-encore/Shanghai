@@ -33,6 +33,7 @@ import etc.HandlerHelper;
 
 @Controller
 public class AdminViewHandler {
+
 	@Resource
 	private UserDao userDao;
 	@Resource
@@ -243,30 +244,30 @@ public class AdminViewHandler {
 		return chatList;
 	}
 
-	@RequestMapping("/admChatting")
-	public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		request.setAttribute("id", id);
-		return new ModelAndView("adm/view/admChatting");
-	}
-	
-	@RequestMapping("/admChatInput")
-	@ResponseBody
-	public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		String chatContent = request.getParameter("chatContent");
-		ChatDataBean chat = new ChatDataBean();
-		chat.setSender("admin");
-		chat.setReceiver(id);
-		chat.setChatContent(chatContent);
-		chatDao.chatInput(chat);
-	}
-	@RequestMapping("/admChat")
-	@ResponseBody
-	public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
-		String id = request.getParameter("id");
-		List<ChatDataBean> chatData = chatDao.getList(id);
-		request.setAttribute("chatData", chatData);
-		return chatData;
-	}
+   @RequestMapping("/admChatting")
+   public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
+      String id = request.getParameter("id");
+      request.setAttribute("id", id);
+      return new ModelAndView("adm/view/admChatting");
+   }
+   
+   @RequestMapping("/admChatInput")
+   @ResponseBody
+   public void admChatInput(HttpServletRequest request, HttpServletResponse response) {
+      String id = request.getParameter("id");
+      String chatContent = request.getParameter("chatContent");
+      ChatDataBean chat = new ChatDataBean();
+      chat.setSender("admin");
+      chat.setReceiver(id);
+      chat.setChatContent(chatContent);
+      chatDao.chatInput(chat);
+   }
+   @RequestMapping("/admChat")
+   @ResponseBody
+   public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
+      String id = request.getParameter("id");
+      List<ChatDataBean> chatData = chatDao.getList(id);
+      request.setAttribute("chatData", chatData);
+      return chatData;
+   }
 }
