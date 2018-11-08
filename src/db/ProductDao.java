@@ -123,6 +123,10 @@ public class ProductDao{
 		return session.delete("Admin.deleteProd", ref);
 	}
 	
+	public ProductDataBean getProductDetailsByProductCode(String productCode) {
+		return session.selectOne("User.getProductDetailsByProductCode", productCode);
+	}
+	
 	public String getProdName(String productCode) {
 		return session.selectOne("Admin.getProdName", productCode);
 	}

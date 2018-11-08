@@ -40,7 +40,7 @@
 	    	<table class="table table-striped">
 	   			<thead>
 	   				<tr>
-	   					<th>${str_productName}</th>
+	   					<th>${str_productCode}</th>
 	   					<th>${str_title}</th>
 	   					<th>${str_writer}</th>
 	   					<th>${str_reviewDate}</th>
@@ -57,9 +57,7 @@
 					<c:if test="${count ne 0}">
 						<c:forEach var="reviewList" items="${reviewList}">
 							<tr>
-								<td><a href="admProductDetail.jk?ref=${ref}">
-								<input type="hidden" name="productCode" id="productCode" value="${reviewList.productCode}">
-								${reviewList.productCode}</a>
+								<td><a href="admProductDetail.jk?ref=${ref}">${reviewList.productCode}</a>
 								</td>
 								<td><a href="admReviewDetail.jk?reviewNo=${reviewList.reviewNo}&productCode=${reviewList.productCode}">
 									${reviewList.title}</a></td>
@@ -75,7 +73,7 @@
 				<c:if test="${currentPage ne 1}">
 					<a href="admReviewList.jk">[◀◀]</a>
 				<c:if test="${startPage gt pageBlock}">
-					<a href="admReviewList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+					<a href="admReviewList.jk?pageNum=${startPage-pageBlock}${url_searchWord}${searchWord}">[◀]</a>
 					</c:if>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -83,20 +81,20 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="admReviewList.jk?pageNum=${i}">[${i}]</a>
+					<a href="admReviewList.jk?pageNum=${i}${url_searchWord}${searchWord}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
 					<c:if test="${pageCount>endPage}">
-					<a href="admReviewList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+					<a href="admReviewList.jk?pageNum=${startPage+pageBlock}${url_searchWord}${searchWord}">[▶]</a>
 					</c:if>
-					<a href="admReviewList.jk?pageNum=${pageCount}">[▶▶]</a>
+					<a href="admReviewList.jk?pageNum=${pageCount}${url_searchWord}${searchWord}">[▶▶]</a>
 				</c:if>
 			</c:if>
 			</div>
 			<br>
 			<div align="center">
-			<form name="searchForm" action="reviewList.js" method="post">
+			<form name="searchForm" action="admReviewList.jk" method="post">
 			     <select name="searchType">
 			       <option value="ttl">${str_searchTitle}</option>
 			       <option value="ctt">${str_content}</option>

@@ -22,10 +22,8 @@
 <c:set var="head_basketList" value="장바구니 상세 페이지"/>
 <c:set var="head_userOrderList" value="내 주문 내역 페이지"/>
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지"/>
-
+<c:set var="head_orderInputForm" value="주문 결제 페이지"/>
 <c:set var="head_productModify" value="상품수정"/>
-
-
 
 
 <!-- String -->
@@ -129,14 +127,17 @@
 <c:set var="str_orderAddress" value="배송 주소"/>
 <c:set var="str_productPrice" value="가격"/>
 <c:set var="str_cart" value="장바구니"/>
-
-<c:set var="str_quantityMod" value="추가할 수량"/>
+<c:set var="str_select" value="선택"/>
+<c:set var="str_currencyUnit" value="원"/>
+<c:set var="str_saveToBasket" value="장바구니에 저장"/>
+<c:set var="str_quantityMod" value="재고수정"/>
 <c:set var="str_lastChat" value="마지막 내용"/>
 <c:set var="str_chatTime" value="시간"/>
-
-
-
-
+<c:set var="str_soldOut" value="품절"/>
+<c:set var="str_remainingProdQty" value="재고"/>
+<c:set var="str_discount" value="% 할인 중"/>
+<c:set var="str_quantityMod" value="추가할 수량"/>
+<c:set var="str_productCode" value="상품코드"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -209,10 +210,11 @@
 <c:set var="btn_userDelete" value="탈퇴"/>
 <c:set var="btn_x" value="삭제"/>
 <c:set var="btn_productModify" value="상품수정"/>
+<c:set var="btn_orderCheckedItems" value="선택 상품 주문"/>
+<c:set var="btn_continueShopping" value="쇼핑 계속하기"/>
+<c:set var="btn_pay" value="결제하기"/>
 <c:set var="btn_gotoUserMain" value="사용자메인"/>
-
-
-
+<c:set var="btn_returnToBasket" value="장바구니 수정"/>
 
 
 <!-- Message -->
@@ -230,15 +232,19 @@
 <c:set var="msg_insertContent" value="내용을 입력하세요"/>
 <c:set var="msg_searchResult" value="개의 검색결과가 있습니다. 검색어 : "/>
 
-<c:set var="msg_emptyOrderList" value="주문 내역이 없습니다."/>
+<c:set var="msg_emptyOrderList" value="주문 내역이 없습니다." />
+<c:set var="msg_tryLater" value="잠시 후 다시 시도해 주세요."/>
+<c:set var="msg_success" value="성공"/>
+<c:set var="msg_failure" value="실패"/>
+<c:set var="msg_systemFailure" value="시스템 점검 중 입니다. 잠시 후 다시 시도해 주세요."/>
+<c:set var="msg_selectColor" value="상품 색상을 선택해 주세요."/>
+<c:set var="msg_selectSize" value="상품 사이즈를 선택해 주세요."/>
+<c:set var="msg_saveSuccess" value="해당 상품을 장바구니에 저장했습니다."/>
 <c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요."/>
 <c:set var="msg_main_login" value="님 안녕하세요"/>
 <c:set var="msg_noPhoto" value="사진을 등록해주세요!"/>
 <c:set var="msg_gotoProductList" value="수정은 상품관리에서 가능합니다." />
-
-
-
-
+<c:set var="msg_selectItemsToOrder" value="주문하실 상품을 선택해 주세요."/>
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum="/>
