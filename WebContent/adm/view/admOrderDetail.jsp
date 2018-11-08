@@ -35,12 +35,12 @@
    <!-- Adm Order Detail View Page -->
     <article class="col-sm-10 col-8" ><br><br>
     	<h4>${str_orderDetail}</h4>
-    	<input type="button" class="btn btn-danger" value="${btn_orderCancel}"><br><br>
+    	<!-- <input type="button" class="btn btn-danger" value="${btn_orderCancel}" onclick="location='cancelOrder.jk'"> -->
 	    <table class="table table-striped">
    			<thead>
    				<tr>
    					<th>${str_productName}</th>
-   					<th>${str_var}</th>
+   					<th>${str_productQuantity}</th>
    					<th>${str_price}</th>
    				</tr>
    			</thead>
@@ -53,12 +53,9 @@
 					</tr>
 				</c:if>
 				<c:if test="${count ne 0}">
-					<c:forEach var="orderList" items="${orders}">
+					<c:forEach var="order" items="${orderDetailList}">
 						<tr>
-							<td>
-								<input type="hidden" name="productCode" value="${order.productCode}">
-								${order.productName}
-							</td>
+							<td>${order.productCode}</td>
 							<td>${order.orderQuantity}</td>
 							<td>${order.orderPrice}</td>
 						</tr>

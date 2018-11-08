@@ -130,5 +130,9 @@ public class ProductDao{
 	public int changeQuantity(ProductDataBean productDto) {
 		return session.update("Admin.changeQuantity", productDto);
 	}
+	
+	public int getProdQuantity(String productCode) {
+		return session.selectOne("Admin.getProdQuantity", productCode);
+	}
 
 }
