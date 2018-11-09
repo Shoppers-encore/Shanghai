@@ -68,6 +68,9 @@
 	<select id="getReviewCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) From jk_review <include refid="search"></include>
 	</select>
+	<select id="getReviewNoSearchCount" resultType="int">
+		SELECT count(*) From jk_review
+	</select>
 	<select id="getReviewList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.* , r FROM (SELECT temp.* , rownum r FROM
 			(SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewDate desc) temp ORDER BY reviewDate desc) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
