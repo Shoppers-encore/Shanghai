@@ -330,20 +330,35 @@ public class UserViewHandler {
 	      } catch (UnsupportedEncodingException e) {
 	         e.printStackTrace();
 	      }
-		Map<String,String> search = new HashMap<String,String>();
-		search.put("searchType", request.getParameter("searchType"));
-		search.put("searchWord", request.getParameter("searchWord"));
+		String searchWord = request.getParameter("searchWord");
+	    String searchType = request.getParameter("searchType");
 		
-		int count = boardDao.getReviewCount(search);
-		if( count > 0 ) {
-			Map<String, String> map = new HandlerHelper().makeCount( count, request );
-			List <ReviewDataBean> articles = boardDao.getReviewList( map );
-			
-			for( int i =0; i<articles.size(); i++ ) {
-				String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
-				articles.get(i).setProductName(productName);
-			}
-			request.setAttribute( "reviewLists", articles );
+		int count = 0;
+	      if( searchWord == "" || searchWord == null ) {
+	          // No query
+	    	  count = boardDao.getReviewCount();
+	          if( count > 0 ) {
+	             Map<String, String> map = new HandlerHelper().makeCount( count, request );
+	             List <ReviewDataBean> articles = boardDao.getRvList( map );
+	             for( int i =0; i<articles.size(); i++ ) {
+	 				String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
+	 				articles.get(i).setProductName(productName);
+	 			}
+	             request.setAttribute( "reviewLists", articles );
+	          }
+	      } else {
+	    	  // Yes query
+	          Map<String,String> search = new HashMap<String,String>();
+	          search.put("searchType", searchType);
+	          search.put("searchWord", searchWord);
+	          count = boardDao.getReviewSearchCount(search);
+	
+	          Map<String, String> map = new HandlerHelper().makeCount(count, request);
+	          map.put("searchType", searchType);
+	          map.put("searchWord", searchWord);
+			  List <ReviewDataBean> articles = boardDao.getRvSearchList( map );
+			  request.setAttribute("searchWord", searchWord);
+			  request.setAttribute( "reviewLists", articles );
 		}
 		return new ModelAndView("user/view/reviewList");
 	}
