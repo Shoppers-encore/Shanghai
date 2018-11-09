@@ -157,43 +157,6 @@ public class HandlerHelper {
 		return sizes;
 	}
 
-/*	public void getGoodImage(HttpServletRequest request, String searchWord) {	// OVERRIDNG METHOD FOR PRODUCT NAME SEARCH
-		ProductDao  productDao= new ProductDao();
-		int count = productDao.getSearchCount(searchWord);
-		Map<String,String> map = makeCount(count,request);
-		map.put("searchWord", searchWord);
-		List<ProductDataBean> productList = productDao.getNameSearch(map);
-		List<ImageInfoDataBean> imgList = new ArrayList<ImageInfoDataBean>();
-		for(int i = 0 ; i<productList.size(); i++) {	
-			int ref = productList.get(i).getRef();		
-			List<ImageInfoDataBean> data = productDao.getImage(ref);
-			imgList.addAll(data);
-		}
-		request.setAttribute("goods", productList);
-		request.setAttribute("imageList", imgList);
-	}
-
-	public void getGoodImage(HttpServletRequest request, String searchWord, String selectedColors) {	// OVERRIDNG METHOD FOR PRODUCT NAME + COLOR SEARCH
-		ProductDao dao = new ProductDao();
-		
-		int count = dao.getColorSearchCount(searchWord, selectedColors);
-		Map<String, String> map = makeCount(count,request);
-		map.put("searchWord", searchWord);
-		map.put("selectedColors", selectedColors);
-
-
-		List<ProductDataBean> productList = dao.getColorSearchList(map);
-		List<ImageInfoDataBean> imgList = new ArrayList<ImageInfoDataBean>();
-		for(int i = 0 ; i<productList.size(); i++) {	
-			int ref = productList.get(i).getRef();		
-			List<ImageInfoDataBean> data = dao.getImage(ref);
-			imgList.addAll(data);
-		}
-		request.setAttribute("goods", productList);
-		request.setAttribute("imageList",imgList);
-	}
-*/
-
 	public void fileWriter(String sql) {
         File file = new File("C:/ExpertJava/start.txt");
 
