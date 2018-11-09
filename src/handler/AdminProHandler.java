@@ -151,8 +151,8 @@ public class AdminProHandler {
 		       int tagId = tags[i];
 		       int result1 = tagDao.insertProdTag(productTagDto);
 		       if( result1 == 1 ) {
-		  		   String sql = "INSERT INTO jk_ProductTag (ref, tagId)"
-		               		+ "VALUES (" + ref + "," + tagId + " );";
+		  		   String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES "
+		  				   + ref + ", " + tagId + ");";
 	              new HandlerHelper().fileWriter(sql);
 		  	   }
 	      	}
@@ -198,7 +198,7 @@ public class AdminProHandler {
 
 	         if( result2 >= 1 ) {
 	               String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "
-		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', " + product_name + ", '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + "," + category + ", '" + thumbnail + "');";
+		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ");";
 	               new HandlerHelper().fileWriter(sql);
 	         }
 	         

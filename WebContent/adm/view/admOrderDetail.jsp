@@ -39,7 +39,7 @@
 	    <table class="table table-striped">
    			<thead>
    				<tr>
-   					<th>${str_productName}</th>
+   					<th>${str_productCode}</th>
    					<th>${str_productQuantity}</th>
    					<th>${str_price}</th>
    				</tr>
