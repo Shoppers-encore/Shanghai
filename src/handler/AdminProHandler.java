@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -207,8 +208,86 @@ public class AdminProHandler {
 	   }
 	   
 	@RequestMapping ( "/productModifyPro" )
-	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
-		return "redirect:productDetail.jk";
+	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+		String path =  request.getSession().getServletContext().getRealPath( "/save" );
+	    MultipartRequest multi = null;
+	    new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
+	    if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+	    	multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+//	    int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
+//	    String systemName = null;
+//	      Enumeration<?> e = multi.getFileNames();
+//	      
+//	      while( e.hasMoreElements() ) {
+//	         String inputName = (String) e.nextElement();
+//	         //String originName = multi.getOriginalFileName( inputName );
+//	          systemName = multi.getFilesystemName( inputName );
+//	         
+//	         String sname = path + "\\" + systemName;
+//	         String tname = path + "\\t" + systemName;
+//	         RenderedOp op = JAI.create("fileload", sname);
+//	         BufferedImage sbuffer = op.getAsBufferedImage();
+//	         
+//	         int SIZE = 3;
+//	         int width = sbuffer.getWidth() / SIZE;
+//	         int height = sbuffer.getHeight() / SIZE;
+//	         
+//	         BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
+//	         Graphics g = tbuffer.getGraphics();
+//	         g.drawImage(sbuffer, 0, 0, width, height, null );   
+//	   
+//	            ImageIO.write( tbuffer, "jpg", new File( tname ) );   
+//	            ImageIO.write( tbuffer, "png", new File( tname ) );
+//	            ImageIO.write( tbuffer, "gif", new File( tname ) );
+//	        
+//	          ImageInfoDataBean imgDto = new ImageInfoDataBean();
+//	          int imageNo = productDao.getImgNo()+1;
+//	  	      imgDto.setImageNo(imageNo);
+//	  	      imgDto.setRef( ref );
+//	  	      imgDto.setImageAddress(systemName);
+//	  	      int result = productDao.insertImgInfo(imgDto);
+//	  	      
+//		  	   if( result == 1 ) {
+//		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
+//		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
+//	              new HandlerHelper().fileWriter(sql);
+//		  	   }
+//		  	 request.setAttribute( "systemName", systemName );
+//			}
+		int ref = Integer.parseInt(multi.getParameter("product_code"));
+		String[] color = multi.getParameterValues("color");
+		String[] size = multi.getParameterValues("size");
+		int[] colors = new int[color.length];
+		for(int i = 0 ; i<color.length;i++) {
+			colors[i] = Integer.parseInt(color[i]);
+		}
+		int[] sizes = new int[size.length];
+		for(int i = 0 ; i<size.length;i++) {
+			sizes[i]=Integer.parseInt(size[i]);
+		}
+		List<String> list = productDao.getProductCodeList(ref);
+		String[] productCodes = new HandlerHelper().makeProductCode(colors, sizes, ref);
+		for(int i = 0 ; i<productCodes.length ; i++) {
+			ProductDataBean product = new ProductDataBean();
+			product.setProductCode(productCodes[i]);
+			product.setRef(ref);
+			product.setProductName(multi.getParameter("product_name"));
+			product.setProductContent(multi.getParameter("productContent"));
+			product.setProductPrice(Integer.parseInt(multi.getParameter("price")));
+			if(multi.getParameter("sale") !=null) {
+				product.setDiscount(Integer.parseInt(multi.getParameter("sale")));
+			}
+			product.setProductCategory(Integer.parseInt(multi.getParameter("category")));
+			int result =productDao.modifyProduct(product);
+			if(result ==1) {
+				list.remove(productCodes[i]);
+			}
+		}
+		for(int i = 0 ; i<list.size(); i++) {
+			productDao.deleteProduct(list.get(i));
+		}
+		
+		return "redirect:admProductDetail.jk?ref="+ref;
 	}
 	@RequestMapping("/productDeletePro")
 	public ModelAndView productDeletePro(HttpServletRequest request, HttpServletResponse response) {
