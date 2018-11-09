@@ -171,7 +171,7 @@
   		FROM jk_orderList o, jk_product p 
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>
-  	
+
 	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
@@ -184,6 +184,7 @@
   	<insert id="chatInput" parameterType="databean.ChatDataBean">
   		INSERT INTO jk_chat VALUES(#{sender}, #{receiver}, #{chatContent}, sysdate)
   	</insert>
+  	
   	
   	<!-- Search -->
 	<sql id="search">
@@ -201,7 +202,6 @@
               WHERE id LIKE '%'||#{searchWord}||'%'
            </when>
            <otherwise>
-               
            </otherwise>
         </choose>
      </sql>

@@ -11,8 +11,8 @@ import databean.ReviewDataBean;
 public class BoardDao {
 	private SqlSession session = SqlMapClient.getSession();
 	
-	public int getReviewCount() {
-		return session.selectOne("User.getReviewCount");
+	public int getReviewCount(Map<String, String> map) {
+		return session.selectOne("User.getReviewCount", map);
 	}
 	public List<ReviewDataBean> getReviewList(Map<String, String> needData){
 		return session.selectList("User.getReviewList", needData);
