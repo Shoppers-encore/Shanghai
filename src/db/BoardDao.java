@@ -14,6 +14,9 @@ public class BoardDao {
 	public int getReviewCount(Map<String, String> map) {
 		return session.selectOne("User.getReviewCount", map);
 	}
+	public int getReviewCount() {
+		return session.selectOne("User.getReviewNoSearchCount");
+	}
 	public List<ReviewDataBean> getReviewList(Map<String, String> needData){
 		return session.selectList("User.getReviewList", needData);
 	}
