@@ -43,6 +43,8 @@ import db.OrderDao;
 import db.ProductDao;
 import db.ChatDao;
 import databean.CommentDataBean;
+import databean.OrderListDataBean;
+import databean.ProductDataBean;
 import db.TagDao;
 
 import databean.UserDataBean;
@@ -63,6 +65,9 @@ public class UserProHandler {
 	
 	@Resource
 	private ChatDao chatDao;
+	
+	@Resource
+	private OrderDao orderDao;
 
 	
 	//////////////////// User /////////////////////	
@@ -530,6 +535,49 @@ public class UserProHandler {
 	// Order
 	@RequestMapping("/orderInputPro")
 	public ModelAndView orderInputPro(HttpServletRequest request, HttpServletResponse response) {
+		String id=(String)request.getSession().getAttribute("id");
+		String identifier=request.getParameter("identifier");
+		
+		if(identifier.equals("0")) {
+			String productCode=request.getParameter("productCode");
+			int ref=Integer.parseInt(productCode.substring(2, productCode.length()-2));
+			String orderZipcode=request.getParameter("orderZipcode");
+			String orderAddress1=request.getParameter("orderAddress1");
+			String orderAddress2=request.getParameter("orderAddress2");
+			int orderQuantity=Integer.parseInt(request.getParameter("orderQuantity"));
+			int orderPrice=Integer.parseInt(request.getParameter("orderPrice"));
+			
+			OrderListDataBean order=new OrderListDataBean();
+			order.setProductCode(productCode);
+			order.setRef(ref);
+			order.setId(id);
+			order.setOrderZipcode(orderZipcode);
+			order.setOrderAddress1(orderAddress1);
+			order.setOrderAddress2(orderAddress2);
+			order.setOrderQuantity(orderQuantity);
+			order.setOrderPrice(orderPrice);
+			
+			BasketDataBean deleteReferences=new BasketDataBean();
+			deleteReferences.setId(id);
+			deleteReferences.setProductCode(productCode);
+			
+			ProductDataBean productDto=new ProductDataBean();
+			int newProductQuantity=productDao.getProdQuantity(productCode)-orderQuantity;
+			productDto.setProductQuantity(newProductQuantity);
+			productDto.setProductCode(productCode);
+			
+			int orderListInsertResult=orderDao.insertOrder(order);
+			int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
+			int productQuantityUpdateResult=productDao.changeQuantity(productDto);
+			
+			request.setAttribute("identifier", identifier);
+			request.setAttribute("orderListInsertResult", orderListInsertResult);
+			request.setAttribute("basketDeleteResult", basketDeleteResult);
+			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
+		} else {
+			
+		}
+		
 		return new ModelAndView("user/pro/orderInputPro");
 	}
 	

@@ -65,5 +65,8 @@ public class OrderDao {
 		return session.selectList("Admin.getOrderDetail", orderCode);
 	}
 	
+	public int insertOrder(OrderListDataBean order) {
+		return session.insert("User.insertOrder", order);
+	}
 }
 	

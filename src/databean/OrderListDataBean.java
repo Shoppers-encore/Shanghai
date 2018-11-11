@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class OrderListDataBean {
 	private int orderCode;
 	private String productCode;
+	private int ref;
 	private String productName;
 	private String thumbnail;
 	private String id;
@@ -86,5 +87,11 @@ public class OrderListDataBean {
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 }

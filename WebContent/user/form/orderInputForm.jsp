@@ -34,6 +34,7 @@
 				<form class="form inputform" name="inputform" method="post" action="orderInputPro.jk">
 					<!-- This page is redirected from userProductDetail -->
 					<c:if test="${identifier eq 0}">
+						<input type="hidden" name="identifier" value="${identifier}">
 						<div class="row font-weight-bold text-center pt-5">
 							<div class="col-lg-2">
 								${str_productImage}
@@ -89,7 +90,7 @@
 								<script type="text/javascript">
 									var qty='${basket.basketQuantity}';
 								</script>
-								<input type="hidden" name="basketQuantity" value="${basket.basketQuantity}">
+								<input type="hidden" name="orderQuantity" value="${basket.basketQuantity}">
 							</div>
 							<div class="col-lg-1 pt-5" id="productPrice">
 								<script type="text/javascript">
@@ -97,7 +98,14 @@
 									var unitPrice='${product.productPrice}'
 									var price=qty*unitPrice*discount;
 									$('#productPrice').text(price+'${str_currencyUnit}');
+									$(window).on(
+										'load',
+										function(event) {
+											$('#orderPrice').attr('value', price);
+										}
+									);
 								</script>
+								<input type="hidden" id="orderPrice" name="orderPrice"/>
 							</div>
 							<div class="col-lg-2 pt-5">
 								<button type="button" class="btn" id="saveToBasket">${btn_save}</button>
@@ -158,7 +166,7 @@
 							<div class="form-group row"><!--zip code -->
 								<label for="zipcode" class="col-sm-3 col-form-label"><strong>${str_zipcode}*</strong></label>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=zipcode id="zipcode" value="${userInfo.zipcode}" required>											
+									<input class="form-control text-center" type="text" name=orderZipcode id="zipcode" value="${userInfo.zipcode}" required>											
 								</div>
 								<div class="col-sm-1">
 									<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" 
@@ -168,13 +176,13 @@
 							<div class="form-group row"><!--address -->
 								<label for="address" class="col-sm-3 col-form-label"><strong>${str_address}*</strong></label>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=address id="address" value="${userInfo.address}" required>											
+									<input class="form-control text-center" type="text" name=orderAddress1 id="address" value="${userInfo.address}" required>											
 								</div>	
 							</div>
 							<div class="form-group row"><!--addressDetail -->
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=addressDetail value="${userInfo.addressDetail}" required>											
+									<input class="form-control text-center" type="text" name=orderAddress2 value="${userInfo.addressDetail}" required>											
 								</div>
 								<div class="col-sm-3 text-right"><h4 id="totalPrice"></h4></div>
 								<script type="text/javascript">
@@ -206,6 +214,7 @@
 					
 					<!-- This page is redirected from basketList -->
 					<c:if test="${identifier eq 1}">
+						<input type="hidden" name="identifier" value="${identifier}">
 						<div class="row font-weight-bold text-center pt-5">
 							<div class="col-lg-2">
 								${str_productImage}
