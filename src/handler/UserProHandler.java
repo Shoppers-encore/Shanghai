@@ -574,7 +574,7 @@ public class UserProHandler {
 			request.setAttribute("orderListInsertResult", orderListInsertResult);
 			request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
-		} else {
+		} else if (identifier.equals("1")){
 			
 		}
 		
