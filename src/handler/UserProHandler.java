@@ -540,7 +540,6 @@ public class UserProHandler {
 		
 		if(identifier.equals("0")) {
 			String productCode=request.getParameter("productCode");
-			int ref=Integer.parseInt(productCode.substring(2, productCode.length()-2));
 			String orderZipcode=request.getParameter("orderZipcode");
 			String orderAddress1=request.getParameter("orderAddress1");
 			String orderAddress2=request.getParameter("orderAddress2");
@@ -549,7 +548,6 @@ public class UserProHandler {
 			
 			OrderListDataBean order=new OrderListDataBean();
 			order.setProductCode(productCode);
-			order.setRef(ref);
 			order.setId(id);
 			order.setOrderZipcode(orderZipcode);
 			order.setOrderAddress1(orderAddress1);
@@ -575,6 +573,7 @@ public class UserProHandler {
 			request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
 		} else if (identifier.equals("1")){
+			List<BasketDataBean> basketList=basketDao.getBasketList(id);
 			
 		}
 		

@@ -178,7 +178,6 @@
 		INSERT INTO jk_orderList VALUES (
 		(SELECT NVL(MAX(orderCode), 0) FROM jk_orderList)+1,
 		#{productCode},
-		#{ref},
 		#{id}, 
 		#{orderZipcode},
 		#{orderAddress1},
