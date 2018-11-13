@@ -573,7 +573,7 @@ public class UserProHandler {
 			request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
 		} else if (identifier.equals("1")){
-			List<BasketDataBean> basketList=basketDao.getBasketList(id);
+			List<BasketDataBean> basket=ArrayList<BasketDataBean>request.getParameterValues("basket");
 			
 		}
 		

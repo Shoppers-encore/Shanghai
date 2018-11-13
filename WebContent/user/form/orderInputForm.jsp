@@ -215,6 +215,7 @@
 					<!-- This page is redirected from basketList -->
 					<c:if test="${identifier eq 1}">
 						<input type="hidden" name="identifier" value="${identifier}">
+						<input type="hidden" name="basket" value="${basket}">
 						<div class="row font-weight-bold text-center pt-5">
 							<div class="col-lg-2">
 								${str_productImage}
