@@ -11,8 +11,6 @@
 		<div class="dropdown">
 			<a class="navbar-brand" href="#" data-toggle="dropdown">${str_product}</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="userProductList.jk?category=TOP">TOP</a>
-				<a class="dropdown-item" href="userProductList.jk?category=BOTTOM">BOTTOM</a>
 				
 				<a class="dropdown-item" href="userProductOuterList.jk">${str_cat_OUTER}</a>
 				<a class="dropdown-item" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a>
