@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
+<c:set var="checkedItems" value="${checkedItems}" scope="session"/>
 <c:forEach var="result" items="${results}">
 	<c:if test="${result ne 1}">
 		<script type="text/javascript">

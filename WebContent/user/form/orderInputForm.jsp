@@ -206,7 +206,7 @@
 											window.location.href='basketList.jk';
 										}
 									</script>
-								<button type="submit" class="btn" id="inputformSubmitBtn">${btn_pay}</button>
+								<button type="submit" class="btn" id="inputformSubmitBtn">${btn_order}</button>
 							</div>
 						</div>
 						

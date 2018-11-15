@@ -327,6 +327,7 @@ public class UserProHandler {
 			}
 		}
 
+		request.setAttribute("checkedItems", checkedItems);
 		request.setAttribute("results", resultSet);
 		return new ModelAndView( "user/pro/basketListPro" );
 	}
@@ -535,11 +536,19 @@ public class UserProHandler {
 	// Order
 	@RequestMapping("/orderInputPro")
 	public ModelAndView orderInputPro(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String id=(String)request.getSession().getAttribute("id");
 		String identifier=request.getParameter("identifier");
 		
 		if(identifier.equals("0")) {
 			String productCode=request.getParameter("productCode");
+			int ref=Integer.parseInt(productCode.substring(2, productCode.length()-2));
 			String orderZipcode=request.getParameter("orderZipcode");
 			String orderAddress1=request.getParameter("orderAddress1");
 			String orderAddress2=request.getParameter("orderAddress2");
@@ -548,6 +557,7 @@ public class UserProHandler {
 			
 			OrderListDataBean order=new OrderListDataBean();
 			order.setProductCode(productCode);
+			order.setRef(ref);
 			order.setId(id);
 			order.setOrderZipcode(orderZipcode);
 			order.setOrderAddress1(orderAddress1);
@@ -555,9 +565,9 @@ public class UserProHandler {
 			order.setOrderQuantity(orderQuantity);
 			order.setOrderPrice(orderPrice);
 			
-			BasketDataBean deleteReferences=new BasketDataBean();
+			/*BasketDataBean deleteReferences=new BasketDataBean();
 			deleteReferences.setId(id);
-			deleteReferences.setProductCode(productCode);
+			deleteReferences.setProductCode(productCode);*/
 			
 			ProductDataBean productDto=new ProductDataBean();
 			int newProductQuantity=productDao.getProdQuantity(productCode)-orderQuantity;
@@ -565,15 +575,16 @@ public class UserProHandler {
 			productDto.setProductCode(productCode);
 			
 			int orderListInsertResult=orderDao.insertOrder(order);
-			int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
+			//int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
 			int productQuantityUpdateResult=productDao.changeQuantity(productDto);
 			
 			request.setAttribute("identifier", identifier);
 			request.setAttribute("orderListInsertResult", orderListInsertResult);
-			request.setAttribute("basketDeleteResult", basketDeleteResult);
+			//request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
 		} else if (identifier.equals("1")){
-			List<BasketDataBean> basket=ArrayList<BasketDataBean>request.getParameterValues("basket");
+			String[] checkedItems=(String[])request.getSession().getAttribute("checkedItems");
+			System.out.println(checkedItems);
 			
 		}
 		
