@@ -154,8 +154,8 @@ public class UserViewHandler {
 		request.setAttribute("category", category);
 		return new ModelAndView ( "user/view/userProductList" );
 	}
-	@RequestMapping ( "/categoryOuterList" )
-	public ModelAndView categoryOuterList( HttpServletRequest request, HttpServletResponse response ) {
+	@RequestMapping ( "/userProductOuterList" )
+	public ModelAndView userProductOuterList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
 		if( category == null || category == "" ) {
 			category = "OUTER";
@@ -169,24 +169,10 @@ public class UserViewHandler {
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		request.setAttribute("category", category);
-		return new ModelAndView ( "/user/view/categoryOuterList" );
+		return new ModelAndView ( "/user/view/userProductOuterList" );
 	}
-	@RequestMapping ( "/categoryDressList" )
-	public ModelAndView categoryDressList( HttpServletRequest request, HttpServletResponse response ) {
-		String category = request.getParameter("category");
-		Map<String, String> map = new HashMap<String,String>();
-		map.put("category",  category);
-		int count = productDao.getProductNoSearchCount(map);
-		map = new HandlerHelper().makeCount(count, request);
-		map.put("category", category);
-		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		request.setAttribute("productCount", count);
-		request.setAttribute("productList", productList);
-		request.setAttribute("category", category);
-		return new ModelAndView ( "/user/view/categoryDressList" );
-	}
-	@RequestMapping ( "/categoryShirtsList" )
-	public ModelAndView categoryShirtsList( HttpServletRequest request, HttpServletResponse response ) {
+	@RequestMapping ( "/userProductShirtsList" )
+	public ModelAndView userProductShirtsList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
 		if( category == null || category == "" ) {
 			category = "BLnSHIRTS";
@@ -200,10 +186,10 @@ public class UserViewHandler {
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		request.setAttribute("category", category);
-		return new ModelAndView ( "/user/view/categoryShirtsList" );
+		return new ModelAndView ( "/user/view/userProductShirtsList" );
 	}
-	@RequestMapping ( "/categoryTopList" )
-	public ModelAndView categoryTopList( HttpServletRequest request, HttpServletResponse response ) {
+	@RequestMapping ( "/userProductTopList" )
+	public ModelAndView userProductTopList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
 		if( category == null || category == "" ) {
 			category = "TnTOP";
@@ -217,27 +203,7 @@ public class UserViewHandler {
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		request.setAttribute("category", category);
-		return new ModelAndView ( "/user/view/categoryTopList" );
-	}
-	@RequestMapping ( "/categorySkirtList" )
-	public ModelAndView categorySkirtList( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "/user/view/categorySkirtList" );
-	}
-	@RequestMapping ( "/categoryPantsList" )
-	public ModelAndView categoryPantsList( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "/user/view/categoryPantsList" );
-	}
-	@RequestMapping ( "/categoryShoesList" )
-	public ModelAndView categoryShoesList( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "/user/view/categoryShoesList" );
-	}
-	@RequestMapping ( "/categoryBagList" )
-	public ModelAndView categoryBagList( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "/user/view/categoryBagList" );
-	}
-	@RequestMapping ( "/categoryAccessoryList" )
-	public ModelAndView categoryAccessoryList( HttpServletRequest request, HttpServletResponse response ) {
-		return new ModelAndView ( "/user/view/categoryAccessoryList" );
+		return new ModelAndView ( "/user/view/userProductTopList" );
 	}
 	
 	@RequestMapping("/userProductDetail")

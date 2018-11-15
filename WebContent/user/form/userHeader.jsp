@@ -9,13 +9,26 @@
 			<img src="images/logo.png" alt="Logo">
 		</a>
 		<div class="dropdown">
-			<a class="navbar-brand" href="#" data-toggle="dropdown">PRODUCT</a>
+			<a class="navbar-brand" href="#" data-toggle="dropdown">${str_product}</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="userProductList.jk?category=TOP">TOP</a>
 				<a class="dropdown-item" href="userProductList.jk?category=BOTTOM">BOTTOM</a>
+				
+				<a class="dropdown-item" href="userProductOuterList.jk">${str_cat_OUTER}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a>
+				<a class="dropdown-item" href="userProductShirtsList.jk">${str_cat_BLnSHIRTS}</a>
+				<a class="dropdown-item" href="userProductTopList.jk">${str_cat_TnTOP}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=SKIRT">${str_cat_SKIRT}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=PANTS">${str_cat_PANTS}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=SHOES">${str_cat_SHOES}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=BAG">${str_cat_BAG}</a>
+				<a class="dropdown-item" href="userProductList.jk?category=ACCESSORY">${str_cat_ACCESSORY}</a>
 			</div>
 		</div>
 		<ul class="navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link" href="">BEST</a>
+		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="userOrderList.jk">ORDER</a>
 		</li>
