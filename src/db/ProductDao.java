@@ -151,4 +151,16 @@ public class ProductDao{
 		return session.delete("Admin.deleteProduct", product);
 	}
 
+	public List<String> getProdCode() {
+		return session.selectList("User.getProdCode");
+	}
+	
+	public List<Integer> getProdRef() {
+		return session.selectList("User.getProdRef");
+	}
+
+	public List<Integer> getBestProduct(List<Integer> ref) {
+		return session.selectList("User.getBestProduct", ref);
+	}
+	
 }
