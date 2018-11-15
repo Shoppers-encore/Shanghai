@@ -267,4 +267,13 @@
 			</otherwise>
 		</choose>
 	</sql>
+	<select id="getProdCode" resultType="java.util.Map">
+		SELECT productCode FROM jk_product
+	</select>
+	<select id="getProdRef" resultType="java.util.Map">
+		SELECT DISTINCT ref FROM jk_product
+	</select>
+	<select id="getBestProduct"  parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM (SELECT COUNT(productCode) FROM jk_orderList WHERE productCode LIKE '%ref%' order by count(productCode) desc)
+	</select>
 </mapper>

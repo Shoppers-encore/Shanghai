@@ -425,4 +425,24 @@ public class UserViewHandler {
 		request.setAttribute("chatData", chatdata);
 		return chatdata;
 	}
+	@RequestMapping("/userBestProductList")
+	public ModelAndView userBestProductList(HttpServletRequest request, HttpServletResponse response){
+		Map<String, String> map = new HashMap<String,String>();
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		List<String> productCode = productDao.getProdCode();
+		List<Integer> ref = productDao.getProdRef();
+		
+		
+		List<Integer> counts = productDao.getBestProduct(ref);
+		
+		System.out.println("코드:" + productCode );
+		System.out.println("ref:" + ref );
+		System.out.println("count:" + counts );
+		
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		return new ModelAndView("user/view/userBestProductList");
+	}
 }
