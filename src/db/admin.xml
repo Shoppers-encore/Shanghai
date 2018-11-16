@@ -151,4 +151,7 @@
 	<select id="getOrderDetail" parameterType="int" resultType="databean.OrderListDataBean">
 		SELECT * FROM jk_orderList WHERE orderCode=#{orderCode}
 	</select>
+<!-- 	<select id="getProductSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=to_char(ref)
+	</select> 1116 고친곳 -->			
 </mapper>

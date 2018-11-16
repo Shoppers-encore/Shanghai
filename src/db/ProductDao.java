@@ -39,7 +39,7 @@ public class ProductDao{
 	}
 	
 	public List<ProductDataBean> getNameSearch(Map<String,String> map){
-		return session.selectList("Admin.searchName", map);
+		return session.selectList("Admin.getProductSearchList", map);
 		//SELECT * FROM jk_good WHERE good_name LIKE '%'||#{searchWord}||'%' AND good_code=to_char(ref)
 	}
 	
