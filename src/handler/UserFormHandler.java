@@ -102,6 +102,9 @@ public class UserFormHandler {
 		UserDataBean userInfo=userDao.getUser(id);
 		request.setAttribute("userInfo", userInfo);
 		
+		String checkedItems=(String) request.getSession().getAttribute("checkedItems");
+		request.setAttribute("checkedItems", checkedItems);
+		
 		/* If this page is accessed from basketList, identifier=1; else identifier=null || identifier="" */ 
 		String identifier=request.getParameter("identifier");
 

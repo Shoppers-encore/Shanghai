@@ -292,7 +292,13 @@ public class UserProHandler {
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
 		List<Integer> resultSet=new ArrayList<Integer>();
 		
+		int i=0;
+		Map<Integer, String> itemsToOrder=new HashMap<Integer, String>();
+		
 		for(String item:checkedItems) {
+			itemsToOrder.put(i, item);
+			i++;
+						
 			for(BasketDataBean basketItem:basketList) {
 				if(item.equals(basketItem.getProductCode())) {
 					String productCode=item;
@@ -326,8 +332,11 @@ public class UserProHandler {
 				}
 			}
 		}
-
-		request.setAttribute("checkedItems", checkedItems);
+		
+		/* Convert Java String to JSON */
+		String itemsChecked=new Gson().toJson(itemsToOrder);
+		
+		request.setAttribute("checkedItems", itemsChecked);
 		request.setAttribute("results", resultSet);
 		return new ModelAndView( "user/pro/basketListPro" );
 	}
@@ -583,7 +592,7 @@ public class UserProHandler {
 			//request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
 		} else if (identifier.equals("1")){
-			String[] checkedItems=(String[])request.getSession().getAttribute("checkedItems");
+			String[] checkedItems=request.getParameterValues("checkedItems");
 			System.out.println(checkedItems);
 			
 		}
