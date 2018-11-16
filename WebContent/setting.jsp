@@ -138,6 +138,7 @@
 <c:set var="str_discount" value="% 할인 중"/>
 <c:set var="str_quantityMod" value="추가할 수량"/>
 <c:set var="str_productCode" value="상품코드"/>
+<c:set var="str_product" value="PRODUCT"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -166,6 +167,28 @@
 <c:set var="str_color_gry" value="그레이"/>
 <c:set var="str_color_beg" value="베이지"/>
 <c:set var="str_color_sky" value="하늘색"/>
+
+<!-- (new) category -->
+<c:set var="str_cat_OUTER" value="OUTER"/>
+	<c:set var="str_cat_JKnJP" value="JACKET & JUMPER"/>
+	<c:set var="str_cat_COAT" value="COAT"/>
+	<c:set var="str_cat_CARDIGAN" value="CARDIGAN"/>
+<c:set var="str_cat_DRESS" value="DRESS"/>
+<c:set var="str_cat_BLnSHIRTS" value="BLOUSE & SHIRTS"/>
+	<c:set var="str_cat_BLOUSE" value="BLOUSE"/>
+	<c:set var="str_cat_SHIRTS" value="SHIRTS"/>
+<c:set var="str_cat_TnTOP" value="T-SHIRTS & TOP"/>
+	<c:set var="str_cat_TSHIRTS" value="T-SHIRTS"/>
+	<c:set var="str_cat_KNIT" value="KNIT"/>
+<c:set var="str_cat_SKIRT" value="SKIRT"/>
+<c:set var="str_cat_PANTS" value="PANTS"/>
+<c:set var="str_cat_SHOES" value="SHOES"/>
+<c:set var="str_cat_BAG" value="BAG"/>
+<c:set var="str_cat_ACCESSORY" value="ACCESSORY"/>
+<c:set var="str_cat_OUTER_ALL" value="OUTER ALL"/>
+<c:set var="str_cat_BLnSHIRTS_ALL" value="BLOUSE & SHIRTS ALL"/>
+<c:set var="str_cat_TnTOP_ALL" value="T-SHIRTS & TOP ALL"/>
+
 
 	
 	
