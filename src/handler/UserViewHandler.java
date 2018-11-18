@@ -154,6 +154,57 @@ public class UserViewHandler {
 		request.setAttribute("category", category);
 		return new ModelAndView ( "user/view/userProductList" );
 	}
+	@RequestMapping ( "/userProductOuterList" )
+	public ModelAndView userProductOuterList( HttpServletRequest request, HttpServletResponse response ) {
+		String category = request.getParameter("category");
+		if( category == null || category == "" ) {
+			category = "OUTER";
+		}
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
+		return new ModelAndView ( "/user/view/userProductOuterList" );
+	}
+	@RequestMapping ( "/userProductShirtsList" )
+	public ModelAndView userProductShirtsList( HttpServletRequest request, HttpServletResponse response ) {
+		String category = request.getParameter("category");
+		if( category == null || category == "" ) {
+			category = "BLnSHIRTS";
+		}
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
+		return new ModelAndView ( "/user/view/userProductShirtsList" );
+	}
+	@RequestMapping ( "/userProductTopList" )
+	public ModelAndView userProductTopList( HttpServletRequest request, HttpServletResponse response ) {
+		String category = request.getParameter("category");
+		if( category == null || category == "" ) {
+			category = "TnTOP";
+		}
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("category",  category);
+		int count = productDao.getProductNoSearchCount(map);
+		map = new HandlerHelper().makeCount(count, request);
+		map.put("category", category);
+		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
+		request.setAttribute("productCount", count);
+		request.setAttribute("productList", productList);
+		request.setAttribute("category", category);
+		return new ModelAndView ( "/user/view/userProductTopList" );
+	}
 	
 	@RequestMapping("/userProductDetail")
 	public ModelAndView userProductDetail(HttpServletRequest request, HttpServletResponse response) {
