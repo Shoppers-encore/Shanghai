@@ -127,6 +127,7 @@
 											function(event) {
 												if('${basketList.productQuantity}'==0) {
 													$('#basketQuantity_${basketList.productCode}').attr('disabled', true);
+													$('#basketQuantity_${basketList.productCode}').attr('min', '0');
 													$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
 													$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
 													$('input[type=checkbox]').removeAttr('checked');
@@ -166,8 +167,6 @@
 											function(event) {
 												event.preventDefault();
 												var basketCount='${basketCount}';
-												alert(prodPrice.val())
-												alert(price);
 												$.ajax({
 													url: 'deleteBasketItemAjax.jk',
 													contentType: 'application/json; charset="UTF-8"',
