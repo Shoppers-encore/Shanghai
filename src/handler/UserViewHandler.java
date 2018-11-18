@@ -355,18 +355,26 @@ public class UserViewHandler {
 			
 			/* Change the time format */
 			SimpleDateFormat newDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+			
+			/* Set Maps for OrderDate and OrderCount */
 			Map<String, String> orderDateMap=new HashMap<String, String>();
+			Map<String, String> orderCountMap=new HashMap<String, String>();
 		
 			List<OrderListDataBean> distinctOrderList=orderDao.getDistinctOrderListById(selectReferences);
 			for(OrderListDataBean orderList:distinctOrderList) {
 				String orderCode=String.valueOf(orderList.getOrderCode());
 				String orderDate=newDateFormat.format(orderList.getOrderDate());
+				String orderCount=String.valueOf(orderDao.getCountOfItemsOrdered(orderList.getOrderCode()));
+				
 				orderDateMap.put(orderCode, orderDate);
+				orderCountMap.put(orderCode, orderCount);
 			}
 			
 			String orderDateJson=new Gson().toJson(orderDateMap);
+			String orderCountJson=new Gson().toJson(orderCountMap);
 			
 			request.setAttribute("orderDate", orderDateJson);
+			request.setAttribute("orderCount", orderCountJson);
 			request.setAttribute("distinctOrderList", distinctOrderList);
 		}
 		

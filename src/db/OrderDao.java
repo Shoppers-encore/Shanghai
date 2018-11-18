@@ -72,5 +72,9 @@ public class OrderDao {
 	public int getMaxOrderCode() {
 		return session.selectOne("User.getMaxOrderCode");
 	}
+	
+	public int getCountOfItemsOrdered(int orderCode) {
+		return session.selectOne("User.getCountOfItemsOrdered", orderCode);
+	}
 }
 	

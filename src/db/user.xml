@@ -192,6 +192,9 @@
 	<select id="getMaxOrderCode" resultType="int">
 		SELECT NVL(MAX(orderCode), 0) FROM jk_orderList
 	</select>
+	<select id="getCountOfItemsOrdered" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM jk_orderList WHERE orderCode=#{orderCode}
+	</select>
 
 
 
