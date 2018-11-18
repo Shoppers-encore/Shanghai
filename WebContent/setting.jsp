@@ -235,7 +235,7 @@
 <c:set var="btn_productModify" value="상품수정"/>
 <c:set var="btn_orderCheckedItems" value="선택 상품 주문"/>
 <c:set var="btn_continueShopping" value="쇼핑 계속하기"/>
-<c:set var="btn_pay" value="결제하기"/>
+<c:set var="btn_order" value="주문하기"/>
 <c:set var="btn_gotoUserMain" value="사용자메인"/>
 <c:set var="btn_returnToBasket" value="장바구니 수정"/>
 

@@ -1,5 +1,6 @@
 package handler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import databean.BasketDataBean;
 import databean.ProductDataBean;
@@ -106,17 +110,8 @@ public class UserFormHandler {
 		String identifier=request.getParameter("identifier");
 
 		if("".equals(identifier) || identifier==null) {
-			identifier="0";
-		}
-		
-		if(identifier.equals("1")) {
-			List<BasketDataBean> basketList=basketDao.getBasketList(id);
-			identifier="1";
+			identifier="0";		// this page is redirected from productDetail
 			
-			request.setAttribute("identifier", identifier);
-			request.setAttribute("basket", basketList);
-			
-		} else {
 			if(request.getParameter("productCode")!=null || ! "".equals(request.getParameter("productCode"))) {
 				String productCode = request.getParameter("productCode");
 				int basketQuantity = Integer.parseInt(request.getParameter("quantity"));
@@ -131,10 +126,42 @@ public class UserFormHandler {
 				request.setAttribute("identifier", identifier);
 				request.setAttribute("basket", basketItem);
 			} else {
-				identifier="2";
+				identifier="2";		// if for some reason productCode is missing
 				request.setAttribute("identifier", identifier);
 			}
+		
+		} else if(identifier.equals("1")) {		// this page is redirected from basket
+			List<BasketDataBean> basketList=basketDao.getBasketList(id);			
+
+			String checked=(String) request.getSession().getAttribute("checkedItems");			
+			JsonObject checkedItems=new JsonParser().parse(checked).getAsJsonObject();
+			
+			List<BasketDataBean> basket=new ArrayList<BasketDataBean>();
+			
+			for(BasketDataBean basketItem:basketList) {
+				for(int i=0; i<checkedItems.size(); i++) {
+					String checkedItemWithQuotes=checkedItems.get(String.valueOf(i)).toString();
+					String checkedItem=checkedItemWithQuotes.substring(1, checkedItemWithQuotes.length()-1);
+					
+					if(basketItem.getProductCode().equals(checkedItem)) {
+						BasketDataBean item=new BasketDataBean();
+						item.setProductCode(basketItem.getProductCode());
+						item.setBasketQuantity(basketItem.getBasketQuantity());
+						item.setProductName(basketItem.getProductName());
+						item.setThumbnail(basketItem.getThumbnail());
+						item.setProductPrice(basketItem.getProductPrice());
+						item.setProductQuantity(basketItem.getProductQuantity());
+						item.setDiscount(basketItem.getDiscount());
+						
+						basket.add(item);
+					}
+				}
+			}
+			
+			request.setAttribute("identifier", identifier);
+			request.setAttribute("basket", basket);
 		}
+		
 		return new ModelAndView("user/form/orderInputForm");
 	}
 }
