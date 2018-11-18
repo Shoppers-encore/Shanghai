@@ -142,6 +142,7 @@ public class UserFormHandler {
 				for(int i=0; i<checkedItems.size(); i++) {
 					String checkedItemWithQuotes=checkedItems.get(String.valueOf(i)).toString();
 					String checkedItem=checkedItemWithQuotes.substring(1, checkedItemWithQuotes.length()-1);
+					
 					if(basketItem.getProductCode().equals(checkedItem)) {
 						BasketDataBean item=new BasketDataBean();
 						item.setProductCode(basketItem.getProductCode());

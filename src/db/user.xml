@@ -176,7 +176,7 @@
   	</select>
 	<insert id="insertOrder" parameterType="databean.OrderListDataBean">
 		INSERT INTO jk_orderList VALUES (
-		(SELECT NVL(MAX(orderCode), 0) FROM jk_orderList)+1,
+		#{orderCode},
 		#{productCode},
 		#{ref},
 		#{id}, 
@@ -189,6 +189,9 @@
 		#{orderPrice}
 		)
 	</insert>
+	<select id="getMaxOrderCode" resultType="int">
+		SELECT NVL(MAX(orderCode), 0) FROM jk_orderList
+	</select>
 
 
 

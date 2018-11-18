@@ -68,5 +68,9 @@ public class OrderDao {
 	public int insertOrder(OrderListDataBean order) {
 		return session.insert("User.insertOrder", order);
 	}
+	
+	public int getMaxOrderCode() {
+		return session.selectOne("User.getMaxOrderCode");
+	}
 }
 	

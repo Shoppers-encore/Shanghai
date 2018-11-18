@@ -92,21 +92,20 @@
 								</script>
 								<input type="hidden" name="orderQuantity" value="${basket.basketQuantity}">
 							</div>
-							<div class="col-lg-1 pt-5" id="productPrice">
-								<script type="text/javascript">
-									var discount=(100-'${product.discount}')/100;
-									var unitPrice='${product.productPrice}'
-									var price=qty*unitPrice*discount;
-									$('#productPrice').text(price+'${str_currencyUnit}');
-									$(window).on(
-										'load',
-										function(event) {
-											$('#orderPrice').attr('value', price);
-										}
-									);
-								</script>
-								<input type="hidden" id="orderPrice" name="orderPrice"/>
-							</div>
+							<div class="col-lg-1 pt-5" id="productPrice"></div>
+							<script type="text/javascript">
+								var discount=(100-'${product.discount}')/100;
+								var unitPrice='${product.productPrice}'
+								var price=qty*unitPrice*discount;
+								$('#productPrice').text(price+'${str_currencyUnit}');
+								$(window).on(
+									'load',
+									function(event) {
+										$('#orderPrice').attr('value', price);
+									}
+								);
+							</script>
+							<input type="hidden" id="orderPrice" name="orderPrice"/>
 							<div class="col-lg-2 pt-5">
 								<button type="button" class="btn" id="saveToBasket">${btn_save}</button>
 								<script type="text/javascript">
@@ -269,16 +268,22 @@
 									</script>
 								
 								<div class="col-lg-2 pt-5">
-									<div class="orderPrice" id="orderPrice_${basket.productCode}"></div>
-									<input type="hidden" name="orderPrice_${basket.productCode}" value="orderPrice_${basket.productCode}">
+									<div class="productPrice" id="productPrice_${basket.productCode}"></div>
 									<script type="text/javascript">
-										var qty='${basket.basketQuantity}';
 										var unitPrice='${basket.productPrice}';
 										var discount=(100-'${basket.discount}')/100;
-										var orderPrice=qty*unitPrice*discount;
+										var price_${basket.productCode}=qty*unitPrice*discount;
 
-										$('#orderPrice_${basket.productCode}').text(orderPrice+'${str_currencyUnit}');
+										$('#productPrice_${basket.productCode}').text(eval('price_${basket.productCode}')+'${str_currencyUnit}');
+
+										$(window).on(
+											'load',
+											function(event) {
+												$('#orderPrice_${basket.productCode}').attr('value', eval('price_${basket.productCode}'));
+											}
+										);
 									</script>
+									<input type="hidden" id="orderPrice_${basket.productCode}" name="orderPrice_${basket.productCode}"/>
 								</div>
 							</div>
 						</c:forEach>		
@@ -312,7 +317,7 @@
 							<div class="form-group row"><!--zip code -->
 								<label for="zipcode" class="col-sm-3 col-form-label"><strong>${str_zipcode}*</strong></label>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=zipcode id="zipcode" value="${userInfo.zipcode}" required>											
+									<input class="form-control text-center" type="text" name=orderZipcode id="zipcode" value="${userInfo.zipcode}" required>											
 								</div>
 								<div class="col-sm-1">
 									<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" 
@@ -322,13 +327,13 @@
 							<div class="form-group row"><!--address -->
 								<label for="address" class="col-sm-3 col-form-label"><strong>${str_address}*</strong></label>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=address id="address" value="${userInfo.address}" required>											
+									<input class="form-control text-center" type="text" name=orderAddress1 id="address" value="${userInfo.address}" required>											
 								</div>	
 							</div>
 							<div class="form-group row"><!--addressDetail -->
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6">
-									<input class="form-control text-center" type="text" name=addressDetail value="${userInfo.addressDetail}" required>											
+									<input class="form-control text-center" type="text" name=orderAddress2 value="${userInfo.addressDetail}" required>											
 								</div>
 								<div class="col-sm-3 text-right"><h4 id="totalPrice"></h4></div>		
 							</div>
@@ -339,9 +344,8 @@
 								'load',
 								function(e) {
 									var grandTotal=0;
-							
-									for(i=0; i<$('.orderPrice').length; i++) {
-										var eachPrice=$('.orderPrice')[i].innerHTML;
+									for(i=0; i<$('.productPrice').length; i++) {
+										var eachPrice=$('.productPrice')[i].innerHTML;
 										var price=eval(eachPrice.substring(0, eachPrice.length-1));
 										grandTotal=grandTotal+price;
 									}
