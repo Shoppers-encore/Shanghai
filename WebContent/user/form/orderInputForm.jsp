@@ -26,7 +26,7 @@
 				
 			<!-- If not logged in, redirect to login page -->
 			<c:if test="${id eq null}">
-				<c:redirect url="/Shanghai/userLoginForm.jk"/>
+				<c:redirect url="userLoginForm.jk"/>
 			</c:if>
 			
 			<!-- When logged in -->
