@@ -238,6 +238,7 @@
 <c:set var="btn_order" value="주문하기"/>
 <c:set var="btn_gotoUserMain" value="사용자메인"/>
 <c:set var="btn_returnToBasket" value="장바구니 수정"/>
+<c:set var="btn_send" value="전송"/>
 
 
 <!-- Message -->

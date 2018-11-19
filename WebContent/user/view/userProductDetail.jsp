@@ -101,8 +101,7 @@
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="quantity" value="1" style="width:60px;" min="0"></td>
-								<td><input type="text" name="remainQuantity" style="width:20px;" readonly></td>
+								<td><input type="number" name="quantity" value="1" style="width:30px;" min="0"></td>
 							</tr>
 							<tr>
 								<th colspan="2"><input type="submit" class="btn-block" value="${btn_buy}"></th>
