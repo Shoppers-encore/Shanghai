@@ -8,7 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="aaa" scope="session"/>
 <body class="container" onload="commentList(${reviewDto.reviewNo})">
 	<article class="centered">
 	<br><br>

@@ -8,7 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${str_review}</title>
 </head>
-<c:set var="id" value="aaa" scope="session"/>
 <body class="container">
 	<!-- User Header -->
 <%@ include file="../../user/form/userHeader.jsp" %>

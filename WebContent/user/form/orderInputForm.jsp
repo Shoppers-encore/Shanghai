@@ -26,7 +26,7 @@
 				
 			<!-- If not logged in, redirect to login page -->
 			<c:if test="${id eq null}">
-				<c:redirect url="userLoginForm.jk"/>
+				<c:redirect url="/Shanghai/userLoginForm.jk"/>
 			</c:if>
 			
 			<!-- When logged in -->
@@ -156,10 +156,7 @@
 								<label for="email" class="col-sm-3 col-form-label"><strong>${str_email}*</strong></label>
 								<div class="col-sm-6">
 									<input class="form-control text-center" type="email" name=email  value="${userInfo.email}" maxlength="70" required>											
-								</div>
-								<div class="col-sm-1">
-									<button class="btn btn-md btn-secondary" type="button"  onclick="mailTransfer()">${btn_selfConfirm}</button>					
-								</div>				
+								</div>			
 							</div>
 							
 							<div class="form-group row"><!--zip code -->
@@ -308,9 +305,6 @@
 								<label for="email" class="col-sm-3 col-form-label"><strong>${str_email}*</strong></label>
 								<div class="col-sm-6">
 									<input class="form-control text-center" type="email" name=email  value="${userInfo.email}" maxlength="70" required>											
-								</div>
-								<div class="col-sm-1">
-									<button class="btn btn-md btn-secondary" type="button"  onclick="mailTransfer()">${btn_selfConfirm}</button>					
 								</div>				
 							</div>
 							
