@@ -1,5 +1,6 @@
 package db;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -159,8 +160,12 @@ public class ProductDao{
 		return session.selectList("User.getProdRef");
 	}
 
-	public List<Integer> getBestProduct(List<Integer> ref) {
-		return session.selectList("User.getBestProduct", ref);
+	public List<Integer> getBestProduct() {
+		return session.selectList("User.getBestProduct");
+	}
+	
+	public List<ProductDataBean> getBestList(int ref) {
+		return session.selectList("User.getBestList", ref);
 	}
 	
 }

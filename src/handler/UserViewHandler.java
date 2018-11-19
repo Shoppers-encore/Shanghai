@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -487,19 +488,16 @@ public class UserViewHandler {
 	@RequestMapping("/userBestProductList")
 	public ModelAndView userBestProductList(HttpServletRequest request, HttpServletResponse response){
 		Map<String, String> map = new HashMap<String,String>();
-		int count = productDao.getProductNoSearchCount(map);
+		int count = productDao.getProdCount();
 		map = new HandlerHelper().makeCount(count, request);
-		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		List<String> productCode = productDao.getProdCode();
-		List<Integer> ref = productDao.getProdRef();
 		
-		
-		List<Integer> counts = productDao.getBestProduct(ref);
-		
-		System.out.println("코드:" + productCode );
+		List<Integer> ref = productDao.getBestProduct();
+		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();
+		for(int i=0; i<ref.size(); i++) {
+		productList.addAll(productDao.getBestList(ref.get(i)));
+		}
 		System.out.println("ref:" + ref );
-		System.out.println("count:" + counts );
-		
+
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userBestProductList");
