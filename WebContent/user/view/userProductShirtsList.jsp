@@ -83,7 +83,7 @@
 							<c:if test="${currentPage ne 1}">
 								<a href="userProductShirtsList.jk?category=${category}">[◀◀]</a>
 							<c:if test="${startPage gt pageBlock}">
-								<a href="userProductShirtsList.jk?category="${category}pageNum=${startPage-pageBlock}">[◀]</a>
+								<a href="userProductShirtsList.jk?category=${category}&pageNum=${startPage-pageBlock}">[◀]</a>
 								</c:if>
 							</c:if>
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -98,7 +98,7 @@
 								<c:if test="${pageCount>endPage}">
 								<a href="userProductShirtsList.jk?category=${category}&pageNum=${startPage+pageBlock}">[▶]</a>
 								</c:if>
-								<a href="userProductShirtsList.jk?category=${cateory}&pageNum=${pageCount}">[▶▶]</a>
+								<a href="userProductShirtsList.jk?category=${category}&pageNum=${pageCount}">[▶▶]</a>
 							</c:if>
 						</c:if>
 					</div>
