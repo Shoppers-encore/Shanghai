@@ -25,7 +25,7 @@
 		</div>
 		<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="">BEST</a>
+			<a class="nav-link" href="userBestProductList.jk">BEST</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="userOrderList.jk">ORDER</a>
