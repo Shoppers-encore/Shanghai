@@ -11,6 +11,7 @@
 		</script>
 	</c:if>
 	<c:if test="${result eq 1}">
+		<c:set var="checkedItems" value="${checkedItems}" scope="session"/>
 		<c:redirect url="orderInputForm.jk?identifier=1"/>
 	</c:if>
 </c:forEach>

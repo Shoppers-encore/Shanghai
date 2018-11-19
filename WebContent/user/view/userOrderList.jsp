@@ -52,16 +52,18 @@
 							<div class="col-lg-2">
 								${distinctOrderList.orderCode}
 							</div>
-							<div class="col-lg-3 date_${distinctOrderList.orderCode}">
-								<%-- ${distinctOrderList.orderDate} --%>
+							<div class="col-lg-3" id="date_${distinctOrderList.orderCode}">
 								<script type="text/javascript">
 									var key='${distinctOrderList.orderCode}';
 									var orderDate=JSON.parse('${orderDate}')[key];
-									$('.date_${distinctOrderList.orderCode}').text(orderDate);
+									$('#date_${distinctOrderList.orderCode}').text(orderDate);
 								</script>
 							</div>
-							<div class="col-lg-2">
-								${count}${str_orderUnit}
+							<div class="col-lg-2" id="count_${distinctOrderList.orderCode}">
+								<script type="text/javascript">
+									var orderCount=JSON.parse('${orderCount}')[key];
+									$('#count_${distinctOrderList.orderCode}').text(orderCount+'${str_orderUnit}');
+								</script>
 							</div>
 							<div class="col-lg-3">
 								<c:if test="${distinctOrderList.orderStatus eq 0}">

@@ -65,5 +65,16 @@ public class OrderDao {
 		return session.selectList("Admin.getOrderDetail", orderCode);
 	}
 	
+	public int insertOrder(OrderListDataBean order) {
+		return session.insert("User.insertOrder", order);
+	}
+	
+	public int getMaxOrderCode() {
+		return session.selectOne("User.getMaxOrderCode");
+	}
+	
+	public int getCountOfItemsOrdered(int orderCode) {
+		return session.selectOne("User.getCountOfItemsOrdered", orderCode);
+	}
 }
 	
