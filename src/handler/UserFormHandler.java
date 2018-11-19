@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +104,16 @@ public class UserFormHandler {
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		
+		if(id==null) {
+			try {
+				response.sendRedirect("/Shanghai/userLoginForm.jk");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		UserDataBean userInfo=userDao.getUser(id);
 		request.setAttribute("userInfo", userInfo);
 		
