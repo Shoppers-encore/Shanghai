@@ -9,7 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="mypage">
+	<a href="main.jk">
 	<img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
+	</a>
     <hr>	
 	<div class="container" style="width: 800px">
 		<h4><b>내 정보</b></h4>
