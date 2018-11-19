@@ -59,6 +59,7 @@
 		</style>
 	</head>
 	<body class="container">
+		
 	<header id="demo" class="carousel slide" data-ride="carousel">
 			
 			  <!-- Indicators -->
@@ -91,15 +92,7 @@
 			
 	      	
 		</header>
-		<c:if test="${sessionScope.id ne null}">
-				<div id="chat">
-		        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-		      	</div>
-		      	<div id="cart">
-					<img id="cartImg" src="images/cart_red.png">
-					<form></form>
-				</div>
-			</c:if>
+		
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
@@ -126,6 +119,7 @@
 										</c:if>
 								</a><br>
 							</form>
+						    
 						</div>
 				     </c:forEach>
 					<div align="center">
@@ -154,6 +148,11 @@
 					</div>
 		    	</div>
 		    </c:if>
+		    <c:if test="${sessionScope.id ne null}">
+				<div id="chat">
+		        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
+		      	</div>
+			</c:if>
 		</article>
 	</body>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>

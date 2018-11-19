@@ -39,10 +39,6 @@
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
 			<br>
