@@ -58,7 +58,6 @@
 						<c:forEach var="reviewList" items="${reviewList}">
 							<tr>
 								<c:set var="productCode" value="${reviewList.productCode}"/>
-								<!--<c:set var="refff" value="${fn:substring(productCode, 2, productCode-2)"/>-->
 								<td><a href="admProductDetail.jk?ref=${refff}">${reviewList.productCode}</a>								
 								</td>
 								<td><a href="admReviewDetail.jk?reviewNo=${reviewList.reviewNo}&productCode=${reviewList.productCode}">
