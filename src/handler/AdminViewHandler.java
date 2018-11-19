@@ -159,6 +159,7 @@ public class AdminViewHandler {
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
 			count = productDao.getSearchCount(searchWord);			/////////////// 1116고친곳
+			System.out.println("count : " + count);
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);

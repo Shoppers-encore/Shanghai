@@ -267,7 +267,7 @@
 			<c:if test="${ searchWord ne null and count ne 0 }">
 			<!-- when there IS a query and results too -->
 				<br><p>${count} ${msg_searchResult} <b>${searchWord}</b></p><br>
-				<c:if test="${selectedColors ne null}">
+				<c:if test="${selectedColors ne ''}">
 					<p><b>${msg_selectedColors}</b>
 						<c:if test="${selectedColors.contains('WH')}">
 							${msg_color_wht}
