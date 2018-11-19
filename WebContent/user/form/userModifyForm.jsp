@@ -16,7 +16,9 @@
  </style>
 <link rel="stylesheet" href="${project}shanghai_style.css">
 <body class="registration">
+	<a href="main.jk">
     <img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
+    </a>
     <hr>	       
 <!-- id, password, name, birthday, tel, email, gender, 
 	userLevel=default 1, height(3,0), weight(3,0), address, addressDetail, zipcode -->
@@ -46,13 +48,13 @@
 			<div class="form-group row"><!-- name -->
 					<label for="name" class="col-sm-2 col-form-label">${str_name}<b>*</b></label>
 					<div class="col-sm-8">
-						<h4>${user.name}</h4>											
+						<h5>${user.name}</h5>											
 					</div>	
 			</div>
 			<div class="form-group row"><!-- birthday -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
 					<div class="col-sm-8">
-						<h4><fmt:formatDate var="birthday" value="${user.birthday}" type="string"/></h4>
+						<h5>${user.birthday}</h5>	
 					</div>		
 			</div>
 			<div class="form-group row"><!-- tel -->
@@ -68,6 +70,15 @@
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"  onclick="">${btn_selfConfirm}</button>					
+					</div>				
+			</div>
+			<div class="form-group row"><!--zip code -->
+					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
+					<div class="col-sm-8">
+						<input class="form-control" type="text" name=zipcode id="zipcode" placeholder="${str_zipcode}"  value="${user.zipcode}" required>											
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>					
 					</div>				
 			</div>
 			<div class="form-group row"><!--address -->
@@ -88,7 +99,7 @@
 			<div class="form-group row"><!-- gender -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_gender}</label>
 					<div class="col-sm-10">	
-						<h4>${user.gender==0?'남자':'여자'}</h4>											
+						<h5>${user.gender==0?'남자':'여자'}</h5>											
 					</div>				
 			</div>
 			<div class="form-group row"><!--height / weight-->
