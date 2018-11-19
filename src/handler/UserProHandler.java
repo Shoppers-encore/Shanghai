@@ -287,7 +287,14 @@ public class UserProHandler {
 	
 	@RequestMapping("/basketListPro")
 	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
+		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
+		
 		String[] checkedItems=request.getParameterValues("itemChecked");
 		
 		/* Get items from jk_basket using id */
@@ -555,6 +562,12 @@ public class UserProHandler {
 		}
 		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
+		
 		String identifier=request.getParameter("identifier");
 		
 		int orderNo=orderDao.getMaxOrderCode();

@@ -10,11 +10,6 @@
 	<body>
 		<%@ include file="../form/userHeader.jsp" %>
 		
-		<!-- If not logged in, redirect to login page -->
-		<c:if test="${id eq null}">
-			<c:redirect url="userLoginForm.jk"/>
-		</c:if>
-		
 		<!-- When logged in -->
 		<c:if test="${id ne null}">
 			<div class="container-fluid col-lg-10">
@@ -29,7 +24,8 @@
 				
 				<!-- If Basket has items -->
 				<c:if test="${basketCount ne 0}">
-					<div class="row font-weight-bold text-center pt-5">
+					<div class="row font-weight-bold text-center pt-5" id="emptyBasketDiv"></div>
+					<div class="row font-weight-bold text-center pt-5" id="basketDiv">
 						<div class="col-lg-1">
 							${str_select}
 						</div>
@@ -60,12 +56,12 @@
 					</script>
 					<form class="form basketListForm" name="basketListForm" method="post" action="basketListPro.jk">
 						<c:forEach var="basketList" items="${basketList}">				
-							<div class="form-group row border text-center" id="${basketList.productCode}">
+							<div class="form-group row border text-center basketListDiv" id="${basketList.productCode}">
 								<script type="text/javascript">
 									prodCode.push('${basketList.productCode}');
 								</script>
 								<div class="col-lg-1 pt-5">
-									<input type="checkbox" id="itemChecked" name="itemChecked" value="${basketList.productCode}" checked>
+									<input type="checkbox" id="itemChecked_${basketList.productCode}" name="itemChecked" value="${basketList.productCode}" checked>
 								</div>
 								<div class="col-lg-2">
 									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -166,7 +162,7 @@
 											'click',
 											function(event) {
 												event.preventDefault();
-												var basketCount='${basketCount}';
+												
 												$.ajax({
 													url: 'deleteBasketItemAjax.jk',
 													contentType: 'application/json; charset="UTF-8"',
@@ -179,9 +175,17 @@
 														
 														if(isItemDeleted=='true') {
 															console.log('basket update ${msg_success}');
-															$('#${basketList.productCode}').remove()
-															basketCount--;
-															newProductPrice;
+															$('#${basketList.productCode}').remove();
+															basketCount=document.getElementsByClassName('basketListDiv').length;
+															if(basketCount==0) {
+																$('#basketDiv').remove();
+																$('#totalPrice').remove();
+																$('#continueShoppingBtn').remove();
+																$('#basketListFormSubmitBtn').remove();
+																$('#emptyBasketDiv').text(emptyBasket);
+																$('#totalNumberOfItems').text(emptyBasketCount);
+															}
+															
 															prodCode=prodCode.filter(function(item) {
 																return item!='${basketList.productCode}'
 															})
@@ -189,6 +193,16 @@
 														} else {
 															alert('${msg_tryLater}');
 														}
+														
+														var grandTotal=0;
+														
+														for(product in prodCode) {
+															eachPrice=$('.prodPrice')[product].innerHTML;
+															price=eval(eachPrice.substring(0, eachPrice.length-1));
+															grandTotal=grandTotal+price;
+														}
+														
+														$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
 													},
 													error: function(e) {
 														console.log('basket update ${msg_failure}');
@@ -215,22 +229,26 @@
 									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
 								}
 							);
-								
-							$('.basketListForm').change(function(event) {
-								var grandTotal=0;
-								
-								for(product in prodCode) {
-									eachPrice=$('.prodPrice')[product].innerHTML;
-									price=eval(eachPrice.substring(0, eachPrice.length-1));
-									grandTotal=grandTotal+price;
+							
+							$('.basketListForm').change(
+								function(event) {
+									var grandTotal=0;
+									
+									for(product in prodCode) {
+										stringConcat='#itemChecked_'+prodCode[product];
+
+										eachPrice=$('.prodPrice')[product].innerHTML;
+										price=eval(eachPrice.substring(0, eachPrice.length-1));
+										grandTotal=grandTotal+price;
+									}
+									
+									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
 								}
-								
-								$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
-							});
+							);
 							
 						</script>
 						<div class="text-right">
-							<button type="button" class="btn mr-1" onclick="returnToList()">${btn_continueShopping}</button>
+							<button type="button" class="btn mr-1" id="continueShoppingBtn" onclick="returnToList()">${btn_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_orderCheckedItems}</button>
 							<script type="text/javascript">
 										

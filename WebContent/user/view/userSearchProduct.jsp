@@ -4,7 +4,12 @@
 <%@ include file ="../../setting.jsp" %>
 <html>   
 <head>
-	<title>${searchWord}의 검색 결과</title>
+	<c:if test="${ searchWord eq null }">
+		<title> 상품 검색 페이지 </title>
+	</c:if>
+ 	<c:if test="${ searchWord ne null }">
+		<title>${searchWord}의 검색 결과</title>
+	</c:if>
 	<style>
 	   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 		/* 색상 체크박스를 위한 container */
@@ -165,6 +170,12 @@
 		    visibility: visible;
 		    opacity: 0.7;
 		}
+		article {
+			text-align : center;
+		}
+		form, div#colors {
+			margin : 0 auto;
+		}
 	  </style>
 	</head>
 	<body>
@@ -172,21 +183,24 @@
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 	    	<c:if test="${ searchWord eq null}">
-	    	<!-- 검색어가 null일 때 (초기 화면일 때와 암것도 안쓰고 검색 실행시) -->
+	    	<!-- when there is NO query
+	    		( when user first enters the search page
+	    		& when user hits the search button without a query ) -->
 					<br><br><br><br><br>
 					<p>${msg_searchProduct}</p>
 			</c:if>
 			<c:if test="${ searchWord ne null and count eq 0 }">
-			<!-- 검색어가 있고 검색 결과 개수가 0 또는 null일 때 -->
+			<!-- when there IS a query but no result -->
 					<br><br><br><br><br>
 					<p><b>${searchWord}</b> ${msg_noSearchResult}</p>
 			</c:if>
-			<form name="searchForm" action="userSearchProduct.jk" method="post" style="text-align:center;">
-				<div class="input-group col-md-3 container-fluid">
+			<form name="searchForm" action="userSearchProduct.jk" method="post" style="text-align:center">
+				<div class="input-group col-md-5 container-fluid">
 				    <input type="text" class="form-control" name="searchWord" style="width:80%" autofocus placeholder="${msg_searchWithWord}">
 				    <input type="submit" class="form-control btn btn-danger" value="${btn_search}" style="width:20%">
 			  	</div>
-				<div class="container-fluid col-md-4 row centered input-group" id="colors">
+			  	<br>
+				<div class="container-fluid col-md-5 row input-group" id="colors">
 					<label class="container form-control " id="colorcontainer">
 					    <input type="checkbox" name="color" value="WH">
 					    <span class="checkmark" id="white"></span>
@@ -251,9 +265,9 @@
 				<br><br>
 			</form>
 			<c:if test="${ searchWord ne null and count ne 0 }">
-			<!-- 검색어가 있고 검색 결과도 있을 때 -->
+			<!-- when there IS a query and results too -->
 				<br><p>${count} ${msg_searchResult} <b>${searchWord}</b></p><br>
-				<c:if test="${selectedColors ne null}">
+				<c:if test="${selectedColors ne ''}">
 					<p><b>${msg_selectedColors}</b>
 						<c:if test="${selectedColors.contains('WH')}">
 							${msg_color_wht}
@@ -312,9 +326,9 @@
 		    <div align="center">
 			    <c:if test="${count gt 0}">
 					<c:if test="${currentPage ne 1}">
-						<a href="searchGood.jk?searchWord=${searchWord}&color=${color}">[◀◀]</a>
+						<a href="userSearchProduct.jk?searchWord=${searchWord}&color=${color}">[◀◀]</a>
 					<c:if test="${startPage gt pageBlock}">
-						<a href="searchGood.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">[◀]</a>
+						<a href="userSearchProduct.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">[◀]</a>
 						</c:if>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -322,14 +336,14 @@
 						<span>[${i}]</span>
 						</c:if>
 						<c:if test="${i ne currentPage}">
-						<a href="searchGood.jk?pageNum=${i}&searchWord=${searchWord}">[${i}]</a>
+						<a href="userSearchProduct.jk?pageNum=${i}&searchWord=${searchWord}">[${i}]</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne pageCount}">
 						<c:if test="${pageCount>endPage}">
-						<a href="searchGood.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">[▶]</a>
+						<a href="userSearchProduct.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">[▶]</a>
 						</c:if>
-						<a href="searchGood.jk?pageNum=${pageCount}&searchWord=${searchWord}">[▶▶]</a>
+						<a href="userSearchProduct.jk?pageNum=${pageCount}&searchWord=${searchWord}">[▶▶]</a>
 					</c:if>
 				</c:if>
 			</div>
