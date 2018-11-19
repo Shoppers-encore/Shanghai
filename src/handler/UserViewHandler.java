@@ -493,7 +493,11 @@ public class UserViewHandler {
 		
 		List<Integer> ref = productDao.getBestProduct();
 		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();
-		for(int i=0; i<ref.size(); i++) {
+		int num = ref.size();
+		if(ref.size()>12) {
+			num=12;
+		}
+		for(int i=0; i<num; i++) {
 		productList.addAll(productDao.getBestList(ref.get(i)));
 		}
 		System.out.println("ref:" + ref );
