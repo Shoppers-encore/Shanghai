@@ -9,7 +9,6 @@
 	</head>
 	<body>
 		<!-- Customer ID only temporarily loaded to sessionScope -->
-		<c:set var="id" value="aaa"/>
 		<%@ include file="../form/userHeader.jsp" %>
 		
 		<c:forEach var="orderedItem" items="${orderListByOrderCode}">

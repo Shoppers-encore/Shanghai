@@ -7,7 +7,6 @@
 	<head>
 		<title>${head_userOrderList}</title>
 	</head>
-<c:set var="id" value="aaa" scope="session"/>
 	<body>
 		<!-- Customer ID only temporarily loaded to sessionScope -->
 		<c:set var="id" value="aaa"/>
