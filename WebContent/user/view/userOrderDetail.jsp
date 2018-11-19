@@ -8,7 +8,7 @@
 		<title>${head_userOrderDetail}</title>
 	</head>
 	<body>
-		<!-- Customer ID only temporarily loaded to sessionScope -->
+
 		<%@ include file="../form/userHeader.jsp" %>
 		
 		<c:forEach var="orderedItem" items="${orderListByOrderCode}">
@@ -16,11 +16,6 @@
 			<c:set var="orderAddress2" value="${orderedItem.orderAddress2}"/>		
 			<c:set var="orderZipcode" value="${orderedItem.orderZipcode}"/>		
 		</c:forEach>
-		
-		<!-- If not logged in, redirect to login page -->
-		<c:if test="${id eq null}">
-			<c:redirect url="userLoginForm.jk"/>
-		</c:if>
 		
 		<!-- When logged in -->
 		<c:if test="${id ne null}">

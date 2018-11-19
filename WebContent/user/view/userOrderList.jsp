@@ -8,14 +8,7 @@
 		<title>${head_userOrderList}</title>
 	</head>
 	<body>
-		<!-- Customer ID only temporarily loaded to sessionScope -->
-		<c:set var="id" value="aaa"/>
 		<%@ include file="../form/userHeader.jsp" %>
-		
-		<!-- If not logged in, redirect to login page -->
-		<c:if test="${id eq null}">
-			<c:redirect url="userLoginForm.jk"/>
-		</c:if>
 		
 		<!-- When logged in -->
 		<c:if test="${id ne null}">
