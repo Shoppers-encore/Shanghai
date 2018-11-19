@@ -25,7 +25,7 @@
 							if(data.count>0){
 								if(data.quantity == 0){
 									alert("재고가 없습니다.");
-									$("input:submit").attr("diable")
+									$("input[name='quantity']").val(data.quantity);
 								}
 								$("input[name='remainQuantity']").val(data.quantity);
 								$("input[name='quantity']").attr("max",data.quantity);
@@ -35,7 +35,13 @@
 					});
 			});
 			$("input:button[name='inputCart']").on("click",function(){
+				if($("input[name='productCode']").val()==$("input[name='reff']").val()){
+					checkSizeColor();
+				}else if($("input[name='quantity']").val()==0 || $("input[name='remainQuantity']").val()==0){
+					alert('0개를 구매할수 없습니다!');
+				}else{
 					location.href="basketInput.jk?productCode="+$("input[name='productCode']").val()+"&quantity="+$("input[name='quantity']").val()+"&ref="+$("input[name='reff']").val();
+				}
 			});
 		});
 		function checkSizeColor(){
@@ -43,10 +49,15 @@
 				alert('상품 세부사항을 선택해주세요');
 				return false;
 			}
+			if($("input[name='quantity']").val()==0){
+				alert('품절상품입니다.');
+				return false;
+			}
 		}
 		//-->
 	</script>
 	<!-- Good Detail View Page -->
+	
 		<article class="row">
 			<!-- Good Picture -->
 			<div class="col-sm-6" >
@@ -101,7 +112,7 @@
 							</tr>
 							<tr>
 							<td>${str_var}</td>
-								<td><input type="number" name="quantity" value="1" style="width:30px;" min="0"></td>
+								<td><input type="number" name="quantity" value="1" style="width:30px;" min="0"><input type="hidden" name="remainQuantity" value="0"></td>
 							</tr>
 							<tr>
 								<th colspan="2"><input type="submit" class="btn-block" value="${btn_buy}"></th>
@@ -127,7 +138,7 @@
 	<!-- Redirect to Board -->
 		<div align="right">
 			Leave your Comment! &nbsp;
-			<input type="button" value="${str_review}" onclick="location='userReviewList.jk'"/><br><br><br><hr>
+			<input type="button" value="${str_review}" onclick="location='reviewList.jk'"/><br><br><br><hr>
 		</div>
 	
 	<!-- Banking Account -->

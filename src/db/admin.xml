@@ -129,7 +129,7 @@
 		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},'abc.jpg')
 	</update>
 	<delete id="deleteProduct" parameterType="String">
-		DELETE FROM jk_product WHERE productCode=#{product}
+		UPDATE jk_product SET productLevel=0 WHERE productCode=#{product}
 	</delete>
 	<select id="getProdQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
@@ -137,7 +137,7 @@
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
-		WHERE chatdate IN (select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+		WHERE chatdate IN (select MAX(chatDate) from jk_chat,jk_user WHERE sender=id AND userLevel!=0 group by sender) ORDER BY chatdate desc
 	</select>
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat
