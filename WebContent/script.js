@@ -30,6 +30,10 @@ var error = "아이디 중복확인 실패";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var emailcheckerror1 = "이메일 인증 해 주세요.";
 var emailcheckerror2 = "인증번호가 일치하지 않습니다."
+	
+// Message-BasketList
+var emptyBasket='장바구니에 담긴 상품이 없습니다.';
+var emptyBasketCount='전체 상품: 총 0개';
 
 ////// <User>
 

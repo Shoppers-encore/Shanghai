@@ -82,7 +82,13 @@ public class UserViewHandler {
 	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
+		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -270,6 +276,13 @@ public class UserViewHandler {
 	@RequestMapping("/userOrderDetail")
 	public ModelAndView userOrderDetail(HttpServletRequest request, HttpServletResponse response) {
 		
+		String id=(String)request.getSession().getAttribute("id");	
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
+		
 		String orderDate=request.getParameter("orderDate");
 		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
@@ -283,7 +296,13 @@ public class UserViewHandler {
 	
 	@RequestMapping("/userOrderList")
 	public ModelAndView userOrderList(HttpServletRequest request, HttpServletResponse response) {
+		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
 		
 		/* Number of Order History Per Page */
 		int pageSize=1; 
