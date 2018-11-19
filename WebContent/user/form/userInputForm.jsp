@@ -17,7 +17,9 @@
  </style>
 <link rel="stylesheet" href="${project}shanghai_style.css">
 <body class="registration">
+	<a href="main.jk">
     <img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
+    </a>
     <hr>	       
 <!-- id, password, name, birthday, tel, email, gender, 
 	userLevel=default 1, height(3,0), weight(3,0), address, addressDetail, zipcode -->

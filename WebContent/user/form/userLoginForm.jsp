@@ -14,7 +14,7 @@
 <c:if test="${sessionScope.id eq null}">	
 <body class="login">
 	<form class="form-signin" method="post" action="userLoginPro.jk" name="loginform">
-  		<a href="userMain.jk">
+  		<a href="main.jk">
   			<img class="pt-0 mt-0 mb-4" src="images/shanghai_icon.png" alt="logo" width="350" height="200">
   		</a>
      	<input type="text" name="id" class="form-control" placeholder="${str_id}" required autofocus>   			 	
