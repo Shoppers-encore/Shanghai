@@ -138,7 +138,7 @@
 	<!-- Redirect to Board -->
 		<div align="right">
 			Leave your Comment! &nbsp;
-			<input type="button" value="${str_review}" onclick="location='reviewList.jk'"/><br><br><br><hr>
+			<input type="button" value="${str_review}" onclick="location='reviewList.jk?productName='"/><br><br><br><hr>
 		</div>
 	
 	<!-- Banking Account -->
