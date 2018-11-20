@@ -59,6 +59,7 @@
 		</style>
 	</head>
 	<body class="container">
+		
 	<header id="demo" class="carousel slide" data-ride="carousel">
 			
 			  <!-- Indicators -->
@@ -88,16 +89,10 @@
 				<a class="carousel-control-next" href="#demo" data-slide="next">
 				<span class="carousel-control-next-icon"></span>
 			</a>
+			
+	      	
 		</header>
-      	<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
-		</c:if>
+		
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
@@ -124,6 +119,7 @@
 										</c:if>
 								</a><br>
 							</form>
+						    
 						</div>
 				     </c:forEach>
 					<div align="center">
@@ -152,6 +148,11 @@
 					</div>
 		    	</div>
 		    </c:if>
+		    <c:if test="${sessionScope.id ne null}">
+				<div id="chat">
+		        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
+		      	</div>
+			</c:if>
 		</article>
 	</body>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -279,7 +280,7 @@
 								'<tr>' +
 								'<td><img style="width:50px; height:50px;" src="/Shanghai/save/' + baskets.thumbnail +'"></td>' 
 								+ '<td><input type="button" id="' + baskets.productCode + '" class="btn btn-outline-secondary btn-sm" value="${btn_x}">'
-								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="good_code" value="'
+								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="productCode" value="'
 								+ baskets.productCode + '"></td></form></tr>';
 								
 								$(html).appendTo('#t');

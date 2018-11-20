@@ -314,7 +314,9 @@
 							<!-- How to get image names from image_info DataBean -->
 							<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">${product.productName}<br>
 							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.discount eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
-							<c:if test="${product.discount ne null and product.discount ne 0}"></c:if></a><br>
+							<c:if test="${product.discount ne 0}">
+											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
+										</c:if></a><br>
 						</div>
 					</c:forEach>
 				</div>

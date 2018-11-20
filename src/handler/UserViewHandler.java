@@ -239,12 +239,8 @@ public class UserViewHandler {
 			for(int i=0; i<selectedColors_temp.length; i++) {
 				selectedColors += selectedColors_temp[i] + " ";
 			}
-		if(searchWord == null || "".equals(searchWord)) {
-			searchWord = " ";
-			return new ModelAndView("user/view/userSearchProduct");
-		} else {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("searchWord", request.getParameter("searchWord"));
+			map.put("searchWord", searchWord);
 			map.put("selectedColors", selectedColors);
 			count = productDao.getProductCount(map);		
 			if( count == 0 ) {
@@ -266,7 +262,7 @@ public class UserViewHandler {
 				request.setAttribute("selectedColors", selectedColors);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("user/view/userSearchProduct");
-			}
+			
 		}
 	}
 	
