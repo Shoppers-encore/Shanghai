@@ -93,9 +93,13 @@ public class AdminViewHandler {
 		String productCode = request.getParameter( "productCode" );
 		ProductDao productDao = new ProductDao();
 		String productName = productDao.getProdName( productCode );
+
+	      String id = (String)request.getSession().getAttribute("id");
+	      UserDataBean userDto = userDao.getUser(id);
+	      request.setAttribute( "id", id );
+	      request.setAttribute( "userDto", userDto );
 		
 		ReviewDataBean reviewDto = boardDao.get( reviewNo );
-		String id = (String)request.getSession().getAttribute("id");
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(reviewNo).toString());

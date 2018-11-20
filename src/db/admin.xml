@@ -6,13 +6,13 @@
 <mapper namespace="Admin">
 	<!-- admin login from jk_user -->
 	<select id="getUser" parameterType="String" resultType="databean.UserDataBean">
-		SELECT * FROM jk_user WHERE id=#{id}
+		SELECT * FROM jk_user WHERE id=#{id} AND userLevel != 0
 	</select>
 	<select id="getUserListCount" resultType="int">
-		SELECT count(*) FROM jk_user
+		SELECT count(*) FROM jk_user WHERE userLevel != 0
 	</select>
 	<select id="getNameuserlist" parameterType="String" resultType="databean.UserDataBean">
-		SELECT * FROM jk_user WHERE name=#{name}
+		SELECT * FROM jk_user WHERE name=#{name} AND userLevel != 0
 	</select>
 	<select id="getAlluserlist" parameterType="java.util.Map" resultType="databean.UserDataBean">
 		SELECT id, password, name, birthday, tel, email, gender, userLevel, height, weight, address, addressDetail, zipcode, r FROM(
