@@ -190,7 +190,9 @@ public class AdminProHandler {
 	         productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
 	         productDto.setProductCategory( category );
 	         productDto.setProductQuantity( quantity );
-	         productDto.setThumbnail( thumbnail );         
+	         productDto.setProductCategory( category );
+	         productDto.setThumbnail( thumbnail );   
+	         productDto.setProductLevel( 1 );
 	         
 	        int result2 = productDao.input( productDto );
 	         
@@ -198,7 +200,7 @@ public class AdminProHandler {
 
 	         if( result2 >= 1 ) {
 	               String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "
-		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ");";
+		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1);";
 	               new HandlerHelper().fileWriter(sql);
 	         }
 	         
