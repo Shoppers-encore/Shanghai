@@ -35,6 +35,12 @@ var iderror = "아이디 중복 확인 후 다시 시도해주세요.";
 var passwderror = "비밀번호 일치 여부 확인 해주세요.";
 
 	
+// Message-BasketList
+var emptyBasket='장바구니에 담긴 상품이 없습니다.';
+var emptyBasketCount='전체 상품: 총 0개';
+
+
+	
 	
 ////// <User>
 

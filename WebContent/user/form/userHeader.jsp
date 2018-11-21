@@ -25,7 +25,7 @@
 		</div>
 		<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="">BEST</a>
+			<a class="nav-link" href="userBestProductList.jk">BEST</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="userOrderList.jk">ORDER</a>
@@ -51,6 +51,10 @@
 	
 	<!-- ############################## ### 2 From here ################################## -->
 	
+	<c:if test="${sessionScope.id ne null}">
+        <a href="basketList.jk"><img id="cartImg" src="images/cart_red.png"></a>
+	</c:if>
+		&nbsp;&nbsp;
 	<a href="userSearchProduct.jk" id="search">
 		<img src="images/red_magnifier.png" style="width:25px;">
 		<span class="tooltiptext" id="search">${str_searchGood}</span>
