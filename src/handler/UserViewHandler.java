@@ -518,7 +518,6 @@ public class UserViewHandler {
 		for(int i=0; i<num; i++) {
 		productList.addAll(productDao.getBestList(ref.get(i)));
 		}
-		System.out.println("ref:" + ref );
 
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
