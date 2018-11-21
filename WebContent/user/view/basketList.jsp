@@ -81,7 +81,7 @@
 										var key='${basketList.productCode}';
 										var prodColors=JSON.parse('${colorOptions}')[key];
 										for(var color in prodColors) {
-											if('${basketList.productCode}'.length>3) {
+											if('${basketList.productCode}'.length>5) {
 												if('${basketList.productCode}'.substring(0,2)==prodColors[color]) {
 													$('#selectColorOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
@@ -100,7 +100,7 @@
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
 										
 										for(var size in prodSizes) {
-											if('${basketList.productCode}'.length>3) {
+											if('${basketList.productCode}'.length>5) {
 												if('${basketList.productCode}'.substring('${basketList.productCode}'.length-2,'${basketList.productCode}'.length)==prodSizes[size]) {
 													$('#selectSizeOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
@@ -238,11 +238,10 @@
 										stringConcat='itemChecked_'+prodCode[product];
 										checkedDiv=document.getElementById(stringConcat);
 										if(checkedDiv.checked) {
-											alert(stringConcat);
+											eachPrice=$('.prodPrice')[product].innerHTML;
+											price=eval(eachPrice.substring(0, eachPrice.length-1));
+											grandTotal=grandTotal+price;
 										}
-										eachPrice=$('.prodPrice')[product].innerHTML;
-										price=eval(eachPrice.substring(0, eachPrice.length-1));
-										grandTotal=grandTotal+price;
 									}
 									
 									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
