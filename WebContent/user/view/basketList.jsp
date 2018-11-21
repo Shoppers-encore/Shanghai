@@ -235,8 +235,11 @@
 									var grandTotal=0;
 									
 									for(product in prodCode) {
-										stringConcat='#itemChecked_'+prodCode[product];
-
+										stringConcat='itemChecked_'+prodCode[product];
+										checkedDiv=document.getElementById(stringConcat);
+										if(checkedDiv.checked) {
+											alert(stringConcat);
+										}
 										eachPrice=$('.prodPrice')[product].innerHTML;
 										price=eval(eachPrice.substring(0, eachPrice.length-1));
 										grandTotal=grandTotal+price;
