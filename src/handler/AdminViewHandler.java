@@ -288,13 +288,19 @@ public class AdminViewHandler {
    }
 	@RequestMapping("/admUserOrderList")
 	public ModelAndView admUserOrderList(HttpServletRequest request, HttpServletResponse response) {		
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean userDto = userDao.getUser(id);
-		int count = userDao.getUserListCount();
+		String adminid = (String)request.getSession().getAttribute("id");
+		UserDataBean adminDto = userDao.getUser(adminid);
+		String userid = (String)request.getParameter("userid");
+		//UserDataBean userDto = userDao.getUser(userid);
+		int count = orderDao.getDistinctOrderCountById(userid);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
-		List<UserDataBean> members = userDao.getList(100, map);
-		request.setAttribute("members", members);
-		request.setAttribute("userDto", userDto);
+		map.put("id", userid);
+		///////////////////////////////////////////////////// 수정중
+		List<OrderListDataBean> orders = orderDao.getDistinctOrderListById(map);
+		request.setAttribute("orders", orders);
+		////////////////////////////////////////////////////
+		request.setAttribute("userid", userid);
+		request.setAttribute("userDto", adminDto);
 		return new ModelAndView("adm/view/admUserOrderList");
 	}
 }

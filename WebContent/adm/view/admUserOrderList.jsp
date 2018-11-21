@@ -35,9 +35,9 @@
 <%@ include file="../view/admMenubar.jsp"%> 
 	    <!-- User List View Page -->
 	    <article class="col-sm-10 col-8" ><br><br>
-	    	<h4>${userId} ${str_userOrderList}</h4>
+	    	<h4>${userid} ${str_userOrderList}</h4>
 	    	<div class="totalOrder">
-	    		${userId} ${str_userOrderList} : ${count}${str_orderUnit}
+	    		${userid} ${str_userOrderList} : ${count}${str_orderUnit}
 	    	</div>
 	   		<table class="table table-striped">
 	   			<thead>
@@ -53,19 +53,18 @@
 	   			<c:if test="${count eq null or count eq 0}">	
 					<tr>
 						<td colspan="5" align="center">
-							${msg_list_x}
+							${msg_emptyOrderList}
 						</td>
 					</tr>
 				</c:if>
 				<c:if test="${count ne 0}">
-	   				<c:forEach var="member" items="${members}">	<!-- member/members 명은 주미랑 확인 -->
+	   				<c:forEach var="order" items="${orders}">	<!-- member/members 명은 주미랑 확인 -->
 	   					<tr>
-	   						<td>${member.id}</td>
-	   						<td>${member.name}</td>
-	   						<td>${member.tel}</td>
-	   						<td>${member.email}</td>
-	   						<td>${member.address}</td>
-	   						<td><input type="button" value="${str_orderList}" onclick="location='orderFind.jk?userid=${member.id}'"></td>
+	   						<td>${order.orderCode}</td>
+	   						<td>${order.orderDate}</td>
+	   						<td>${order.orderCount}</td>
+	   						<td>${order.orderStatus}</td>
+	   						<!-- <td><input type="button" value="${str_orderList}" onclick="location='orderFind.jk?userid=${member.id}'"></td> -->
 	   					</tr>
 	   				</c:forEach>
 	   			</c:if>
