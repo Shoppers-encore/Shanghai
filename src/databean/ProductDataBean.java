@@ -13,6 +13,8 @@ public class ProductDataBean {
 	private int productQuantity;
 	private int productCategory;
 	private String thumbnail;
+	private int productLevel;
+	
 	
 	public int getRef() {
 		return ref;
@@ -73,5 +75,11 @@ public class ProductDataBean {
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+	public int getProductLevel() {
+		return productLevel;
+	}
+	public void setProductLevel(int productLevel) {
+		this.productLevel = productLevel;
 	}
 }
