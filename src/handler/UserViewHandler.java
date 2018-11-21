@@ -233,6 +233,7 @@ public class UserViewHandler {
 		}
 		int count = 0;
 		String searchWord = request.getParameter("searchWord");
+		if(searchWord ==null || "".equals(searchWord))  searchWord=" ";
 		String[] selectedColors_temp = request.getParameterValues("color");
 		String selectedColors = "";
 		if( selectedColors_temp !=null)
