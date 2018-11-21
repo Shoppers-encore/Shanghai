@@ -270,15 +270,14 @@
 													var colorSelection=document.getElementById(colorSelector);
 													
 													if(prodCode[product]==this.value) {
-														alert(this.value)
 														if(colorSelection.value=='unselected') {
 															event.preventDefault();
 															alert('${msg_selectColor}');
-															break;
+															return false;
 														} else if(sizeSelection.value=='unselected') {
 															event.preventDefault();
 															alert('${msg_selectSize}');
-															break;
+															return false;
 														}
 													}	
 												}
