@@ -54,6 +54,11 @@ public class UserFormHandler {
 	public ModelAndView userModifyForm (HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
 		UserDataBean user = userDao.getUser(id);
+		if(id==null) {		// redirect non-member in member-only page
+	         ModelAndView mav=new ModelAndView();
+	         mav.setViewName("redirect:/userLoginForm.jk");
+	         return mav;
+	     }
 		request.setAttribute("user", user);
 		return new ModelAndView( "user/form/userModifyForm" );
 	}

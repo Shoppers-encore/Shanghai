@@ -46,7 +46,9 @@
 			</div>
 			<div class="form-group row"><!-- email -->
 					<label for="email" class="col-sm-2 col-form-label">${str_email}</label>
-						${userDto.email}		
+					<div class="col-sm-8">
+						${userDto.email}	
+					</div>			
 			</div>
 			<div class="form-group row"><!--zip code -->
 					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}</label>
