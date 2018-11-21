@@ -91,12 +91,23 @@ public class UserProHandler {
 		userDto.setBirthday(request.getParameter("birthday"));
 		userDto.setTel(request.getParameter("tel"));
 		userDto.setEmail(request.getParameter("email"));	
-		int gender = Integer.parseInt(request.getParameter("gender"));
-		userDto.setGender(gender);
-		int height = Integer.parseInt(request.getParameter("height"));
-		userDto.setHeight(height);
-		int weight = Integer.parseInt(request.getParameter("weight"));
+		
+		String genderValue = request.getParameter("gender"); 
+		if(! genderValue.equals("")) {
+			int gender = Integer.parseInt(genderValue);
+			userDto.setGender(gender);
+		}	
+		String heightValue = request.getParameter("height");
+		if(! heightValue.equals("")) {
+			int height = Integer.parseInt(heightValue);
+			userDto.setHeight(height);
+		}
+		String weightValue = request.getParameter("weight");
+		if(! weightValue.equals("")) {
+		int weight = Integer.parseInt(weightValue);
 		userDto.setWeight(weight);
+		}
+		
 		userDto.setZipcode(request.getParameter("zipcode"));
 		userDto.setAddress(request.getParameter("address"));
 		userDto.setAddressDetail(request.getParameter("addressDetail"));	
