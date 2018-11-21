@@ -114,7 +114,7 @@
 										</c:if>
 								</a><br>
 								<c:if test="${sessionScope.id ne null}">
-							        <input type="button" name="cart" value="장바구니">
+							        <input type="button" id="cart" name="${product.ref}" value="장바구니">
 								</c:if>
 							</form>
 						    
@@ -156,7 +156,7 @@
   			var cartDiv = document.getElementById( 'cart' );
   			$(document).on(
   				'click',
-  				'input[name=cart]',
+  				'input[id=cart]',
   				function(){
   					var name = this.name;
   					$.ajax({
