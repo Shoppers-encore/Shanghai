@@ -159,4 +159,9 @@
 		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%'
 		 GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select> 	
+	<select id="getUserOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
+		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
+		(SELECT * FROM jk_orderList WHERE id=#{id} ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select>
 </mapper>
