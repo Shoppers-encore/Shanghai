@@ -24,9 +24,9 @@
 <!-- id, password, name, birthday, tel, email, gender, 
 	userLevel=default 1, height(3,0), weight(3,0), address, addressDetail, zipcode -->
 	<div class="container" style="width: 800px">
-		<h4><b>회원가입</b></h4>
+		<h4><b>${page_input}</b></h4>
 		<br><br>
-		<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputcheck()">		
+		<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputCheck()">		
 			<div class="form-group row"><!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
 					<div class="col-sm-8">
@@ -65,7 +65,7 @@
 			<div class="form-group row"><!-- tel -->
 					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12" required>											
+						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12" required onkeyup="checkTel()">											
 					</div>			
 			</div>
 			<div class="form-group row"><!-- email -->

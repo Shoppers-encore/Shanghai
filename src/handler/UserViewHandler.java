@@ -75,7 +75,11 @@ public class UserViewHandler {
 		if(id!=null) {
 			UserDataBean userDto= userDao.getUser(id);
 			request.setAttribute("userDto", userDto);
-		}
+		} else {		// redirect non-member in member-only page
+	         ModelAndView mav=new ModelAndView();
+	         mav.setViewName("redirect:/userLoginForm.jk");
+	         return mav;
+	     }
 		return new ModelAndView("user/view/userMyPage");
 	}
 	
