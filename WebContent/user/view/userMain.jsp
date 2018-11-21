@@ -30,23 +30,14 @@
 			 	text-align: center;
 			
 			  }
-			div#cart {
-				position: sticky;
-				top: 300px;
-				width: 0px;
-				height: 150px;
-				font-size: 20px;
-				float: right;
-			}
 			div#chat {
 				position: sticky;
-				top: 600px;
-				right: 120px;
+				top:900px;
 				float: right;
 			}
-			img#cartImg {
-				width: 80px;
-				height: 80px;
+			#cartImg {
+				width: 20px;
+				height: 20px;
 			}
 			img#chatImg {
 				width: 40px;
@@ -59,6 +50,11 @@
 		</style>
 	</head>
 	<body class="container">
+		<c:if test="${sessionScope.id ne null}">
+			<div id="chat">
+	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
+	      	</div>
+		</c:if>
 	<header id="demo" class="carousel slide" data-ride="carousel">
 			
 			  <!-- Indicators -->
@@ -88,16 +84,10 @@
 				<a class="carousel-control-next" href="#demo" data-slide="next">
 				<span class="carousel-control-next-icon"></span>
 			</a>
+			
+	      	
 		</header>
-      	<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
-		</c:if>
+		
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
@@ -122,8 +112,12 @@
 										<c:if test="${product.discount ne 0}">
 											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
 										</c:if>
-								</a><br>
+								</a>
+								<c:if test="${sessionScope.id ne null}">
+							        <img id="cartImg" src="images/cart_red.png" name="${product.ref}">
+								</c:if>
 							</form>
+						    
 						</div>
 				     </c:forEach>
 					<div align="center">
@@ -153,6 +147,7 @@
 		    	</div>
 		    </c:if>
 		</article>
+		
 	</body>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript">
@@ -163,24 +158,15 @@
   				'click',
   				'img[id=cartImg]',
   				function(){
-  					var foldbt = document.createElement( 'input' );
-  					var cartbt = document.createElement( 'input' );
-  					cartDiv.removeChild( document.getElementById( 'cartImg' ) );
-  				//접기버튼 붙이기
-  					foldbt.setAttribute( 'id', 'foldbt' );
-  					foldbt.setAttribute( 'type', 'button' );
-  					foldbt.setAttribute( 'class', 'btn btn-outline-danger btn-sm' );
-  					foldbt.setAttribute( 'value', '${btn_fold}' );
-  					cartDiv.appendChild( foldbt );
-  				//장바구니 버튼 붙이기
-  					cartbt.setAttribute( 'id', 'cartbt' );
-  					cartbt.setAttribute( 'type', 'button' );
-  					cartbt.setAttribute( 'class', 'btn btn-outline-danger btn-sm' );
-  					cartbt.setAttribute( 'onclick', 'location="basketList.jk"');
-  					cartbt.setAttribute( 'value', '${str_cart}' );
-  					cartDiv.appendChild( cartbt );
-				//장바구니 리스트 조회
-  					show();
+  					var name = this.name;
+  					$.ajax({
+						type : 'POST',
+						url : 'cartInsert.jk',
+						data : $('form[name="' + name + '"]').serialize(),
+						success: setTimeout( function(){
+							alert('장바구니에 상품이 들어갔습니다.');
+						}, 1000 )
+  					});
   			});
   			
   			$(document).on(
@@ -229,13 +215,6 @@
 							}, 1000 )
 	  					});
   	  				});
-  	  				
-  				//드래그 앤 드롭
-	  			$("img[id~='thumb']").draggable({
-	  	        	revert: "invalid",
-	  	        	stack: ".draggable",
-	  	        	helper: "clone"
-	  	        });
 	  			
 	  	        $("#cart").droppable({
 	  	        	activeClass: "ui-state-default",
@@ -279,7 +258,7 @@
 								'<tr>' +
 								'<td><img style="width:50px; height:50px;" src="/Shanghai/save/' + baskets.thumbnail +'"></td>' 
 								+ '<td><input type="button" id="' + baskets.productCode + '" class="btn btn-outline-secondary btn-sm" value="${btn_x}">'
-								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="good_code" value="'
+								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="productCode" value="'
 								+ baskets.productCode + '"></td></form></tr>';
 								
 								$(html).appendTo('#t');

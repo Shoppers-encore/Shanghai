@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -86,7 +87,13 @@ public class UserViewHandler {
 	// Basket
 	@RequestMapping( "/basketList" )
 	public ModelAndView basketList ( HttpServletRequest request, HttpServletResponse response ) {		
+		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
 		
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList=basketDao.getBasketList(id);
@@ -230,20 +237,15 @@ public class UserViewHandler {
 		}
 		int count = 0;
 		String searchWord = request.getParameter("searchWord");
-		if(searchWord ==null || "".equals(searchWord)) {
-			searchWord = " ";
-		}
+		if(searchWord ==null || "".equals(searchWord))  searchWord=" ";
 		String[] selectedColors_temp = request.getParameterValues("color");
 		String selectedColors = "";
 		if( selectedColors_temp !=null)
 			for(int i=0; i<selectedColors_temp.length; i++) {
 				selectedColors += selectedColors_temp[i] + " ";
 			}
-		if(searchWord == null || "".equals(searchWord)) {
-			return new ModelAndView("user/view/userSearchProduct");
-		} else {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("searchWord", request.getParameter("searchWord"));
+			map.put("searchWord", searchWord);
 			map.put("selectedColors", selectedColors);
 			count = productDao.getProductCount(map);		
 			if( count == 0 ) {
@@ -265,7 +267,7 @@ public class UserViewHandler {
 				request.setAttribute("selectedColors", selectedColors);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("user/view/userSearchProduct");
-			}
+			
 		}
 	}
 	
@@ -273,6 +275,13 @@ public class UserViewHandler {
 	// Order
 	@RequestMapping("/userOrderDetail")
 	public ModelAndView userOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		String id=(String)request.getSession().getAttribute("id");	
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
 		
 		String orderDate=request.getParameter("orderDate");
 		
@@ -287,7 +296,13 @@ public class UserViewHandler {
 	
 	@RequestMapping("/userOrderList")
 	public ModelAndView userOrderList(HttpServletRequest request, HttpServletResponse response) {
+		
 		String id=(String)request.getSession().getAttribute("id");
+		if(id==null) {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
+		}
 		
 		/* Number of Order History Per Page */
 		int pageSize=1; 
@@ -491,19 +506,20 @@ public class UserViewHandler {
 	@RequestMapping("/userBestProductList")
 	public ModelAndView userBestProductList(HttpServletRequest request, HttpServletResponse response){
 		Map<String, String> map = new HashMap<String,String>();
-		int count = productDao.getProductNoSearchCount(map);
+		int count = productDao.getProdCount();
 		map = new HandlerHelper().makeCount(count, request);
-		List<ProductDataBean> productList = productDao.getNoSearchProductList(map);
-		List<String> productCode = productDao.getProdCode();
-		List<Integer> ref = productDao.getProdRef();
 		
-		
-		List<Integer> counts = productDao.getBestProduct(ref);
-		
-		System.out.println("코드:" + productCode );
+		List<Integer> ref = productDao.getBestProduct();
+		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();
+		int num = ref.size();
+		if(ref.size()>12) {
+			num=12;
+		}
+		for(int i=0; i<num; i++) {
+		productList.addAll(productDao.getBestList(ref.get(i)));
+		}
 		System.out.println("ref:" + ref );
-		System.out.println("count:" + counts );
-		
+
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userBestProductList");

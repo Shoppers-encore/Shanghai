@@ -108,15 +108,12 @@ public class UserFormHandler {
 	// Order
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
 		
+		String id=(String)request.getSession().getAttribute("id");
 		if(id==null) {
-			try {
-				response.sendRedirect("/Shanghai/userLoginForm.jk");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("redirect:/userLoginForm.jk");
+			return mav;
 		}
 		
 		UserDataBean userInfo=userDao.getUser(id);

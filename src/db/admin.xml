@@ -20,7 +20,9 @@
 		(SELECT * FROM jk_user ORDER BY userLevel desc, id asc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getSearchCount" parameterType="String" resultType="int">
-		SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%'
+		<!-- SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%' -->
+		SELECT count(*) FROM jk_product WHERE ref IN (SELECT MAX(ref) FROM jk_product
+		WHERE productName LIKE '%'||#{searchWord}||'%' GROUP BY ref) AND productCode=TO_CHAR(ref)
 	</select>
 	<select id="getOrderCount" resultType="int">
 	 	 SELECT count(*) FROM jk_orderList
@@ -60,8 +62,8 @@
 		SELECT max(ref) FROM jk_product
 	</select>
 	<insert id="input" parameterType="databean.ProductDataBean">
-	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail) 
-	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail})
+	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail, productLevel) 
+	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail}, #{productLevel})
 	</insert>
 	<select id="maxImg" resultType="int">
 		SELECT max(imageNo) FROM jk_imageInfo
@@ -129,7 +131,7 @@
 		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},'abc.jpg')
 	</update>
 	<delete id="deleteProduct" parameterType="String">
-		DELETE FROM jk_product WHERE productCode=#{product}
+		UPDATE jk_product SET productLevel=0 WHERE productCode=#{product}
 	</delete>
 	<select id="getProdQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
@@ -137,7 +139,7 @@
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
-		WHERE chatdate IN (select MAX(chatDate) from jk_chat group by sender) ORDER BY chatdate desc
+		WHERE chatdate IN (select MAX(chatDate) from jk_chat,jk_user WHERE sender=id AND userLevel!=0 group by sender) ORDER BY chatdate asc
 	</select>
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat
@@ -151,4 +153,10 @@
 	<select id="getOrderDetail" parameterType="int" resultType="databean.OrderListDataBean">
 		SELECT * FROM jk_orderList WHERE orderCode=#{orderCode}
 	</select>
+ 	<select id="getProductSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+		<!-- SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=to_char(ref) -->
+		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE ref in 
+		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%'
+		 GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select> 	
 </mapper>
