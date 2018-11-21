@@ -35,25 +35,24 @@
 <%@ include file="../view/admMenubar.jsp"%> 
 	    <!-- User List View Page -->
 	    <article class="col-sm-10 col-8" ><br><br>
-	    	<h4>${str_userList}</h4>
-	    	<div class="totalUser">
-	    		${str_totalUser} :  ${members.size()} 
+	    	<h4>${userId} ${str_userOrderList}</h4>
+	    	<div class="totalOrder">
+	    		${userId} ${str_userOrderList} : ${count}${str_orderUnit}
 	    	</div>
 	   		<table class="table table-striped">
 	   			<thead>
 	   				<tr>
-	   					<th>${str_id}</th>
-	   					<th>${str_name}</th>
-	   					<th>${str_tel}</th>
-	   					<th>${str_email}</th>
-	   					<th>${str_address}</th>
-	   					<th>${str_orderList}</th>
+	   					<th>${str_orderCode}</th>
+	   					<th>${str_orderDate}</th>
+	   					<th>${str_orderCount}</th>
+	   					<th>${str_orderStatus}</th>
+	   					<th>${str_orderDetail}</th>
 	   				</tr>
 	   			</thead>
 	   			<tbody>
 	   			<c:if test="${count eq null or count eq 0}">	
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="5" align="center">
 							${msg_list_x}
 						</td>
 					</tr>
@@ -66,7 +65,7 @@
 	   						<td>${member.tel}</td>
 	   						<td>${member.email}</td>
 	   						<td>${member.address}</td>
-	   						<td><input type="button" value="${str_orderList}" onclick="location='admUserOrderList.jk?userid=${member.id}'"></td>
+	   						<td><input type="button" value="${str_orderList}" onclick="location='orderFind.jk?userid=${member.id}'"></td>
 	   					</tr>
 	   				</c:forEach>
 	   			</c:if>

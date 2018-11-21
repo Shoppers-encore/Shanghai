@@ -286,5 +286,15 @@ public class AdminViewHandler {
       request.setAttribute("chatData", chatData);
       return chatData;
    }
-
+	@RequestMapping("/admUserOrderList")
+	public ModelAndView admUserOrderList(HttpServletRequest request, HttpServletResponse response) {		
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		int count = userDao.getUserListCount();
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<UserDataBean> members = userDao.getList(100, map);
+		request.setAttribute("members", members);
+		request.setAttribute("userDto", userDto);
+		return new ModelAndView("adm/view/admUserOrderList");
+	}
 }

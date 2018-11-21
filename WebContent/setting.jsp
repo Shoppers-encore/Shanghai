@@ -72,24 +72,6 @@
 <c:set var="str_price" value="금액"/>
 <c:set var="str_salePercent" value="할인율"/>
 <c:set var="str_category" value="카테고리"/>
-<c:set var="str_top" value="상의"/>
-<c:set var="str_bottom" value="하의"/>
-<c:set var="str_out" value="[아우터]"/>
-<c:set var="str_tst" value="[티]"/>
-<c:set var="str_sht" value="[셔츠]"/>
-<c:set var="str_btm" value="[팬츠]"/>
-<c:set var="str_cot" value="코트"/>
-<c:set var="str_jkt" value="자켓"/>
-<c:set var="str_jpr" value="점퍼/집업"/>
-<c:set var="str_cdg" value="가디건"/>
-<c:set var="str_lst" value="긴 티"/>
-<c:set var="str_sst" value="반팔 티"/>
-<c:set var="str_mtm" value="맨투맨"/>
-<c:set var="str_hdt" value="후드티"/>
-<c:set var="str_lss" value="긴 셔츠"/>
-<c:set var="str_sss" value="짧은 셔츠"/>
-<c:set var="str_lpt" value="긴 바지"/>
-<c:set var="str_spt" value="반바지"/>
 <c:set var="str_content" value="내용"/>
 <c:set var="str_writeReview" value="Reveiw 작성하기"/>
 <c:set var="str_rating" value="평점"/>
@@ -139,6 +121,7 @@
 <c:set var="str_quantityMod" value="추가할 수량"/>
 <c:set var="str_productCode" value="상품코드"/>
 <c:set var="str_product" value="PRODUCT"/>
+<c:set var="str_userOrderList" value="님의 주문내역"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -188,8 +171,19 @@
 <c:set var="str_cat_OUTER_ALL" value="OUTER ALL"/>
 <c:set var="str_cat_BLnSHIRTS_ALL" value="BLOUSE & SHIRTS ALL"/>
 <c:set var="str_cat_TnTOP_ALL" value="T-SHIRTS & TOP ALL"/>
-
-
+<c:set var="str_cat_JKnJP_kor" value="자켓&점퍼"/>
+<c:set var="str_cat_COAT_kor" value="코트"/>
+<c:set var="str_cat_CARDIGAN_kor" value="가디건"/>
+<c:set var="str_cat_DRESS_kor" value="드레스"/>
+<c:set var="str_cat_BLOUSE_kor" value="블라우스"/>
+<c:set var="str_cat_SHIRTS_kor" value="셔츠"/>
+<c:set var="str_cat_TSHIRTS_kor" value="티셔츠"/>
+<c:set var="str_cat_KNIT_kor" value="니트"/>
+<c:set var="str_cat_SKIRT_kor" value="스커트"/>
+<c:set var="str_cat_PANTS_kor" value="팬츠"/>
+<c:set var="str_cat_SHOES_kor" value="슈즈"/>
+<c:set var="str_cat_BAG_kor" value="가방"/>
+<c:set var="str_cat_ACCESSORY_kor" value="액세서리"/>
 	
 	
 	
