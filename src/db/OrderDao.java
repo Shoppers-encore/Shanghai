@@ -76,5 +76,10 @@ public class OrderDao {
 	public int getCountOfItemsOrdered(int orderCode) {
 		return session.selectOne("User.getCountOfItemsOrdered", orderCode);
 	}
+	
+	public List<OrderListDataBean> getUserOrderList(Map<String, String> map){
+		List<OrderListDataBean> orderList = session.selectList("Admin.getUserOrderList", map);
+		return orderList;
+	}
 }
 	

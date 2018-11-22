@@ -240,18 +240,19 @@ function deletePhoto(tb_no,photo_id,start){
                       <th style="width :10%"> ${str_category} </th>
                       <td style="width :20%">
                       <select name="category">
-                                 <option value="1">${str_out}${str_cot}</option>
-                                 <option value="2">${str_out}${str_jkt}</option>
-                                 <option value="3">${str_out}${str_jpr}</option>
-                                 <option value="4">${str_out}${str_cdg}</option>
-                                 <option value="5">${str_tst}${str_lst}</option>
-                                 <option value="6">${str_tst}${str_sst}</option>
-                                 <option value="7">${str_tst}${str_mtm}</option>
-                                 <option value="8">${str_tst}${str_hdt}</option>
-                                 <option value="9">${str_sht}${str_lss}</option>
-                                 <option value="10">${str_sht}${str_sss}</option>
-                                 <option value="11">${str_btm}${str_lpt}</option>
-                                 <option value="12">${str_btm}${str_spt}</option>
+                                <option value="1">${str_cat_JKnJP_kor}</option>
+                                <option value="2">${str_cat_COAT_kor}</option>
+                                <option value="3">${str_cat_CARDIGAN_kor}</option>
+                                <option value="4">${str_cat_DRESS_kor}</option>
+                                <option value="5">${str_cat_BLOUSE_kor}</option>
+                                <option value="6">${str_cat_SHIRTS_kor}</option>
+                                <option value="7">${str_cat_TSHIRTS_kor}</option>
+                                <option value="8">${str_cat_KNIT_kor}</option>
+                                <option value="9">${str_cat_SKIRT_kor}</option>
+                                <option value="10">${str_cat_PANTS_kor}</option>
+                                <option value="11">${str_cat_SHOES_kor}</option>
+                                <option value="12">${str_cat_BAG_kor}</option>
+                                <option value="13">${str_cat_ACCESSORY_kor}</option>
                            </select>
                         </td>
                      

@@ -174,7 +174,8 @@
 		WHERE r between #{start} and #{end}
 	</select>
   	<select id="getOrderListByOrderCode" parameterType="int" resultType="databean.OrderListDataBean">
-  		SELECT o.productCode, p.productName, p.thumbnail, o.orderQuantity, o.orderPrice, o.orderStatus, o.orderAddress1, o.orderAddress2, o.orderZipcode
+  		SELECT o.productCode, p.productName, p.thumbnail, o.orderQuantity, o.orderPrice, o.orderStatus,
+  				o.orderAddress1, o.orderAddress2, o.orderZipcode, o.id
   		FROM jk_orderList o, jk_product p 
   		WHERE o.productCode=p.productCode AND o.orderCode=#{orderCode}
   	</select>

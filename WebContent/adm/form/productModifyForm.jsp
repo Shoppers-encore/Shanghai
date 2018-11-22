@@ -240,18 +240,19 @@ function deletePhoto(tb_no,photo_id,start){
                       <th style="width :10%"> ${str_category} </th>
                       <td style="width :20%">
                       <select name="category">
-                                 <option value="1" ${products.get(0).productCategory==1?'selected':''}>${str_out}${str_cot}</option>
-                                 <option value="2" ${products.get(0).productCategory==2?'selected':''}>${str_out}${str_jkt}</option>
-                                 <option value="3" ${products.get(0).productCategory==3?'selected':''}>${str_out}${str_jpr}</option>
-                                 <option value="4" ${products.get(0).productCategory==4?'selected':''}>${str_out}${str_cdg}</option>
-                                 <option value="5" ${products.get(0).productCategory==5?'selected':''}>${str_tst}${str_lst}</option>
-                                 <option value="6" ${products.get(0).productCategory==6?'selected':''}>${str_tst}${str_sst}</option>
-                                 <option value="7" ${products.get(0).productCategory==7?'selected':''}>${str_tst}${str_mtm}</option>
-                                 <option value="8" ${products.get(0).productCategory==8?'selected':''}>${str_tst}${str_hdt}</option>
-                                 <option value="9" ${products.get(0).productCategory==9?'selected':''}>${str_sht}${str_lss}</option>
-                                 <option value="10" ${products.get(0).productCategory==10?'selected':''}>${str_sht}${str_sss}</option>
-                                 <option value="11" ${products.get(0).productCategory==11?'selected':''}>${str_btm}${str_lpt}</option>
-                                 <option value="12" ${products.get(0).productCategory==12?'selected':''}>${str_btm}${str_spt}</option>
+                                 <option value="1" ${products.get(0).productCategory==1?'selected':''}>${str_cat_JKnJP_kor}</option>
+                                 <option value="2" ${products.get(0).productCategory==2?'selected':''}>${str_cat_COAT_kor}</option>
+                                 <option value="3" ${products.get(0).productCategory==3?'selected':''}>${str_cat_CARDIGAN_kor}</option>
+                                 <option value="4" ${products.get(0).productCategory==4?'selected':''}>${str_cat_DRESS_kor}</option>
+                                 <option value="5" ${products.get(0).productCategory==5?'selected':''}>${str_cat_BLOUSE_kor}</option>
+                                 <option value="6" ${products.get(0).productCategory==6?'selected':''}>${str_cat_SHIRTS_kor}</option>
+                                 <option value="7" ${products.get(0).productCategory==7?'selected':''}>${str_cat_TSHIRTS_kor}</option>
+                                 <option value="8" ${products.get(0).productCategory==8?'selected':''}>${str_cat_KNIT_kor}</option>
+                                 <option value="9" ${products.get(0).productCategory==9?'selected':''}>${str_cat_SKIRT_kor}</option>
+                                 <option value="10" ${products.get(0).productCategory==10?'selected':''}>${str_cat_PANTS_kor}</option>
+                                 <option value="11" ${products.get(0).productCategory==11?'selected':''}>${str_cat_SHOES_kor}</option>
+                                 <option value="12" ${products.get(0).productCategory==12?'selected':''}>${str_cat_BAG_kor}</option>
+                                 <option value="13" ${products.get(0).productCategory==12?'selected':''}>${str_cat_ACCESSORY_kor}</option>
                            </select>
                         </td>
                      
@@ -359,7 +360,7 @@ function deletePhoto(tb_no,photo_id,start){
                         </td>
                        	<th> ${str_productQuantity} </th>
                     	<td> 
-                        <input type="text" name="quantity" class="form-control" readonly value="${msg_gotoProductList}">
+                        <input type="text" name="quantity" class="form-control" readonly value="${products.get(0).productQuantity}">
                     	</td> 
                   </tr>
                   <tr>

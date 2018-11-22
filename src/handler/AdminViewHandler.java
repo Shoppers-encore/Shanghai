@@ -93,9 +93,13 @@ public class AdminViewHandler {
 		String productCode = request.getParameter( "productCode" );
 		ProductDao productDao = new ProductDao();
 		String productName = productDao.getProdName( productCode );
+
+	      String id = (String)request.getSession().getAttribute("id");
+	      UserDataBean userDto = userDao.getUser(id);
+	      request.setAttribute( "id", id );
+	      request.setAttribute( "userDto", userDto );
 		
 		ReviewDataBean reviewDto = boardDao.get( reviewNo );
-		String id = (String)request.getSession().getAttribute("id");
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(reviewNo).toString());
@@ -158,7 +162,7 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			count = productDao.getSearchCount(searchWord);			/////////////// 1116고친곳
+			count = productDao.getSearchCount(searchWord);			/////////////// 1116怨좎튇怨�
 			System.out.println("count : " + count);
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
@@ -169,7 +173,7 @@ public class AdminViewHandler {
 				map.put("searchWord", searchWord);
 				Map<String, String> cmap = hh.makeCount(count, request);
 				cmap.put("searchWord", searchWord);
-				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 고친곳
+				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 怨좎튇怨�
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("adm/view/admProductView");
@@ -218,10 +222,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
+		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int count = orderDao.prodFromOrder(orderCode);
 		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
 		
+		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("count", count);
 		request.setAttribute("orderDetailList", orderDetailList);
 		return new ModelAndView("adm/view/admOrderDetail");
@@ -282,5 +292,25 @@ public class AdminViewHandler {
       request.setAttribute("chatData", chatData);
       return chatData;
    }
-
+	@RequestMapping("/admUserOrderList")
+	public ModelAndView admUserOrderList(HttpServletRequest request, HttpServletResponse response) {		
+		String adminid = (String)request.getSession().getAttribute("id");
+		UserDataBean adminDto = userDao.getUser(adminid);
+		String userid = (String)request.getParameter("userid");
+		//UserDataBean userDto = userDao.getUser(userid);
+		int count = orderDao.getDistinctOrderCountById(userid);
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		map.put("id", userid);
+		//System.out.println("map.id : " + map.get("id"));
+		//System.out.println("map.start : " + map.get("start"));
+		//System.out.println("map.end : " + map.get("end"));
+		///////////////////////////////////////////////////// ONGOING
+		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
+		request.setAttribute("orders", orders);
+		request.setAttribute("count", count);
+		////////////////////////////////////////////////////
+		request.setAttribute("userid", userid);
+		request.setAttribute("userDto", adminDto);
+		return new ModelAndView("adm/view/admUserOrderList");
+	}
 }
