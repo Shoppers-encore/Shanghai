@@ -166,4 +166,11 @@ public class ProductDao{
 		return session.selectList("User.getBestList", ref);
 	}
 	
+	public int getProductDetailSearchCount(String searchWord) {
+		return session.selectOne("Admin.getProductDetailSearchCount", searchWord);
+	}
+	public List<ProductDataBean> getProductDetailSearchList(Map<String, String> map) {
+		return session.selectList("Admin.getProductDetailSearchList", map);
+	}
+	
 }

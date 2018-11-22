@@ -193,13 +193,30 @@ public class AdminViewHandler {
 			UserDataBean userDto = userDao.getUser(id);
 			request.setAttribute( "id", id );
 			request.setAttribute( "userDto", userDto );
-	
-			int count = productDao.getProdCount();
-			Map<String,String> map = new HandlerHelper().makeCount(count, request);
-			List <ProductDataBean> products = productDao.getProdList(map);
-	
-			request.setAttribute("products", products);
-			request.setAttribute("count", count);
+			   try {
+			         request.setCharacterEncoding("utf-8");
+			      } catch ( UnsupportedEncodingException e ) {
+			         e.printStackTrace();
+			      }
+			String searchWord = request.getParameter("searchWord");
+			if( "".equals(searchWord) || searchWord == null ) {
+				// NO QUERY
+				int count = productDao.getProdCount();
+				Map<String,String> map = new HandlerHelper().makeCount(count, request);
+				List <ProductDataBean> products = productDao.getProdList(map);
+				request.setAttribute("products", products);
+				request.setAttribute("count", count);
+			} else {
+				// YES QUERY
+				int count = productDao.getProductDetailSearchCount(searchWord);
+				System.out.println(count);
+				Map<String,String> map = new HandlerHelper().makeCount(count, request);
+				map.put("searchWord", searchWord);
+				List<ProductDataBean> products = productDao.getProductDetailSearchList(map);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("products", products);
+				request.setAttribute("count", count);
+			}
 			return new ModelAndView("adm/view/admProductList");
 		}
 	
