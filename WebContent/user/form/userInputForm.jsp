@@ -65,7 +65,7 @@
 			<div class="form-group row"><!-- tel -->
 					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12" required onkeyup="checkTel()">											
+						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12" required onkeyup="numberonly()">											
 					</div>			
 			</div>
 			<div class="form-group row"><!-- email -->
