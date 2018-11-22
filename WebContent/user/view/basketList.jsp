@@ -92,9 +92,6 @@
 												$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
 											} 
 										}
-										
-
-											
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5">							
@@ -114,6 +111,92 @@
 												$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
 											}	
 										}
+										
+										$('#selectColorOptions_${basketList.productCode}').on(
+											'change',
+											function(event) {
+												if($('#selectColorOptions_${basketList.productCode}').val()!='unselected' && $('#selectSizeOptions_${basketList.productCode}').val()!='unselected') {
+													
+													var ref;
+													if('${basketList.productCode}'.length>5) {
+														ref='${basketList.productCode}'.substring(2, '${basketList.productCode}'.length-2);
+													} else {
+														ref='${basketList.productCode}';
+													}
+													
+													var itemCode=$('#selectColorOptions_${basketList.productCode}').val()+ref+$('#selectSizeOptions_${basketList.productCode}').val();
+													
+													$.ajax({
+														url: 'getProductQuantityAjax.jk',
+														contentType: 'application/json; charset="UTF-8"',
+														cache: false,
+														data: {
+															productCode: itemCode,
+														},
+														success: function(data) {
+															console.log('product quantity fetch ${msg_success}');
+															var prodQty=JSON.parse(data);	
+															if(prodQty==0) {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', true);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
+																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
+																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
+																$('input[type=checkbox]').removeAttr('checked');
+																$('input[type=checkbox]').attr('disabled', true);
+															} else if(prodQty<5) {
+																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+															}
+														},
+														error: function(e) {
+															console.log('product quantity fetch ${msg_failure}');
+														}
+													});
+												}
+											}
+										);
+										
+										$('#selectSizeOptions_${basketList.productCode}').on(
+											'change',
+											function(event) {
+												if($('#selectColorOptions_${basketList.productCode}').val()!='unselected' && $('#selectSizeOptions_${basketList.productCode}').val()!='unselected') {
+													
+													var ref;
+													if('${basketList.productCode}'.length>5) {
+														ref='${basketList.productCode}'.substring(2, '${basketList.productCode}'.length-2);
+													} else {
+														ref='${basketList.productCode}';
+													}
+													
+													var itemCode=$('#selectColorOptions_${basketList.productCode}').val()+ref+$('#selectSizeOptions_${basketList.productCode}').val();
+													
+													$.ajax({
+														url: 'getProductQuantityAjax.jk',
+														contentType: 'application/json; charset="UTF-8"',
+														cache: false,
+														data: {
+															productCode: itemCode,
+														},
+														success: function(data) {
+															console.log('product quantity fetch ${msg_success}');
+															var prodQty=JSON.parse(data);	
+															if(prodQty==0) {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', true);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
+																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
+																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
+																$('input[type=checkbox]').removeAttr('checked');
+																$('input[type=checkbox]').attr('disabled', true);
+															} else if(prodQty<5) {
+																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+															}
+														},
+														error: function(e) {
+															console.log('product quantity fetch ${msg_failure}');
+														}
+													});
+												}
+											}
+										);
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5 d-flex flex-column">

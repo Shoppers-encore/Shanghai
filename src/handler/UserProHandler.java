@@ -296,6 +296,21 @@ public class UserProHandler {
 		return isItemDeleted;
 	}
 	
+	@RequestMapping(value="/getProductQuantityAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String getProductQuantityAjax(HttpServletRequest request, HttpServletResponse response) {
+	
+		/* Get productCode from Ajax data */
+		String productCode=request.getParameter("productCode");
+		
+		/* Get Product Quantity */
+		int productQty=productDao.getProdQuantity(productCode);
+
+		/* Convert Java String to JSON and return */
+		String prodQty=new Gson().toJson(String.valueOf(productQty));
+		return prodQty;
+	}
+	
 	@RequestMapping("/basketListPro")
 	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
 		
