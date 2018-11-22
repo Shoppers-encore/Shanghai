@@ -24,7 +24,7 @@
 				
 				<!-- If Basket has items -->
 				<c:if test="${basketCount ne 0}">
-					<div class="row font-weight-bold text-center pt-5" id="emptyBasketDiv"></div>
+					<div class="row font-weight-bold text-center pt-5" id="emptyBasketDiv" hidden></div>
 					<div class="row font-weight-bold text-center pt-5" id="basketDiv">
 						<div class="col-lg-1">
 							${str_select}
@@ -92,6 +92,9 @@
 												$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'">'+prodColors[color]+'</option>');
 											} 
 										}
+										
+
+											
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5">							
@@ -138,19 +141,21 @@
 								<div class="col-lg-2 pt-5">
 									<div class="prodPrice" id="productPrice_${basketList.productCode}"></div>
 									<script type="text/javascript">
-										var qty='${basketList.basketQuantity}';
-										var unitPrice='${basketList.productPrice}';
-										var discount=(100-'${basketList.discount}')/100;
-										var productPrice=qty*unitPrice*discount;
+										var qty_${basketList.productCode}='${basketList.basketQuantity}';
+										var unitPrice_${basketList.productCode}='${basketList.productPrice}';
+										var discount_${basketList.productCode}=(100-'${basketList.discount}')/100;
+										var productPrice_${basketList.productCode}=qty_${basketList.productCode}
+											*unitPrice_${basketList.productCode}*discount_${basketList.productCode};
 
-										$('#productPrice_${basketList.productCode}').text(productPrice+'${str_currencyUnit}');
+										$('#productPrice_${basketList.productCode}').text(productPrice_${basketList.productCode}+'${str_currencyUnit}');
 									
 										$('#basketQuantity_${basketList.productCode}').on(
 											'change',
 											function(event) {
-												var changedQty=$('#basketQuantity_${basketList.productCode}').val();
-												var newProductPrice=changedQty*unitPrice*discount;
-												$('#productPrice_${basketList.productCode}').text(newProductPrice+'${str_currencyUnit}');
+												var changedQty_${basketList.productCode}=this.value;
+												var newProductPrice_${basketList.productCode}=productPrice_${basketList.productCode}
+													*(changedQty_${basketList.productCode}/qty_${basketList.productCode});
+												$('#productPrice_${basketList.productCode}').text(newProductPrice_${basketList.productCode}+'${str_currencyUnit}');
 											}
 										);
 									</script>
@@ -183,6 +188,7 @@
 																$('#continueShoppingBtn').remove();
 																$('#basketListFormSubmitBtn').remove();
 																$('#emptyBasketDiv').text(emptyBasket);
+																$('#emptyBasketDiv').removeAttr('hidden');
 																$('#totalNumberOfItems').text(emptyBasketCount);
 															}
 															
@@ -230,14 +236,15 @@
 								}
 							);
 							
-							$('.basketListForm').change(
+							$('.basketListForm').on(
+								'change',
 								function(event) {
 									var grandTotal=0;
 									
 									for(product in prodCode) {
 										stringConcat='itemChecked_'+prodCode[product];
-										checkedDiv=document.getElementById(stringConcat);
-										if(checkedDiv.checked) {
+										checkDiv=document.getElementById(stringConcat);
+										if(checkDiv.checked) {
 											eachPrice=$('.prodPrice')[product].innerHTML;
 											price=eval(eachPrice.substring(0, eachPrice.length-1));
 											grandTotal=grandTotal+price;
@@ -253,7 +260,6 @@
 							<button type="button" class="btn mr-1" id="continueShoppingBtn" onclick="returnToList()">${btn_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_orderCheckedItems}</button>
 							<script type="text/javascript">
-										
 								$('#basketListFormSubmitBtn').on(
 									'click',
 									function(event) {
