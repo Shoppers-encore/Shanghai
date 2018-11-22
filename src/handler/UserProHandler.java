@@ -296,6 +296,21 @@ public class UserProHandler {
 		return isItemDeleted;
 	}
 	
+	@RequestMapping(value="/getProductQuantityAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String getProductQuantityAjax(HttpServletRequest request, HttpServletResponse response) {
+	
+		/* Get productCode from Ajax data */
+		String productCode=request.getParameter("productCode");
+		
+		/* Get Product Quantity */
+		int productQty=productDao.getProdQuantity(productCode);
+
+		/* Convert Java String to JSON and return */
+		String prodQty=new Gson().toJson(String.valueOf(productQty));
+		return prodQty;
+	}
+	
 	@RequestMapping("/basketListPro")
 	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
 		
@@ -316,9 +331,7 @@ public class UserProHandler {
 		Map<Integer, String> itemsToOrder=new HashMap<Integer, String>();
 		
 		for(String item:checkedItems) {
-			itemsToOrder.put(i, item);
-			i++;
-						
+			
 			for(BasketDataBean basketItem:basketList) {
 				if(item.equals(basketItem.getProductCode())) {
 					String productCode=item;
@@ -335,6 +348,9 @@ public class UserProHandler {
 					}
 				
 					String newProductCode=colorSelected+ref+sizeSelected;
+					
+					itemsToOrder.put(i, newProductCode);
+					i++;
 
 					/* Make  a map (can't use BasketDataBean because the productCode must be updated with a new one) */
 					/* Map<String, Object> so we can put both String and int */ 
@@ -604,17 +620,12 @@ public class UserProHandler {
 			order.setOrderQuantity(orderQuantity);
 			order.setOrderPrice(orderPrice);
 			
-			/*BasketDataBean deleteReferences=new BasketDataBean();
-			deleteReferences.setId(id);
-			deleteReferences.setProductCode(productCode);*/
-			
 			ProductDataBean productDto=new ProductDataBean();
 			int newProductQuantity=productDao.getProdQuantity(productCode)-orderQuantity;
 			productDto.setProductQuantity(newProductQuantity);
 			productDto.setProductCode(productCode);
 			
 			int orderListInsertResult=orderDao.insertOrder(order);
-			//int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
 			int productQuantityUpdateResult=productDao.changeQuantity(productDto);
 			
 			request.setAttribute("orderListInsertResult", orderListInsertResult);
