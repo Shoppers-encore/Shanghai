@@ -190,15 +190,34 @@ public class UserProHandler {
 	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
-		UserDataBean user = new UserDataBean();
-		user.setId(id);
-		user.setPassword(request.getParameter("password"));
-		user.setTel(request.getParameter("tel"));
-		user.setEmail(request.getParameter("email"));
-		user.setAddress(request.getParameter("address"));
-		user.setAddressDetail(request.getParameter("addressDetail"));
-		int height = 0;
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String id = (String)request.getSession().getAttribute("id");		
+		if(id==null) {		// redirect non-member in member-only page
+	         return "redirect:/userLoginForm.jk";
+	     }
+		UserDataBean userDto = new UserDataBean();
+		userDto.setId(id);
+		userDto.setPassword(request.getParameter("password"));
+		userDto.setTel(request.getParameter("tel"));
+		userDto.setEmail(request.getParameter("email"));
+		userDto.setAddress(request.getParameter("address"));
+		userDto.setAddressDetail(request.getParameter("addressDetail"));
+		String heightValue = request.getParameter("height");
+		if(! heightValue.equals("")) {
+			int height = Integer.parseInt(heightValue);
+			userDto.setHeight(height);
+		}
+		String weightValue = request.getParameter("weight");
+		if(! weightValue.equals("")) {
+		int weight = Integer.parseInt(weightValue);
+			userDto.setWeight(weight);
+		}
+		/*int height = 0;
 		if(request.getParameter("height") !=null || !"".equals(request.getParameter("height"))) {
 			height=Integer.parseInt(request.getParameter("height"));
 		}
@@ -207,8 +226,8 @@ public class UserProHandler {
 		if(request.getParameter("weight") != null || !"".equals(request.getParameter("weight"))) {
 			weight = Integer.parseInt(request.getParameter("weight"));
 		}
-		user.setWeight(weight);
-		userDao.modifyUser(user);
+		user.setWeight(weight);*/
+		userDao.modifyUser(userDto);
 		return "redirect:userMyPage.jk";
 	}
 	@RequestMapping( "/userDeletePro" )

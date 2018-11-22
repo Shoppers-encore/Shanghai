@@ -18,7 +18,8 @@
 		UPDATE jk_user SET password='0', tel=0, email='0@a.com', name='0',userLevel=0, addressDetail='0' WHERE id=#{id}
 	</update>
 	<update id="modifyUser" parameterType="databean.UserDataBean">
-		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, height=#{height, jdbcType=INTEGER} weight=#{jdbcType=INTEGER} WHERE id=#{id}
+		UPDATE jk_user SET password=#{password}, tel=#{tel}, email=#{email}, address=#{address}, addressDetail=#{addressDetail}, 
+		height=#{height, jdbcType=INTEGER}, weight=#{weight, jdbcType=INTEGER} WHERE id=#{id}
 	</update>
 	<select id="getUserLevel" parameterType="String" resultType="Integer">		
 		select userLevel from jk_user where id=#{id}
