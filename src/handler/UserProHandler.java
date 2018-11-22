@@ -91,12 +91,23 @@ public class UserProHandler {
 		userDto.setBirthday(request.getParameter("birthday"));
 		userDto.setTel(request.getParameter("tel"));
 		userDto.setEmail(request.getParameter("email"));	
-		int gender = Integer.parseInt(request.getParameter("gender"));
-		userDto.setGender(gender);
-		int height = Integer.parseInt(request.getParameter("height"));
-		userDto.setHeight(height);
-		int weight = Integer.parseInt(request.getParameter("weight"));
+		
+		String genderValue = request.getParameter("gender"); 
+		if(! genderValue.equals("")) {
+			int gender = Integer.parseInt(genderValue);
+			userDto.setGender(gender);
+		}	
+		String heightValue = request.getParameter("height");
+		if(! heightValue.equals("")) {
+			int height = Integer.parseInt(heightValue);
+			userDto.setHeight(height);
+		}
+		String weightValue = request.getParameter("weight");
+		if(! weightValue.equals("")) {
+		int weight = Integer.parseInt(weightValue);
 		userDto.setWeight(weight);
+		}
+		
 		userDto.setZipcode(request.getParameter("zipcode"));
 		userDto.setAddress(request.getParameter("address"));
 		userDto.setAddressDetail(request.getParameter("addressDetail"));	
@@ -285,6 +296,21 @@ public class UserProHandler {
 		return isItemDeleted;
 	}
 	
+	@RequestMapping(value="/getProductQuantityAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String getProductQuantityAjax(HttpServletRequest request, HttpServletResponse response) {
+	
+		/* Get productCode from Ajax data */
+		String productCode=request.getParameter("productCode");
+		
+		/* Get Product Quantity */
+		int productQty=productDao.getProdQuantity(productCode);
+
+		/* Convert Java String to JSON and return */
+		String prodQty=new Gson().toJson(String.valueOf(productQty));
+		return prodQty;
+	}
+	
 	@RequestMapping("/basketListPro")
 	public ModelAndView basketListPro (HttpServletRequest request, HttpServletResponse response) {		
 		
@@ -305,9 +331,7 @@ public class UserProHandler {
 		Map<Integer, String> itemsToOrder=new HashMap<Integer, String>();
 		
 		for(String item:checkedItems) {
-			itemsToOrder.put(i, item);
-			i++;
-						
+			
 			for(BasketDataBean basketItem:basketList) {
 				if(item.equals(basketItem.getProductCode())) {
 					String productCode=item;
@@ -324,6 +348,9 @@ public class UserProHandler {
 					}
 				
 					String newProductCode=colorSelected+ref+sizeSelected;
+					
+					itemsToOrder.put(i, newProductCode);
+					i++;
 
 					/* Make  a map (can't use BasketDataBean because the productCode must be updated with a new one) */
 					/* Map<String, Object> so we can put both String and int */ 
@@ -593,17 +620,12 @@ public class UserProHandler {
 			order.setOrderQuantity(orderQuantity);
 			order.setOrderPrice(orderPrice);
 			
-			/*BasketDataBean deleteReferences=new BasketDataBean();
-			deleteReferences.setId(id);
-			deleteReferences.setProductCode(productCode);*/
-			
 			ProductDataBean productDto=new ProductDataBean();
 			int newProductQuantity=productDao.getProdQuantity(productCode)-orderQuantity;
 			productDto.setProductQuantity(newProductQuantity);
 			productDto.setProductCode(productCode);
 			
 			int orderListInsertResult=orderDao.insertOrder(order);
-			//int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
 			int productQuantityUpdateResult=productDao.changeQuantity(productDto);
 			
 			request.setAttribute("orderListInsertResult", orderListInsertResult);

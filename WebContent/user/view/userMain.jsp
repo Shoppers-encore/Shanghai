@@ -36,8 +36,8 @@
 				float: right;
 			}
 			#cartImg {
-				width: 20px;
-				height: 20px;
+				width: 40px;
+				height: 40px;
 			}
 			img#chatImg {
 				width: 40px;
@@ -112,9 +112,9 @@
 										<c:if test="${product.discount ne 0}">
 											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
 										</c:if>
-								</a>
+								</a><br>
 								<c:if test="${sessionScope.id ne null}">
-							        <img id="cartImg" src="images/cart_red.png" name="${product.ref}">
+							        <input type="button" id="cart" name="${product.ref}" value="장바구니">
 								</c:if>
 							</form>
 						    
@@ -156,7 +156,7 @@
   			var cartDiv = document.getElementById( 'cart' );
   			$(document).on(
   				'click',
-  				'img[id=cartImg]',
+  				'input[id=cart]',
   				function(){
   					var name = this.name;
   					$.ajax({

@@ -24,7 +24,7 @@
 				
 				<!-- If Basket has items -->
 				<c:if test="${basketCount ne 0}">
-					<div class="row font-weight-bold text-center pt-5" id="emptyBasketDiv"></div>
+					<div class="row font-weight-bold text-center pt-5" id="emptyBasketDiv" hidden></div>
 					<div class="row font-weight-bold text-center pt-5" id="basketDiv">
 						<div class="col-lg-1">
 							${str_select}
@@ -61,7 +61,7 @@
 									prodCode.push('${basketList.productCode}');
 								</script>
 								<div class="col-lg-1 pt-5">
-									<input type="checkbox" id="itemChecked_${basketList.productCode}" name="itemChecked" value="${basketList.productCode}" checked>
+									<input type="checkbox" class="itemChecked" id="itemChecked_${basketList.productCode}" name="itemChecked" value="${basketList.productCode}" checked>
 								</div>
 								<div class="col-lg-2">
 									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
@@ -81,7 +81,7 @@
 										var key='${basketList.productCode}';
 										var prodColors=JSON.parse('${colorOptions}')[key];
 										for(var color in prodColors) {
-											if('${basketList.productCode}'.length>3) {
+											if('${basketList.productCode}'.length>5) {
 												if('${basketList.productCode}'.substring(0,2)==prodColors[color]) {
 													$('#selectColorOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectColorOptions_${basketList.productCode}').append('<option value="'+prodColors[color]+'" selected>'+prodColors[color]+'</option>');
@@ -100,7 +100,7 @@
 										var prodSizes=JSON.parse('${sizeOptions}')[key];
 										
 										for(var size in prodSizes) {
-											if('${basketList.productCode}'.length>3) {
+											if('${basketList.productCode}'.length>5) {
 												if('${basketList.productCode}'.substring('${basketList.productCode}'.length-2,'${basketList.productCode}'.length)==prodSizes[size]) {
 													$('#selectSizeOptions_${basketList.productCode}').removeAttr('selected');
 													$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'" selected>'+prodSizes[size]+'</option>');
@@ -111,6 +111,92 @@
 												$('#selectSizeOptions_${basketList.productCode}').append('<option value="'+prodSizes[size]+'">'+prodSizes[size]+'</option>');
 											}	
 										}
+										
+										$('#selectColorOptions_${basketList.productCode}').on(
+											'change',
+											function(event) {
+												if($('#selectColorOptions_${basketList.productCode}').val()!='unselected' && $('#selectSizeOptions_${basketList.productCode}').val()!='unselected') {
+													
+													var ref;
+													if('${basketList.productCode}'.length>5) {
+														ref='${basketList.productCode}'.substring(2, '${basketList.productCode}'.length-2);
+													} else {
+														ref='${basketList.productCode}';
+													}
+													
+													var itemCode=$('#selectColorOptions_${basketList.productCode}').val()+ref+$('#selectSizeOptions_${basketList.productCode}').val();
+													
+													$.ajax({
+														url: 'getProductQuantityAjax.jk',
+														contentType: 'application/json; charset="UTF-8"',
+														cache: false,
+														data: {
+															productCode: itemCode,
+														},
+														success: function(data) {
+															console.log('product quantity fetch ${msg_success}');
+															var prodQty=JSON.parse(data);	
+															if(prodQty==0) {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', true);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
+																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
+																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
+																$('input[type=checkbox]').removeAttr('checked');
+																$('input[type=checkbox]').attr('disabled', true);
+															} else if(prodQty<5) {
+																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+															}
+														},
+														error: function(e) {
+															console.log('product quantity fetch ${msg_failure}');
+														}
+													});
+												}
+											}
+										);
+										
+										$('#selectSizeOptions_${basketList.productCode}').on(
+											'change',
+											function(event) {
+												if($('#selectColorOptions_${basketList.productCode}').val()!='unselected' && $('#selectSizeOptions_${basketList.productCode}').val()!='unselected') {
+													
+													var ref;
+													if('${basketList.productCode}'.length>5) {
+														ref='${basketList.productCode}'.substring(2, '${basketList.productCode}'.length-2);
+													} else {
+														ref='${basketList.productCode}';
+													}
+													
+													var itemCode=$('#selectColorOptions_${basketList.productCode}').val()+ref+$('#selectSizeOptions_${basketList.productCode}').val();
+													
+													$.ajax({
+														url: 'getProductQuantityAjax.jk',
+														contentType: 'application/json; charset="UTF-8"',
+														cache: false,
+														data: {
+															productCode: itemCode,
+														},
+														success: function(data) {
+															console.log('product quantity fetch ${msg_success}');
+															var prodQty=JSON.parse(data);	
+															if(prodQty==0) {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', true);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
+																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
+																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
+																$('input[type=checkbox]').removeAttr('checked');
+																$('input[type=checkbox]').attr('disabled', true);
+															} else if(prodQty<5) {
+																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+															}
+														},
+														error: function(e) {
+															console.log('product quantity fetch ${msg_failure}');
+														}
+													});
+												}
+											}
+										);
 									</script>
 								</div>
 								<div class="col-lg-1 pt-5 d-flex flex-column">
@@ -138,19 +224,21 @@
 								<div class="col-lg-2 pt-5">
 									<div class="prodPrice" id="productPrice_${basketList.productCode}"></div>
 									<script type="text/javascript">
-										var qty='${basketList.basketQuantity}';
-										var unitPrice='${basketList.productPrice}';
-										var discount=(100-'${basketList.discount}')/100;
-										var productPrice=qty*unitPrice*discount;
+										var qty_${basketList.productCode}='${basketList.basketQuantity}';
+										var unitPrice_${basketList.productCode}='${basketList.productPrice}';
+										var discount_${basketList.productCode}=(100-'${basketList.discount}')/100;
+										var productPrice_${basketList.productCode}=qty_${basketList.productCode}
+											*unitPrice_${basketList.productCode}*discount_${basketList.productCode};
 
-										$('#productPrice_${basketList.productCode}').text(productPrice+'${str_currencyUnit}');
+										$('#productPrice_${basketList.productCode}').text(productPrice_${basketList.productCode}+'${str_currencyUnit}');
 									
 										$('#basketQuantity_${basketList.productCode}').on(
 											'change',
 											function(event) {
-												var changedQty=$('#basketQuantity_${basketList.productCode}').val();
-												var newProductPrice=changedQty*unitPrice*discount;
-												$('#productPrice_${basketList.productCode}').text(newProductPrice+'${str_currencyUnit}');
+												var changedQty_${basketList.productCode}=this.value;
+												var newProductPrice_${basketList.productCode}=productPrice_${basketList.productCode}
+													*(changedQty_${basketList.productCode}/qty_${basketList.productCode});
+												$('#productPrice_${basketList.productCode}').text(newProductPrice_${basketList.productCode}+'${str_currencyUnit}');
 											}
 										);
 									</script>
@@ -183,6 +271,7 @@
 																$('#continueShoppingBtn').remove();
 																$('#basketListFormSubmitBtn').remove();
 																$('#emptyBasketDiv').text(emptyBasket);
+																$('#emptyBasketDiv').removeAttr('hidden');
 																$('#totalNumberOfItems').text(emptyBasketCount);
 															}
 															
@@ -230,16 +319,19 @@
 								}
 							);
 							
-							$('.basketListForm').change(
+							$('.basketListForm').on(
+								'change',
 								function(event) {
 									var grandTotal=0;
 									
 									for(product in prodCode) {
-										stringConcat='#itemChecked_'+prodCode[product];
-
-										eachPrice=$('.prodPrice')[product].innerHTML;
-										price=eval(eachPrice.substring(0, eachPrice.length-1));
-										grandTotal=grandTotal+price;
+										stringConcat='itemChecked_'+prodCode[product];
+										checkDiv=document.getElementById(stringConcat);
+										if(checkDiv.checked) {
+											eachPrice=$('.prodPrice')[product].innerHTML;
+											price=eval(eachPrice.substring(0, eachPrice.length-1));
+											grandTotal=grandTotal+price;
+										}
 									}
 									
 									$('#totalPrice').text('${str_totalPrice}: '+grandTotal+'${str_currencyUnit}');
@@ -251,15 +343,14 @@
 							<button type="button" class="btn mr-1" id="continueShoppingBtn" onclick="returnToList()">${btn_continueShopping}</button>
 							<button type="submit" class="btn" id="basketListFormSubmitBtn">${btn_orderCheckedItems}</button>
 							<script type="text/javascript">
-										
 								$('#basketListFormSubmitBtn').on(
 									'click',
 									function(event) {
-										if($('#itemChecked:checked').length=='0') {
+										if($('.itemChecked:checked').length=='0') {
 											event.preventDefault();
 											alert('${msg_selectItemsToOrder}');
 										} else {
-											$('#itemChecked:checked').each(function(e) {
+											$('.itemChecked:checked').each(function(e) {
 												for(product in prodCode) {
 													var sizeSelector='selectSizeOptions_'+prodCode[product];
 													var colorSelector='selectColorOptions_'+prodCode[product];
@@ -271,11 +362,11 @@
 														if(colorSelection.value=='unselected') {
 															event.preventDefault();
 															alert('${msg_selectColor}');
-															break;
+															return false;
 														} else if(sizeSelection.value=='unselected') {
 															event.preventDefault();
 															alert('${msg_selectSize}');
-															break;
+															return false;
 														}
 													}	
 												}

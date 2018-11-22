@@ -75,7 +75,11 @@ public class UserViewHandler {
 		if(id!=null) {
 			UserDataBean userDto= userDao.getUser(id);
 			request.setAttribute("userDto", userDto);
-		}
+		} else {		// redirect non-member in member-only page
+	         ModelAndView mav=new ModelAndView();
+	         mav.setViewName("redirect:/userLoginForm.jk");
+	         return mav;
+	     }
 		return new ModelAndView("user/view/userMyPage");
 	}
 	
@@ -514,7 +518,6 @@ public class UserViewHandler {
 		for(int i=0; i<num; i++) {
 		productList.addAll(productDao.getBestList(ref.get(i)));
 		}
-		System.out.println("ref:" + ref );
 
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
