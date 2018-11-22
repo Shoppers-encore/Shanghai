@@ -222,10 +222,16 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		UserDataBean userDto = userDao.getUser(id);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
+		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int count = orderDao.prodFromOrder(orderCode);
 		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
 		
+		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("count", count);
 		request.setAttribute("orderDetailList", orderDetailList);
 		return new ModelAndView("adm/view/admOrderDetail");

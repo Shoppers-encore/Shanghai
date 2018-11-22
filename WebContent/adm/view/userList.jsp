@@ -66,7 +66,7 @@
 	   						<td>${member.tel}</td>
 	   						<td>${member.email}</td>
 	   						<td>${member.address}</td>
-	   						<td><input type="button" value="${str_orderList}" onclick="location='admUserOrderList.jk?userid=${member.id}'"></td>
+	   						<td><input type="button" class="btn-sm btn-primary" value="${str_orderList}" onclick="location='admUserOrderList.jk?userid=${member.id}'"></td>
 	   					</tr>
 	   				</c:forEach>
 	   			</c:if>

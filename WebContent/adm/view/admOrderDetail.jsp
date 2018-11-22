@@ -26,6 +26,9 @@
   .btn-danger {
   	float: right;
   }
+  .buttons {
+  	float:right;
+  }
 
   </style>
 </head>
@@ -34,8 +37,48 @@
 <%@ include file="../view/admMenubar.jsp"%> 
    <!-- Adm Order Detail View Page -->
     <article class="col-sm-10 col-8" ><br><br>
-    	<h4>${str_orderDetail}</h4>
+    	<h4>${str_orderDetail} : ${orderCode}</h4>
     	<!-- <input type="button" class="btn btn-danger" value="${btn_orderCancel}" onclick="location='cancelOrder.jk'"> -->
+	    <div class="buttons">
+	 	   <a href="userList.jk" class="btn btn-secondary">${str_userList}</a>
+	 	   <a href="admOrderList.jk" class="btn btn-info">${btn_orderList}</a>
+	    </div>
+	    <br>
+	    <h5> ${str_order_detail} </h5>
+	    <table class="table table-striped">
+   			<thead>
+   				<tr>
+   					<th style="width:20%">${str_orderId}</th>
+   					<th style="width:20%">${str_orderDate}</th>
+   					<th style="width:30%">${str_orderAddress}</th>
+   					<th style="width:20%">${str_orderStatus}</th>
+   				</tr>
+   			</thead>
+   			<tbody>
+   				<tr>
+   				<c:set var="order" value="${orderDetailList}"/>
+	   				<td><a href="admUserOrderList.jk?userid=${order.get(0).id}" >${order.get(0).id}</a></td>
+	   				<td>${order.get(0).orderDate}</td>
+	   				<td>${order.get(0).orderZipcode} ${order.get(0).orderAddress1} ${order.get(0).orderAddress2}</td>
+	   				<td>
+						<c:if test="${order.get(0).orderStatus eq 0}">
+							${str_orderStatus0}
+						</c:if>								
+						<c:if test="${order.get(0).orderStatus eq 1}">
+							${str_orderStatus1}
+						</c:if>								
+						<c:if test="${order.get(0).orderStatus eq 2}">
+							${str_orderStatus2}
+						</c:if>								
+						<c:if test="${order.get(0).orderStatus eq 3}">
+							${str_orderStatus3}
+						</c:if>	
+	   				</td>
+   				</tr>
+   			</tbody>
+	    </table>
+	    <br>
+	    <h5>${str_product_detail}</h5>
 	    <table class="table table-striped">
    			<thead>
    				<tr>

@@ -122,6 +122,8 @@
 <c:set var="str_productCode" value="상품코드"/>
 <c:set var="str_product" value="PRODUCT"/>
 <c:set var="str_userOrderList" value="님의 주문내역"/>
+<c:set var="str_product_detail" value="상품 상세정보"/>
+<c:set var="str_order_detail" value="주문 상세정보"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY"/>
@@ -233,6 +235,7 @@
 <c:set var="btn_gotoUserMain" value="사용자메인"/>
 <c:set var="btn_returnToBasket" value="장바구니 수정"/>
 <c:set var="btn_send" value="전송"/>
+<c:set var="btn_orderList" value="주문목록"/>
 
 
 <!-- Message -->
