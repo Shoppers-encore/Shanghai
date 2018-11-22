@@ -110,7 +110,7 @@ function checkHeight(){
 
 //SMTP - Simple Mail Transfer Protocol
 function mailTransfer() {
-	if(inputform.email.value.indexOf("@")==-1){ //check proper email format
+	if(inputform.email.value.indexOf("@") == -1 || inputform.email.value.indexOf(".") == -1){ //check proper email format
 	      alert(emailfmterror);
 	      return false;
 	 }
@@ -133,16 +133,16 @@ function inputCheck() {
 	      alert( emailconfirmerror );
 	      inputform.email.focus();
 	      return false;
-	   }
-	   if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
+	   } else if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
 	      alert( iderror );
 	      inputform.id.focus();
 	      return false;
 	   } else if( inputform.password.value != inputform.repassword.value ) {
 	      alert( passwderror );
-	      inputform.repasswd.focus();
+	      inputform.repassword.focus();
 	      return false;
 	   } 
+	   
 }
 
 //Find address through zip-code : http://postcode.map.daum.net/guide#sample

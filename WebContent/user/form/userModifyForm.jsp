@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <style>
    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -29,7 +30,7 @@
 			<div class="form-group row"><!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
 					<div class="col-sm-8">
-						${user.id}								
+						${userDto.id}								
 					</div>			
 			</div>
 			<div class="form-group row pass"><!-- password -->
@@ -48,25 +49,25 @@
 			<div class="form-group row"><!-- name -->
 					<label for="name" class="col-sm-2 col-form-label">${str_name}<b>*</b></label>
 					<div class="col-sm-8">
-						<h5>${user.name}</h5>											
+						<h5>${userDto.name}</h5>											
 					</div>	
 			</div>
 			<div class="form-group row"><!-- birthday -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
 					<div class="col-sm-8">
-						<h5>${user.birthday}</h5>	
+						<h5>${userDto.birthday}</h5>	
 					</div>		
 			</div>
 			<div class="form-group row"><!-- tel -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12"  value="${user.tel}" required>											
+						<input class="form-control" type="text" name=tel placeholder="-없이 입력해주세요" maxlength="12"  value="${userDto.tel}" required>											
 					</div>			
 			</div>
 			<div class="form-group row"><!-- email -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="12" value="${user.email}" required>											
+						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="12" value="${userDto.email}" required>											
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"  onclick="">${btn_selfConfirm}</button>					
@@ -75,7 +76,7 @@
 			<div class="form-group row"><!--zip code -->
 					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=zipcode id="zipcode" placeholder="${str_zipcode}"  value="${user.zipcode}" required>											
+						<input class="form-control" type="text" name=zipcode id="zipcode" placeholder="${str_zipcode}"  value="${userDto.zipcode}" required>											
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"  value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>					
@@ -84,33 +85,30 @@
 			<div class="form-group row"><!--address -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=address placeholder="${str_address}" value="${user.address}" required>											
-					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary" type="button" onclick="">${btn_confirm}</button>					
+						<input class="form-control" type="text" name=address id="address" placeholder="${str_address}" value="${userDto.address}" required>											
 					</div>				
 			</div>
 			<div class="form-group row"><!--addressDetail -->
 					<div class="col-sm-2"></div>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=addressDetail placeholder="${str_addressDetail}" value="${user.addressDetail}" required>											
+						<input class="form-control" type="text" name=addressDetail placeholder="${str_addressDetail}" value="${userDto.addressDetail}" required>											
 					</div>		
 			</div>
 			<div class="form-group row"><!-- gender -->
 					<label for="inputID" class="col-sm-2 col-form-label">${str_gender}</label>
 					<div class="col-sm-10">	
-						<h5>${user.gender==0?'남자':'여자'}</h5>											
+						<h5>${userDto.gender==0?'남자':'여자'}</h5>											
 					</div>				
 			</div>
 			<div class="form-group row"><!--height / weight-->
 					<label for="height" class="col-sm-2 col-form-label">${str_height} / ${str_weight}</label>
 					<div class="col-sm-3">
-						<input class="form-control" type="number" name=height placeholder="height (optional)" value="${user.height}" maxlength="3">											
+						<input class="form-control" type="number" name=height placeholder="height (optional)" value="${userDto.height}" maxlength="3">											
 					</div>	
 					cm
 					<label class="col-sm-1 col-form-label"> &nbsp;&nbsp;/ </label>					
 					<div class="col-sm-3">
-						<input class="form-control" type="number" name=weight placeholder="weight (optional)" value="${user.weight}" maxlength="3">									
+						<input class="form-control" type="number" name=weight placeholder="weight (optional)" value="${userDto.weight}" maxlength="3">									
 					</div>					
 					kg					
 			</div>
