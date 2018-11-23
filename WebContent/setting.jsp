@@ -239,11 +239,11 @@
 
 
 <!-- Message -->
-<c:set var="msg_list_x" value="목록이 존재하지 않습니다."/>
+<c:set var="msg_list_x" value="목록이 없습니다."/>
 <c:set var="msg_admLogin" value="관리자 로그인을 해 주세요."/>
 <c:set var="msg_hello" value="안녕하세요!"/>
 <c:set var="msg_rewritepw" value="수정 시 비밀번호 재입력이 필요합니다."/>
-<c:set var="msg_noSearchResult" value="검색 결과가 존재하지 않습니다."/>
+<c:set var="msg_noSearchResult" value="검색 결과가 없습니다."/>
 <c:set var="msg_searchProduct" value="검색할 내용을 입력하세요."/>
 <c:set var="msg_copyright" value="Copyright &copy; 2018 삼김일정(3Kim1Jeong)"/>
 <c:set var="msg_reviewScore" value="명이 공감한 게시물입니다."/>

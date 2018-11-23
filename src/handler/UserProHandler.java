@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +45,6 @@ import db.ChatDao;
 import databean.CommentDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
-import db.TagDao;
 
 import databean.UserDataBean;
 
@@ -177,16 +174,6 @@ public class UserProHandler {
 		}
 		return new ModelAndView("user/pro/userLoginPro");
 	}
-
-	
-//	@RequestMapping( "/findId" )
-//	public ModelAndView idFindProcess(HttpServletRequest request, HttpServletResponse response) {
-//		return new ModelAndView("user/pro/findIdResult");
-//	}
-//	@RequestMapping( "/findPassword" )
-//	public ModelAndView passwordFindProcess(HttpServletRequest request, HttpServletResponse response) {
-//		return new ModelAndView("user/pro/findPasswordResult");
-//	}
 	
 	@RequestMapping( "/userModifyPro" )
 	public String userModifyPro (HttpServletRequest request, HttpServletResponse response) {
@@ -217,19 +204,11 @@ public class UserProHandler {
 		int weight = Integer.parseInt(weightValue);
 			userDto.setWeight(weight);
 		}
-		/*int height = 0;
-		if(request.getParameter("height") !=null || !"".equals(request.getParameter("height"))) {
-			height=Integer.parseInt(request.getParameter("height"));
-		}
-		user.setHeight(height);
-		int weight = 0;
-		if(request.getParameter("weight") != null || !"".equals(request.getParameter("weight"))) {
-			weight = Integer.parseInt(request.getParameter("weight"));
-		}
-		user.setWeight(weight);*/
+
 		userDao.modifyUser(userDto);
 		return "redirect:userMyPage.jk";
 	}
+	
 	@RequestMapping( "/userDeletePro" )
 	public ModelAndView userDeletePro (HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
@@ -240,15 +219,13 @@ public class UserProHandler {
 		request.setAttribute("result", result);
 		return new ModelAndView("user/pro/userDeletePro");
 	}
-	
-	
+		
 	// Logout
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().setAttribute("id", null);
 		return "redirect:main.jk";
 	}
-	
 	
 	// Basket
 	@RequestMapping( "/basketInput" )
@@ -274,6 +251,7 @@ public class UserProHandler {
 		request.setAttribute("ref", request.getParameter("ref"));
 		return new ModelAndView("user/pro/basketInput");
 	}
+	
 	@RequestMapping( "/basketModify" )
 	public ModelAndView basketModify ( HttpServletRequest request, HttpServletResponse response ) {
 		return new ModelAndView( "user/pro/basketModify" );
@@ -596,7 +574,6 @@ public class UserProHandler {
 		boardDao.deleteComment(commentNo);
 	}
 	
-	
 	// Order
 	@RequestMapping("/orderInputPro")
 	public ModelAndView orderInputPro(HttpServletRequest request, HttpServletResponse response) {
@@ -706,7 +683,6 @@ public class UserProHandler {
 				}
 			}
 		}
-		
 		return new ModelAndView("user/pro/orderInputPro");
 	}
 	
@@ -739,6 +715,7 @@ public class UserProHandler {
 		request.setAttribute("baskets", baskets);
 		return baskets;
 	}
+	
 	@RequestMapping("/cartDelete")
 	@ResponseBody
 	public void cartDelete(HttpServletRequest request, HttpServletResponse response) {
@@ -749,6 +726,7 @@ public class UserProHandler {
 		basket.setProductCode(productCode);
 		basketDao.deleteBasketItem(basket);
 	}
+	
 	//productDetail - productQuantity
 	@RequestMapping(value="/howManyQuantity", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody

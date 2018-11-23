@@ -1,6 +1,5 @@
 package handler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
@@ -63,13 +60,14 @@ public class UserFormHandler {
 		return new ModelAndView( "user/form/userModifyForm" );
 	}
 	
-	
 	// Review
 	@RequestMapping( "/reviewWriteForm" )
 	public ModelAndView reviewWriteForm (HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id= (String)request.getSession().getAttribute("id");
 		if(id==null) {
-			return new UserViewHandler().main(request,response);
+	         ModelAndView mav=new ModelAndView();
+	         mav.setViewName("redirect:/userLoginForm.jk");
+	         return mav;
 		} else {
 			String productCode = request.getParameter("productCode");
 			String productName = new ProductDao().getProductName(productCode);
@@ -88,6 +86,13 @@ public class UserFormHandler {
 	@RequestMapping( "/reviewModifyForm" )
 	public ModelAndView reviewModifyForm (HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		
+		if(id==null) {		// redirect non-member in member-only page
+	         ModelAndView mav=new ModelAndView();
+	         mav.setViewName("redirect:/userLoginForm.jk");
+	         return mav;
+	     }
+		
 		int num = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
 		request.setAttribute("pageNum", pageNum);
@@ -97,14 +102,10 @@ public class UserFormHandler {
 			String productName = new ProductDao().getProductName(reviewDto.getProductCode());
 			request.setAttribute("productName", productName);
 			request.setAttribute("num",num);
-			return new ModelAndView("user/form/reviewModifyForm");
-		}else {
-			//Admin
-			return new ModelAndView("#");
 		}
+		return new ModelAndView("user/form/reviewModifyForm");
 	}
 
-	
 	// Order
 	@RequestMapping("/orderInputForm")
 	public ModelAndView orderInputForm(HttpServletRequest request, HttpServletResponse response) {
@@ -170,11 +171,9 @@ public class UserFormHandler {
 					}
 				}
 			}
-			
 			request.setAttribute("identifier", identifier);
 			request.setAttribute("basket", basket);
 		}
-		
 		return new ModelAndView("user/form/orderInputForm");
 	}
 }

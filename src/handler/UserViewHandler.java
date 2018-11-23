@@ -1,8 +1,5 @@
 package handler;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.sql.Timestamp;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import databean.BasketDataBean;
 import databean.ChatDataBean;
@@ -68,7 +63,6 @@ public class UserViewHandler {
 		return new ModelAndView("user/view/userMain");
 	}
 	
-	
 	@RequestMapping("/userMyPage")
 	public ModelAndView userMypage(HttpServletRequest request, HttpServletResponse response) {
 		String id=(String)request.getSession().getAttribute("id");		
@@ -82,7 +76,6 @@ public class UserViewHandler {
 	     }
 		return new ModelAndView("user/view/userMyPage");
 	}
-	
 	
 	// Basket
 	@RequestMapping( "/basketList" )
@@ -149,7 +142,6 @@ public class UserViewHandler {
 		return new ModelAndView( "/user/view/basketList" );
 	}
 	
-	
 	//Product
 	@RequestMapping ( "/userProductList" )
 	public ModelAndView userProductList ( HttpServletRequest request, HttpServletResponse response ) {
@@ -165,6 +157,7 @@ public class UserViewHandler {
 		request.setAttribute("category", category);
 		return new ModelAndView ( "user/view/userProductList" );
 	}
+	
 	@RequestMapping ( "/userProductOuterList" )
 	public ModelAndView userProductOuterList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
@@ -182,6 +175,7 @@ public class UserViewHandler {
 		request.setAttribute("category", category);
 		return new ModelAndView ( "/user/view/userProductOuterList" );
 	}
+	
 	@RequestMapping ( "/userProductShirtsList" )
 	public ModelAndView userProductShirtsList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
@@ -199,6 +193,7 @@ public class UserViewHandler {
 		request.setAttribute("category", category);
 		return new ModelAndView ( "/user/view/userProductShirtsList" );
 	}
+	
 	@RequestMapping ( "/userProductTopList" )
 	public ModelAndView userProductTopList( HttpServletRequest request, HttpServletResponse response ) {
 		String category = request.getParameter("category");
@@ -228,6 +223,7 @@ public class UserViewHandler {
 		request.setAttribute("sizes", sizes);
 		return new ModelAndView("user/view/userProductDetail");
 	}
+	
 	@RequestMapping("/userSearchProduct")
 	public ModelAndView userSearchProduct(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -270,7 +266,6 @@ public class UserViewHandler {
 			
 		}
 	}
-	
 	
 	// Order
 	@RequestMapping("/userOrderDetail")
@@ -396,7 +391,6 @@ public class UserViewHandler {
 			request.setAttribute("orderCount", orderCountJson);
 			request.setAttribute("distinctOrderList", distinctOrderList);
 		}
-		
 		return new ModelAndView("user/view/userOrderList");
 	}
 	
