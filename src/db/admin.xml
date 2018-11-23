@@ -164,4 +164,14 @@
 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
 		(SELECT * FROM jk_orderList WHERE id=#{id} ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
+	
+	<select id="getProductDetailSearchCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode!=TO_CHAR(ref)
+	</select>
+ 	<select id="getProductDetailSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
+	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
+		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
+		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) AND  productName LIKE '%'||#{searchWord}||'%' ORDER BY ref desc))
+		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+	</select> 
 </mapper>
