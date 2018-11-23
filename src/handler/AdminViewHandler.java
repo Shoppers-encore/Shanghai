@@ -163,7 +163,6 @@ public class AdminViewHandler {
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
 			count = productDao.getSearchCount(searchWord);			/////////////// 1116怨좎튇怨�
-			System.out.println("count : " + count);
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);
@@ -318,14 +317,9 @@ public class AdminViewHandler {
 		int count = orderDao.getDistinctOrderCountById(userid);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		map.put("id", userid);
-		//System.out.println("map.id : " + map.get("id"));
-		//System.out.println("map.start : " + map.get("start"));
-		//System.out.println("map.end : " + map.get("end"));
-		///////////////////////////////////////////////////// ONGOING
 		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
 		request.setAttribute("orders", orders);
 		request.setAttribute("count", count);
-		////////////////////////////////////////////////////
 		request.setAttribute("userid", userid);
 		request.setAttribute("userDto", adminDto);
 		return new ModelAndView("adm/view/admUserOrderList");
