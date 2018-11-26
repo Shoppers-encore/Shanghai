@@ -637,6 +637,7 @@ public class UserProHandler {
 			order.setProductCode(productCode);
 			order.setRef(ref);
 			order.setId(id);
+			order.setOrderDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			order.setOrderZipcode(orderZipcode);
 			order.setOrderAddress1(orderAddress1);
 			order.setOrderAddress2(orderAddress2);
@@ -690,6 +691,7 @@ public class UserProHandler {
 						order.setProductCode(productCode);
 						order.setRef(ref);
 						order.setId(id);
+						order.setOrderDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 						order.setOrderZipcode(orderZipcode);
 						order.setOrderAddress1(orderAddress1);
 						order.setOrderAddress2(orderAddress2);
@@ -796,7 +798,7 @@ public class UserProHandler {
 	}
 	private void orderLog(String path, String log, Calendar cal) {
 		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
-		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".log");
+		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
@@ -809,7 +811,7 @@ public class UserProHandler {
 	}
 	private void productLog(String path, String log, Calendar cal) {
 		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
-		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".log");
+		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
