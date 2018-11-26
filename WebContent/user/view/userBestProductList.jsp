@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
+
 <html>
 	<head>
-		<title>${category} 페이지</title>
+		<title>${head_best}</title>
 		<style>
 			div#cart {
 				position: sticky;
@@ -39,14 +40,9 @@
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
-		<c:set var="id" value="aaa" scope="session"/>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
 					<p align="center">${msg_list_x}</p>
@@ -69,157 +65,45 @@
 											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
 										</c:if>
 								</a><br>
+								<c:if test="${sessionScope.id ne null}">
+							        <input type="button" id="cart" name="${product.ref}" value="장바구니">
+								</c:if>
 							</form>
+							
 						</div>
 				     </c:forEach>
 		    	</div>
 		    </c:if>
 		</article>
 	</body>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	
 	<script type="text/javascript">
   	//<!--
-  		$(document).ready(function(){
-  			var cartDiv = document.getElementById( 'cart' );
-  			$(document).on(
-  				'click',
-  				'img[id=cartImg]',
-  				function(){
-  					var foldbt = document.createElement( 'input' );
-  					var cartbt = document.createElement( 'input' );
-  					cartDiv.removeChild( document.getElementById( 'cartImg' ) );
-  				//접기버튼 붙이기
-  					foldbt.setAttribute( 'id', 'foldbt' );
-  					foldbt.setAttribute( 'type', 'button' );
-  					foldbt.setAttribute( 'class', 'btn btn-outline-danger btn-sm' );
-  					foldbt.setAttribute( 'value', '${btn_fold}' );
-  					cartDiv.appendChild( foldbt );
-  				//장바구니 버튼 붙이기
-  					cartbt.setAttribute( 'id', 'cartbt' );
-  					cartbt.setAttribute( 'type', 'button' );
-  					cartbt.setAttribute( 'class', 'btn btn-outline-danger btn-sm' );
-  					cartbt.setAttribute( 'onclick', 'location="basketList.jk"');
-  					cartbt.setAttribute( 'value', '${str_cart}' );
-  					cartDiv.appendChild( cartbt );
-				//장바구니 리스트 조회
-  					show();
-  			});
-  			
-  			$(document).on(
-  				'click',
-  				'input[id=foldbt]',
-  				function (){
-  					var cartDiv = document.getElementById( 'cart' );
-  					var cartImg = document.createElement( 'img' );
-  					cartImg.setAttribute( 'id', 'cartImg' );
-  					cartImg.setAttribute( 'src', 'images/cart_red.png' );
-  					if( document.getElementById( 'foldbt' ) ){
-  						cartDiv.removeChild( document.getElementById( 'foldbt' ) );
-  					}
-  					if( document.getElementById( 'cartbt' ) ){
-  						cartDiv.removeChild( document.getElementById( 'cartbt' ) );
-  					}
-  					if( document.getElementById( 'add_cart' ) ){
-  						cartDiv.removeChild( document.getElementById ( 'add_cart' ) );
-  					}
-  					if( document.getElementById( 'table' ) ){
-  						cartDiv.removeChild( document.getElementById( 'table' ) );
-  					}
-  					if( document.getElementById( 'cartImg' ) ){
-  						cartDiv.removeChild( document.getElementById( 'cartImg' ) );
-  					}
-  					for( i=0; i<cartDiv.childNodes.length; i++ ){
-  						cartDiv.removeChild( cartDiv.childNodes.item(i) );
-  					}
-  					cartDiv.appendChild( cartImg );
-  				});
-  			
-  				//삭제 버튼 눌렀을 때 
-  				$(document).on(
-  	  				'click',
-  	  				'input[value="${btn_x}"]',
-  	  				function (event){
-  	  					var targetid = $('input[value="${btn_x}"]').attr( "id" );
-	  	  				$.ajax({
-							type : 'POST',
-							url : 'cartDelete.jk',
-							data : $('form[name="' + targetid + '"]').serialize(),
-							dataType : 'xml',
-							success: setTimeout( function(){
-								cartDiv.removeChild(document.getElementById('table'));
-								show();
-							}, 1000 )
-	  					});
-  	  				});
-  	  				
-  				//드래그 앤 드롭
-	  			$("img[id~='thumb']").draggable({
-	  	        	revert: "invalid",
-	  	        	stack: ".draggable",
-	  	        	helper: "clone"
-	  	        });
-	  			
-	  	        $("#cart").droppable({
-	  	        	activeClass: "ui-state-default",
-	  	            hoverClass: "ui-state-hover",
-	  	            drop: function (event, ui) {
-	  	            if( document.getElementById ( 'add_cart' ) ){
-	  	              document.getElementById( 'cart' ).removeChild( document.getElementById ( 'add_cart' ) );
-	  	            }
-	              	var draggable = ui.draggable;
-	              	var targetname = draggable.attr( "name" );
-	  	              $.ajax({
+  		$(document).ready(
+  			function(){
+	  			var cartDiv = document.getElementById( 'cart' );
+	  			$(document).on(
+	  				'click',
+	  				'input[id=cart]',
+	  				
+	  				function(){
+	  					var name = this.name;
+	  					$.ajax({
 							type : 'POST',
 							url : 'cartInsert.jk',
-							data : $('form[name="' + targetname + '"]').serialize(),
-							dataType : 'xml',
+							data : $('form[name="' + name + '"]').serialize(),
 							success: setTimeout( function(){
-								show();
-							}, 1000 )
+								alert('장바구니에 상품이 들어갔습니다.');
+							}, 500 )
 	  					});
-  	        		}
-  	        });
-  		
-  		//장바구니 리스트 조회 메소드
-  		function show(){
-  			$.ajax({
-				type : 'POST',
-				url : 'viewCart.jk',
-				data: $('form').serialize(),
-				success : function( data ){
-					if( data.length > 0 ){
-						$('#t').html('');
-						var table = document.createElement( 'table' );
-	  					var tbody = document.createElement( 'tbody' );
-		  				table.setAttribute( 'border', '1' );
-		  				table.setAttribute( 'id', 'table' );
-	  					tbody.setAttribute( 'id', 't' );
-	  					table.appendChild( tbody );
-	  					cartDiv.appendChild( table );
-						
-						$.each(data, function(key, baskets){
-							var html =
-								'<tr>' +
-								'<td><img style="width:50px; height:50px;" src="/Shanghai/save/' + baskets.thumbnail +'"></td>' 
-								+ '<td><input type="button" id="' + baskets.productCode + '" class="btn btn-outline-secondary btn-sm" value="${btn_x}">'
-								+ '<form name="' + baskets.productCode + '"><input type="hidden" name="id" value="${sessionScope.memid}"><input type="hidden" name="good_code" value="'
-								+ baskets.productCode + '"></td></form></tr>';
-								
-								$(html).appendTo('#t');
-						});
-					} else {
- 							var add_cart = document.createElement( 'img' );
- 							add_cart.setAttribute( 'id', 'add_cart' );
- 		  					add_cart.setAttribute( 'src', '/Shanghai/images/add_cart.png' );
- 		  					cartDiv.appendChild( add_cart );
-					}
-				}
-			});
-  		}
-  	});
-	function chatting(){
-		window.open("chatView.jk");
-	}
+	  				}
+	  			);
+  			}
+  		);
+  			
+		function chatting(){
+			window.open("chatView.jk");
+		}
   	//-->
   </script>
 </html>

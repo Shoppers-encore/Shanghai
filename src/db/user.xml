@@ -50,10 +50,10 @@
 		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	<select id="getProductNoSearch" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref)
+		SELECT count(*) FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref) AND productLevel=1
 	</select>
 	<select id="getProductNoSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref) ORDER BY productRegDate desc) list) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_product <include refid="cate"></include> productCode=TO_CHAR(ref) AND productLevel=1 ORDER BY productRegDate desc) list) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
 	<select id="getProductQuantityCount" parameterType="String" resultType="int">
 		SELECT count(*) FROM jk_product WHERE productCode=#{productList}

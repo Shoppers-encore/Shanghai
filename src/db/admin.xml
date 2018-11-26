@@ -20,9 +20,8 @@
 		(SELECT * FROM jk_user ORDER BY userLevel desc, id asc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getSearchCount" parameterType="String" resultType="int">
-		<!-- SELECT count(ref) FROM jk_product WHERE productCode =TO_CHAR(ref) AND productName LIKE '%'||#{searchWord}||'%' -->
 		SELECT count(*) FROM jk_product WHERE ref IN (SELECT MAX(ref) FROM jk_product
-		WHERE productName LIKE '%'||#{searchWord}||'%' GROUP BY ref) AND productCode=TO_CHAR(ref)
+		WHERE productName LIKE '%'||#{searchWord}||'%' AND productLevel=1 GROUP BY ref) AND productCode=TO_CHAR(ref)
 	</select>
 	<select id="getOrderCount" resultType="int">
 	 	 SELECT count(*) FROM jk_orderList
@@ -51,12 +50,12 @@
 	 	 SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList WHERE id=#{id} ORDER BY orderCode desc) list ) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	 </select>
 	 <select id="getProdCount" resultType="int">
-	 	 SELECT count(*) FROM jk_product
+	 	 SELECT count(*) FROM jk_product WHERE productLevel=1
 	</select>
 	<select id="getProdList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
 		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
-		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) AND productLevel=1 ORDER BY ref desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getRef" resultType="int">
 		SELECT max(ref) FROM jk_product
@@ -98,9 +97,9 @@
 	<delete id="deleteImg" parameterType="int">
 		DELETE FROM jk_imageInfo WHERE ref=#{ref}
 	</delete>
-	<delete id="deleteProd" parameterType="int">
-		DELETE FROM jk_product WHERE ref=#{ref}
-	</delete>
+	<update id="deleteProd" parameterType="int">
+		UPDATE jk_product SET productLevel=0 WHERE ref=#{ref}
+	</update>
 	<update id="admModify" parameterType="databean.UserDataBean">
 		UPDATE jk_user SET password=#{password}, name=#{name}, tel=#{tel}, email=#{email} WHERE id=#{id} 
 	</update>
@@ -156,7 +155,7 @@
  	<select id="getProductSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		<!-- SELECT * FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode=to_char(ref) -->
 		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE ref in 
-		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%'
+		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productLevel=1
 		 GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2) tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select> 	
 	<select id="getUserOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
@@ -166,12 +165,12 @@
 	</select>
 	
 	<select id="getProductDetailSearchCount" parameterType="String" resultType="int">
-		SELECT count(*) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode!=TO_CHAR(ref)
+		SELECT count(*) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%' AND productCode!=TO_CHAR(ref) AND productLevel=1
 	</select>
  	<select id="getProductDetailSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 	 	SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, r FROM(
 		SELECT ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, rownum r FROM 
-		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) AND  productName LIKE '%'||#{searchWord}||'%' ORDER BY ref desc))
+		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) AND  productName LIKE '%'||#{searchWord}||'%' AND productLevel=1 ORDER BY ref desc))
 		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select> 
 </mapper>
