@@ -34,7 +34,7 @@
 			<a class="nav-link" href="userMyPage.jk">CUSTOMER</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="reviewList.jk">Review</a>
+			<a class="nav-link" href="reviewList.jk">REVIEW</a>
 		</li>
 		<c:if test="${sessionScope.id eq null or sessionScope.id.length() eq 0}">
 			<li class="nav-item">
