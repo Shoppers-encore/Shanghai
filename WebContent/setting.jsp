@@ -242,6 +242,7 @@
 <c:set var="btn_returnToBasket" value="장바구니 수정" />
 <c:set var="btn_send" value="전송" />
 <c:set var="btn_orderList" value="주문목록" />
+<c:set var="btn_addImage" value="사진추가"/>
 
 
 <!-- Message -->
