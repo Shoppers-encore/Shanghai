@@ -412,3 +412,13 @@ function numberonly( event, form ) {      // function for typing only numbers
    }
 }
 
+
+// <product>
+function productInputCheck() {				//////// 1127 ONGOING BY JH
+    var sizes = document.getElementsByName("size");
+    var sizeLength = sizes.length;
+    if (checkedNum == 0 ) {
+		alert( notagchecked );
+        return false;
+    }
+}

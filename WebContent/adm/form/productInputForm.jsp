@@ -221,7 +221,7 @@ function deletePhoto(tb_no,photo_id,start){
    <div class="aa">
        <div class="border" id="productInput">
                <h3>${str_productInput}</h3>
-               <form name="goodInputform" encType="multipart/form-data" action="productInputPro.jk" method="post" accept-charset="UTF-8">
+               <form name="productInputform" encType="multipart/form-data" action="productInputPro.jk" method="post" accept-charset="UTF-8">
                <table class="table">
                   <tr>
                      <th style="width :10%"> ${str_productCode} </th>
@@ -240,6 +240,7 @@ function deletePhoto(tb_no,photo_id,start){
                       <th style="width :10%"> ${str_category} </th>
                       <td style="width :20%">
                       <select name="category">
+                                <option value="-1">${str_select}</option>
                                 <option value="1">${str_cat_JKnJP_kor}</option>
                                 <option value="2">${str_cat_COAT_kor}</option>
                                 <option value="3">${str_cat_CARDIGAN_kor}</option>
