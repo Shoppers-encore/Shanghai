@@ -110,7 +110,7 @@ public class UserViewHandler {
 			String productCode = product.getProductCode();
 			String ref;
 			// 1-2) Check if productCode=ref (=options not selected)
-			if (productCode.length() < 5) {
+			if (productCode.length() < 6) {
 				ref = productCode;
 			} else {
 				ref = productCode.substring(2, productCode.length() - 2);
@@ -304,8 +304,8 @@ public class UserViewHandler {
 		}
 
 		/* Number of Order History Per Page */
-		int pageSize = 1;
-		int pageBlock = 1;
+		int pageSize = 12;
+		int pageBlock = 5;
 
 		int count = 0;
 		int start = 0;

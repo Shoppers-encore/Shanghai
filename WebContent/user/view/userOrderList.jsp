@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					<c:forEach var="distinctOrderList" items="${distinctOrderList}">
-						<div class="row border text-center mt-1"> 					
+						<div class="row border text-center mt-1 pt-2 pb-2"> 					
 							<div class="col-lg-2">
 								${distinctOrderList.orderCode}
 							</div>

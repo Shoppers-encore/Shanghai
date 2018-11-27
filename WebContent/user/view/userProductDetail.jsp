@@ -61,7 +61,7 @@
 		<article class="row">
 			<!-- Good Picture -->
 			<div class="col-sm-6" >
-				<img src="/WebProject/save/${productList.get(0).thumbnail}" style="width: 100%; height: 600px; padding: 10%;">
+				<img src="/Shanghai/save/${productList.get(0).thumbnail}" style="width: 100%; height: 600px; padding: 10%;">
 			</div>
 			<!-- Good Detail -->
 			<div class="col-sm-6" align="center" style="padding:10%;">

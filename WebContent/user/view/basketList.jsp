@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<%@ include file="../form/userHeader.jsp" %>
-		
+
 		<!-- When logged in -->
 		<c:if test="${id ne null}">
 			<div class="container-fluid col-lg-10">

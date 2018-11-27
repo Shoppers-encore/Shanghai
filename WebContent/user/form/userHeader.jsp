@@ -52,7 +52,7 @@
 	<!-- ############################## ### 2 From here ################################## -->
 	
 	<c:if test="${sessionScope.id ne null}">
-        <a href="basketList.jk"><img id="cartImg" src="images/cart_red.png"></a>
+        <a href="basketList.jk"><img id="cartImg" src="images/cart.png"></a>
 	</c:if>
 		&nbsp;&nbsp;
 	<a href="userSearchProduct.jk" id="search">

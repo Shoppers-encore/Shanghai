@@ -14,6 +14,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/Shanghai/user/shanghai_style.css">
+
 <c:set var="project" value="/Shanghai/user/" />
 
 <!-- Page -->
