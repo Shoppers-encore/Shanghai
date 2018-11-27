@@ -28,13 +28,13 @@
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM jk_product WHERE ref IN (SELECT MAX(ref) FROM jk_product
-		WHERE productName LIKE '%'||#{searchWord}||'%' <include refid="colorSearch"></include>
+		WHERE productName LIKE '%'||#{searchWord}||'%' <include refid="colorSearch"></include> AND productLevel=1
 		GROUP BY ref) AND productCode=TO_CHAR(ref)
 	</select>
 	<select id="getProductColorSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE ref in 
 		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%'
-		<include refid="colorSearch"></include> GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2)
+		<include refid="colorSearch"></include> AND productLevel=1 GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2)
 		tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
@@ -44,7 +44,7 @@
 		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
 	</select>
 	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
-		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>3
+		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>5
 	</select>
 	<select id="getProductThumbnail" parameterType="String" resultType="String">
 		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}

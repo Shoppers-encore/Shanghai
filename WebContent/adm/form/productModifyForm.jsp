@@ -196,25 +196,7 @@
     opacity: 0.7;
 }
   </style>
-<script type="text/javascript">
-function deletePhoto(tb_no,photo_id,start){
-	$.ajax({
-		type:'POST',
-		url:'productInputForm.jk',
-		data:{
-			tb_no:tb_no,
-			photo_id:photo_id
-		},
-		success:function(data){
-			var page="svc/boardAlbum.go?tb_no="+tb_no+"&start="+start;
-			$('#album').load(page);
-		},
-		error:function(e){
-			alert(photodeleteerror);
-		}
-	});
-}
-</script>  
+
 </head>
 
 <body>
@@ -364,10 +346,11 @@ function deletePhoto(tb_no,photo_id,start){
                     	</td> 
                   </tr>
                   <tr>
-                     <th colspan="6">
-                     	
-                     	<!-- //////////////////////  사진 수정 들어갈 자리  ////////////////////////// -->
-                     	
+                     <th colspan="6" id="thimg">
+                     	<c:forEach var="img" items="${imageList}">
+							<img src="/Shanghai/save/${img.imageAddress}" name="${img.imageNo}" id="image" onclick="deleteImage(${img.imageNo})"><br>
+						</c:forEach>
+						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImage()">
                      </th>
                   </tr>
 
@@ -388,5 +371,23 @@ function deletePhoto(tb_no,photo_id,start){
        </div>
    </div>
 </body>
+<script type="text/javascript">
+		var cnt = 0;
+		function deleteImage(imageNo){
+			$("img[name='"+imageNo+"']").remove();
+			$("th[id='thimg']").append("<input type='hidden' name='delImg' value='"+imageNo+"'>");
+		}
+		function addImage(){
+			console.log('2');
+			$("th[id='thimg']").append("<input type='file' name='upload' id='"+cnt+"'>");
+			$("th[id='thimg']").append("<input type='button' value='-' onclick='delImg("+cnt+")'>");
+			cnt++;
+		}
+		function delImg(imgId){
+			var thimg = document.getElementById('thimg');
+			var img = document.getElementById(imgId);
+			thimg.removeAttribute(img);
+		}
+</script>  
 
 </html>
