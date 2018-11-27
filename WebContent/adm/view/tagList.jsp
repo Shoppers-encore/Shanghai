@@ -32,7 +32,7 @@
 		<br><br>
 		<h4> ${page_manageTag} </h4>
 		<br><br>
-		<form name="tagForm" method="post" action="tagDeletePro.jk">
+		<form name="tagForm" method="post" action="tagDeletePro.jk" onsubmit="return isTagChecked()">
 			<c:forEach var="tag" items="${tags}">   
 				<label class="btn btn-info">
 		           	<input type="checkbox" name="tag" value="${tag.tagId}">${tag.tagName}

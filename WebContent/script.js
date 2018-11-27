@@ -341,10 +341,21 @@ function inputTag() {
 	window.location.href='tagInputPro.jk';
 }
 function isTagChecked() {
-	if( ! tagForm.getAttribute("checked") ) {
+    var tags = document.getElementsByName("tag");
+    var length = tags.length;
+    var checkedNum = 0; 
+    for (i=0; i <length; i++) {
+        if (tags[i].checked == true) { 
+            checkedNum += 1;
+            alert(tags[i].value);  
+        }
+    }
+    if (checkedNum == 0 ) {
 		alert( notagchecked );
-		return false;
-	} 
+        return false;
+    } else {
+        return;
+    }
 }
 
 // <mypage>
@@ -392,7 +403,7 @@ var editingKeycodes = [8, 46, 37, 39];   // keys for editing : backspace(8), del
 function numberonly( event, form ) {      // function for typing only numbers
    var kc = event.keyCode;
    if( ( kc >= 48 && kc <= 57) || ( kc >= 96 && kc <= 105) || editingKeycodes.indexOf(kc) != -1 ) {
-      // upper side number keycodes 48~57 // rihgt side number keycodes 96~105 // is the key one of the editing keys?
+      // upper side number keycodes 48~57 // right side number keycodes 96~105 // is the key one of the editing keys?
       return;
    } else {
       alert( onlynum );
