@@ -350,7 +350,7 @@
                      	<c:forEach var="img" items="${imageList}">
 							<img src="/Shanghai/save/${img.imageAddress}" name="${img.imageNo}" id="image" onclick="deleteImage(${img.imageNo})"><br>
 						</c:forEach>
-						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImage()">
+						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImages()">
                      </th>
                   </tr>
 
@@ -377,16 +377,13 @@
 			$("img[name='"+imageNo+"']").remove();
 			$("th[id='thimg']").append("<input type='hidden' name='delImg' value='"+imageNo+"'>");
 		}
-		function addImage(){
-			console.log('2');
-			$("th[id='thimg']").append("<input type='file' name='upload' id='"+cnt+"'>");
-			$("th[id='thimg']").append("<input type='button' value='-' onclick='delImg("+cnt+")'>");
+		function addImages(){
+			$("th[id='thimg']").append("<input type='file' name='upload"+cnt+"' id='"+cnt+"'>");
+			$("th[id='thimg']").append("<input type='button' value='-' id='"+cnt+"'onclick='delImg("+cnt+")'>");
 			cnt++;
 		}
 		function delImg(imgId){
-			var thimg = document.getElementById('thimg');
-			var img = document.getElementById(imgId);
-			thimg.removeAttribute(img);
+			$("input[id='"+imgId+"']").remove();
 		}
 </script>  
 

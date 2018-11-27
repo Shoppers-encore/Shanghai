@@ -119,15 +119,14 @@ img#thumb {
 								name="${product.ref}"><br> ${product.productName}<br>
 								<input type="hidden" name="id" value="${sessionScope.id}">
 								<input type="hidden" name="productCode" value="${product.ref}">
-								<input type="hidden" name="var" value="1"> ${str_price}
-								: <c:if
-									test="${product.discount eq null or product.discount eq 0}">
+								<input type="hidden" name="var" value="1">
+								<c:if test="${product.discount eq null or product.discount eq 0}">
 									<fmt:formatNumber value="${product.productPrice}"
-										type="currency" currencySymbol="￦" />
+										type="currency" currencySymbol="￦"/>
 								</c:if> <c:if test="${product.discount ne 0}">
 									<fmt:formatNumber
 										value="${product.productPrice-(product.productPrice*product.discount/100)}"
-										type="currency" currencySymbol="￦" />
+										type="currency" currencySymbol="￦"/>
 								</c:if>
 							</a><br>
 							<c:if test="${sessionScope.id ne null}">
