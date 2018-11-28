@@ -39,6 +39,15 @@ var passwderror = "비밀번호 일치 여부 확인 해주세요.";
 var emptyBasket='장바구니에 담긴 상품이 없습니다.';
 var emptyBasketCount='전체 상품: 총 0개';
 
+// Message-productInputForm
+var noSizeChecked = "사이즈를 선택해주세요.";
+var noCategorySelected = "카테고리를 선택해주세요";
+var noTagChecked = "태그를 선택해주세요.";
+var noColorChecked = "색상을 선택해주세요.";
+var noProductName = "상품명을 입력해주세요.";
+var noProuctPrice = "상품 가격을 입력해주세요.";
+var noProductQuantity = "상품 초기 수량을 입력해주세요.";
+var noProductContent = "상품 소개를 입력해주세요.";
 
 	
 	
@@ -414,11 +423,58 @@ function numberonly( event, form ) {      // function for typing only numbers
 
 
 // <product>
-function productInputCheck() {				//////// 1127 ONGOING BY JH
+function productInputCheck() {		
     var sizes = document.getElementsByName("size");
-    var sizeLength = sizes.length;
-    if (checkedNum == 0 ) {
-		alert( notagchecked );
-        return false;
+    var sizeCheck = 0;
+    var tags = document.getElementsByName("tag");
+    var tagLength = tags.length;
+    var tagCheck = 0;
+    var productName = document.getElementById("product_name").value;
+    var colors = document.getElementsByName("color");
+    var colorCheck = 0;
+    var price = document.getElementById("price").value;
+    var quantity = document.getElementById("quantity").value;
+    var content = document.getElementById("productContent").value;
+    for (i=0; i <5; i++) {
+        if (sizes[i].checked == true) { 
+            sizeCheck = 1;
+        }
     }
+    for (i=0; i<tagLength; i++) {
+    	if(tags[i].checked == true) {
+    		tagCheck = 1;
+    	}
+    }
+    for (i=0; i <14; i++) {
+        if (colors[i].checked == true) { 
+            colorCheck = 1;
+        }
+    }
+    
+    if(sizeCheck != 1) {
+    	alert( noSizeChecked );
+    	return false;
+    } else if( document.getElementById("catCheck").selected == true ) {
+    	alert( noCategorySelected );
+    	return false;
+    } else if( tagCheck != 1 ) {
+    	alert( noTagChecked );
+    	return false;
+    } else if( productName == "" || productName == null ) {
+    	alert( noProductName );
+    	return false;
+    } else if(colorCheck != 1) {
+    	alert( noColorChecked );
+    	alert(price);
+    	return false;
+    } else if( price == "" || price == null ) {
+    	alert( noProuctPrice );
+    	alert( quantity );
+    	return false;
+    } else if( content == "" || content == null ) {
+    	alert( noProductContent );
+    	return false;
+    }
+    
+    /////////// PHOTO!!! /////////
 }
