@@ -172,5 +172,13 @@ public class ProductDao{
 	public List<ProductDataBean> getProductDetailSearchList(Map<String, String> map) {
 		return session.selectList("Admin.getProductDetailSearchList", map);
 	}
+
+	public int deleteImage(int imageNo) {
+		return session.delete("Admin.deleteImage", imageNo);
+	}
+
+	public String getDeleteImageAddress(int deleteImageNo) {
+		return session.selectOne("Admin.getDeleteImageAddress", deleteImageNo);
+	}
 	
 }

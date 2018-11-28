@@ -30,14 +30,20 @@ public class AdminFormHandler {
 	@Resource
 	private TagDao tagDao;
 	
-	@RequestMapping("/admLoginForm")
+
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
 	}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) {
+			return admLoginForm(request, response);
+		}
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel()!=9) {
+			return admLoginForm(request, response);
+		}
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
@@ -46,13 +52,19 @@ public class AdminFormHandler {
 	@RequestMapping("/admModifyView")
 	public ModelAndView admModifyView(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admModifyView");
 	}
 	@RequestMapping("/productInputForm")
 	public ModelAndView productInputPro (HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		ProductDao productDao = new ProductDao();
 		int ref = new ProductDataBean().getRef();
 		if( ref > -1 ) {
@@ -76,8 +88,10 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productModifyForm")
 	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
-		String id=(String)request.getSession().getAttribute("id");
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		if( userDto.getUserLevel() == 9 ) {
 			int ref = Integer.parseInt( request.getParameter("ref") );
 			List<ProductDataBean> list = productDao.getProductDetail( ref );

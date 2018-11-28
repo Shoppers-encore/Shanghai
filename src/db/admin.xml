@@ -135,6 +135,12 @@
 	<select id="getProdQuantity" parameterType="String" resultType="int">
 		SELECT productQuantity FROM jk_product WHERE productCode=#{productCode}
 	</select>
+	<select id="getDeleteImageAddress" parameterType="int" resultType="String">
+		SELECT imageAddress FROM jk_ImageInfo WHERE imageNo = #{deleteImageNo}
+	</select>
+	<delete id="deleteImage" parameterType="int">
+		DELETE FROM jk_imageInfo WHERE imageNo=#{imageNo}
+	</delete>
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		SELECT * FROM jk_chat
