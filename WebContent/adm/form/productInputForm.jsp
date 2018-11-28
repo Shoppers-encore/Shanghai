@@ -196,7 +196,7 @@
     opacity: 0.7;
 }
   </style>
-<script type="text/javascript">
+<script type="text/javascript">/* 
 function deletePhoto(tb_no,photo_id,start){
 	$.ajax({
 		type:'POST',
@@ -213,7 +213,7 @@ function deletePhoto(tb_no,photo_id,start){
 			alert(photodeleteerror);
 		}
 	});
-}
+} */
 </script>  
 </head>
 
