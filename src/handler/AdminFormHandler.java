@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import databean.TagDataBean;
 import databean.UserDataBean;
@@ -29,14 +30,20 @@ public class AdminFormHandler {
 	@Resource
 	private TagDao tagDao;
 	
-	@RequestMapping("/admLoginForm")
+
 	public ModelAndView admLoginForm(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("adm/form/admLoginForm");
 	}
 	@RequestMapping("/admMain")
 	public ModelAndView admMain(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) {
+			return admLoginForm(request, response);
+		}
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel()!=9) {
+			return admLoginForm(request, response);
+		}
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admMain");
@@ -45,13 +52,19 @@ public class AdminFormHandler {
 	@RequestMapping("/admModifyView")
 	public ModelAndView admModifyView(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		return new ModelAndView("adm/form/admModifyView");
 	}
 	@RequestMapping("/productInputForm")
 	public ModelAndView productInputPro (HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		ProductDao productDao = new ProductDao();
 		int ref = new ProductDataBean().getRef();
 		if( ref > -1 ) {
@@ -75,8 +88,10 @@ public class AdminFormHandler {
 	}
 	@RequestMapping("/productModifyForm")
 	public ModelAndView productModifyForm(HttpServletRequest request, HttpServletResponse response) {
-		String id=(String)request.getSession().getAttribute("id");
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return admLoginForm(request, response);
 		if( userDto.getUserLevel() == 9 ) {
 			int ref = Integer.parseInt( request.getParameter("ref") );
 			List<ProductDataBean> list = productDao.getProductDetail( ref );
@@ -93,11 +108,11 @@ public class AdminFormHandler {
 				System.out.println("size"+sizes[i]);
 				sizeMap.put("siz"+new Integer(sizes[i]).toString(), sizes[i]);
 			}
-
+			List<ImageInfoDataBean> imageList = productDao.getImgDetail(ref);
 			TagDao tagDao = new TagDao();
 			List <TagDataBean> tags = tagDao.getTags();
 			List<Integer> checkedTags = tagDao.getProductTagId(ref);
-
+			request.setAttribute("imageList",imageList);
 			request.setAttribute("allTags", tags);
 			request.setAttribute("colorMap", colorMap);
 			request.setAttribute("sizeMap", sizeMap);

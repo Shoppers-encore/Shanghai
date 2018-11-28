@@ -2,12 +2,17 @@ package handler;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -614,6 +619,7 @@ public class UserProHandler {
 			order.setProductCode(productCode);
 			order.setRef(ref);
 			order.setId(id);
+			order.setOrderDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			order.setOrderZipcode(orderZipcode);
 			order.setOrderAddress1(orderAddress1);
 			order.setOrderAddress2(orderAddress2);
@@ -624,10 +630,16 @@ public class UserProHandler {
 			int newProductQuantity = productDao.getProdQuantity(productCode) - orderQuantity;
 			productDto.setProductQuantity(newProductQuantity);
 			productDto.setProductCode(productCode);
-
-			int orderListInsertResult = orderDao.insertOrder(order);
-			int productQuantityUpdateResult = productDao.changeQuantity(productDto);
-
+			int orderListInsertResult=orderDao.insertOrder(order);
+			int productQuantityUpdateResult=productDao.changeQuantity(productDto);
+			//LogWriter
+			String path =  request.getSession().getServletContext().getRealPath( "/data" );
+			Calendar cal = GregorianCalendar.getInstance();
+			ProductDataBean product = productDao.getProductDetailsByProductCode(order.getProductCode());
+			String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice();
+			String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
+			orderLog(path,orderList, cal);
+			productLog(path,productList, cal);
 			request.setAttribute("orderListInsertResult", orderListInsertResult);
 			// request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
@@ -661,6 +673,7 @@ public class UserProHandler {
 						order.setProductCode(productCode);
 						order.setRef(ref);
 						order.setId(id);
+						order.setOrderDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 						order.setOrderZipcode(orderZipcode);
 						order.setOrderAddress1(orderAddress1);
 						order.setOrderAddress2(orderAddress2);
@@ -675,11 +688,17 @@ public class UserProHandler {
 						int newProductQuantity = productDao.getProdQuantity(productCode) - orderQuantity;
 						productDto.setProductQuantity(newProductQuantity);
 						productDto.setProductCode(productCode);
-
-						int orderListInsertResult = orderDao.insertOrder(order);
-						int basketDeleteResult = basketDao.deleteBasketItem(deleteReferences);
-						int productQuantityUpdateResult = productDao.changeQuantity(productDto);
-
+						int orderListInsertResult=orderDao.insertOrder(order);
+						int basketDeleteResult=basketDao.deleteBasketItem(deleteReferences);
+						int productQuantityUpdateResult=productDao.changeQuantity(productDto);
+						//LogWriter
+						String path =  request.getSession().getServletContext().getRealPath( "/data" );
+						Calendar cal = GregorianCalendar.getInstance();
+						ProductDataBean product = productDao.getProductDetailsByProductCode(order.getProductCode());
+						String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice();
+						String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
+						orderLog(path,orderList, cal);
+						productLog(path,productList, cal);
 						request.setAttribute("orderListInsertResult", orderListInsertResult);
 						request.setAttribute("basketDeleteResult", basketDeleteResult);
 						request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
@@ -759,5 +778,30 @@ public class UserProHandler {
 		chat.setChatContent(chatContent);
 		chat.setReceiver("admin");
 		chatDao.chatInput(chat);
+	}
+	private void orderLog(String path, String log, Calendar cal) {
+		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
+		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		try {
+			FileWriter fw = new FileWriter(file, true);
+			fw.write(log);
+			fw.flush();
+			if(fw!=null) fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	private void productLog(String path, String log, Calendar cal) {
+		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
+		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		try {
+			FileWriter fw = new FileWriter(file, true);
+			fw.write(log);
+			fw.flush();
+			if(fw!=null) fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
