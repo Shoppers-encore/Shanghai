@@ -56,7 +56,9 @@ public class AdminProHandler {
 		String password = request.getParameter( "password" );
 		UserDataBean userDto = userDao.getUser(id);
 		int result = 0;
-		if(userDto.getUserLevel() != USERLEVEL) {
+		if(userDto == null) {
+			result = 0;
+		}else if(userDto.getUserLevel() != USERLEVEL) {
 			result = -9;
 		} else if( userDto.getPassword().equals( password ) ) {
 			result = 1; 
@@ -64,7 +66,7 @@ public class AdminProHandler {
 			result = -1;
 		}
 		request.setAttribute( "result", result );
-		request.getSession().setAttribute("id", id);
+		if(result == 1) request.getSession().setAttribute("id", id);
 		return new ModelAndView ("adm/pro/admLoginPro");
 	}
 	
@@ -84,14 +86,13 @@ public class AdminProHandler {
 	         
 	      String systemName = null;
 	      Enumeration<?> e = multi.getFileNames();
-	      
+	      if(e!=null)
 	      while( e.hasMoreElements() ) {
 	         String inputName = (String) e.nextElement();
 	         //String originName = multi.getOriginalFileName( inputName );
 	          systemName = multi.getFilesystemName( inputName );
 	         
 	         String sname = path + "\\" + systemName;            // love5.png
-	         String tname = path + "\\t" + systemName;         // tlove5.png
 	         RenderedOp op = JAI.create("fileload", sname);
 	         BufferedImage sbuffer = op.getAsBufferedImage();
 	         
@@ -103,9 +104,9 @@ public class AdminProHandler {
 	         Graphics g = tbuffer.getGraphics();
 	         g.drawImage(sbuffer, 0, 0, width, height, null );   
 	   
-	            ImageIO.write( tbuffer, "jpg", new File( tname ) );   
-	            ImageIO.write( tbuffer, "png", new File( tname ) );
-	            ImageIO.write( tbuffer, "gif", new File( tname ) );
+	            ImageIO.write( tbuffer, "jpg", new File( sname ) );   
+	            ImageIO.write( tbuffer, "png", new File( sname ) );
+	            ImageIO.write( tbuffer, "gif", new File( sname ) );
 	        
 	           
 	          int imageNo = productDao.getImgNo()+1;
@@ -181,7 +182,6 @@ public class AdminProHandler {
 	    	 
 	    	 int price = Integer.parseInt( multi.getParameter( "price" ) );
 		     String thumbnail = productDao.getImgAddress( ref );
-		     // System.out.println( thumbnail );
 	         productDto.setRef( ref );
 	         productDto.setProductCode( product_codes[i] );
 	         productDto.setProductName( product_name ); 
@@ -190,7 +190,9 @@ public class AdminProHandler {
 	         productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
 	         productDto.setProductCategory( category );
 	         productDto.setProductQuantity( quantity );
-	         productDto.setThumbnail( thumbnail );         
+	         productDto.setProductCategory( category );
+	         productDto.setThumbnail( thumbnail );   
+	         productDto.setProductLevel( 1 );
 	         
 	        int result2 = productDao.input( productDto );
 	         
@@ -198,7 +200,7 @@ public class AdminProHandler {
 
 	         if( result2 >= 1 ) {
 	               String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "
-		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ");";
+		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1);";
 	               new HandlerHelper().fileWriter(sql);
 	         }
 	         
@@ -214,47 +216,44 @@ public class AdminProHandler {
 	    new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
 	    if(-1 < request.getContentType().indexOf("multipart/form-data")) 
 	    	multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
-//	    int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
-//	    String systemName = null;
-//	      Enumeration<?> e = multi.getFileNames();
-//	      
-//	      while( e.hasMoreElements() ) {
-//	         String inputName = (String) e.nextElement();
-//	         //String originName = multi.getOriginalFileName( inputName );
-//	          systemName = multi.getFilesystemName( inputName );
-//	         
-//	         String sname = path + "\\" + systemName;
-//	         String tname = path + "\\t" + systemName;
-//	         RenderedOp op = JAI.create("fileload", sname);
-//	         BufferedImage sbuffer = op.getAsBufferedImage();
-//	         
-//	         int SIZE = 3;
-//	         int width = sbuffer.getWidth() / SIZE;
-//	         int height = sbuffer.getHeight() / SIZE;
-//	         
-//	         BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
-//	         Graphics g = tbuffer.getGraphics();
-//	         g.drawImage(sbuffer, 0, 0, width, height, null );   
-//	   
-//	            ImageIO.write( tbuffer, "jpg", new File( tname ) );   
-//	            ImageIO.write( tbuffer, "png", new File( tname ) );
-//	            ImageIO.write( tbuffer, "gif", new File( tname ) );
-//	        
-//	          ImageInfoDataBean imgDto = new ImageInfoDataBean();
-//	          int imageNo = productDao.getImgNo()+1;
-//	  	      imgDto.setImageNo(imageNo);
-//	  	      imgDto.setRef( ref );
-//	  	      imgDto.setImageAddress(systemName);
-//	  	      int result = productDao.insertImgInfo(imgDto);
-//	  	      
-//		  	   if( result == 1 ) {
-//		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
-//		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
-//	              new HandlerHelper().fileWriter(sql);
-//		  	   }
-//		  	 request.setAttribute( "systemName", systemName );
-//			}
-		int ref = Integer.parseInt(multi.getParameter("product_code"));
+	    int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
+	    String[] deleteFiles = multi.getParameterValues("delImg");
+	    if(deleteFiles!=null) {
+	    	for(int i = 0 ; i <deleteFiles.length;i++) {
+	    		int deleteImageNo = Integer.parseInt(deleteFiles[i]);
+	    		File f = new File(path+"/"+productDao.getDeleteImageAddress(deleteImageNo));
+	    		System.out.println(f.exists() +" : " + deleteFiles[i]);
+	    		if(f.exists()) {
+	    			f.delete();
+	    			productDao.deleteImage(deleteImageNo);
+	    		}
+	    	}
+	    }
+	    String systemName = null;
+	      Enumeration<?> e = multi.getFileNames();
+	      
+	      while( e.hasMoreElements() ) {
+	         String inputName = (String) e.nextElement();
+	         //String originName = multi.getOriginalFileName( inputName );
+	          systemName = multi.getFilesystemName( inputName );
+	         
+	         String sname = path + "\\" + systemName;
+	         RenderedOp op = JAI.create("fileload", sname);
+	         BufferedImage sbuffer = op.getAsBufferedImage();
+	          ImageInfoDataBean imgDto = new ImageInfoDataBean();
+	          int imageNo = productDao.getImgNo()+1;
+	  	      imgDto.setImageNo(imageNo);
+	  	      imgDto.setRef( ref );
+	  	      imgDto.setImageAddress(systemName);
+	  	      int result = productDao.insertImgInfo(imgDto);
+	  	      
+		  	   if( result == 1 ) {
+		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
+		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
+	              new HandlerHelper().fileWriter(sql);
+		  	   }
+		  	 request.setAttribute( "systemName", systemName );
+			}
 		String[] color = multi.getParameterValues("color");
 		String[] size = multi.getParameterValues("size");
 		int[] colors = new int[color.length];
@@ -366,8 +365,8 @@ public class AdminProHandler {
 	}
 	@RequestMapping("/admLogoutPro")
 	public String admLogoutPro(HttpServletRequest request, HttpServletResponse response) {
-		request.getSession().setAttribute("memid",null);
-		return "redirect:admLoginForm.jk";
+		request.getSession().setAttribute("id",null);
+		return "redirect:admMain.jk";
 	}
 
 	@RequestMapping("/changeQuantity")

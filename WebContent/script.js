@@ -30,7 +30,18 @@ var error = "아이디 중복확인 실패";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var emailcheckerror1 = "이메일 인증 해 주세요.";
 var emailcheckerror2 = "인증번호가 일치하지 않습니다."
+var emailconfirmerror = "이메일 인증 후 다시 시도해주세요.";
+var iderror = "아이디 중복 확인 후 다시 시도해주세요.";
+var passwderror = "비밀번호 일치 여부 확인 해주세요.";
 
+	
+// Message-BasketList
+var emptyBasket='장바구니에 담긴 상품이 없습니다.';
+var emptyBasketCount='전체 상품: 총 0개';
+
+
+	
+	
 ////// <User>
 
 /*Function*/
@@ -89,6 +100,7 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+//Input Validation: block special character & accept input of only numbers
 function checkHeight(){
 	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
     if((event.keyCode<48)||(event.keyCode>57) && (event.keyCode==num))  //input only numbers
@@ -96,16 +108,15 @@ function checkHeight(){
 }
 
 
-출처: http://kmj1107.tistory.com/entry/javascript-input-textBox-숫자만-입력allow-only-number-in-textbox [토순이네집]
 //SMTP - Simple Mail Transfer Protocol
 function mailTransfer() {
-	if(inputform.email.value.indexOf("@")==-1){ //check proper email format
+	if(inputform.email.value.indexOf("@") == -1 || inputform.email.value.indexOf(".") == -1){ //check proper email format
 	      alert(emailfmterror);
 	      return false;
 	 }
 	var url = "userMailCheck.jk?email="+inputform.email.value;	//direct to UserProHandler.java with email value
 	//open(URL, name, specs, replace)
-	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=400, height=250, top=180, left=630" );
+	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630" );
 }
 //Check authentication-key match
 function matchAuthKey() {
@@ -116,6 +127,24 @@ function matchAuthKey() {
         self.close();
     }
 }
+//Validity Check for userInputForm - function for joining member
+function inputCheck() {
+	   if( inputform.email.value == 0 ) {      // 이메일 인증 안하면 block
+	      alert( emailconfirmerror );
+	      inputform.email.focus();
+	      return false;
+	   } else if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
+	      alert( iderror );
+	      inputform.id.focus();
+	      return false;
+	   } else if( inputform.password.value != inputform.repassword.value ) {
+	      alert( passwderror );
+	      inputform.repassword.focus();
+	      return false;
+	   } 
+	   
+}
+
 //Find address through zip-code : http://postcode.map.daum.net/guide#sample
 function sample4_execDaumPostcode() {
     new daum.Postcode({

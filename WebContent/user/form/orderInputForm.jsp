@@ -23,11 +23,6 @@
 		
 		<div class="container-fluid col-lg-10 justify-content-center">
 			<div class="mt-3"><h5>${head_orderInputForm}</h5></div>
-				
-			<!-- If not logged in, redirect to login page -->
-			<c:if test="${id eq null}">
-				<c:redirect url="userLoginForm.jk"/>
-			</c:if>
 			
 			<!-- When logged in -->
 			<c:if test="${id ne null}">				

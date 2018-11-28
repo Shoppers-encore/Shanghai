@@ -1,5 +1,6 @@
 package db;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,13 +35,11 @@ public class ProductDao{
 	}
 
 	public int getSearchCount(String searchWord) {	
-		System.out.println(searchWord);
 		return session.selectOne("Admin.getSearchCount", searchWord);
 	}
 	
 	public List<ProductDataBean> getNameSearch(Map<String,String> map){
-		return session.selectList("Admin.searchName", map);
-		//SELECT * FROM jk_good WHERE good_name LIKE '%'||#{searchWord}||'%' AND good_code=to_char(ref)
+		return session.selectList("Admin.getProductSearchList", map);
 	}
 	
 	public int getProdCount() {
@@ -159,8 +158,27 @@ public class ProductDao{
 		return session.selectList("User.getProdRef");
 	}
 
-	public List<Integer> getBestProduct(List<Integer> ref) {
-		return session.selectList("User.getBestProduct", ref);
+	public List<Integer> getBestProduct() {
+		return session.selectList("User.getBestProduct");
+	}
+	
+	public List<ProductDataBean> getBestList(int ref) {
+		return session.selectList("User.getBestList", ref);
+	}
+	
+	public int getProductDetailSearchCount(String searchWord) {
+		return session.selectOne("Admin.getProductDetailSearchCount", searchWord);
+	}
+	public List<ProductDataBean> getProductDetailSearchList(Map<String, String> map) {
+		return session.selectList("Admin.getProductDetailSearchList", map);
+	}
+
+	public int deleteImage(int imageNo) {
+		return session.delete("Admin.deleteImage", imageNo);
+	}
+
+	public String getDeleteImageAddress(int deleteImageNo) {
+		return session.selectOne("Admin.getDeleteImageAddress", deleteImageNo);
 	}
 	
 }

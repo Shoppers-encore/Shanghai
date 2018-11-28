@@ -39,10 +39,6 @@
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
 		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
 			<br>
@@ -83,7 +79,7 @@
 							<c:if test="${currentPage ne 1}">
 								<a href="userProductShirtsList.jk?category=${category}">[◀◀]</a>
 							<c:if test="${startPage gt pageBlock}">
-								<a href="userProductShirtsList.jk?category="${category}pageNum=${startPage-pageBlock}">[◀]</a>
+								<a href="userProductShirtsList.jk?category=${category}&pageNum=${startPage-pageBlock}">[◀]</a>
 								</c:if>
 							</c:if>
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -98,7 +94,7 @@
 								<c:if test="${pageCount>endPage}">
 								<a href="userProductShirtsList.jk?category=${category}&pageNum=${startPage+pageBlock}">[▶]</a>
 								</c:if>
-								<a href="userProductShirtsList.jk?category=${cateory}&pageNum=${pageCount}">[▶▶]</a>
+								<a href="userProductShirtsList.jk?category=${category}&pageNum=${pageCount}">[▶▶]</a>
 							</c:if>
 						</c:if>
 					</div>

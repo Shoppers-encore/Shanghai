@@ -9,7 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="mypage">
+	<a href="main.jk">
 	<img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
+	</a>
     <hr>	
 	<div class="container" style="width: 800px">
 		<h4><b>내 정보</b></h4>
@@ -44,7 +46,9 @@
 			</div>
 			<div class="form-group row"><!-- email -->
 					<label for="email" class="col-sm-2 col-form-label">${str_email}</label>
-						${userDto.email}		
+					<div class="col-sm-8">
+						${userDto.email}	
+					</div>			
 			</div>
 			<div class="form-group row"><!--zip code -->
 					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}</label>

@@ -33,8 +33,9 @@
 					</c:if>
 					<c:if test="${count ne 0}">
 						<c:forEach var="reviewlist" items="${reviewLists}">
+							<c:set var="prodRef" value="${fn:substring(reviewlist.productCode, 2, fn:length(reviewlist.productCode)-2)}"/>
 							<tr>
-								<td><a href="userProductDetail.jk?productCode=${reviewlist.productCode}">${reviewlist.productName}</a></td>
+								<td><a href="userProductDetail.jk?ref=${prodRef}">${reviewlist.productName}</a></td>
 								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}&pageNum=${pageNum}">
 									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
 										

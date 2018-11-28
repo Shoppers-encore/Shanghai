@@ -50,8 +50,10 @@ public class AdminViewHandler {
 	         e.printStackTrace();
 	      }
 	  BoardDao boardDao = new BoardDao();
-      String id = (String)request.getSession().getAttribute("id");
-      UserDataBean userDto = userDao.getUser(id);
+	  String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
       request.setAttribute( "id", id );
       request.setAttribute( "userDto", userDto );
       
@@ -93,9 +95,15 @@ public class AdminViewHandler {
 		String productCode = request.getParameter( "productCode" );
 		ProductDao productDao = new ProductDao();
 		String productName = productDao.getProdName( productCode );
+
+			String id = (String)request.getSession().getAttribute("id");
+			if(id == null) return new AdminFormHandler().admLoginForm(request, response);
+			UserDataBean userDto = userDao.getUser(id);
+			if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
+	      request.setAttribute( "id", id );
+	      request.setAttribute( "userDto", userDto );
 		
 		ReviewDataBean reviewDto = boardDao.get( reviewNo );
-		String id = (String)request.getSession().getAttribute("id");
 		if(id !=null) {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("reviewNo", new Integer(reviewNo).toString());
@@ -110,8 +118,10 @@ public class AdminViewHandler {
 
 	@RequestMapping("/tagList")
 	public ModelAndView tagList(HttpServletRequest request, HttpServletResponse response) {
-	   String id = (String)request.getSession().getAttribute("id");
-	   UserDataBean userDto = userDao.getUser(id);
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 	   request.setAttribute( "id", id );
 	   request.setAttribute( "userDto", userDto );
 	   TagDao tagDao = new TagDao();
@@ -123,10 +133,12 @@ public class AdminViewHandler {
 	@RequestMapping("/userList")
 	public ModelAndView userList(HttpServletRequest request, HttpServletResponse response) {		
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 		int count = userDao.getUserListCount();
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<UserDataBean> members = userDao.getList(100, map);
-		UserDataBean userDto = userDao.getUser(id);
 		request.setAttribute("members", members);
 		request.setAttribute("userDto", userDto);
 		return new ModelAndView("adm/view/userList");
@@ -134,7 +146,9 @@ public class AdminViewHandler {
 	@RequestMapping("/admChatView")
 	   public ModelAndView admChatView(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 	      return new ModelAndView("adm/view/admChatView");
@@ -142,7 +156,9 @@ public class AdminViewHandler {
 	@RequestMapping("/admProductView")
 	public ModelAndView admProductView( HttpServletRequest request, HttpServletResponse response ) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		
@@ -158,7 +174,7 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			count = productDao.getProductCount(map);
+			count = productDao.getSearchCount(searchWord);			/////////////// 1116怨좎튇怨�
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);
@@ -168,7 +184,7 @@ public class AdminViewHandler {
 				map.put("searchWord", searchWord);
 				Map<String, String> cmap = hh.makeCount(count, request);
 				cmap.put("searchWord", searchWord);
-				List<ProductDataBean> productList = productDao.getProductList(cmap);
+				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 怨좎튇怨�
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("adm/view/admProductView");
@@ -185,23 +201,44 @@ public class AdminViewHandler {
 	@RequestMapping("/admProductList")
 	public ModelAndView admProductList( HttpServletRequest request, HttpServletResponse response ) {
 			String id = (String)request.getSession().getAttribute("id");
+			if(id == null) return new AdminFormHandler().admLoginForm(request, response);
 			UserDataBean userDto = userDao.getUser(id);
+			if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 			request.setAttribute( "id", id );
 			request.setAttribute( "userDto", userDto );
-	
-			int count = productDao.getProdCount();
-			Map<String,String> map = new HandlerHelper().makeCount(count, request);
-			List <ProductDataBean> products = productDao.getProdList(map);
-	
-			request.setAttribute("products", products);
-			request.setAttribute("count", count);
+			   try {
+			         request.setCharacterEncoding("utf-8");
+			      } catch ( UnsupportedEncodingException e ) {
+			         e.printStackTrace();
+			      }
+			String searchWord = request.getParameter("searchWord");
+			if( "".equals(searchWord) || searchWord == null ) {
+				// NO QUERY
+				int count = productDao.getProdCount();
+				Map<String,String> map = new HandlerHelper().makeCount(count, request);
+				List <ProductDataBean> products = productDao.getProdList(map);
+				request.setAttribute("products", products);
+				request.setAttribute("count", count);
+			} else {
+				// YES QUERY
+				int count = productDao.getProductDetailSearchCount(searchWord);
+				System.out.println(count);
+				Map<String,String> map = new HandlerHelper().makeCount(count, request);
+				map.put("searchWord", searchWord);
+				List<ProductDataBean> products = productDao.getProductDetailSearchList(map);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("products", products);
+				request.setAttribute("count", count);
+			}
 			return new ModelAndView("adm/view/admProductList");
 		}
 	
 	@RequestMapping ( "/admProductDetail" )
 	public ModelAndView productDetail ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		int ref = Integer.parseInt(request.getParameter("ref"));
@@ -217,10 +254,18 @@ public class AdminViewHandler {
 	}
 	@RequestMapping("/admOrderDetail")
 	public ModelAndView admOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
+		request.setAttribute( "id", id );
+		request.setAttribute( "userDto", userDto );
+		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int count = orderDao.prodFromOrder(orderCode);
 		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
 		
+		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("count", count);
 		request.setAttribute("orderDetailList", orderDetailList);
 		return new ModelAndView("adm/view/admOrderDetail");
@@ -229,7 +274,9 @@ public class AdminViewHandler {
 	@RequestMapping("/admOrderList")
 	public ModelAndView admOrderList(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == null) return new AdminFormHandler().admLoginForm(request, response);
 		UserDataBean userDto = userDao.getUser(id);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		
@@ -257,7 +304,7 @@ public class AdminViewHandler {
 	}
    @RequestMapping("/admChatting")
    public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
-      String id = request.getParameter("id");
+	   String id = (String)request.getSession().getAttribute("id");
       request.setAttribute("id", id);
       return new ModelAndView("adm/view/admChatting");
    }
@@ -281,5 +328,23 @@ public class AdminViewHandler {
       request.setAttribute("chatData", chatData);
       return chatData;
    }
-
+	@RequestMapping("/admUserOrderList")
+	public ModelAndView admUserOrderList(HttpServletRequest request, HttpServletResponse response) {		
+		String adminid = (String)request.getSession().getAttribute("id");
+		if(adminid == null) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean userDto = userDao.getUser(adminid);
+		if(userDto.getUserLevel() != 9) return new AdminFormHandler().admLoginForm(request, response);
+		UserDataBean adminDto = userDao.getUser(adminid);
+		String userid = (String)request.getParameter("userid");
+		//UserDataBean userDto = userDao.getUser(userid);
+		int count = orderDao.getDistinctOrderCountById(userid);
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		map.put("id", userid);
+		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
+		request.setAttribute("orders", orders);
+		request.setAttribute("count", count);
+		request.setAttribute("userid", userid);
+		request.setAttribute("userDto", adminDto);
+		return new ModelAndView("adm/view/admUserOrderList");
+	}
 }

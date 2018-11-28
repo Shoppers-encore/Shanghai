@@ -35,15 +35,6 @@
 		</style>
 	</head>
 	<body class="container">
-      	<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-	      	</div>
-	      	<div id="cart">
-				<img id="cartImg" src="images/cart_red.png">
-				<form></form>
-			</div>
-		</c:if>
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
 		<c:set var="id" value="aaa" scope="session"/>
@@ -78,7 +69,7 @@
 							<c:if test="${currentPage ne 1}">
 								<a href="userProductList.jk?category=${category}">[◀◀]</a>
 							<c:if test="${startPage gt pageBlock}">
-								<a href="userProductList.jk?category="${category}pageNum=${startPage-pageBlock}">[◀]</a>
+								<a href="userProductList.jk?category=${category}&pageNum=${startPage-pageBlock}">[◀]</a>
 								</c:if>
 							</c:if>
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -93,7 +84,7 @@
 								<c:if test="${pageCount>endPage}">
 								<a href="userProductList.jk?category=${category}&pageNum=${startPage+pageBlock}">[▶]</a>
 								</c:if>
-								<a href="userProductList.jk?category=${cateory}&pageNum=${pageCount}">[▶▶]</a>
+								<a href="userProductList.jk?category=${category}&pageNum=${pageCount}">[▶▶]</a>
 							</c:if>
 						</c:if>
 					</div>
