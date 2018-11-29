@@ -3,7 +3,42 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>썸네일</title>
+<title>썸네일</title><head>
+  <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  * {
+   font-family: 'Nanum Gothic';
+	}
+	html, body {
+		height:100%;
+	}
+	body {
+	  display:flex;
+	  align-items:center;
+	}
+
+	#tagInputForm {
+		text-align : center;
+		float : none;
+		margin : 0 auto;
+		width : 300px;
+		height : 230px;
+		padding : 20px;
+	}
+  </style>
+</head>
+<body>
+	<form name="thumb" encType="multipart/form-data" method="post" action="thumbnailInputPro.jk">
+		<div class="container-fluid">
+		    <div class="col-*-4 border centered" id="tagInputForm">
+		    	<br> ${msg_addTag} <br><br>
+		    	<input type="text" class="form-control" name="newTag" autofocus> <br>
+		    	<input type="submit" class="btn btn-primary" value="${btn_confirm}" >
+		    	<input type="button" class="btn btn-primary" value="${btn_cancel}" onclick="self.close()">
+			</div>
+		</div>
+	</form>
+</body>
 </head>
 <body>
 	<%@ include file="../../setting.jsp" %>
