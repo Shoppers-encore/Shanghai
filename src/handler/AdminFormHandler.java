@@ -101,11 +101,11 @@ public class AdminFormHandler {
 			int[] colors = hh.decodeColorCode(list);
 			int[] sizes = hh.decodeSizeCode(list);
 			for(int i=0;i<colors.length;i++) {
-				System.out.println("color" + colors[i]);
+				//System.out.println("color" + colors[i]);
 				colorMap.put("col"+new Integer(colors[i]).toString(), colors[i]);
 			}
 			for(int i = 0 ; i<sizes.length;i++) {
-				System.out.println("size"+sizes[i]);
+				//System.out.println("size"+sizes[i]);
 				sizeMap.put("siz"+new Integer(sizes[i]).toString(), sizes[i]);
 			}
 			List<ImageInfoDataBean> imageList = productDao.getImgDetail(ref);

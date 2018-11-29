@@ -388,7 +388,7 @@ function delImg(imgId){
                         </td>
                        	<th> ${str_productQuantity} </th>
                     	<td> 
-                        <input type="text" name="quantity" id = "quantity"class="form-control">
+                        <input type="text" name="quantity" id="quantity"class="form-control">
                     	</td> 
                   </tr>
                   <tr>
@@ -401,7 +401,7 @@ function delImg(imgId){
                   <tr>
                         <th> ${str_content} </th>
                         <td colspan="5">
-                           <textarea id="productContent" name="good_content" id="productContent" class="form-control" rows="15"></textarea>
+                           <textarea id="productContent" name="good_content" class="form-control" rows="15"></textarea>
                         </td>
                   </tr>
                   <tr>
