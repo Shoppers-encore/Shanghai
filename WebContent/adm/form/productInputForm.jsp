@@ -196,24 +196,49 @@
     opacity: 0.7;
 }
   </style>
-<script type="text/javascript">/* 
-function deletePhoto(tb_no,photo_id,start){
+<script type="text/javascript">
+		$(document).ready(
+			function(){
+				$(document).on(
+					'click','th[id="thumb"]',function(){
+						if($('input[name="thumbnail"]').val()==0){
+							thumbnailInputForm();
+						}else{
+							var con = confirm('기존 파일이 지워지게 됩니다 진행하시겠습니까?');
+							if(con){
+								thumbnailInputform();
+							}else{
+								
+							}
+						}
+					}
+				);
+			}
+		);
+		function thumbnailInputForm(){
+			open( "thumbnailInput.jk", "search window", "toolbar=no, scrollbar=no, status=no, menubar=no, width=300px, height=340px" );
+		}
+function photoView(){
 	$.ajax({
-		type:'POST',
-		url:'productInputForm.jk',
-		data:{
-			tb_no:tb_no,
-			photo_id:photo_id
-		},
+		type:'post',
+		url:'thumbnailInput.jk',
+		data:$('form[id="thumb"]').serialize(),
+		dataType:'json',
+		contentType:'multipart/form-data',
 		success:function(data){
-			var page="svc/boardAlbum.go?tb_no="+tb_no+"&start="+start;
-			$('#album').load(page);
-		},
-		error:function(e){
-			alert(photodeleteerror);
+			$("input[name='productThumbnail']").val()=data.systemName;
 		}
 	});
-} */
+}
+var cnt = 0;
+function addImages(){
+	$("th[id='thimg']").append("<input type='file' name='upload"+cnt+"' id='"+cnt+"'>");
+	$("th[id='thimg']").append("<input type='button' value='-' id='"+cnt+"'onclick='delImg("+cnt+")'>");
+	cnt++;
+}
+function delImg(imgId){
+	$("input[id='"+imgId+"']").remove();
+}
 </script>  
 </head>
 
@@ -228,6 +253,7 @@ function deletePhoto(tb_no,photo_id,start){
                      <th style="width :10%"> ${str_productCode} </th>
                      <td style="width :20%">
                         <input type="text" name="product_code" class="form-control" readonly value="${ref}">
+                        <input type="hidden" name="productThumbnail" value="">
                      </td>
                      <th style="width :10%"> ${str_size} </th>
                      <td style="width :30%">
@@ -366,9 +392,10 @@ function deletePhoto(tb_no,photo_id,start){
                     	</td> 
                   </tr>
                   <tr>
-                     <th colspan="6">
-                     <input class="btn btn-danger" type="file" name="upload1">
-                     <input class="btn btn-danger" type="file" name="upload2">     
+                  	<th>썸네일</th><th colspan="2" id="thumb"><input type="hidden" name="thumbnail" value="0"></th>
+                  	<th>사진정보</th>
+                     <th colspan="2" id="thimg">
+						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImages()">
                      </th>
                   </tr>
 		                     	

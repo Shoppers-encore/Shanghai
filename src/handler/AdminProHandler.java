@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -392,4 +393,27 @@ public class AdminProHandler {
 	         }
 	         return "redirect:admProductList.jk";
 	   }
+	@RequestMapping("thumbnailInputPro")
+	public void thumbnailInputPro(HttpServletRequest request, HttpServletResponse response) {
+		String path = request.getSession().getServletContext().getRealPath("/save");
+		MultipartRequest multi = null;
+	    new File( path ).mkdir();
+	    System.out.println(request.getContentType());
+	    if(-1 < request.getContentType().indexOf("multipart/form-data"))
+			try {
+				multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	    String systemName = null;
+	    Enumeration<?> e = multi.getFileNames();
+	      
+	      while( e.hasMoreElements() ) {
+	         String inputName = (String) e.nextElement();
+	         //String originName = multi.getOriginalFileName( inputName );
+	          systemName = multi.getFilesystemName( inputName );
+	         
+		  	  }
+		  	 request.setAttribute( "systemName", systemName );
+	}
 }

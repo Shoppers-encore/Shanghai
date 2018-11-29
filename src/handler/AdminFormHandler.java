@@ -123,4 +123,9 @@ public class AdminFormHandler {
 			return new ModelAndView("user/view/userMain");
 		}
 	}
+
+	@RequestMapping("thumbnailInput")
+	public ModelAndView thumbnailInput(HttpServletRequest request,HttpServletResponse response) {
+		return new ModelAndView("adm/form/thumbnailInput");
+	}
 }
