@@ -1,5 +1,17 @@
 @charset "UTF-8";
 /*====Common Shanghai Theme====*/
+
+/*====userHeader====*/
+#cartImg {
+	width: 40px;
+	height: 40px;
+}
+
+img#chatImg {
+	width: 40px;
+	height: 40px;
+}
+
 /*===userInputForm.jsp===*/
 .iconMargin img {
 	margin-botton : -5px;
