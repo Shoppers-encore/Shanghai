@@ -242,7 +242,7 @@ public class AdminViewHandler {
 		request.setAttribute( "id", id );
 		request.setAttribute( "userDto", userDto );
 		int ref = Integer.parseInt(request.getParameter("ref"));
-		List<ProductDataBean> list =productDao.getProdDetail( ref );
+		List<ProductDataBean> list =productDao.getProductDetail( ref );
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));

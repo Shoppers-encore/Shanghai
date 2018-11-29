@@ -27,4 +27,7 @@ public class TagDao {
 	public List<Integer> getProductTagId(int ref) {
 		return session.selectList("Admin.getProductTagId", ref);
 	}
+/*	public int modifyProductTag(ProductTagDataBean productTagDto) {			// 1129 ONGOING BY JH
+		return session.update("Admin.modifyProductTag", productTagDto);
+	}*/				
 }

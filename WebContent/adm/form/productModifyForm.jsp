@@ -234,7 +234,7 @@
                                  <option value="10" ${products.get(0).productCategory==10?'selected':''}>${str_cat_PANTS_kor}</option>
                                  <option value="11" ${products.get(0).productCategory==11?'selected':''}>${str_cat_SHOES_kor}</option>
                                  <option value="12" ${products.get(0).productCategory==12?'selected':''}>${str_cat_BAG_kor}</option>
-                                 <option value="13" ${products.get(0).productCategory==12?'selected':''}>${str_cat_ACCESSORY_kor}</option>
+                                 <option value="13" ${products.get(0).productCategory==13?'selected':''}>${str_cat_ACCESSORY_kor}</option>
                            </select>
                         </td>
                      
