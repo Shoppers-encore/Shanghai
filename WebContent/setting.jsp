@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<script src="/Shanghai/script.js"></script>
+<script src="/urPresent/script.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script
@@ -14,9 +14,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/Shanghai/user/shanghai_style.css">
+<link rel="stylesheet" type="text/css" href="/urPresent/user/shanghai_style.css">
 
-<c:set var="project" value="/Shanghai/user/" />
+<c:set var="project" value="/urPresent/user/" />
 
 <!-- Page -->
 <c:set var="page_input" value="회원가입" />
