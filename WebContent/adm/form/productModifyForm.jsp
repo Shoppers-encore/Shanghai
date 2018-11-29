@@ -348,7 +348,7 @@
                   <tr>
                      <th colspan="6" id="thimg">
                      	<c:forEach var="img" items="${imageList}">
-							<img src="/Shanghai/save/${img.imageAddress}" name="${img.imageNo}" id="image" onclick="deleteImage(${img.imageNo})"><br>
+							<img src="/urPresent/save/${img.imageAddress}" name="${img.imageNo}" id="image" onclick="deleteImage(${img.imageNo})"><br>
 						</c:forEach>
 						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImages()">
                      </th>

@@ -36,7 +36,7 @@
    <article class="col-sm-10 col-8 row">
    <!-- Good Picture -->
       <div class="col-sm-6" >
-         <img src="/Shanghai/save/${productList.get(0).thumbnail}" style="width: 595px; height: 836px; padding: 10%;">
+         <img src="/urPresent/save/${productList.get(0).thumbnail}" style="width: 595px; height: 836px; padding: 10%;">
       </div>
       <!-- Good Detail -->
       <div class="col-sm-6" align="left" style="padding:10%;">
@@ -58,8 +58,8 @@
                <tr>
                   <td>${str_color}</td>
                   <td>
-                     <select>
-                        <option value="-1">${btn_select}</option>
+                     <select name="cl">
+                        <option value=" ">${btn_select}</option>
                         <c:forEach var="productColor" items="${colors}" varStatus="code">
                             <option value="${productColor}">${productColor}</option>
                         </c:forEach>
@@ -69,8 +69,8 @@
                <tr>
                   <td>${str_size}</td>
                   <td>
-                     <select>
-                        <option value="-1">${btn_select}</option>
+                     <select name="sz">
+                        <option value=" ">${btn_select}</option>
                         <c:forEach var="productSize" items="${sizes}">
                             <option value="${productSize}">${productSize}</option>
                         </c:forEach>
@@ -93,7 +93,7 @@
    <div align="center" style="width:100%;">
 
       <c:forEach var="img" items="${imageList}">
-      		<img src="/Shanghai/save/${img.imageAddress}"><br>
+      		<img src="/urPresent/save/${img.imageAddress}"><br>
       </c:forEach>
    </div>
    <hr><br><br><br>

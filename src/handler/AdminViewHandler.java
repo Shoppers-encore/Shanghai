@@ -222,7 +222,7 @@ public class AdminViewHandler {
 			} else {
 				// YES QUERY
 				int count = productDao.getProductDetailSearchCount(searchWord);
-				System.out.println(count);
+				// System.out.println(count);
 				Map<String,String> map = new HandlerHelper().makeCount(count, request);
 				map.put("searchWord", searchWord);
 				List<ProductDataBean> products = productDao.getProductDetailSearchList(map);
