@@ -343,10 +343,10 @@ public class AdminProHandler {
 		request.setAttribute("result", result);
 		return new ModelAndView("adm/pro/tagDeletePro");
 	}
-	@RequestMapping("/tagModifyPro")
+/*	@RequestMapping("/tagModifyPro")
 	public String tagModifyPro(HttpServletRequest request, HttpServletResponse response) {
 		return "redirect:tagList.jk";
-	}
+	}*/
 	@RequestMapping("/admModifyPro")
 	public ModelAndView admModifyPro ( HttpServletRequest request, HttpServletResponse response ) {
 		try {
