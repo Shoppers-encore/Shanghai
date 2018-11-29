@@ -58,8 +58,8 @@
                <tr>
                   <td>${str_color}</td>
                   <td>
-                     <select>
-                        <option value="-1">${btn_select}</option>
+                     <select name="cl">
+                        <option value=" ">${btn_select}</option>
                         <c:forEach var="productColor" items="${colors}" varStatus="code">
                             <option value="${productColor}">${productColor}</option>
                         </c:forEach>
@@ -69,8 +69,8 @@
                <tr>
                   <td>${str_size}</td>
                   <td>
-                     <select>
-                        <option value="-1">${btn_select}</option>
+                     <select name="sz">
+                        <option value=" ">${btn_select}</option>
                         <c:forEach var="productSize" items="${sizes}">
                             <option value="${productSize}">${productSize}</option>
                         </c:forEach>
