@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<div class="text-center">
+	<a href="main.jk">
+		<img src="/urPresent/images/logo1-1.png" class="w-50" alt="Logo">
+	</a>
+</div>
+
 <nav class="navbar navbar-expand-sm sticky-top">
 	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-		<a class="navbar-brand" href="main.jk">
-			<img src="/urPresent/images/logo2.png" class="w-75" alt="Logo">
-		</a>
 		<div class="dropdown">
 			<a class="navbar-brand" href="#" data-toggle="dropdown">${str_product}</a>
 			<div class="dropdown-menu">
