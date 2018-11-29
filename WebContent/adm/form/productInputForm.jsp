@@ -395,7 +395,7 @@ function delImg(imgId){
                   	<th>썸네일</th><th colspan="2" id="thumb"><input type="hidden" name="thumbnail" value="0"></th>
                   	<th>사진정보</th>
                      <th colspan="2" id="thimg">
-						<input type="button" name="addImage" value="${btn_addImage}" onclick="addImages()">
+						<input type="file" name="thumb">
                      </th>
                   </tr>
 		                     	

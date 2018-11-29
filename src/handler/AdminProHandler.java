@@ -394,11 +394,10 @@ public class AdminProHandler {
 	         return "redirect:admProductList.jk";
 	   }
 	@RequestMapping("thumbnailInputPro")
-	public void thumbnailInputPro(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView thumbnailInputPro(HttpServletRequest request, HttpServletResponse response) {
 		String path = request.getSession().getServletContext().getRealPath("/save");
 		MultipartRequest multi = null;
 	    new File( path ).mkdir();
-	    System.out.println(request.getContentType());
 	    if(-1 < request.getContentType().indexOf("multipart/form-data"))
 			try {
 				multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
@@ -407,13 +406,14 @@ public class AdminProHandler {
 			}
 	    String systemName = null;
 	    Enumeration<?> e = multi.getFileNames();
-	      
 	      while( e.hasMoreElements() ) {
 	         String inputName = (String) e.nextElement();
 	         //String originName = multi.getOriginalFileName( inputName );
 	          systemName = multi.getFilesystemName( inputName );
+		      System.out.println(systemName);
 	         
 		  	  }
-		  	 request.setAttribute( "systemName", systemName );
+		  	 request.setAttribute( "result", systemName );
+		  	 return new ModelAndView("adm/pro/thumbnailInputPro");
 	}
 }
