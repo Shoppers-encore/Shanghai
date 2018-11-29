@@ -73,142 +73,133 @@ public class AdminProHandler {
 	
 
 	@RequestMapping ( "/productInputPro" )
-	   public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
-		  ProductDao productDao = new ProductDao(); 
-	      ImageInfoDataBean imgDto = new ImageInfoDataBean();
-	      ProductTagDataBean productTagDto = new ProductTagDataBean();
-	      
-	      String path =  request.getSession().getServletContext().getRealPath( "/save" );
-	      MultipartRequest multi = null;
-	      new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
-	      if(-1 < request.getContentType().indexOf("multipart/form-data")) 
-	         multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
-	      int ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
-	         
-	      String systemName = null;
-	      Enumeration<?> e = multi.getFileNames();
-	      if(e!=null)
-	      while( e.hasMoreElements() ) {
-	         String inputName = (String) e.nextElement();
-	         //String originName = multi.getOriginalFileName( inputName );
-	          systemName = multi.getFilesystemName( inputName );
-	         
-	         String sname = path + "\\" + systemName;            // love5.png
-	         RenderedOp op = JAI.create("fileload", sname);
-	         BufferedImage sbuffer = op.getAsBufferedImage();
-	         
-	         int SIZE = 3;
-	         int width = sbuffer.getWidth() / SIZE;
-	         int height = sbuffer.getHeight() / SIZE;
-	         
-	         BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
-	         Graphics g = tbuffer.getGraphics();
-	         g.drawImage(sbuffer, 0, 0, width, height, null );   
-	   
-	            ImageIO.write( tbuffer, "jpg", new File( sname ) );   
-	            ImageIO.write( tbuffer, "png", new File( sname ) );
-	            ImageIO.write( tbuffer, "gif", new File( sname ) );
-	        
-	           
-	          int imageNo = productDao.getImgNo()+1;
-	  	      imgDto.setImageNo(imageNo);
-	  	      imgDto.setRef( ref );
-	  	      imgDto.setImageAddress(systemName);
-	  	      int result = productDao.insertImgInfo(imgDto);
-	  	      
-		  	   if( result == 1 ) {
-		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
-		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
-	              new HandlerHelper().fileWriter(sql);
-		  	   }
-		  	 request.setAttribute( "systemName", systemName );
+	public ModelAndView productInputPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+		ProductDao productDao = new ProductDao(); 
+		ImageInfoDataBean imgDto = new ImageInfoDataBean();
+		ProductTagDataBean productTagDto = new ProductTagDataBean();
+		String path =  request.getSession().getServletContext().getRealPath( "/save" );
+		MultipartRequest multi = null;
+		new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
+		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
+			multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+		int ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
+		String thumbnail = null;
+		String systemName = null;
+		Enumeration<?> e = multi.getFileNames();
+		while( e.hasMoreElements() ) {
+			String inputName = (String) e.nextElement();
+			systemName = multi.getFilesystemName( inputName );
+			String sname = path + "\\" + systemName;
+			String tname = null;
+			new File(path+"\\"+ref).mkdir();
+			int imageNo = 0;
+			if(inputName.equals("thumb")) {
+				tname = ref+"\\thumbnail"+ref+"-"+systemName;
+			}else {
+				imageNo = productDao.getImgNo()+1;
+				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
 			}
-	      	      
-	      String col[] = multi.getParameterValues( "color" );
-	      int colors[] = null;
-	      if( col != null ) {
-	         colors = new int[ col.length ];
-	      for( int i=0;i<col.length; i++ ) {
-	         colors[i] = Integer.parseInt( col[i] );
-	         }
-	      }
-	      
-	      String siz[] = multi.getParameterValues( "size" );
-	      int sizes[] = null;
-	      if( siz != null ) {
-	         sizes = new int[ siz.length ];
-	      for( int i=0;i<siz.length; i++ ) {
-	         sizes[i] = Integer.parseInt( siz[i] );
-	         }
-	      }
-	      
-	      String tag[] = multi.getParameterValues( "tag" );
-	      int tags[] = null;
-	      if( tag != null ) {
-	    	  tags = new int[ tag.length ];
-	      for( int i=0; i<tag.length; i++ ) {
-	    	  tags[i] = Integer.parseInt( tag[i] );
-		       productTagDto.setRef( ref );
-		       productTagDto.setTagid(  tags[i] );	
-		       int tagId = tags[i];
-		       int result1 = tagDao.insertProdTag(productTagDto);
-		       if( result1 == 1 ) {
-		  		   String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES "
-		  				   + ref + ", " + tagId + ");";
-	              new HandlerHelper().fileWriter(sql);
-		  	   }
-	      	}
-	      }
-	     //yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
-	      ProductDataBean productDto = new ProductDataBean();
-	      String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
-	     
-	      for( int i=0; i<product_codes.length; i++ ) {
-	    	  
-	    	 ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
-	    	 String product_name = multi.getParameter( "product_name" );
-	    	 int quantity = Integer.parseInt( multi.getParameter( "quantity" ) );
-	    	 int category = Integer.parseInt( multi.getParameter("category"));
-	    	 String good_content = multi.getParameter("good_content");	    	
-	    	 String saleCheck = multi.getParameter( "sale" );
-	    	 int sale;
-	    	 
-	    	 if( saleCheck == null || saleCheck.equals("") ) {
-	    		 productDto.setDiscount( 0 );
-	    		 sale = 0;
-	    	 } else {
-	    		 sale = Integer.parseInt( saleCheck );
-	    		 productDto.setDiscount( sale );
-	    	 }
-	    	 
-	    	 int price = Integer.parseInt( multi.getParameter( "price" ) );
-		     String thumbnail = productDao.getImgAddress( ref );
-	         productDto.setRef( ref );
-	         productDto.setProductCode( product_codes[i] );
-	         productDto.setProductName( product_name ); 
-	         productDto.setProductContent( good_content );
-	         productDto.setProductPrice( price );
-	         productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
-	         productDto.setProductCategory( category );
-	         productDto.setProductQuantity( quantity );
-	         productDto.setProductCategory( category );
-	         productDto.setThumbnail( thumbnail );   
-	         productDto.setProductLevel( 1 );
-	         
-	        int result2 = productDao.input( productDto );
-	         
-	        productDao.getProdCount();
-
-	         if( result2 >= 1 ) {
-	               String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "
-		               		+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1);";
-	               new HandlerHelper().fileWriter(sql);
-	         }
-	         
-	         request.setAttribute( "result", result2 );
-	      }  
+			RenderedOp op = JAI.create("fileload", sname);
+			BufferedImage sbuffer = op.getAsBufferedImage();
+			int width = sbuffer.getWidth();
+			int height = sbuffer.getHeight();
+			BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
+			Graphics g = tbuffer.getGraphics();
+			g.drawImage(sbuffer, 0, 0, width, height, null );   
+			ImageIO.write( tbuffer, "jpg", new File( path + "\\"+tname ) );   
+			ImageIO.write( tbuffer, "png", new File( path + "\\"+tname ) );
+			ImageIO.write( tbuffer, "gif", new File( path + "\\"+tname ) );
+			if(inputName.equals("thumb")) {
+				thumbnail = tname;
+			}else {
+				imgDto.setImageNo(imageNo);
+				imgDto.setRef( ref );
+				imgDto.setImageAddress(tname);
+				int result = productDao.insertImgInfo(imgDto);
+				if( result == 1 ) {
+					String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"+ "VALUES ("+imageNo+", "+ ref+", '"+imgDto.getImageAddress()+"' );";
+					new HandlerHelper().fileWriter(sql);
+				}
+			}
+			File f = new File(sname);
+			if(f.exists()) f.delete();
+			request.setAttribute( "systemName", systemName );
+		}      
+		String col[] = multi.getParameterValues( "color" );
+		int colors[] = null;
+		if( col != null ) {
+			colors = new int[ col.length ];
+			for( int i=0;i<col.length; i++ ) {
+				colors[i] = Integer.parseInt( col[i] );
+			}
+		}
+		String siz[] = multi.getParameterValues( "size" );
+		int sizes[] = null;
+		if( siz != null ) {
+			sizes = new int[ siz.length ];
+			for( int i=0;i<siz.length; i++ ) {
+				sizes[i] = Integer.parseInt( siz[i] );
+			}
+		}
+		String tag[] = multi.getParameterValues( "tag" );
+		int tags[] = null;
+		if( tag != null ) {
+			tags = new int[ tag.length ];
+			for( int i=0; i<tag.length; i++ ) {
+				tags[i] = Integer.parseInt( tag[i] );
+				productTagDto.setRef( ref );
+				productTagDto.setTagid(  tags[i] );	
+				int tagId = tags[i];
+				int result1 = tagDao.insertProdTag(productTagDto);
+				if( result1 == 1 ) {
+					String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES "+ ref + ", " + tagId + ");";
+					new HandlerHelper().fileWriter(sql);
+				}
+			}
+		}
+		//yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
+		ProductDataBean productDto = new ProductDataBean();
+		String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
+		 
+		for( int i=0; i<product_codes.length; i++ ) {
+			ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
+			String product_name = multi.getParameter( "product_name" );
+			int quantity = Integer.parseInt( multi.getParameter( "quantity" ) );
+			int category = Integer.parseInt( multi.getParameter("category"));
+			String good_content = multi.getParameter("good_content");	    	
+			String saleCheck = multi.getParameter( "sale" );
+			int sale;
+			if( saleCheck == null || saleCheck.equals("") ) {
+				productDto.setDiscount( 0 );
+				sale = 0;
+			} else {
+				sale = Integer.parseInt( saleCheck );
+				productDto.setDiscount( sale );
+			}
+			int price = Integer.parseInt( multi.getParameter( "price" ) );
+			productDto.setRef( ref );
+			productDto.setProductCode( product_codes[i] );
+			productDto.setProductName( product_name ); 
+			productDto.setProductContent( good_content );
+			productDto.setProductPrice( price );
+			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
+			productDto.setProductCategory( category );
+			productDto.setProductQuantity( quantity );
+			productDto.setProductCategory( category );
+			productDto.setThumbnail( thumbnail );   
+			productDto.setProductLevel( 1 );
+			 
+			int result2 = productDao.input( productDto );
+			 
+			productDao.getProdCount();
+			if( result2 >= 1 ) {
+				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1);";
+				new HandlerHelper().fileWriter(sql);
+			}
+			request.setAttribute( "result", result2 );
+		}  
 		return new ModelAndView ( "adm/pro/productInputPro" );
-	   }
+	}
 	   
 	@RequestMapping ( "/productModifyPro" )
 	public String productModifyPro ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
@@ -393,27 +384,5 @@ public class AdminProHandler {
 	         }
 	         return "redirect:admProductList.jk";
 	   }
-	@RequestMapping("thumbnailInputPro")
-	public ModelAndView thumbnailInputPro(HttpServletRequest request, HttpServletResponse response) {
-		String path = request.getSession().getServletContext().getRealPath("/save");
-		MultipartRequest multi = null;
-	    new File( path ).mkdir();
-	    if(-1 < request.getContentType().indexOf("multipart/form-data"))
-			try {
-				multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-	    String systemName = null;
-	    Enumeration<?> e = multi.getFileNames();
-	      while( e.hasMoreElements() ) {
-	         String inputName = (String) e.nextElement();
-	         //String originName = multi.getOriginalFileName( inputName );
-	          systemName = multi.getFilesystemName( inputName );
-		      System.out.println(systemName);
-	         
-		  	  }
-		  	 request.setAttribute( "result", systemName );
-		  	 return new ModelAndView("adm/pro/thumbnailInputPro");
-	}
+	
 }
