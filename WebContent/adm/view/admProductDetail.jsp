@@ -36,7 +36,7 @@
    <article class="col-sm-10 col-8 row">
    <!-- Good Picture -->
       <div class="col-sm-6" >
-         <img src="/Shanghai/save/${productList.get(0).thumbnail}" style="width: 595px; height: 836px; padding: 10%;">
+         <img src="/urPresent/save/${productList.get(0).thumbnail}" style="width: 595px; height: 836px; padding: 10%;">
       </div>
       <!-- Good Detail -->
       <div class="col-sm-6" align="left" style="padding:10%;">
@@ -93,7 +93,7 @@
    <div align="center" style="width:100%;">
 
       <c:forEach var="img" items="${imageList}">
-      		<img src="/Shanghai/save/${img.imageAddress}"><br>
+      		<img src="/urPresent/save/${img.imageAddress}"><br>
       </c:forEach>
    </div>
    <hr><br><br><br>
