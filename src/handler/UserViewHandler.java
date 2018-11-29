@@ -510,9 +510,8 @@ public class UserViewHandler {
 
 	@RequestMapping("/userBestProductList")
 	public ModelAndView userBestProductList(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> map = new HashMap<String, String>();
 		int count = productDao.getProdCount();
-		map = new HandlerHelper().makeCount(count, request);
+		new HandlerHelper().makeCount(count, request);
 
 		List<Integer> ref = productDao.getBestProduct();
 		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();

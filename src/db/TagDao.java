@@ -1,12 +1,10 @@
 package db;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
-import databean.ImageInfoDataBean;
 import databean.ProductTagDataBean;
 import databean.TagDataBean;
 

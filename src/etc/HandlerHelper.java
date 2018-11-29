@@ -11,10 +11,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import databean.TagDataBean;
-import db.ProductDao;
 import db.TagDao;
 
 
