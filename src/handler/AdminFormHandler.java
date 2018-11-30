@@ -124,8 +124,4 @@ public class AdminFormHandler {
 		}
 	}
 
-	@RequestMapping("thumbnailInput")
-	public ModelAndView thumbnailInput(HttpServletRequest request,HttpServletResponse response) {
-		return new ModelAndView("adm/form/thumbnailInput");
-	}
 }
