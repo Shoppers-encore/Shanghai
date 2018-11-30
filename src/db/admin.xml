@@ -88,9 +88,9 @@
 	<insert id="insertProdTag" parameterType="databean.ProductTagDataBean">
 		INSERT INTO jk_ProductTag VALUES (#{ref}, #{tagId})
 	</insert>
-<!-- <select id="getProdDetail" parameterType="int" resultType="databean.ProductDataBean">
-		SELECT * FROM jk_product WHERE ref=#{ref}
-	</select> -->
+	<delete id="deleteProdTag" parameterType="databean.ProductTagDataBean">
+		DELETE FROM jk_productTag WHERE ref=#{ref} AND tagId=#{tagId}
+	</delete>
 	<select id="getImgDetail" parameterType="int" resultType="databean.ImageInfoDataBean">
 		SELECT * FROM jk_imageInfo WHERE ref=#{ref}
 	</select>

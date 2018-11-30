@@ -24,10 +24,11 @@ public class TagDao {
 	public int insertProdTag(ProductTagDataBean productTagDto) {
 		return session.insert("Admin.insertProdTag", productTagDto);
 	}
+	public int deleteProdTag(ProductTagDataBean productTagDto) {
+		return session.delete("Admin.deleteProdTag", productTagDto);
+	}
 	public List<Integer> getProductTagId(int ref) {
 		return session.selectList("Admin.getProductTagId", ref);
 	}
-/*	public int modifyProductTag(ProductTagDataBean productTagDto) {			// 1129 ONGOING BY JH
-		return session.update("Admin.modifyProductTag", productTagDto);
-	}*/				
+	
 }
