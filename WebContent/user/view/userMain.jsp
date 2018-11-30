@@ -57,22 +57,23 @@ img#thumb {
 }
 </style>
 </head>
-<body class="container">
+<body>
 	<c:if test="${sessionScope.id ne null}">
 		<div id="chat">
 			<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 		</div>
 	</c:if>
-	<header id="demo" class="carousel slide" data-ride="carousel">
+	
+	<!-- <header id="demo" class="carousel slide" data-ride="carousel">
 
-		<!-- Indicators -->
+		Indicators
 		<ul class="carousel-indicators">
 			<li data-target="#demo" data-slide-to="0" class="active"></li>
 			<li data-target="#demo" data-slide-to="1"></li>
 			<li data-target="#demo" data-slide-to="2"></li>
 		</ul>
 
-		<!-- The slideshow -->
+		The slideshow
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<img src="images/1809main02.png" alt="main01" width="767px"
@@ -86,7 +87,7 @@ img#thumb {
 			</div>
 		</div>
 
-		<!-- Left and right controls -->
+		Left and right controls
 		<a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
 			class="carousel-control-prev-icon"></span>
 		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
@@ -94,10 +95,10 @@ img#thumb {
 		</a>
 
 
-	</header>
-
+	</header> -->
 	<%@ include file="../form/userHeader.jsp"%>
-	<article>
+
+	<div class="container">
 		<br>
 		<c:if test="${productCount eq null or productCount eq 0}">
 			<br>
@@ -115,7 +116,7 @@ img#thumb {
 						<form name="${product.ref}">
 							<a class="goodName"
 								href="userProductDetail.jk?ref=${product.ref}"> <img
-								src="/Shanghai/save/${product.thumbnail}" id="thumb"
+								src="/urPresent/save/${product.thumbnail}" id="thumb"
 								name="${product.ref}"><br> ${product.productName}<br>
 								<input type="hidden" name="id" value="${sessionScope.id}">
 								<input type="hidden" name="productCode" value="${product.ref}">
@@ -163,7 +164,7 @@ img#thumb {
 				</div>
 			</div>
 		</c:if>
-	</article>
+	</div>
 </body>
 
 <script type="text/javascript">
