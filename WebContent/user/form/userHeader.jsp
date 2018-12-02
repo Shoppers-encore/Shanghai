@@ -3,7 +3,7 @@
 
 <div class="text-center border">
 	<a href="main.jk">
-		<img src="/urPresent/images/logo1-1.png" class="w-25" alt="UrPresent Brand Logo">
+		<img src="/urPresent/images/brandLogo.png" class="w-25" alt="UrPresent Brand Logo">
 	</a>
 </div>
 

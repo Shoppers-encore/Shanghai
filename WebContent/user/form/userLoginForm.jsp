@@ -15,7 +15,7 @@
 <body class="login">
 	<form class="form-signin" method="post" action="userLoginPro.jk" name="loginform">
   		<a href="main.jk">
-  			<img class="pt-0 mt-0 mb-4" src="images/shanghai_icon.png" alt="logo" width="350" height="200">
+  			<img class="pt-0 mt-0 mb-4 w-100" src="/urPresent/images/brandLogo.png" alt="UrPresent Brand Logo">
   		</a>
      	<input type="text" name="id" class="form-control" placeholder="${str_id}" required autofocus>   			 	
  	 	<input type="password" name="password" class="form-control" placeholder="${str_passwd}" required>	 		
