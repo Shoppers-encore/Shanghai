@@ -32,7 +32,7 @@
 					<div class="col-lg-2">
 						${str_productImage}
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 						${str_productCode}
 					</div>
 					<div class="col-lg-3">
@@ -44,7 +44,7 @@
 					<div class="col-lg-2">
 						${str_productPrice}
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-2">
 						${str_orderStatus}
 					</div>
 					<div class="col-lg-1">
@@ -56,7 +56,7 @@
 						<div class="col-lg-2">
 							<img class="w-50" src="/Shanghai/images/${orderedItem.thumbnail}" alt="Product Img">
 						</div>
-						<div class="col-lg-2 pt-5">
+						<div class="col-lg-1 pt-5">
 							${orderedItem.productCode}
 						</div>
 						<div class="col-lg-3 pt-5">
@@ -66,9 +66,9 @@
 							${orderedItem.orderQuantity}
 						</div>
 						<div class="col-lg-2 pt-5">
-							${orderedItem.orderPrice}
+							${orderedItem.orderPrice}${str_currencyUnit}
 						</div>
-						<div class="col-lg-1 pt-5">
+						<div class="col-lg-2 pt-5">
 							<c:if test="${orderedItem.orderStatus eq 0}">
 								${str_orderStatus0}
 							</c:if>								

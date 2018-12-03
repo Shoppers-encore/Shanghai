@@ -1,12 +1,10 @@
 package db;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import bean.SqlMapClient;
-import databean.ImageInfoDataBean;
 import databean.ProductTagDataBean;
 import databean.TagDataBean;
 
@@ -24,7 +22,11 @@ public class TagDao {
 	public int insertProdTag(ProductTagDataBean productTagDto) {
 		return session.insert("Admin.insertProdTag", productTagDto);
 	}
+	public int deleteProdTag(ProductTagDataBean productTagDto) {
+		return session.delete("Admin.deleteProdTag", productTagDto);
+	}
 	public List<Integer> getProductTagId(int ref) {
 		return session.selectList("Admin.getProductTagId", ref);
 	}
+	
 }

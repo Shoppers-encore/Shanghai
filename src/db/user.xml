@@ -41,10 +41,10 @@
 		SELECT productName FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	<select id="getProductDetail" parameterType="int" resultType="databean.ProductDataBean">
-		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref}
+		SELECT * FROM jk_product WHERE TO_CHAR(ref)!=productCode AND ref=#{ref} AND productLevel=1
 	</select>
 	<select id="getProductCodesByRef" parameterType="String" resultType="databean.ProductDataBean">
-		SELECT productCode FROM jk_product WHERE ref=#{ref} AND LENGTH(productCode)>5
+		SELECT productCode FROM jk_product WHERE ref=#{ref} AND productCode!=TO_CHAR(ref)
 	</select>
 	<select id="getProductThumbnail" parameterType="String" resultType="String">
 		SELECT thumbnail FROM jk_product WHERE productCode=#{productCode}

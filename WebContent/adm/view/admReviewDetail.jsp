@@ -43,8 +43,8 @@
 						</tr>
 						</table>
 							<div style="align:center;">
-								<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
-								<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+								<img src="/urPresent/save/${reviewDto.photo1}" name="photo1">	
+								<img src="/urPresent/save/${reviewDto.photo2}" name="photo2">
 							</div>
 						<table class="table">
 						<tr>

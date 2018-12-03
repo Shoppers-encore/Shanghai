@@ -11,10 +11,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import databean.TagDataBean;
-import db.ProductDao;
 import db.TagDao;
 
 
@@ -158,7 +156,7 @@ public class HandlerHelper {
 	}
 
 	public void fileWriter(String sql) {
-        File file = new File("C:/ExpertJava/start.txt");
+        File file = new File("C:/ExpertJava/insertSQL.txt");
 
         FileWriter fw;
 		try {
