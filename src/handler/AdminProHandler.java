@@ -289,20 +289,18 @@ public class AdminProHandler {
 			int n = newTagList.get(i);
 			for(int j=0; j<oldTagList.size(); j++) {
 				int o = oldTagList.get(j);
-				/*if( !oldTagList.contains( n ) ) {		// when oldTagList does not contain an element of newTagList => INSERT the new one
+				if( !oldTagList.contains( n ) ) {		// when oldTagList does not contain an element of newTagList => INSERT the new one
 					ProductTagDataBean productTagDto = new ProductTagDataBean();
 					productTagDto.setRef( ref );
 					productTagDto.setTagid( n );	
 					tagDao.insertProdTag(productTagDto);
-					System.out.println("추가된 태그id : " + n);
-				}*/				// 1130 JH 아 진짜 이것만 끝내고 가려고 했는데 ^^ 미완성
-				/*if( !newTagList.contains(o) ) {		// when newTagList does not contain an element of oldTagList => DELETE the old one
+				}
+				if( !newTagList.contains(o) ) {		// when newTagList does not contain an element of oldTagList => DELETE the old one
 					ProductTagDataBean productTagDto = new ProductTagDataBean();
 					productTagDto.setRef( ref );
 					productTagDto.setTagid( o );	
 					tagDao.deleteProdTag(productTagDto);
-					System.out.println("삭제된 태그id : " + o);
-				}*/
+				}
 			}
 		}
 		

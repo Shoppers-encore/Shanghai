@@ -86,7 +86,8 @@
 		DELETE FROM jk_tag WHERE tagId = #{tagId}
 	</delete>
 	<insert id="insertProdTag" parameterType="databean.ProductTagDataBean">
-		INSERT INTO jk_ProductTag VALUES (#{ref}, #{tagId})
+		MERGE INTO jk_productTag USING DUAL ON (ref=#{ref} AND tagId=#{tagId})
+		WHEN NOT MATCHED THEN INSERT (ref, tagId) VALUES (#{ref}, #{tagId})
 	</insert>
 	<delete id="deleteProdTag" parameterType="databean.ProductTagDataBean">
 		DELETE FROM jk_productTag WHERE ref=#{ref} AND tagId=#{tagId}
@@ -125,7 +126,7 @@
 		SELECT productCode FROM jk_product WHERE ref=#{ref}
 	</select>
 	<update id="modifyProduct" parameterType="databean.ProductDataBean">
-		MERGE INTO jk_product USING DUAL ON (productCode = #{productCode}) WHEN MATCHED THEN UPDATE SET productContent=#{productContent}, discount=#{discount, jdbcType=INTEGER}, 
+		MERGE INTO jk_product USING DUAL ON (productCode = #{productCode}) WHEN MATCHED THEN UPDATE SET productName=#{productName}, productContent=#{productContent}, discount=#{discount, jdbcType=INTEGER}, 
 		productPrice=#{productPrice}, productCategory=#{productCategory}, productLevel=1 WHERE productCode=#{productCode}
 		WHEN NOT MATCHED THEN INSERT (ref, productCode, productCategory, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productLevel) 
 		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},'abc.jpg', 1)
