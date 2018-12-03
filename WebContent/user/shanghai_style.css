@@ -5,8 +5,14 @@
 * {
 	font-family: 'Nanum Gothic';
 }
-/*
+
 ====userHeader====
+div#chat {
+	position: sticky;
+	top: 900px;
+	float: right;
+}
+
 #cartImg {
 	width: 40px;
 	height: 40px;
@@ -16,7 +22,7 @@ img#chatImg {
 	width: 40px;
 	height: 40px;
 }
-
+/*
 ===userInputForm.jsp===
 .iconMargin img {
 	margin-botton : -5px;

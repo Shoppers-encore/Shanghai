@@ -5,20 +5,12 @@
 
 <html>
 	<head>
-		<title>${head_main}</title>
-		<style>
-		/* Make the image fully responsive */	
-		div#chat {
-			position: sticky;
-			top: 900px;
-			float: right;
-		}
-				
-		img#chatImg {
-			width: 40px;
-			height: 40px;
-		}
-		</style>
+	 	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="${project}shanghai_style.css">
+	    <title>${head_main}</title>
+	    <link rel="icon" href="/urPresent/images/favicon1.png" type="image/png">
 	</head>
 	<body>
 		<c:if test="${sessionScope.id ne null}">
