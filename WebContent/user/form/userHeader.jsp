@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div class="text-center border">
+<div class="text-center">
 	<a href="main.jk">
 		<img src="/urPresent/images/brandLogo.png" class="w-25" alt="UrPresent Brand Logo">
 	</a>
