@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -20,17 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import databean.CommentDataBean;
 import databean.ImageInfoDataBean;
 import databean.ProductDataBean;
 import databean.ProductTagDataBean;
-import databean.TagDataBean;
 import databean.UserDataBean;
 import db.BoardDao;
 import db.OrderDao;
@@ -160,23 +158,25 @@ public class AdminProHandler {
 		//yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 		ProductDataBean productDto = new ProductDataBean();
 		String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
-		 
 		for( int i=0; i<product_codes.length; i++ ) {
 			ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 			String product_name = multi.getParameter( "product_name" );
-			int quantity = Integer.parseInt( multi.getParameter( "quantity" ) );
-			int category = Integer.parseInt( multi.getParameter("category"));
-			String good_content = multi.getParameter("good_content");	    	
-			String saleCheck = multi.getParameter( "sale" );
-			int sale;
-			if( saleCheck == null || saleCheck.equals("") ) {
-				productDto.setDiscount( 0 );
+			int quantity = 0;
+			int category = 0;
+			String good_content = multi.getParameter("good_content");
+			int sale=0;
+			int price = 0;
+			try {
+				price = Integer.parseInt( multi.getParameter( "price" ) );
+				quantity=Integer.parseInt( multi.getParameter( "quantity" ) );
+				category=Integer.parseInt( multi.getParameter("category"));
+				sale=Integer.parseInt(multi.getParameter("sale"));
+			}catch(NumberFormatException | NullPointerException e1) {
+				price = 0;
+				quantity=0;
+				category=14;
 				sale = 0;
-			} else {
-				sale = Integer.parseInt( saleCheck );
-				productDto.setDiscount( sale );
 			}
-			int price = Integer.parseInt( multi.getParameter( "price" ) );
 			productDto.setRef( ref );
 			productDto.setProductCode( product_codes[i] );
 			productDto.setProductName( product_name ); 
@@ -185,8 +185,8 @@ public class AdminProHandler {
 			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
 			productDto.setProductCategory( category );
 			productDto.setProductQuantity( quantity );
-			productDto.setProductCategory( category );
 			productDto.setThumbnail( thumbnail );   
+			productDto.setDiscount( sale );
 			productDto.setProductLevel( 1 );
 			 
 			int result2 = productDao.input( productDto );
@@ -222,30 +222,47 @@ public class AdminProHandler {
 	    	}
 	    }
 	    String systemName = null;
-	      Enumeration<?> e = multi.getFileNames();
-	      
-	      while( e.hasMoreElements() ) {
-	         String inputName = (String) e.nextElement();
-	         //String originName = multi.getOriginalFileName( inputName );
-	          systemName = multi.getFilesystemName( inputName );
-	         
-	         String sname = path + "\\" + systemName;
-	         RenderedOp op = JAI.create("fileload", sname);
-	         BufferedImage sbuffer = op.getAsBufferedImage();
-	          ImageInfoDataBean imgDto = new ImageInfoDataBean();
-	          int imageNo = productDao.getImgNo()+1;
-	  	      imgDto.setImageNo(imageNo);
-	  	      imgDto.setRef( ref );
-	  	      imgDto.setImageAddress(systemName);
-	  	      int result = productDao.insertImgInfo(imgDto);
-	  	      
-		  	   if( result == 1 ) {
-		  		   String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"
-		               		+ "VALUES ("+imageNo+", "+ ref+", '"+systemName+"' );";
-	              new HandlerHelper().fileWriter(sql);
-		  	   }
-		  	 request.setAttribute( "systemName", systemName );
+		Enumeration<?> e = multi.getFileNames();
+		while( e.hasMoreElements() ) {
+			String inputName = (String) e.nextElement();
+			systemName = multi.getFilesystemName( inputName );
+			String sname = path + "\\" + systemName;
+			String tname = null;
+			new File(path+"\\"+ref).mkdir();
+			int imageNo = 0;
+			if(inputName.equals("thumb")) {
+				tname = ref+"\\thumbnail-"+ref+"-"+systemName;
+			}else {
+				imageNo = productDao.getImgNo()+1;
+				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
 			}
+			RenderedOp op = JAI.create("fileload", sname);
+			BufferedImage sbuffer = op.getAsBufferedImage();
+			int width = sbuffer.getWidth();
+			int height = sbuffer.getHeight();
+			BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
+			Graphics g = tbuffer.getGraphics();
+			g.drawImage(sbuffer, 0, 0, width, height, null );   
+			ImageIO.write( tbuffer, "jpg", new File( path + "\\"+tname ) );   
+			ImageIO.write( tbuffer, "png", new File( path + "\\"+tname ) );
+			ImageIO.write( tbuffer, "gif", new File( path + "\\"+tname ) );
+			if(inputName.equals("thumb")) {
+			}else {
+				ImageInfoDataBean imgDto = new ImageInfoDataBean();
+				imgDto.setImageNo(imageNo);
+				imgDto.setRef( ref );
+				imgDto.setImageAddress(tname);
+				int result = productDao.insertImgInfo(imgDto);
+				if( result == 1 ) {
+					String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"+ "VALUES ("+imageNo+", "+ ref+", '"+imgDto.getImageAddress()+"' );";
+					new HandlerHelper().fileWriter(sql);
+				}
+			}
+			
+			File f = new File(sname);
+			if(f.exists()) f.delete();
+			request.setAttribute( "systemName", systemName );
+		}  
 		String[] color = multi.getParameterValues("color");
 		String[] size = multi.getParameterValues("size");
 		int[] colors = new int[color.length];
@@ -277,12 +294,50 @@ public class AdminProHandler {
 		for(int i = 0 ; i<list.size(); i++) {
 			productDao.deleteProduct(list.get(i));
 		}
+
+		List<Integer> oldTagList = tagDao.getProductTagId(ref);
+		String tag[] = multi.getParameterValues( "tag" );
+		List<Integer> newTagList = new ArrayList();
+		for(int i=0; i<tag.length; i++) {
+			newTagList.add( Integer.parseInt( tag[i] ) );
+		}
+		for(int i=0; i<newTagList.size(); i++) {
+			int n = newTagList.get(i);
+			for(int j=0; j<oldTagList.size(); j++) {
+				int o = oldTagList.get(j);
+				if( !oldTagList.contains( n ) ) {		// when oldTagList does not contain an element of newTagList => INSERT the new one
+					ProductTagDataBean productTagDto = new ProductTagDataBean();
+					productTagDto.setRef( ref );
+					productTagDto.setTagid( n );	
+					tagDao.insertProdTag(productTagDto);
+				}
+				if( !newTagList.contains(o) ) {		// when newTagList does not contain an element of oldTagList => DELETE the old one
+					ProductTagDataBean productTagDto = new ProductTagDataBean();
+					productTagDto.setRef( ref );
+					productTagDto.setTagid( o );	
+					tagDao.deleteProdTag(productTagDto);
+				}
+			}
+		}
 		
 		return "redirect:admProductDetail.jk?ref="+ref;
 	}
 	@RequestMapping("/productDeletePro")
 	public ModelAndView productDeletePro(HttpServletRequest request, HttpServletResponse response) {
 		int ref = Integer.parseInt( request.getParameter("ref") );
+		List<ProductDataBean> product =productDao.getProdDetail(ref);
+		List<ImageInfoDataBean> images = productDao.getImgDetail(ref);
+		String path =  request.getSession().getServletContext().getRealPath( "/save" );
+		for(int i = 0; i<images.size()+1 ; i++) {
+			File f = null;
+			if(i==images.size()) {
+				f=new File(path+product.get(0).getThumbnail());
+				if(f.exists()) f.delete();
+			}else {
+				f=new File(path+images.get(i).getImageAddress());
+				if(f.exists()) f.delete();
+			}
+		}
 		productDao.deleteImg( ref );
 		int result = productDao.deleteProd( ref );
 		request.setAttribute( "result", result );
