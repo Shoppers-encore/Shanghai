@@ -1,7 +1,5 @@
 package databean;
 
-import java.sql.Date;
-
 public class UserDataBean {
 	private String id;
 	private String password;
