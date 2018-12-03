@@ -10,10 +10,10 @@
 </head>
 <body class="mypage">
 	<a href="main.jk">
-	<img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
+		<img class="iconMargin pt-3 w-25" src="/urPresent/images/brandLogo.png" alt="UrPresent Brand Logo">
 	</a>
     <hr>	
-	<div class="container" style="width: 800px">
+	<div class="container">
 		<h4><b>내 정보</b></h4>
 		<br><br>
 		<div class="text-center">
