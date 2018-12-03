@@ -30,7 +30,7 @@
 <c:set var="head_userOrderDetail" value="주문 내역 상세 페이지" />
 <c:set var="head_orderInputForm" value="주문 결제 페이지" />
 <c:set var="head_productModify" value="상품수정" />
-<c:set var="head_main" value="메인 페이지" />
+<c:set var="head_main" value="지금, 그대." />
 <c:set var="head_best" value="BEST 상품 페이지" />
 
 

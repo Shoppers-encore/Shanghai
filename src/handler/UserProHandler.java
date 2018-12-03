@@ -779,7 +779,6 @@ public class UserProHandler {
 		chatDao.chatInput(chat);
 	}
 	private void orderLog(String path, String log, Calendar cal) {
-		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
 		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
@@ -792,7 +791,6 @@ public class UserProHandler {
 		
 	}
 	private void productLog(String path, String log, Calendar cal) {
-		new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)).mkdir();
 		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
