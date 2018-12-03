@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 
 import databean.BasketDataBean;
 import databean.ChatDataBean;
+import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
 import db.BasketDao;
@@ -219,8 +220,10 @@ public class UserViewHandler {
 	public ModelAndView userProductDetail(HttpServletRequest request, HttpServletResponse response) {
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list = productDao.getProductDetail(ref);
+		List<ImageInfoDataBean> imageList = productDao.getImgDetail(ref);
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
+		request.setAttribute("imageList", imageList);
 		request.setAttribute("productList", list);
 		request.setAttribute("colors", colors);
 		request.setAttribute("sizes", sizes);
@@ -507,9 +510,8 @@ public class UserViewHandler {
 
 	@RequestMapping("/userBestProductList")
 	public ModelAndView userBestProductList(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> map = new HashMap<String, String>();
 		int count = productDao.getProdCount();
-		map = new HandlerHelper().makeCount(count, request);
+		new HandlerHelper().makeCount(count, request);
 
 		List<Integer> ref = productDao.getBestProduct();
 		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();
