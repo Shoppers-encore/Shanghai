@@ -22,7 +22,11 @@ public class TagDao {
 	public int insertProdTag(ProductTagDataBean productTagDto) {
 		return session.insert("Admin.insertProdTag", productTagDto);
 	}
+	public int deleteProdTag(ProductTagDataBean productTagDto) {
+		return session.delete("Admin.deleteProdTag", productTagDto);
+	}
 	public List<Integer> getProductTagId(int ref) {
 		return session.selectList("Admin.getProductTagId", ref);
 	}
+	
 }
