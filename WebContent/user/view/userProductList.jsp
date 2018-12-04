@@ -37,7 +37,6 @@
 	<body class="container">
 		<%@ include file="../form/userHeader.jsp" %>
 		<article><br>
-		<c:set var="id" value="aaa" scope="session"/>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
 					<p align="center">${msg_list_x}</p>
