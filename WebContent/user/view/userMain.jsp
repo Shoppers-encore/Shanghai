@@ -6,19 +6,9 @@
 <html>
 	<head>
 		<title>${head_main}</title>
-		<style>
-		/* Make the image fully responsive */	
-		div#chat {
-			position: sticky;
-			top: 900px;
-			float: right;
-		}
-				
-		img#chatImg {
-			width: 40px;
-			height: 40px;
-		}
-		</style>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="/urPresent/images/favicon2.png" type="image/png">
 	</head>
 	<body>
 		<c:if test="${sessionScope.id ne null}">
