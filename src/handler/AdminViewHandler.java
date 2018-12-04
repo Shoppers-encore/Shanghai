@@ -86,8 +86,8 @@ public class AdminViewHandler {
       }
       return new ModelAndView("adm/view/admReviewList");
    }
-
-	@RequestMapping("/admReviewDetail")
+   
+   @RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
 		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
@@ -302,8 +302,10 @@ public class AdminViewHandler {
 	public List<ChatDataBean> admChatList(HttpServletRequest request,HttpServletResponse response){
 		int count = chatDao.getChatListCount();
 		List<ChatDataBean> chatList = null;
+		//System.out.println("카운트는 " + count);				// 1204 ongoin by jh
 		if(count > 0) {
 			chatList = chatDao.getChatList();
+			//System.out.println(chatList.get(0).getChatContent());
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;
