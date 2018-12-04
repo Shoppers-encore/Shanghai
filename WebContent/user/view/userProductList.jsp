@@ -35,7 +35,7 @@
 		</style>
 	</head>
 	<body class="container">
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>

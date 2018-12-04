@@ -10,7 +10,7 @@
 </head>
 	<body class="container">
 	<!-- User Menu Bar -->
-	<%@ include file="../form/userHeader.jsp" %>
+	<%@ include file="../../user/view/userTopNavbar.jsp" %>
 	<script type="text/javascript">
 		//<!--
 		$(document).ready(function(){
