@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 
 <html>
+	<%@ include file="../../setting.jsp"%>
 	<%@include file="../view/userHead.jsp"%>
 	<body>
-		<%@ include file="../form/userHeader.jsp"%>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 				<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
