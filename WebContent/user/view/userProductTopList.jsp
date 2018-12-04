@@ -47,7 +47,6 @@
 			<a href="userProductTopList.jk?category=KNIT">${str_cat_KNIT}</a>
 			<br>
 		<article><br>
-		<c:set var="id" value="aaa" scope="session"/>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
 					<p align="center">${msg_list_x}</p>
