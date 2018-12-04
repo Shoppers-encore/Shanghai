@@ -5,9 +5,9 @@
 * {
 	font-family: 'Nanum Gothic';
 }
-/*
+
 ====userHeader====
-#cartImg {
+img#cartImg {
 	width: 40px;
 	height: 40px;
 }
@@ -16,6 +16,14 @@ img#chatImg {
 	width: 40px;
 	height: 40px;
 }
+
+div#chat {
+	position: sticky;
+	top: 900px;
+	float: right;
+}
+
+/*
 
 ===userInputForm.jsp===
 .iconMargin img {
