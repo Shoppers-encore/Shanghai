@@ -1,55 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp"%>
 
 <html>
-	<head>
-		<title>${head_main}</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" href="/urPresent/images/favicon2.png" type="image/png">
-	</head>
+	<%@include file="../view/userHead.jsp"%>
 	<body>
+		<%@ include file="../form/userHeader.jsp"%>
 		<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 				<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 			</div>
 		</c:if>
-		
-		<!-- <header id="demo" class="carousel slide" data-ride="carousel">
-	
-			Indicators
-			<ul class="carousel-indicators">
-				<li data-target="#demo" data-slide-to="0" class="active"></li>
-				<li data-target="#demo" data-slide-to="1"></li>
-				<li data-target="#demo" data-slide-to="2"></li>
-			</ul>
-	
-			The slideshow
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="images/1809main02.png" alt="main01" width="767px"
-						height="480px">
-				</div>
-				<div class="carousel-item">
-					<img src="images/1809main01.png" alt="main02">
-				</div>
-				<div class="carousel-item">
-					<img src="images/1809main03.png" alt="main03">
-				</div>
-			</div>
-	
-			Left and right controls
-			<a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
-				class="carousel-control-prev-icon"></span>
-			</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>
-	
-	
-		</header> -->
-		<%@ include file="../form/userHeader.jsp"%>
 	
 		<div class="container">
 			<br>
