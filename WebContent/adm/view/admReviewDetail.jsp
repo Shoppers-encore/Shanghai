@@ -57,16 +57,17 @@
 							<!-- comment -->
 								<th>comment</th>
 								<td>
-									<form name="commentInsertForm" method="post">
+									<form name="commentInsertForm" method="post" onsubmit="commentInsert()">
 										<div class="input-group">
 											<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/>
 											<input type="hidden" name="session" value="${sessionScope.id}"/>
 											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${mgs_insertComment}">
-											&nbsp;<button class="btn btn-default" type="button" onclick="commentInsert()">${btn_writeComment}</button>
+											&nbsp;<button class="btn btn-default" type="submit">${btn_writeComment}</button>
 										</div>
 									</form>
 								</td>
 							</tr>
+							<div class="commentList container"></div>
 							<!-- comment -->
 						<tr>
 							<th colspan="2">
