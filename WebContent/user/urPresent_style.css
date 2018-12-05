@@ -6,7 +6,12 @@
 	font-family: 'Nanum Gothic';
 }
 
-====userHeader====
+.brandLogo {
+	width: 30vw;
+	min-width: 19rem;
+}
+
+/* ====userTopNavbar==== */
 img#cartImg {
 	width: 40px;
 	height: 40px;
@@ -25,6 +30,26 @@ div#chat {
 
 .cardItem {
 	
+}
+
+/* ====userFooter==== */
+.footer {
+	position: absolute;
+	bottom: 1vh;
+	margin: auto;
+	width: 100vw;
+}
+
+/* ====userSideNavbar==== */
+.sidebar {
+	position: fixed;
+	top: 40vh;
+	right: 0vw;
+}
+
+/* ====userLoginForm==== */
+.joinUs {
+	width: 7rem;
 }
 
 /*

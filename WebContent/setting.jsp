@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<link rel="stylesheet" type="text/css" href="/urPresent/user/urPresent_style.css">
+
 <script src="/urPresent/script.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -13,8 +15,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="../user/urPresent_style.css">
 
 <c:set var="project" value="/urPresent/user/" />
 
@@ -132,6 +132,10 @@
 <c:set var="str_userOrderList" value="님의 주문내역" />
 <c:set var="str_product_detail" value="상품 상세정보" />
 <c:set var="str_order_detail" value="주문 상세정보" />
+<c:set var="str_teamName" value="응답하라 8080"/>
+<c:set var="str_joinUsLine1" value="지금 그대의 소중한 멤버가 되어주세요!"/>
+<c:set var="str_joinUsLine2" value="다양한 할인 혜택이 기다리고 있어요 :)"/>
+
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />
