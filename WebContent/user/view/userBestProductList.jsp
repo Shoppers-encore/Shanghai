@@ -41,7 +41,7 @@
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
 		</c:if>
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<article><br>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>

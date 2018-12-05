@@ -8,7 +8,7 @@
 		<title>${head_basketList}</title>
 	</head>
 	<body>
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 
 		<!-- When logged in -->
 		<c:if test="${id ne null}">

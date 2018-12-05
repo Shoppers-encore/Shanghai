@@ -40,7 +40,7 @@
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
 		</c:if>
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 			<br>
 			<a href="userProductShirtsList.jk">${str_cat_BLnSHIRTS_ALL}</a> &nbsp;/&nbsp;
 			<a href="userProductShirtsList.jk?category=BLOUSE">${str_cat_BLOUSE}</a>&nbsp;/&nbsp;
