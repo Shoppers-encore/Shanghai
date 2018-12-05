@@ -403,6 +403,7 @@ public class AdminProHandler {
 		UserDataBean dto = new UserDataBean();
 		dto.setId((String)request.getSession().getAttribute("id"));
 		dto.setPassword(request.getParameter("passwd"));
+		// System.out.println(request.getParameter("passwd"));		// 1205 ONGOING BY JH
 		dto.setName(request.getParameter("name"));
 		dto.setTel(request.getParameter("tel"));
 		dto.setEmail(request.getParameter("email"));

@@ -43,14 +43,14 @@
 						</table>
 							<div style="align:center;">
 								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 ne null}"> 
-									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
-									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+									<img src="/urPresent/save/${reviewDto.photo1}" name="photo1">	
+									<img src="/urPresent/save/${reviewDto.photo2}" name="photo2">
 								</c:if>
 								<c:if test="${reviewDto.photo1 ne null && reviewDto.photo2 eq null}">
-									<img src="/Shanghai/save/${reviewDto.photo1}" name="photo1">	
+									<img src="/urPresent/save/${reviewDto.photo1}" name="photo1">	
 								</c:if>
 								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 ne null}">
-									<img src="/Shanghai/save/${reviewDto.photo2}" name="photo2">
+									<img src="/urPresent/save/${reviewDto.photo2}" name="photo2">
 								</c:if>
 								<c:if test="${reviewDto.photo1 eq null && reviewDto.photo2 eq null}">
 									${msg_noPhoto}
@@ -78,7 +78,7 @@
 										<div class="input-group">
 											<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/>
 											<input type="hidden" name="session" value="${sessionScope.id}"/>
-											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${mgs_insertComment}">
+											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${msg_insertComment}">
 											&nbsp;<button class="btn btn-default" type="button" onclick="commentInsert()">${btn_writeComment}</button>
 										</div>
 									</form>
