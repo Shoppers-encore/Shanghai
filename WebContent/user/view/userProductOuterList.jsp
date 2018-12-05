@@ -40,7 +40,7 @@
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
 	      	</div>
 		</c:if>
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 			<br>
 			<a href="userProductOuterList.jk">${str_cat_OUTER_ALL}</a> &nbsp;/&nbsp;
 			<a href="userProductOuterList.jk?category=JKnJP">${str_cat_JKnJP}</a>&nbsp;/&nbsp;
@@ -48,7 +48,6 @@
 			<a href="userProductOuterList.jk?category=CARDIGAN">${str_cat_CARDIGAN}</a>
 			<br>
 		<article><br>
-		<c:set var="id" value="aaa" scope="session"/>
 	    	<c:if test="${productCount eq null or productCount eq 0}">	
 					<br><br><br><br><br>
 					<p align="center">${msg_list_x}</p>

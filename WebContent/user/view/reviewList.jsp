@@ -10,7 +10,7 @@
 </head>
 <body class="container">
 	<!-- User Header -->
-<%@ include file="../../user/form/userHeader.jsp" %>
+<%@ include file="../../user/view/userTopNavbar.jsp" %>
 	<!-- Review Board List -->
 	<article><br><br>
 	    	<h4>${str_review}</h4>

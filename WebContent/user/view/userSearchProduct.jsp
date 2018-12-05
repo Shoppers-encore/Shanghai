@@ -180,7 +180,7 @@
 	</head>
 	<body>
 		<div class="container">
-		<%@ include file="../form/userHeader.jsp" %>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<article><br>
 	    	<c:if test="${ searchWord eq null}">
 	    	<!-- when there is NO query
