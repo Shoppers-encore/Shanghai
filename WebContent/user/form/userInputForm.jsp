@@ -1,29 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="../../setting.jsp" %>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="../../setting.jsp"%>
+
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-</head>
-<style>
-   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
- * {
-   font-family: 'Nanum Gothic'sans-serif;
- }
- </style>
-<link rel="stylesheet" href="${project}shanghai_style.css">
-<body class="registration">
-	<a href="main.jk">
-    <img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
-    </a>
-    <hr>	       
-<!-- id, password, name, birthday, tel, email, gender, 
-	userLevel=default 1, height(3,0), weight(3,0), address, addressDetail, zipcode -->
-	<div class="container" style="width: 800px">
+	<!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> -->
+	<%@include file="../view/userHead.jsp"%>
+	<body>
+		<div class="jumbotron bg-white mb-1 text-center">
+		  	<a href="main.jk">
+	  			<img class="brandLogo" src="/urPresent/images/brandLogo.png" alt="UrPresent Brand Logo">
+	  		</a>
+  		</div>
+		<div class="container col-lg-6">
 		<h4><b>${page_input}</b></h4>
 		<br><br>
 		<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputCheck()">		

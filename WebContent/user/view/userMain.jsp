@@ -8,13 +8,8 @@
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
-		<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-				<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-			</div>
-		</c:if>
 	
-		<div class="container col-lg-12">
+		<div class="container col-lg-10">
 			<c:if test="${productCount eq null or productCount eq 0}">
 				<p align="center">${msg_list_x}</p>
 			</c:if>
