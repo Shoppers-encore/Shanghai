@@ -150,7 +150,7 @@ public class UserProHandler {
 			Map<String, String> info = new HashMap<String, String>(); // parameter for SendMail.java
 			info.put("sender", "hkk9331@gmail.com");
 			info.put("receiver", email);
-			info.put("subject", "Shanghai 쇼핑몰 가입인증 메일입니다.");
+			info.put("subject", "'지금, 그대.' 쇼핑몰 가입인증 메일입니다.");
 			info.put("content", "인증번호 : " + "[" + number + "]");
 			new SendMail().sendMail(info);
 		} catch (IOException e) {

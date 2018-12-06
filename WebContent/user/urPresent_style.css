@@ -22,11 +22,11 @@ img#chatImg {
 	height: 40px;
 }
 
-div#chat {
+/* div#chat {
 	position: sticky;
 	top: 900px;
 	float: right;
-}
+} */
 
 .cardItem {
 	
@@ -34,8 +34,8 @@ div#chat {
 
 /* ====userFooter==== */
 .footer {
-	position: absolute;
-	bottom: 1vh;
+	position: relative;
+	bottom: 0vh;
 	margin: auto;
 	width: 100vw;
 }
@@ -45,6 +45,14 @@ div#chat {
 	position: fixed;
 	top: 40vh;
 	right: 0vw;
+}
+
+.loginImg {
+	width: 2rem;
+}
+
+@media (max-width: 450px) {
+#secondary {clear: both;}
 }
 
 /* ====userLoginForm==== */
