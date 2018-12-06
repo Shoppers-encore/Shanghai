@@ -1,6 +1,7 @@
 package handler;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import databean.ChatDataBean;
 import databean.ImageInfoDataBean;
@@ -303,10 +306,20 @@ public class AdminViewHandler {
 	public List<ChatDataBean> admChatList(HttpServletRequest request,HttpServletResponse response){
 		int count = chatDao.getChatListCount();
 		List<ChatDataBean> chatList = null;
-		System.out.println("카운트는 " + count);				// 1204 ongoin by jh
 		if(count > 0) {
 			chatList = chatDao.getChatList();
+			//////////////////// 1206 ongoing by JH ///////////////////////////
+			SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			for (OrderListDataBean orderList : distinctOrderList) {
+				String orderDate = newDateFormat.format(orderList.getOrderDate());
+				orderDateMap.put(orderCode, orderDate);
+			}
+			String orderDateJson = new Gson().toJson(orderDateMap);
+			request.setAttribute("orderDate", orderDateJson);
+			/////////////////////// 1206 ongoing by JH ////////////////////////
+			System.out.println(chatList.get(0).getId());
 			System.out.println(chatList.get(0).getChatContent());
+			System.out.println(chatList.get(0).getChatTime());
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;
@@ -324,8 +337,8 @@ public class AdminViewHandler {
       String id = request.getParameter("id");
       String chatContent = request.getParameter("chatContent");
       ChatDataBean chat = new ChatDataBean();
-      chat.setSender("admin");
-      chat.setReceiver(id);
+//      chat.setSender("admin");
+//      chat.setReceiver(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);
    }
