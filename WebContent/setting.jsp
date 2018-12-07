@@ -50,7 +50,6 @@
 <c:set var="str_gender_m" value="남성" />
 <c:set var="str_gender_f" value="여성" />
 <c:set var="str_zipcode" value="우편번호" />
-<c:set var="str_addressPlaceholder" value="검색 버튼을 눌러 주소를 입력해 주세요."/>
 <c:set var="str_address" value="주소" />
 <c:set var="str_addressDetail" value="상세 주소" />
 <c:set var="str_nim" value=" 님" />
@@ -138,7 +137,6 @@
 <c:set var="str_teamName" value="응답하라 8080"/>
 <c:set var="str_joinUsLine1" value="지금 그대의 소중한 멤버가 되어주세요!"/>
 <c:set var="str_joinUsLine2" value="다양한 할인 혜택이 기다리고 있어요 :)"/>
-<c:set var="str_noDash" value="-없이 입력해주세요"/>
 
 
 <!-- color -->

@@ -42,7 +42,10 @@
 				</script>
 			</div>
 		</div>
-
+		
+<!-- 		<div class="jumbotron bg-white">
+		
+		</div> -->
 		<%@include file="../view/userFooter.jsp"%>
 		
 		<!-- Status: User logged-in -->
