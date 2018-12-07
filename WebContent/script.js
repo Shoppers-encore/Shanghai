@@ -1,14 +1,14 @@
 
 /*Message*/
-var inserterror = "글쓰기에 실패했습니다.\n잠시 후 다시 시도하세요.";
+var inserterror = "글쓰기에 실패했습니다.\n잠시 후 다시 시도해 주세요.";
 var delCheck = "삭제하시겠습니까?";
 var cannotdelete = "삭제 권한이 없습니다.";
 var cannotmodify = "수정 권한이 없습니다.";
-var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 시도하세요.";
-var tagdeleteerror = "태그를 삭제하지 못했습니다.\n잠시 후 다시 시도하세요.";
-var notagchecked = "삭제할 태그를 선택해주세요.";
+var taginputerror = "태그를 추가하지 못했습니다.\n잠시 후 다시 시도해 주세요.";
+var tagdeleteerror = "태그를 삭제하지 못했습니다.\n잠시 후 다시 시도해 주세요.";
+var notagchecked = "삭제할 태그를 선택해 주세요.";
 var commenterror = "댓글을 입력해 주세요.";
-var modifyerror = "수정에 실패했습니다.\n잠시 후 다시 시도하세요.";
+var modifyerror = "수정에 실패했습니다.\n잠시 후 다시 시도해 주세요.";
 var nopasswderror = "비밀번호는 필수 입력사항입니다.";
 var nonameerror = "이름은 필수 입력사항입니다.";
 var notelerror = "전화번호는 필수 입력사항입니다.";
@@ -20,19 +20,19 @@ var modcompleted = "수정이 완료되었습니다.";
 var adminonly = "관리자만 접근할 수 있습니다.";
 
 //Message-userLoginPro-User Login
-var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인하세요.";
-var loginpasswderror = "입력하신 비밀번호가 다릅니다.\n비밀번호를 다시 확인하세요.";
-var rejoinmsg = "탈퇴된 계정입니다.\n회원가입 해주세요. ";
+var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인해 주세요.";
+var loginpasswderror = "입력하신 비밀번호가 틀렸습니다.\n비밀번호를 다시 확인해 주세요.";
+var rejoinmsg = "탈퇴된 계정입니다.\n다시 회원가입을 해 주세요. ";
 
 //Message-userInputForm-Join Member
-var confirmerror = "아이디 중복확인 해 주세요";
+var confirmerror = "아이디 중복확인을 해 주세요.";
 var error = "아이디 중복확인 실패";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
-var emailcheckerror1 = "이메일 인증 해 주세요.";
+var emailcheckerror1 = "이메일 인증을 해 주세요.";
 var emailcheckerror2 = "인증번호가 일치하지 않습니다."
-var emailconfirmerror = "이메일 인증 후 다시 시도해주세요.";
-var iderror = "아이디 중복 확인 후 다시 시도해주세요.";
-var passwderror = "비밀번호 일치 여부 확인 해주세요.";
+var emailconfirmerror = "이메일 인증 후 다시 시도해 주세요.";
+var iderror = "아이디 중복 확인 후 다시 시도해 주세요.";
+var passwderror = "비밀번호 일치 여부를 확인해 주세요.";
 
 	
 // Message-BasketList
@@ -40,14 +40,14 @@ var emptyBasket='장바구니에 담긴 상품이 없습니다.';
 var emptyBasketCount='전체 상품: 총 0개';
 
 // Message-productInputForm
-var noSizeChecked = "사이즈를 선택해주세요.";
-var noCategorySelected = "카테고리를 선택해주세요";
-var noTagChecked = "태그를 선택해주세요.";
-var noColorChecked = "색상을 선택해주세요.";
-var noProductName = "상품명을 입력해주세요.";
-var noProuctPrice = "상품 가격을 입력해주세요.";
-var noProductQuantity = "상품 초기 수량을 입력해주세요.";
-var noProductContent = "상품 소개를 입력해주세요.";
+var noSizeChecked = "사이즈를 선택해 주세요.";
+var noCategorySelected = "카테고리를 선택해 주세요";
+var noTagChecked = "태그를 선택해 주세요.";
+var noColorChecked = "색상을 선택해 주세요.";
+var noProductName = "상품명을 입력해 주세요.";
+var noProuctPrice = "상품 가격을 입력해 주세요.";
+var noProductQuantity = "상품 초기 수량을 입력해 주세요.";
+var noProductContent = "상품 소개를 입력해 주세요.";
 
 	
 	
@@ -73,8 +73,20 @@ function confirmId() {
 			dataType : "json",			//Transformed format
 			success : function(data) {	//When succeeded
 				if (data.countId > 0) {
-					$('#confirmIdResult').html("아이디가 존재합니다. 다른 아이디를 입력해주세요.");						
+					$('#id').css({
+						border: '2px solid brown'
+					});
+					$('#confirmIdResult').css({
+						color: 'brown'
+					});
+					$('#confirmIdResult').html("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");						
 				} else {
+					$('#id').css({
+						border: '1px solid #ced4da'
+					});
+					$('#confirmIdResult').css({
+						color: 'green'
+					});
 					$('#confirmIdResult').html("사용가능한 아이디입니다.");
 					idCheck = 1; 			//아이디 중복체크시 1이됨 -
 				}
@@ -90,8 +102,17 @@ function passwordCheckFunction() {
 	var password1 = $('#password1').val();
 	var password2 = $('#password2').val();
 	if (password1 != password2) {
+		$('#password2').css({
+			border: '2px solid brown'
+		});
+		$('#passwordCheckMessage').css({
+			color: 'brown'
+		});
 		$('#passwordCheckMessage').html("비밀번호가 일치하지 않습니다");
 	} else {
+		$('#password2').css({
+			border: '1px solid #ced4da'
+		});
 		$('#passwordCheckMessage').html(" ");
 	}
 }
@@ -133,20 +154,25 @@ function matchAuthKey() {
     	 alert( emailcheckerror2 );
     } else {
         alert( "인증 완료되었습니다" );
+        opener.document.emailVerified=1;
         self.close();
     }
 }
 //Validity Check for userInputForm - function for joining member
 function inputCheck() {
-	   if( inputform.email.value == 0 ) {      // 이메일 인증 안하면 block
+	   if( emailVerified == 0 ) {      // 이메일 인증 안하면 block
 	      alert( emailconfirmerror );
 	      inputform.email.focus();
 	      return false;
-	   } else if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
+	   } 
+	   
+	   if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
 	      alert( iderror );
 	      inputform.id.focus();
 	      return false;
-	   } else if( inputform.password.value != inputform.repassword.value ) {
+	   } 
+	   
+	   if( inputform.password.value != inputform.repassword.value ) {
 	      alert( passwderror );
 	      inputform.repassword.focus();
 	      return false;
@@ -186,20 +212,6 @@ function sample4_execDaumPostcode() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
             document.getElementById('address').value = data.address;
-
-            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            if(data.autoRoadAddress) {
-                //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-            } else if(data.autoJibunAddress) {
-                var expJibunAddr = data.autoJibunAddress;
-                document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-            } else {
-                document.getElementById('guide').innerHTML = '';
-            }
         }
     }).open();
 }
