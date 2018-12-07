@@ -145,11 +145,12 @@
 	</delete>
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
-		SELECT * FROM jk_chat
-		WHERE chatdate IN (select MAX(chatDate) from jk_chat,jk_user WHERE sender=id AND userLevel!=0 group by sender) ORDER BY chatdate asc
+		<!-- SELECT * FROM jk_chat WHERE chatdate IN (select MAX(chatDate) from jk_chat,jk_user WHERE sender=id AND userLevel!=0 group by sender) ORDER BY chatdate asc -->
+		SELECT id, chatContent, chatDate FROM jk_chat WHERE chatDate IN (SELECT MAX(c.chatDate)
+		FROM jk_chat c, jk_user u WHERE c.id=u.id AND userLevel=1 GROUP BY u.id);			<!-- 1205 ongoing by JH -->
 	</select>
 	<select id="getChatListCount" resultType="int">
-		SELECT count(*) FROM jk_chat
+		SELECT count(*) FROM jk_chat					<!-- 1205 ongoing by JH -->
 	</select>
 	<select id="getRefNo" parameterType="String" resultType="int">
 		SELECT ref FROM jk_product WHERE productCode=#{productCode}
@@ -181,8 +182,4 @@
 		(SELECT * FROM jk_product WHERE productCode != TO_CHAR(ref) AND  productName LIKE '%'||#{searchWord}||'%' AND productLevel=1 ORDER BY ref desc))
 		WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select> 
-<!-- 	<update id="modifyProductTag" parameterType="databean.ProductTagDataBean">		// 1129 ONGOING BY JH
-		MERGE INTO jk_productTag USING DUAL ON (ref=#{ref} AND tagId=#{tagId})
-		WHEN NOT MATCHED THEN INSERT (ref, tagId) VALUES (#{ref},#{tagId})
-	</update> -->
 </mapper>

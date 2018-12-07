@@ -17,5 +17,5 @@
 				alert(modcompleted);
 			//-->
 	</script>
-	<c:redirect url="admModifyView.jk"/>
+	<c:redirect url="admModifyPro.jk"/>		<!-- ONGOING BY JH -->
 </c:if>

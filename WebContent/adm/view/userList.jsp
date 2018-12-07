@@ -37,7 +37,7 @@
 	    <article class="col-sm-10 col-8" ><br><br>
 	    	<h4>${str_userList}</h4>
 	    	<div class="totalUser">
-	    		${str_totalUser} :  ${members.size()} 
+	    		${str_totalUser} :  ${count} 
 	    	</div>
 	   		<table class="table table-striped">
 	   			<thead>
@@ -96,6 +96,7 @@
 				</c:if>
 				</c:if>
 			</div>
+			<br><br>
 	   </article>
 </body>
 </html>

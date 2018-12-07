@@ -65,7 +65,7 @@
 							$('#content').html('');
 							if( data.length > 0 ){
 								$.each(data, function(key, chatList){
-									var html = "<tr><th><a href='admChatting.jk?id="+chatList.sender+"''>"+chatList.sender+"</a></th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td></tr>";
+									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id+"</a></th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td></tr>";
 										$('#content').append( html );
 							
 								});

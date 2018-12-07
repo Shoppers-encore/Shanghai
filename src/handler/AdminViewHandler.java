@@ -86,8 +86,8 @@ public class AdminViewHandler {
       }
       return new ModelAndView("adm/view/admReviewList");
    }
-
-	@RequestMapping("/admReviewDetail")
+   
+   @RequestMapping("/admReviewDetail")
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
 		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
@@ -139,6 +139,7 @@ public class AdminViewHandler {
 		int count = userDao.getUserListCount();
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<UserDataBean> members = userDao.getList(100, map);
+		request.setAttribute("count", count);
 		request.setAttribute("members", members);
 		request.setAttribute("userDto", userDto);
 		return new ModelAndView("adm/view/userList");
@@ -302,8 +303,10 @@ public class AdminViewHandler {
 	public List<ChatDataBean> admChatList(HttpServletRequest request,HttpServletResponse response){
 		int count = chatDao.getChatListCount();
 		List<ChatDataBean> chatList = null;
+		System.out.println("카운트는 " + count);				// 1204 ongoin by jh
 		if(count > 0) {
 			chatList = chatDao.getChatList();
+			System.out.println(chatList.get(0).getChatContent());
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;

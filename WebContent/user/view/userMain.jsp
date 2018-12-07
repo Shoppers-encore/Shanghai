@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="../../setting.jsp"%>
 
 <html>
-	<%@ include file="../../setting.jsp"%>
 	<%@include file="../view/userHead.jsp"%>
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
-		<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-				<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-			</div>
-		</c:if>
 	
-		<div class="container col-lg-12">
+		<div class="container col-lg-10">
 			<c:if test="${productCount eq null or productCount eq 0}">
 				<p align="center">${msg_list_x}</p>
 			</c:if>
@@ -23,9 +18,9 @@
 				<div class="card-deck">
 					<c:forEach var="product" items="${productList}">
 						<form name="${product.ref}">
-							<div class="card cardItem">
+							<div class="card cardItem w-50 mt-4 mb-4">
 								<a href="userProductDetail.jk?ref=${product.ref}"> 
-									<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}">
+									<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
 									<span>${product.productName}</span>
 									<input type="hidden" name="id" value="${sessionScope.id}">
 									<input type="hidden" name="productCode" value="${product.ref}">
