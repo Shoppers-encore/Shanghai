@@ -1,12 +1,13 @@
 package databean;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ChatDataBean {
 	private String sender;
 	private String receiver;
 	private String chatContent;
-	private Date chatDate;
+	private Timestamp chatDate;
+	private int isUser;
 	public String getSender() {
 		return sender;
 	}
@@ -25,10 +26,16 @@ public class ChatDataBean {
 	public void setChatContent(String chatContent) {
 		this.chatContent = chatContent;
 	}
-	public Date getChatDate() {
+	public Timestamp getChatDate() {
 		return chatDate;
 	}
-	public void setChatDate(Date chatDate) {
+	public void setChatDate(Timestamp chatDate) {
 		this.chatDate = chatDate;
+	}
+	public int getIsUser() {
+		return isUser;
+	}
+	public void setIsUser(int isUser) {
+		this.isUser = isUser;
 	}
 }
