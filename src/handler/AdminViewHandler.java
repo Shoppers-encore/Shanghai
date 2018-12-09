@@ -178,7 +178,7 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			count = productDao.getSearchCount(searchWord);			/////////////// 1116怨좎튇怨�
+			count = productDao.getSearchCount(searchWord);			/////////////// 1116�⑥쥙�뒊�⑨옙
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);
@@ -188,7 +188,7 @@ public class AdminViewHandler {
 				map.put("searchWord", searchWord);
 				Map<String, String> cmap = hh.makeCount(count, request);
 				cmap.put("searchWord", searchWord);
-				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 怨좎튇怨�
+				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 �⑥쥙�뒊�⑨옙
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("adm/view/admProductView");
@@ -309,13 +309,14 @@ public class AdminViewHandler {
 		if(count > 0) {
 			chatList = chatDao.getChatList();
 			//////////////////// 1206 ongoing by JH ///////////////////////////
+			Map<String, String> chatTimeMap = new HashMap<String, String>();
 			SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			for (OrderListDataBean orderList : distinctOrderList) {
-				String orderDate = newDateFormat.format(orderList.getOrderDate());
-				orderDateMap.put(orderCode, orderDate);
+			for (ChatDataBean recentChat : chatList) {
+				String chatTime = newDateFormat.format(recentChat.getChatTime());
+				chatTimeMap.put(recentChat.getId(), chatTime);
 			}
-			String orderDateJson = new Gson().toJson(orderDateMap);
-			request.setAttribute("orderDate", orderDateJson);
+			String chatTimeJson = new Gson().toJson(chatTimeMap);
+			request.setAttribute("chatTime", chatTimeJson);
 			/////////////////////// 1206 ongoing by JH ////////////////////////
 			System.out.println(chatList.get(0).getId());
 			System.out.println(chatList.get(0).getChatContent());
