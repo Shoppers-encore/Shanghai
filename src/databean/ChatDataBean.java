@@ -3,22 +3,22 @@ package databean;
 import java.sql.Timestamp;
 
 public class ChatDataBean {
-	private String sender;
-	private String receiver;
+	private int isUser ;
+	private String id;
 	private String chatContent;
-	private Timestamp chatDate;
-	private int isUser;
-	public String getSender() {
-		return sender;
+	private Timestamp chatTime;
+	
+	public int getIsUser() {
+		return isUser;
 	}
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setIsUser(int isUser) {
+		this.isUser = isUser;
 	}
-	public String getReceiver() {
-		return receiver;
+	public String getId() {
+		return id;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getChatContent() {
 		return chatContent;
@@ -26,16 +26,11 @@ public class ChatDataBean {
 	public void setChatContent(String chatContent) {
 		this.chatContent = chatContent;
 	}
-	public Timestamp getChatDate() {
-		return chatDate;
+	public Timestamp getChatTime() {
+		return chatTime;
 	}
-	public void setChatDate(Timestamp chatDate) {
-		this.chatDate = chatDate;
+	public void setChatTime(Timestamp chatTime) {
+		this.chatTime = chatTime;
 	}
-	public int getIsUser() {
-		return isUser;
-	}
-	public void setIsUser(int isUser) {
-		this.isUser = isUser;
-	}
+	
 }

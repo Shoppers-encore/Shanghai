@@ -1,6 +1,7 @@
 package handler;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import databean.ChatDataBean;
 import databean.ImageInfoDataBean;
@@ -175,7 +178,7 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			count = productDao.getSearchCount(searchWord);			/////////////// 1116怨좎튇怨�
+			count = productDao.getSearchCount(searchWord);			/////////////// 1116�⑥쥙�뒊�⑨옙
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);
@@ -185,7 +188,7 @@ public class AdminViewHandler {
 				map.put("searchWord", searchWord);
 				Map<String, String> cmap = hh.makeCount(count, request);
 				cmap.put("searchWord", searchWord);
-				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 怨좎튇怨�
+				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 �⑥쥙�뒊�⑨옙
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("adm/view/admProductView");
@@ -303,10 +306,8 @@ public class AdminViewHandler {
 	public List<ChatDataBean> admChatList(HttpServletRequest request,HttpServletResponse response){
 		int count = chatDao.getChatListCount();
 		List<ChatDataBean> chatList = null;
-		System.out.println("카운트는 " + count);				// 1204 ongoin by jh
 		if(count > 0) {
 			chatList = chatDao.getChatList();
-			System.out.println(chatList.get(0).getChatContent());
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;
@@ -324,8 +325,8 @@ public class AdminViewHandler {
       String id = request.getParameter("id");
       String chatContent = request.getParameter("chatContent");
       ChatDataBean chat = new ChatDataBean();
-      chat.setSender("admin");
-      chat.setReceiver(id);
+//      chat.setSender("admin");
+//      chat.setReceiver(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);
    }
