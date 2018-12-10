@@ -27,8 +27,8 @@ public class UserDao{
 		return session.selectOne("User.getUserLevel", id);
 	}
 	
-	public int insertUser( UserDataBean UserDto ) {
-		return session.insert("User.insertUser", UserDto);
+	public int insertUser( UserDataBean userDto ) {
+		return session.insert("User.insertUser", userDto);
 	}
 	
 	public int check(String id, String password) {
