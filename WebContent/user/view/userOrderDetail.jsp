@@ -8,6 +8,7 @@
 		<title>${head_userOrderDetail}</title>
 	</head>
 	<body>
+
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		
 		<c:forEach var="orderedItem" items="${orderListByOrderCode}">
@@ -91,7 +92,7 @@
 								$('.review_${orderedItem.productCode}').on(
 									'click',
 									function(event) {
-										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}';
+										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}&orderCode=${orderCode}';
 									} 
 								);
 							</script>

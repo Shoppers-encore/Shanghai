@@ -74,8 +74,10 @@ public class UserFormHandler {
 		} else {
 			String productCode = request.getParameter("productCode");
 			String productName = new ProductDao().getProductName(productCode);
+			String orderCode = request.getParameter("orderCode");
 			request.setAttribute("productName", productName);
 			request.setAttribute("productCode", productCode);
+			request.setAttribute("orderCode", orderCode);
 		}
 		int reviewNo = 0;
 

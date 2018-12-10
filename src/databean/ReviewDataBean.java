@@ -3,6 +3,7 @@ package databean;
 import java.sql.Timestamp;
 
 public class ReviewDataBean {
+	private int	orderCode;
 	private int reviewNo;
 	private String title;
 	private String reviewContent;
@@ -15,6 +16,13 @@ public class ReviewDataBean {
 	private String photo2;
 	private int reviewScoreSum;
 	private boolean checkedme;
+	
+	public int getOrderCode() {
+		return orderCode;
+	}
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
+	}
 	public int getReviewScoreSum() {
 		return reviewScoreSum;
 	}
