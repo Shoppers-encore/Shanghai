@@ -92,7 +92,7 @@
 								$('.review_${orderedItem.productCode}').on(
 									'click',
 									function(event) {
-										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}';
+										window.location.href='reviewWriteForm.jk?productCode=${orderedItem.productCode}&orderCode=${orderCode}';
 									} 
 								);
 							</script>
