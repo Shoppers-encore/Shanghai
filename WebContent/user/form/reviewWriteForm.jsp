@@ -27,6 +27,7 @@
 						<th style="width:20%"> ${str_productName} </th>
 						<td style="width:30%">
 							<input class="input" type="text" name="productName" value="${productName}" disabled>
+							<input type="hidden" name="orderCode" value="${orderCode}">
 							<input type="text" name="productCode" value="${productCode}">
 						</td>		
 						<th style="width:20%">${str_rating}</th>
