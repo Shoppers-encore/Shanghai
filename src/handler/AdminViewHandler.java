@@ -308,19 +308,6 @@ public class AdminViewHandler {
 		List<ChatDataBean> chatList = null;
 		if(count > 0) {
 			chatList = chatDao.getChatList();
-			//////////////////// 1206 ongoing by JH ///////////////////////////
-			Map<String, String> chatTimeMap = new HashMap<String, String>();
-			SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			for (ChatDataBean recentChat : chatList) {
-				String chatTime = newDateFormat.format(recentChat.getChatTime());
-				chatTimeMap.put(recentChat.getId(), chatTime);
-			}
-			String chatTimeJson = new Gson().toJson(chatTimeMap);
-			request.setAttribute("chatTime", chatTimeJson);
-			/////////////////////// 1206 ongoing by JH ////////////////////////
-			System.out.println(chatList.get(0).getId());
-			System.out.println(chatList.get(0).getChatContent());
-			System.out.println(chatList.get(0).getChatTime());
 			request.setAttribute("chatList", chatList);
 		}
 		return chatList;

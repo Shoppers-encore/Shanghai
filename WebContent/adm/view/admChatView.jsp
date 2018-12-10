@@ -65,14 +65,17 @@
 							$('#content').html('');
 							if( data.length > 0 ){
 								$.each(data, function(key, chatList){
-									
-									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id
-											+"</a></th><td>"+chatList.chatContent+"</td><td id=time_"+chatList.id+"></td></tr>";
-										$('#content').append( html );
-
-										var key='${'+chatList.id+'}';
-										var chatTime=JSON.parse('${chatTime}')[key];
-										$('#time_'+chatList.id).text(chatTime);
+									var dateobj = new Date(chatList.chatTime);
+									var year = dateobj.getFullYear();
+									var month = dateobj.getMonth();
+									var date = dateobj.getDate();
+									var hours = dateobj.getHours();
+									var minutes = dateobj.getMinutes();
+									var seconds = dateobj.getSeconds();
+  									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id
+										+"</a></th><td>"+chatList.chatContent+"</td><td>"
+										+year+"-"+month+"-"+date+"&nbsp;&nbsp;"+hours+":"+minutes+":"+seconds+"</td></tr>";
+										$('#content').append( html );  
 
 								});
 
