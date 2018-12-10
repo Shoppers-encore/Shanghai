@@ -205,9 +205,8 @@
 	<select id="getCountOfItemsOrdered" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM jk_orderList WHERE orderCode=#{orderCode}
 	</select>
-	
-	<select id="checkReviewWritten" parameterType="databean.ReviewDataBean" resultType="int">
-		SELECT COUNT(*) FROM jk_review WHERE orderCode=#{orderCode} AND productCode=#{productCode}
+	<select id="checkReviewWritten" parameterType="int" resultType="databean.ReviewDataBean">
+		SELECT productCode FROM jk_review WHERE orderCode=#{orderCode}
 	</select>
 
   	

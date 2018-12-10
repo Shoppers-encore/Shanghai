@@ -289,10 +289,13 @@ public class UserViewHandler {
 
 		int orderCode = Integer.parseInt(request.getParameter("orderCode"));
 		List<OrderListDataBean> orderListByOrderCode = orderDao.getOrderListByOrderCode(orderCode);
-
+		List<ReviewDataBean> checkReviewWritten=boardDao.checkReviewWritten(orderCode);
+		System.out.println(checkReviewWritten);
+		
 		request.setAttribute("orderDate", orderDate);
 		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("orderListByOrderCode", orderListByOrderCode);
+		request.setAttribute("checkReviewWritten", checkReviewWritten);
 		return new ModelAndView("user/view/userOrderDetail");
 	}
 

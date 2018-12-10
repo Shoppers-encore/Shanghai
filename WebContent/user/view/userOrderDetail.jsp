@@ -86,8 +86,15 @@
 							<button class="btn btn-sm review_${orderedItem.productCode}" disabled>${btn_writeReview}</button>
 							<script type="text/javascript">
 								var orderStatus='${orderedItem.orderStatus}';
+								var checkReviewWritten='${checkReviewWritten}';
 								if(orderStatus=='3') {
-									$('.review_${orderedItem.productCode}').attr('disabled', false);
+									for(var reviewWritten in checkReviewWritten) {
+										alert(checkReviewWritten[reviewWritten])
+										alert('${orderedItem.productCode}')
+										if('${orderedItem.productCode}'!=checkReviewWritten[reviewWritten]) {
+											$('.review_${orderedItem.productCode}').attr('disabled', false);		
+										}
+									}		
 								}
 								$('.review_${orderedItem.productCode}').on(
 									'click',
