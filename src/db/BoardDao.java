@@ -87,4 +87,8 @@ public class BoardDao {
 	public List <ReviewDataBean> getRvSearchList(Map<String,String> map) {
 		return session.selectList("User.getRvSearchList", map);
 	}
+	
+	public int checkReviewWritten(ReviewDataBean reviewDto) {
+		return session.selectOne("User.checkReviewWritten", reviewDto);
+	}
 }
