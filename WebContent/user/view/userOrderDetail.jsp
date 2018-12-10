@@ -8,6 +8,7 @@
 		<title>${head_userOrderDetail}</title>
 	</head>
 	<body>
+
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		
 		<c:forEach var="orderedItem" items="${orderListByOrderCode}">

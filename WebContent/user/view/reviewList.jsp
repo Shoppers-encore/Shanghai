@@ -40,11 +40,11 @@
 									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
 										
 										<c:if test="${reviewlist.photo1 ne null}">
-											<img src="/Shanghai/save/${reviewlist.photo1}" style="width:50px; height:50px;">
+											<img src="/urPresent/save/${reviewlist.photo1}" style="width:50px; height:50px;">
 											${reviewlist.title}
 										</c:if>
 										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 ne null}">
-											<img src="/Shanghai/save/${reviewlist.photo2}" style="width:50px; height:50px;">
+											<img src="/urPresent/save/${reviewlist.photo2}" style="width:50px; height:50px;">
 											${reviewlist.title}
 										</c:if>
 										<c:if test="${reviewlist.photo1 eq null && reviewlist.photo2 eq null}">
