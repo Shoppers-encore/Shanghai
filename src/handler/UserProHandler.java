@@ -435,6 +435,7 @@ public class UserProHandler {
 		reviewDto.setReviewDate(new Timestamp(System.currentTimeMillis()));
 		reviewDto.setId((String) request.getSession().getAttribute("id"));
 		reviewDto.setProductCode(multi.getParameter("productCode"));
+		reviewDto.setOrderCode(Integer.parseInt(multi.getParameter("orderCode")));
 		reviewDto.setRating(Double.parseDouble(multi.getParameter("rating")));
 		reviewDto.setReviewScoreSum(0);
 
