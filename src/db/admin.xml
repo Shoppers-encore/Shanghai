@@ -146,8 +146,8 @@
 	<!-- chatData -->
 	<select id="getChatList" resultType="databean.ChatDataBean">
 		<!-- SELECT * FROM jk_chat WHERE chatdate IN (select MAX(chatDate) from jk_chat,jk_user WHERE sender=id AND userLevel!=0 group by sender) ORDER BY chatdate asc -->
-		SELECT id, chatContent, chatDate FROM jk_chat WHERE chatDate IN (SELECT MAX(c.chatDate)
-		FROM jk_chat c, jk_user u WHERE c.id=u.id AND userLevel=1 GROUP BY u.id);			<!-- 1205 ongoing by JH -->
+		SELECT id, chatContent, chatTime FROM jk_chat WHERE chatTime IN (SELECT MAX(c.chatTime)
+		FROM jk_chat c, jk_user u WHERE c.id=u.id AND userLevel=1 GROUP BY u.id) order by chatTime desc
 	</select>
 	<select id="getChatListCount" resultType="int">
 		SELECT count(*) FROM jk_chat					<!-- 1205 ongoing by JH -->

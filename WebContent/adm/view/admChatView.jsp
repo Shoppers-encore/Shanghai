@@ -65,9 +65,18 @@
 							$('#content').html('');
 							if( data.length > 0 ){
 								$.each(data, function(key, chatList){
-									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id+"</a></th><td>"+chatList.chatContent+"<td><td>"+new Date(chatList.chatDate).toDateString()+"</td></tr>";
-										$('#content').append( html );
-							
+									var dateobj = new Date(chatList.chatTime);
+									var year = dateobj.getFullYear();
+									var month = dateobj.getMonth();
+									var date = dateobj.getDate();
+									var hours = dateobj.getHours();
+									var minutes = dateobj.getMinutes();
+									var seconds = dateobj.getSeconds();
+  									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id
+										+"</a></th><td>"+chatList.chatContent+"</td><td>"
+										+year+"-"+month+"-"+date+"&nbsp;&nbsp;"+hours+":"+minutes+":"+seconds+"</td></tr>";
+										$('#content').append( html );  
+
 								});
 
 				  				$("a").attr('target','_blank');
