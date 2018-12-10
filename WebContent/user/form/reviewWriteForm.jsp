@@ -27,7 +27,7 @@
 						<th style="width:20%"> ${str_productName} </th>
 						<td style="width:30%">
 							<input class="input" type="text" name="productName" value="${productName}" disabled>
-							<!-- 주문내역 배송완료 목록에서 받아온 상품명 값을 입력해줌 -->
+							<input type="hidden" name="orderCode" value="${orderCode}">
 							<input type="text" name="productCode" value="${productCode}">
 						</td>		
 						<th style="width:20%">${str_rating}</th>

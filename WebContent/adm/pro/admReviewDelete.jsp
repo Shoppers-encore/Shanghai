@@ -10,5 +10,10 @@
 	</script>		
 </c:if>
 <c:if test="${result ne 0}">
-	<c:redirect url="admReviewList.jk"/>
+	<script type="text/javascript">
+			//<!--
+				alert('리뷰가 삭제 됐습니다.');
+			//-->
+		</script>	
+	<meta http-equiv="refresh" content="0; url=reviewList.jk?pageNum=${pageNum}">	
 </c:if>
