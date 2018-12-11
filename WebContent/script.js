@@ -146,7 +146,7 @@ function mailTransfer(form) {
 	 }
 	var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
 	//open(URL, name, specs, replace)
-	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630" );
+	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
 }
 //Check authentication-key match
 function matchAuthKey() {
@@ -154,10 +154,16 @@ function matchAuthKey() {
     	 alert( emailcheckerror2 );
     } else {
         alert( "인증 완료되었습니다" );
-        opener.document.emailVerified=1;
+        window.opener.emailVerified(1);
         self.close();
     }
 }
+
+function emailVerified(val) {
+	var emailVerified=val;
+	return emailVerified;
+}
+
 //Validity Check for userInputForm - function for joining member
 function inputCheck() {
 	   if( emailVerified == 0 ) {      // 이메일 인증 안하면 block
