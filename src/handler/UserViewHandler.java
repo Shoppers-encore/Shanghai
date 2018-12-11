@@ -290,12 +290,20 @@ public class UserViewHandler {
 		int orderCode = Integer.parseInt(request.getParameter("orderCode"));
 		List<OrderListDataBean> orderListByOrderCode = orderDao.getOrderListByOrderCode(orderCode);
 		List<ReviewDataBean> checkReviewWritten=boardDao.checkReviewWritten(orderCode);
-		System.out.println(checkReviewWritten);
+		
+		if(!checkReviewWritten.isEmpty()) {
+			Map<String, String> reviewedItems=new HashMap<String, String>();
+			for (ReviewDataBean item:checkReviewWritten) {
+				reviewedItems.put(item.getProductCode(), item.getProductCode());
+			}
+			String reviewed = new Gson().toJson(reviewedItems);
+			request.setAttribute("reviewedItems", reviewed);
+		}
 		
 		request.setAttribute("orderDate", orderDate);
 		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("orderListByOrderCode", orderListByOrderCode);
-		request.setAttribute("checkReviewWritten", checkReviewWritten);
+		
 		return new ModelAndView("user/view/userOrderDetail");
 	}
 
