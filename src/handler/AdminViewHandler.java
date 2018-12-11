@@ -248,12 +248,12 @@ public class AdminViewHandler {
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list =productDao.getProductDetail( ref );
 		for(int i = 0 ; i<list.size();i++) {
-			System.out.println(list.get(i).getProductCode());
+			// System.out.println(list.get(i).getProductCode());
 		}
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		for(int i = 0 ; i<colors.length;i++){
-			System.out.println(colors[i]);
+			// System.out.println(colors[i]);
 		}
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
 		request.setAttribute("productList", list);
@@ -315,8 +315,10 @@ public class AdminViewHandler {
    @RequestMapping("/admChatting")
    public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
 	   String id = (String)request.getSession().getAttribute("id");
-      request.setAttribute("id", id);
-      return new ModelAndView("adm/view/admChatting");
+	   request.setAttribute("id", id);
+//	   String userid = request.getParameter("id");			// 1211 JH tried...
+//     request.setAttribute("userid", userid);
+       return new ModelAndView("adm/view/admChatting");
    }
    
    @RequestMapping("/admChatInput")
@@ -327,14 +329,18 @@ public class AdminViewHandler {
       ChatDataBean chat = new ChatDataBean();
 //      chat.setSender("admin");
 //      chat.setReceiver(id);
+      chat.setId(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);
    }
    @RequestMapping("/admChat")
    @ResponseBody
    public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
-      String id = request.getParameter("id");
+      String id = request.getParameter("id");		// id = admin
       List<ChatDataBean> chatData = chatDao.getList(id);
+//      String userid = (String) request.getAttribute("userid");	// 1211 JH tried..
+//      System.out.println(userid);
+//      List<ChatDataBean> chatData = chatDao.getList(userid);
       request.setAttribute("chatData", chatData);
       return chatData;
    }

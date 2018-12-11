@@ -211,10 +211,10 @@
   	
   	<!-- chatting -->
   	<select id="getChatList" parameterType="String" resultType="databean.ChatDataBean">
-  		SELECT * FROM jk_chat WHERE sender=#{id} OR receiver=#{id} ORDER BY chatdate asc
+  		SELECT * FROM jk_chat WHERE id=#{userid} ORDER BY chatTime asc
   	</select>
   	<insert id="chatInput" parameterType="databean.ChatDataBean">
-  		INSERT INTO jk_chat VALUES(#{sender}, #{receiver}, #{chatContent}, sysdate)
+  		INSERT INTO jk_chat VALUES(#{id}, #{chatContent}, sysdate)
   	</insert>
   	
   	
