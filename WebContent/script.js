@@ -139,12 +139,12 @@ function checkHeight(){
 
 
 //SMTP - Simple Mail Transfer Protocol
-function mailTransfer() {
-	if(inputform.email.value.indexOf("@") == -1 || inputform.email.value.indexOf(".") == -1){ //check proper email format
+function mailTransfer(form) {
+	if(form.email.value.indexOf("@") == -1 || form.email.value.indexOf(".") == -1){ //check proper email format
 	      alert(emailfmterror);
 	      return false;
 	 }
-	var url = "userMailCheck.jk?email="+inputform.email.value;	//direct to UserProHandler.java with email value
+	var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
 	//open(URL, name, specs, replace)
 	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630" );
 }

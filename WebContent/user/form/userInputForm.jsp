@@ -68,7 +68,7 @@
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=tel
 							placeholder="${str_noDash}" maxlength="12" required
-							onkeyup="numberonly()">
+							onkeyup="numberonly(event, inputform)">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -83,7 +83,7 @@
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary" type="button"
-							onclick="mailTransfer()">${btn_selfConfirm}</button>
+							onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>
 					</div>
 				</div>
 				<div class="form-group row">
