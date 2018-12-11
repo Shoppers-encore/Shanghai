@@ -86,9 +86,9 @@
 	   		<div align="center">
 		   		<c:if test="${count gt 0}">
 					<c:if test="${currentPage ne 1}">
-						<a href="userOrderList.jk?userid=${userid}&">[◀◀]</a>
+						<a href="admUserOrderList.jk?userid=${userid}&">[◀◀]</a>
 						<c:if test="${startPage gt pageBlock}">
-							<a href="userOrderList.jk?userid=${userid}&pageNum=${startPage-pageBlock}">[◀]</a>
+							<a href="admUserOrderList.jk?userid=${userid}&pageNum=${startPage-pageBlock}">[◀]</a>
 						</c:if>
 					</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -96,14 +96,14 @@
 					<span>[${i}]</span>
 					</c:if>
 					<c:if test="${i ne currentPage}">
-					<a href="userOrderList.jk?userid=${userid}&pageNum=${i}">[${i}]</a>
+					<a href="admUserOrderList.jk?userid=${userid}&pageNum=${i}">[${i}]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage ne pageCount}">
 					<c:if test="${pageCount>endPage}">
-					<a href="userOrderList.jk?userid=${userid}&pageNum=${startPage+pageBlock}">[▶]</a>
+					<a href="admUserOrderList.jk?userid=${userid}&pageNum=${startPage+pageBlock}">[▶]</a>
 					</c:if>
-					<a href="userOrderList.jk?userid=${userid}&pageNum=${pageCount}">[▶▶]</a>
+					<a href="admUserOrderList.jk?userid=${userid}&pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 				</c:if>
 			</div>
