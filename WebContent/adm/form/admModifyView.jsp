@@ -82,7 +82,7 @@
 						</div>
 						<div>
 	 			    		<input class="btn btn-outline-primary" type="button" value="${btn_confirmmail}"
-							onclick="confirmmail()"> <br><br>
+							onclick=""> <br><br>		<!-- mailTransfer(admModForm) 들어갈 자리 -->
 						</div>
 						<input class="btn btn-secondary" type="button" value="${btn_back}"
 									onclick="history.back()">
