@@ -357,6 +357,41 @@ public class AdminViewHandler {
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		map.put("id", userid);
 		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
+		/////////////////////////////// 1212 ONGOING BY JH ///////////////////////////////////////
+		if (count > 0) {
+			Map<String, String> selectReferences = new HashMap<String, String>();
+			String startNum = String.valueOf(map.get("start"));
+			String endNum = String.valueOf(map.get("end"));
+
+			selectReferences.put("id", map.get("userid"));
+			selectReferences.put("start", startNum);
+			selectReferences.put("end", endNum);
+
+			/* Change the time format */
+			SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+			/* Set Maps for OrderDate and OrderCount */
+			Map<String, String> orderDateMap = new HashMap<String, String>();
+			Map<String, String> orderCountMap = new HashMap<String, String>();
+
+			List<OrderListDataBean> distinctOrderList = orderDao.getDistinctOrderListById(selectReferences);
+			for (OrderListDataBean orderList : distinctOrderList) {
+				String orderCode = String.valueOf(orderList.getOrderCode());
+				String orderDate = newDateFormat.format(orderList.getOrderDate());
+				String orderCount = String.valueOf(orderDao.getCountOfItemsOrdered(orderList.getOrderCode()));
+
+				orderDateMap.put(orderCode, orderDate);
+				orderCountMap.put(orderCode, orderCount);
+			}
+
+			String orderDateJson = new Gson().toJson(orderDateMap);
+			String orderCountJson = new Gson().toJson(orderCountMap);
+
+			request.setAttribute("orderDate", orderDateJson);
+			request.setAttribute("orderCount", orderCountJson);
+			request.setAttribute("distinctOrderList", distinctOrderList);
+		}
+		///////////////////////////////// 1212 ONGOING BY JH /////////////////////////// 
 		request.setAttribute("orders", orders);
 		request.setAttribute("count", count);
 		request.setAttribute("userid", userid);
