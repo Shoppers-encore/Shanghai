@@ -77,13 +77,11 @@
 					<div class="col-sm-8">
 						<input class="form-control" type="email" name=email 
 							placeholder="e-mail" maxlength="70" required>
+						<small id="emailVerificationMsg">${msg_emailVerificationNeeded}</small>
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-secondary emailVerificationBtn" type="button"
 							onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>
-						<script type="text/javascript">
-							var emailVerified=0;
-						</script>
 					</div>
 				</div>
 				<div class="form-group row">

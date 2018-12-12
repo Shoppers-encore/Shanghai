@@ -60,6 +60,12 @@ img#chatImg {
 	width: 7rem;
 }
 
+/* ====userInputForm==== */
+#emailVerificationMsg {
+	color: brown;
+}
+
+
 /*
 
 ===userInputForm.jsp===

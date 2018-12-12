@@ -146,27 +146,25 @@ function mailTransfer(form) {
 	 }
 	var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
 	//open(URL, name, specs, replace)
-	open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
+	window.open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
 }
 //Check authentication-key match
 function matchAuthKey() {
     if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ){ //null 값 입력시 emailcheckerror1 메시지 뜨는처리도 추가하기
     	 alert( emailcheckerror2 );
     } else {
-        alert( "인증 완료되었습니다" );
-        window.opener.emailVerified(1);
+        alert( '인증 완료되었습니다' );
+        $('#emailVerificationMsg', window.opener.document.inputform).html('이메일이 인증되었습니다.');
+        $('#emailVerificationMsg', window.opener.document.inputform).css({
+        	color: 'green'
+		});
         self.close();
     }
 }
 
-function emailVerified(val) {
-	var emailVerified=val;
-	return emailVerified;
-}
-
 //Validity Check for userInputForm - function for joining member
 function inputCheck() {
-	   if( emailVerified == 0 ) {      // 이메일 인증 안하면 block
+	   if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
 	      alert( emailconfirmerror );
 	      inputform.email.focus();
 	      return false;
