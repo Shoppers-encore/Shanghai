@@ -7,7 +7,7 @@
 	</a>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top border">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top border bg-white">
 	<div class="container-fluid">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>

@@ -54,7 +54,7 @@
 				<c:forEach var="orderedItem" items="${orderListByOrderCode}">
 					<div class="row border text-center mt-1"> 					
 						<div class="col-lg-2">
-							<img class="w-50" src="/Shanghai/images/${orderedItem.thumbnail}" alt="Product Img">
+							<img class="w-50" src="/urPresent/save/${orderedItem.thumbnail}" alt="Product Img">
 						</div>
 						<div class="col-lg-1 pt-5">
 							${orderedItem.productCode}
@@ -86,9 +86,17 @@
 							<button class="btn btn-sm review_${orderedItem.productCode}" disabled>${btn_writeReview}</button>
 							<script type="text/javascript">
 								var orderStatus='${orderedItem.orderStatus}';
-								if(orderStatus=='3') {
+								var orderedProductCode='${orderedItem.productCode}';
+								
+								if(orderStatus=='3' && '${reviewedItems}'!='') {
+									var jsonObj=$.parseJSON('${reviewedItems}');
+									if(!jsonObj['${orderedItem.productCode}']) {
+	 									$('.review_${orderedItem.productCode}').attr('disabled', false);
+									}
+								} else if(orderStatus=='3' && '${reviewedItems}'=='') {
 									$('.review_${orderedItem.productCode}').attr('disabled', false);
 								}
+								
 								$('.review_${orderedItem.productCode}').on(
 									'click',
 									function(event) {

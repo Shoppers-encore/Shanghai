@@ -56,7 +56,7 @@
 						<input type="hidden" name="productCode" value="${basket.productCode}">
 						<div class="row border text-center">
 							<div class="col-lg-2">
-								<img class="w-50" src="/Shanghai/images/${product.thumbnail}" alt="Product Img">
+								<img class="w-50" src="/urPresent/save/${product.thumbnail}" alt="Product Img">
 							</div>
 							<div class="col-lg-4 pt-5">
 								${product.productName}<br>
@@ -230,7 +230,7 @@
 						<c:forEach var="basket" items="${basket}">
 							<div class="form-group row border text-center" id="${basket.productCode}">
 								<div class="col-lg-2">
-									<img class="w-50" src="/Shanghai/images/${basket.thumbnail}" alt="Product Img">
+									<img class="w-50" src="/urPresent/save/${basket.thumbnail}" alt="Product Img">
 								</div>
 								<div class="col-lg-4 pt-5">
 									${basket.productName}<br>
