@@ -355,14 +355,12 @@ public class AdminViewHandler {
 		//UserDataBean userDto = userDao.getUser(userid);
 		int count = orderDao.getDistinctOrderCountById(userid);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
-		map.put("id", userid);
-		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
 		/////////////////////////////// 1212 ONGOING BY JH ///////////////////////////////////////
 		if (count > 0) {
 			Map<String, String> selectReferences = new HashMap<String, String>();
 			String startNum = String.valueOf(map.get("start"));
 			String endNum = String.valueOf(map.get("end"));
-
+			map.put("userid", userid);
 			selectReferences.put("id", map.get("userid"));
 			selectReferences.put("start", startNum);
 			selectReferences.put("end", endNum);
@@ -392,7 +390,6 @@ public class AdminViewHandler {
 			request.setAttribute("distinctOrderList", distinctOrderList);
 		}
 		///////////////////////////////// 1212 ONGOING BY JH /////////////////////////// 
-		request.setAttribute("orders", orders);
 		request.setAttribute("count", count);
 		request.setAttribute("userid", userid);
 		request.setAttribute("userDto", adminDto);
