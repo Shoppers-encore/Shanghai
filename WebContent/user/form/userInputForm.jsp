@@ -15,7 +15,7 @@
   		<div class="container col-lg-6">
 			<h4 class="mb-5"><b>${page_input}</b></h4>
 			
-			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return inputCheck()">
+			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform">
 				<div class="form-group row">
 					<!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
@@ -75,7 +75,7 @@
 					<!-- email -->
 					<label for="email" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="email" name=email 
+						<input class="form-control" type="email" name="email" id="email" 
 							placeholder="e-mail" maxlength="70" required>
 						<small id="emailVerificationMsg">${msg_emailVerificationNeeded}</small>
 					</div>
@@ -92,7 +92,7 @@
 							placeholder="${str_addressPlaceholder}" required readonly>
 					</div>
 					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary" type="button"
+						<button class="btn btn-md btn-secondary addressSearchBtn" type="button"
 							value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>
 					</div>
 				</div>
@@ -101,6 +101,9 @@
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=address id="address" required readonly>
+						<script type="text/javascript">
+							alert(inputform.address.value)
+						</script>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -150,4 +153,41 @@
 		</div>
 	<%@include file="../view/userFooter.jsp"%>
 	</body>
+	<script type="text/javascript">
+		/* Validity Check for userInputForm - function for joining member */
+		$('.btn_join').on(
+			'click',
+			function(event) {
+				if(!$('#email').val()) {
+					event.preventDefault();
+					alert(noemailerror);
+					$('#email').focus();
+				}
+				
+				if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
+					event.preventDefault();  
+					alert( emailconfirmerror );
+					$('.emailVerificationBtn').focus();
+				   } 
+				   
+				if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
+					event.preventDefault();
+					alert( iderror );
+					inputform.id.focus();
+				} 
+		   
+				if( inputform.password.value != inputform.repassword.value ) {
+					event.preventDefault();
+					alert( passwderror );
+					inputform.repassword.focus();
+				}
+		   
+				if(!inputform.address.value) {
+					event.preventDefault();
+					alert( addresserror );
+					inputform.addressSearchBtn.focus();
+				}
+			}
+		);
+	</script>
 </html>
