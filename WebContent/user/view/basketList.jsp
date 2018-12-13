@@ -64,7 +64,7 @@
 									<input type="checkbox" class="itemChecked" id="itemChecked_${basketList.productCode}" name="itemChecked" value="${basketList.productCode}" checked>
 								</div>
 								<div class="col-lg-2">
-									<img class="w-50" src="/Shanghai/images/${basketList.thumbnail}" alt="Product Img">
+									<img class="w-50" src="/urPresent/save/${basketList.thumbnail}" alt="Product Img">
 								</div>
 								<div class="col-lg-3 pt-5">
 									${basketList.productName}<br>

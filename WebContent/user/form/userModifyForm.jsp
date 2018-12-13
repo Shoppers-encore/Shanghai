@@ -70,7 +70,7 @@
 						<input class="form-control" type="email" name=email  placeholder="e-mail" maxlength="12" value="${userDto.email}" required>											
 					</div>
 					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary" type="button"  onclick="">${btn_selfConfirm}</button>					
+						<button class="btn btn-md btn-secondary" type="button" onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>					
 					</div>				
 			</div>
 			<div class="form-group row"><!--zip code -->

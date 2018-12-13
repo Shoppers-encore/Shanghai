@@ -125,6 +125,10 @@
 		delete from jk_comment where commentNo = #{commentNo}
 	</delete>
 	
+	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
+		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	</select>
+	
 	
 	<!-- Basket -->
 	<select id="getBasketList" parameterType="String" resultType="databean.BasketDataBean">
@@ -201,11 +205,8 @@
 	<select id="getCountOfItemsOrdered" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM jk_orderList WHERE orderCode=#{orderCode}
 	</select>
-
-
-
-	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
-		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
+	<select id="checkReviewWritten" parameterType="int" resultType="databean.ReviewDataBean">
+		SELECT productCode FROM jk_review WHERE orderCode=#{orderCode}
 	</select>
 
   	
