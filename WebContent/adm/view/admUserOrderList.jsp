@@ -56,27 +56,46 @@
 					</tr>
 				</c:if>
 				<c:if test="${count ne 0}">
-	   				<c:forEach var="order" items="${orders}">	
+	   				<c:forEach var="distinctOrderList" items="${distinctOrderList}">	
 	   					<tr>
-	   						<td>${order.orderCode}</td>
-	   						<td>${order.orderDate}</td>
-	   						<td>${order.orderQuantity} ${str_orderUnit}</td>
+	   						<td>${distinctOrderList.orderCode}</td>
+	   						<td id="date_${distinctOrderList.orderCode}">
+								<script type="text/javascript">
+									var key='${distinctOrderList.orderCode}';
+									var orderDate=JSON.parse('${orderDate}')[key];
+									$('#date_${distinctOrderList.orderCode}').text(orderDate);
+								</script>
+							</td>
+	   						<td id="count_${distinctOrderList.orderCode}">
+								<script type="text/javascript">
+									var orderCount=JSON.parse('${orderCount}')[key];
+									$('#count_${distinctOrderList.orderCode}').text(orderCount+'${str_orderUnit}');
+								</script>
+							</td>
 	   						<td>
-								<c:if test="${order.orderStatus eq 0}">
+								<c:if test="${distinctOrderList.orderStatus eq 0}">
 									${str_orderStatus0}
 								</c:if>								
-								<c:if test="${order.orderStatus eq 1}">
+								<c:if test="${distinctOrderList.orderStatus eq 1}">
 									${str_orderStatus1}
 								</c:if>								
-								<c:if test="${order.orderStatus eq 2}">
+								<c:if test="${distinctOrderList.orderStatus eq 2}">
 									${str_orderStatus2}
 								</c:if>								
-								<c:if test="${order.orderStatus eq 3}">
+								<c:if test="${distinctOrderList.orderStatus eq 3}">
 									${str_orderStatus3}
-								</c:if>	
+								</c:if>			
 	   						</td> 
 	   						<td>
-								<a href="admOrderDetail.jk?orderCode=${order.orderCode}" class="btn-sm btn-secondary">${btn_orderDetails}</a>
+								<button class="btn btn-sm orderListDetails_${distinctOrderList.orderCode}">${btn_orderDetails}</button>
+								<script type="text/javascript">
+									$('.orderListDetails_${distinctOrderList.orderCode}').on(
+										'click',
+										function(event) {
+											window.location.href='admOrderDetail.jk?orderCode=${distinctOrderList.orderCode}&orderDate='+orderDate;
+										}
+									);
+								</script>
 							</td>
 	   					</tr>
 	   				</c:forEach>
