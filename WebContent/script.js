@@ -18,6 +18,7 @@ var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var onlynum = "숫자만 입력이 가능합니다.";
 var modcompleted = "수정이 완료되었습니다.";
 var adminonly = "관리자만 접근할 수 있습니다.";
+var addresserror="주소는 필수 입력사항입니다.";
 
 //Message-userLoginPro-User Login
 var loginiderror = "입력하신 아이디가 없습니다.\n아이디를 다시 확인해 주세요.";
@@ -27,7 +28,6 @@ var rejoinmsg = "탈퇴된 계정입니다.\n다시 회원가입을 해 주세�
 //Message-userInputForm-Join Member
 var confirmerror = "아이디 중복확인을 해 주세요.";
 var error = "아이디 중복확인 실패";
-var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var emailcheckerror1 = "이메일 인증을 해 주세요.";
 var emailcheckerror2 = "인증번호가 일치하지 않습니다."
 var emailconfirmerror = "이메일 인증 후 다시 시도해 주세요.";
@@ -160,28 +160,6 @@ function matchAuthKey() {
 		});
         self.close();
     }
-}
-
-//Validity Check for userInputForm - function for joining member
-function inputCheck() {
-	   if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
-	      alert( emailconfirmerror );
-	      inputform.email.focus();
-	      return false;
-	   } 
-	   
-	   if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
-	      alert( iderror );
-	      inputform.id.focus();
-	      return false;
-	   } 
-	   
-	   if( inputform.password.value != inputform.repassword.value ) {
-	      alert( passwderror );
-	      inputform.repassword.focus();
-	      return false;
-	   } 
-	   
 }
 
 //Find address through zip-code : http://postcode.map.daum.net/guide#sample
