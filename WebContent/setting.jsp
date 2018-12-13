@@ -6,7 +6,6 @@
 
 <link rel="stylesheet" type="text/css" href="/urPresent/user/urPresent_style.css">
 
-<script src="/urPresent/script.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script
@@ -17,6 +16,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<script src="/urPresent/script.js"></script>
 
 <c:set var="project" value="/urPresent/user/" />
 

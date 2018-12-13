@@ -101,9 +101,6 @@
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
 					<div class="col-sm-8">
 						<input class="form-control" type="text" name=address id="address" required readonly>
-						<script type="text/javascript">
-							alert(inputform.address.value)
-						</script>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -158,34 +155,26 @@
 		$('.btn_join').on(
 			'click',
 			function(event) {
-				if(!$('#email').val()) {
-					event.preventDefault();
-					alert(noemailerror);
-					$('#email').focus();
-				}
-				
-				if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
-					event.preventDefault();  
-					alert( emailconfirmerror );
-					$('.emailVerificationBtn').focus();
-				   } 
-				   
 				if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
 					event.preventDefault();
 					alert( iderror );
-					inputform.id.focus();
-				} 
-		   
-				if( inputform.password.value != inputform.repassword.value ) {
+					$('#id').focus();
+				} else if( $('#password1').val() != $('#password2').val() ) {
 					event.preventDefault();
 					alert( passwderror );
-					inputform.repassword.focus();
-				}
-		   
-				if(!inputform.address.value) {
+					$('#password2').focus();
+				} else if(!$('#email').val()) {
+					event.preventDefault();
+					alert(noemailerror);
+					$('#email').focus();
+				} else if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
+					event.preventDefault();  
+					alert( emailconfirmerror );
+					$('.emailVerificationBtn').focus();
+				} else if(!$('#address').val()) {
 					event.preventDefault();
 					alert( addresserror );
-					inputform.addressSearchBtn.focus();
+					$('.addressSearchBtn').focus();
 				}
 			}
 		);
