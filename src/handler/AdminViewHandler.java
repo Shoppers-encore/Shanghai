@@ -248,12 +248,12 @@ public class AdminViewHandler {
 		int ref = Integer.parseInt(request.getParameter("ref"));
 		List<ProductDataBean> list =productDao.getProductDetail( ref );
 		for(int i = 0 ; i<list.size();i++) {
-			System.out.println(list.get(i).getProductCode());
+			// System.out.println(list.get(i).getProductCode());
 		}
 		List<ImageInfoDataBean> imageList = productDao.getImgDetail( ref );
 		String[] colors = new HandlerHelper().whatColor(new HandlerHelper().decodeColorCode(list));
 		for(int i = 0 ; i<colors.length;i++){
-			System.out.println(colors[i]);
+			// System.out.println(colors[i]);
 		}
 		String[] sizes = new HandlerHelper().whatSize(new HandlerHelper().decodeSizeCode(list));
 		request.setAttribute("productList", list);
@@ -315,8 +315,10 @@ public class AdminViewHandler {
    @RequestMapping("/admChatting")
    public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
 	   String id = (String)request.getSession().getAttribute("id");
-      request.setAttribute("id", id);
-      return new ModelAndView("adm/view/admChatting");
+	   request.setAttribute("id", id);
+//	   String userid = request.getParameter("id");			// 1211 JH tried...
+//     request.setAttribute("userid", userid);
+       return new ModelAndView("adm/view/admChatting");
    }
    
    @RequestMapping("/admChatInput")
@@ -327,14 +329,18 @@ public class AdminViewHandler {
       ChatDataBean chat = new ChatDataBean();
 //      chat.setSender("admin");
 //      chat.setReceiver(id);
+      chat.setId(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);
    }
    @RequestMapping("/admChat")
    @ResponseBody
    public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
-      String id = request.getParameter("id");
+      String id = request.getParameter("id");		// id = admin
       List<ChatDataBean> chatData = chatDao.getList(id);
+//      String userid = (String) request.getAttribute("userid");	// 1211 JH tried..
+//      System.out.println(userid);
+//      List<ChatDataBean> chatData = chatDao.getList(userid);
       request.setAttribute("chatData", chatData);
       return chatData;
    }
@@ -349,9 +355,41 @@ public class AdminViewHandler {
 		//UserDataBean userDto = userDao.getUser(userid);
 		int count = orderDao.getDistinctOrderCountById(userid);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
-		map.put("id", userid);
-		List<OrderListDataBean> orders = orderDao.getUserOrderList(map);
-		request.setAttribute("orders", orders);
+		/////////////////////////////// 1212 ONGOING BY JH ///////////////////////////////////////
+		if (count > 0) {
+			Map<String, String> selectReferences = new HashMap<String, String>();
+			String startNum = String.valueOf(map.get("start"));
+			String endNum = String.valueOf(map.get("end"));
+			map.put("userid", userid);
+			selectReferences.put("id", map.get("userid"));
+			selectReferences.put("start", startNum);
+			selectReferences.put("end", endNum);
+
+			/* Change the time format */
+			SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+			/* Set Maps for OrderDate and OrderCount */
+			Map<String, String> orderDateMap = new HashMap<String, String>();
+			Map<String, String> orderCountMap = new HashMap<String, String>();
+
+			List<OrderListDataBean> distinctOrderList = orderDao.getDistinctOrderListById(selectReferences);
+			for (OrderListDataBean orderList : distinctOrderList) {
+				String orderCode = String.valueOf(orderList.getOrderCode());
+				String orderDate = newDateFormat.format(orderList.getOrderDate());
+				String orderCount = String.valueOf(orderDao.getCountOfItemsOrdered(orderList.getOrderCode()));
+
+				orderDateMap.put(orderCode, orderDate);
+				orderCountMap.put(orderCode, orderCount);
+			}
+
+			String orderDateJson = new Gson().toJson(orderDateMap);
+			String orderCountJson = new Gson().toJson(orderCountMap);
+
+			request.setAttribute("orderDate", orderDateJson);
+			request.setAttribute("orderCount", orderCountJson);
+			request.setAttribute("distinctOrderList", distinctOrderList);
+		}
+		///////////////////////////////// 1212 ONGOING BY JH /////////////////////////// 
 		request.setAttribute("count", count);
 		request.setAttribute("userid", userid);
 		request.setAttribute("userDto", adminDto);
