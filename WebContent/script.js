@@ -199,7 +199,30 @@ function sample4_execDaumPostcode() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-
+/* Validity Check for userInputForm - function for joining member */
+function joincheck() {
+	if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
+		alert( iderror );
+		$('#id').focus();
+		return false;
+	} else if( $('#password1').val() != $('#password2').val() ) {
+		alert( passwderror );
+		$('#password2').focus();
+		return false;
+	} else if(!$('#email').val()) {
+		alert(noemailerror);
+		$('#email').focus();
+		return false;
+	} else if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
+		alert( emailconfirmerror );
+		$('.emailVerificationBtn').focus();
+		return false;
+	} else if(!$('#address').val()) {
+		alert( addresserror );
+		$('.addressSearchBtn').focus();
+		return false;
+	}
+}
 
 ///<Review>
 function scoring() {
