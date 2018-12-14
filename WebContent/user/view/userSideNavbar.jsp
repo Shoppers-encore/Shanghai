@@ -5,27 +5,27 @@
 	<ul class="nav flex-column">
 		<li class="nav-item">
 			<c:if test="${sessionScope.id eq null}">
-				<a class="nav-link ml-1 mr-1 border" href="userLoginForm.jk">
-					<img class="loginImg sidebarImg row" src="/urPresent/images/login.png">
+				<a class="nav-link ml-1 mr-1 border loginIconPanel" href="userLoginForm.jk">
+					<img class="loginImg row" src="/urPresent/images/login.png">
 					<small class="row">${btn_login}</small>
 				</a>
 			</c:if>
 			<c:if test="${sessionScope.id ne null}">
-				<a class="nav-link ml-1 mr-1 border" href="logout.jk">
-					<img class="logoutImg sidebarImg row justify-content-center" src="/urPresent/images/logout.png">
+				<a class="nav-link ml-1 mr-1 border logoutIconPanel" href="logout.jk">
+					<img class="logoutImg row justify-content-center" src="/urPresent/images/logout.png">
 					<small class="row">${btn_logout}</small>
 				</a>
 			</c:if>
 		</li>
 		<li class="nav-item">
 			<c:if test="${sessionScope.id eq null}">
-				<a class="nav-link ml-1 mr-1 border" href="userLoginForm.jk">
+				<a class="nav-link ml-1 mr-1 border sidebarIconPanel" href="userLoginForm.jk">
 					<img class="myPageImg sidebarImg row" src="/urPresent/images/myPage.png">
 					<small class="row">${btn_myPage}</small>
 				</a>
 			</c:if>
 			<c:if test="${sessionScope.id ne null}">
-				<a class="nav-link ml-1 mr-1 border" href="userMyPage.jk">
+				<a class="nav-link ml-1 mr-1 border sidebarIconPanel" href="userMyPage.jk">
 					<img class="myPageImg sidebarImg row" src="/urPresent/images/myPage.png">
 					<small class="row">${btn_myPage}</small>
 				</a>
@@ -33,13 +33,13 @@
 		</li>
 		<li class="nav-item">
 			<c:if test="${sessionScope.id eq null}">
-				<a class="nav-link ml-1 mr-1 border" href="userLoginForm.jk">
+				<a class="nav-link ml-1 mr-1 border sidebarIconPanel" href="userLoginForm.jk">
 					<img class="chatImg sidebarImg row" src="/urPresent/images/chat.png">
 					<small class="row">${str_chat}</small>
 				</a>
 			</c:if>
 			<c:if test="${sessionScope.id ne null}">
-				<a class="nav-link ml-1 mr-1 border" href="chatView.jk">
+				<a class="nav-link ml-1 mr-1 border sidebarIconPanel" href="chatView.jk">
 					<img class="chatImg sidebarImg row" src="/urPresent/images/chat.png">
 					<small class="row">${str_chat}</small>
 				</a>
@@ -57,11 +57,23 @@
 		</li>
 	</ul>
 </div>
-
-
-<%-- 
-		<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-				<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-			</div>
-		</c:if> --%>
+<script type="text/javascript">
+	$('.loginIconPanel').hover(
+		function(event) {
+			$('.sidebarIconPanel').css({
+				'background-color': 'black'		
+			});
+			$('.sidebarImg').css({
+				'filter': 'invert(100%)'		
+			});	
+		},
+		function(event) {
+			$('.sidebarIconPanel').css({
+				'background-color': 'white'		
+			});
+			$('.sidebarImg').css({
+				'filter': 'invert(0%)'		
+			});	
+		}
+	);
+</script>
