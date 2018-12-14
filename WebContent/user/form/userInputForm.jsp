@@ -79,9 +79,8 @@
 							placeholder="e-mail" maxlength="70" required>
 						<small id="emailVerificationMsg">${msg_emailVerificationNeeded}</small>
 					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-md btn-secondary emailVerificationBtn" type="button"
-							onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>
+					<div class="col-sm-2" id="maildiv">
+						<button class='btn btn-md btn-secondary emailVerificationBtn' type='button' onclick='mailTransfer(inputform)'>${btn_selfConfirm}</button>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -150,4 +149,46 @@
 		</div>
 	<%@include file="../view/userFooter.jsp"%>
 	</body>
+	<script type="text/javascript">
+	//<--
+	//SMTP - Simple Mail Transfer Protocol
+function mailTransfer(form) {
+		if(form.email.value.indexOf("@") == -1 || form.email.value.indexOf(".") == -1){ //check proper email format
+		      alert(emailfmterror);
+		      return false;
+		 }
+		$.ajax({
+			type:'POST',
+			url : 'isMail.jk',
+			data : $("input[name='email']").serialize(),
+			dataType : "json",
+			success : function(data){
+				console.log(data.result)
+				if(data.result>0){
+					alert('존재하는 이메일입니다.\n다른 주소를 입력해주세요');
+					$("input[name='email']").focus();
+				}else{
+					var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
+					//open(URL, name, specs, replace)
+					window.open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
+
+				}
+			}
+		});
+	}
+	$(document).ready(
+			$("input[name='email']").change(function(){
+				 $('#emailVerificationMsg').html('이메일 인증을 해 주세요.');
+				 $('#emailVerificationMsg').css({color: 'brown'});
+			})
+	);
+	$(document).ready(
+			$("input[name='id']").change(function(){
+				 $('#confirmIdResult').html('이메일 인증을 해 주세요.');
+				 $('#confirmIdResult').css({color: 'brown'});
+				 idCheck=0;
+			})
+	);
+	//-->
+	</script>
 </html>
