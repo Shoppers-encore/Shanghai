@@ -14,7 +14,7 @@
 	<!-- Review Write Form -->
 	<article><br><br>
 	    <div id="writeForm">
-			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform">
+			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform" onsubmit="return checkReviewWrite()">
 				<table class="table" >
 					<tr>
 						<th colspan="4">${str_writeReview}</th>
@@ -28,7 +28,7 @@
 						<td style="width:30%">
 							<input class="input" type="text" name="productName" value="${productName}" disabled>
 							<input type="hidden" name="orderCode" value="${orderCode}">
-							<input type="text" name="productCode" value="${productCode}">
+							<input type="text" name="productCode" value="${productCode}" readonly>
 						</td>		
 						<th style="width:20%">${str_rating}</th>
 						<td style="width:30%">
@@ -65,5 +65,4 @@
 		 </div>
 	</article>
 </body>
-
 </html>
