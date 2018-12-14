@@ -8,13 +8,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 <title>${str_modifyReview}</title>
-  
+<script type="text/javascript">
+	//<!--
+	//Delete Photo
+	function photoModify(photoNo){
+		var photoModify ='';
+		photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
+		   
+		$('.photo'+photoNo).html(photoModify);
+	}
+	//-->
+</script>
 </head>
 <body>
 	<article class="centered">
 	<br><br>
 	    <div id="writeform">
-			<form method="post" encType="multipart/form-data" action="reviewModifyPro.jk" name="writeform">
+			<form method="post" encType="multipart/form-data" action="reviewModifyPro.jk" name="writeform" onsubmit="return checkReviewWrite()">
 				<table class="table" >
 					<tr>
 						<th colspan="4">

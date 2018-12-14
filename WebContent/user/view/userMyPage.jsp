@@ -93,9 +93,19 @@
 			</div>
 			<div class="col-sm-12 text-center mt-4"><!-- button -->
 	            <button class="btn" type="button" onclick="location='userModifyForm.jk'">${btn_modify}</button>
-	            <button class="btn" type="button" onclick="location='userDeletePro.jk'">${btn_userDelete}</button>
+	            <button class="btn" type="button" onclick="userDelete()">${btn_userDelete}</button>
 	            <button class="btn" type="button" onclick="location='logout.jk'">${btn_logout}</button>
       	    </div>			
 		</form>
 	</div> <!-- container -->
+	<script type="text/javascript">
+	//<!--
+		function userDelete(){
+			var userDel = confirm('정말 탈퇴하실거나요? 나가지 말아용~~\n더 잘할게~~');
+			if(userDel){
+				location='userDeletePro.jk'
+			}
+	}
+	//-->
+	</script>
 </body> 

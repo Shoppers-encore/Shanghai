@@ -234,12 +234,33 @@ function scoring() {
 	     output.innerHTML = this.value;
 	   }
 	}
-
+function checkReviewWrite(){
+	if($("input:text[name='title']").val()==null || $("input:text[name='title']").val().trim()==''){
+		alert('제목을 입력해주세요');
+		$("input:text[name='title']").focus();
+		return false;
+	}else if($("textarea[name='reviewContent']").val()==null || $("textarea[name='reviewContent']").val().trim()==''){
+		alert('내용을 입력해주세요');
+		$("textarea[name='reviewContent']").focus();
+		return false;
+	}
+}
+function reviewDelete(reviewNo, pageNum){
+	var reviewdeleteconfirm = confirm('리뷰를삭제하시겠습니까?');
+	if(reviewdeleteconfirm){
+		location='reviewDeletePro.jk?reviewNo='+reviewNo+'&pageNum='+pageNum;
+	}
+}
 ///<Review Comment>
 function commentInsert(){
+	if($("[name='commentContent']").val()==null || $("[name='commentContent']").val().trim()==''){
+		alert('글을 쓰고 등록해주세요');
+		return false;
+	}
 	var insertData = $('[name=commentInsertForm]').serialize();
 	CmtInsert(insertData);
 }
+
 
 //Comment Insert
 function CmtInsert(insertData){
@@ -341,13 +362,7 @@ function commentDelete(commentNo){
    });
 }
 
-//Delete Photo
-function photoModify(photoNo){
-	var photoModify ='';
-	photoModify += '<div><input class="btn btn-outline-danger" type="file" name="photo'+photoNo+'"></div>';
-	   
-	$('.photo'+photoNo).html(photoModify);
-	}
+
 
 
 // BasketList
