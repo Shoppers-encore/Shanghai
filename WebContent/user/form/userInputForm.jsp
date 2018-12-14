@@ -15,7 +15,7 @@
   		<div class="container col-lg-6">
 			<h4 class="mb-5"><b>${page_input}</b></h4>
 			
-			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform">
+			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return joincheck()">
 				<div class="form-group row">
 					<!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
@@ -150,33 +150,4 @@
 		</div>
 	<%@include file="../view/userFooter.jsp"%>
 	</body>
-	<script type="text/javascript">
-		/* Validity Check for userInputForm - function for joining member */
-		$('.btn_join').on(
-			'click',
-			function(event) {
-				if( idCheck != 1 ) {					// 아이디 중복 확인 안하면 회원가입 block
-					event.preventDefault();
-					alert( iderror );
-					$('#id').focus();
-				} else if( $('#password1').val() != $('#password2').val() ) {
-					event.preventDefault();
-					alert( passwderror );
-					$('#password2').focus();
-				} else if(!$('#email').val()) {
-					event.preventDefault();
-					alert(noemailerror);
-					$('#email').focus();
-				} else if($('#emailVerificationMsg').html()!='이메일이 인증되었습니다.') {      // 이메일 인증 안하면 block
-					event.preventDefault();  
-					alert( emailconfirmerror );
-					$('.emailVerificationBtn').focus();
-				} else if(!$('#address').val()) {
-					event.preventDefault();
-					alert( addresserror );
-					$('.addressSearchBtn').focus();
-				}
-			}
-		);
-	</script>
 </html>
