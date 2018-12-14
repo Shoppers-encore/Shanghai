@@ -53,8 +53,8 @@ img#chatImg {
 
 .sidebarImg:hover {
 	/* filter: invert(100%); */
-	-webkit-filter: invert(100%)
-	background-color: black;
+	filter: hue-rotate(230deg) brightness(60%);
+	/* background-color: black; */
 }
 
 @media (max-width: 450px) {
