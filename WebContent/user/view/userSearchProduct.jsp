@@ -310,7 +310,7 @@
 				<div class="row">
 					<c:forEach var="product" items="${productList}">
 						<div class="col-md-3"  align="center"><br>
-							<img src="/WebProject/save/${product.thumbnail}" name="thumb"><br>
+							<img src="/urPresent/save/${product.thumbnail}" name="thumb"><br>
 							<!-- How to get image names from image_info DataBean -->
 							<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">${product.productName}<br>
 							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.discount eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
