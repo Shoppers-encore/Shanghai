@@ -47,8 +47,14 @@ img#chatImg {
 	right: 0vw;
 }
 
-.loginImg {
+.sidebarImg {
 	width: 2rem;
+}
+
+.sidebarImg:hover {
+	/* filter: invert(100%); */
+	-webkit-filter: invert(100%)
+	background-color: black;
 }
 
 @media (max-width: 450px) {
