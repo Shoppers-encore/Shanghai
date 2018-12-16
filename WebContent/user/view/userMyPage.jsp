@@ -101,7 +101,7 @@
 	<script type="text/javascript">
 	//<!--
 		function userDelete(){
-			var userDel = confirm('정말 탈퇴하실거나요? 나가지 말아용~~\n더 잘할게~~');
+			var userDel = confirm('정말 탈퇴하실거나요?\n나가지 말아용~~\n더 잘해줄게~~');
 			if(userDel){
 				location='userDeletePro.jk'
 			}

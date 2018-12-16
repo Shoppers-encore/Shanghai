@@ -767,7 +767,18 @@ public class UserProHandler {
 			return map;
 		}
 	}
-
+	//userInput MailCheck
+	@RequestMapping("isMail")
+	@ResponseBody
+	public Map<Object, Object> isMail(HttpServletRequest request, HttpServletResponse response) {
+		String mailAddress = request.getParameter("email");
+		System.out.println(mailAddress);
+		int result = userDao.getMailCount(mailAddress);
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("result", result);
+		return map;
+	}
+	
 	// chat ajax
 	@RequestMapping("/userChatInput")
 	@ResponseBody
