@@ -24,6 +24,9 @@
 	<select id="getUserLevel" parameterType="String" resultType="Integer">		
 		select userLevel from jk_user where id=#{id}
 	</select>
+	<select id="getMailCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM jk_user WHERE email=#{email}
+	</select>
 	
 	<!-- Product DB -->
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">

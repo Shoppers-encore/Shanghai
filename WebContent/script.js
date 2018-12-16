@@ -138,16 +138,7 @@ function checkHeight(){
 }
 
 
-//SMTP - Simple Mail Transfer Protocol
-function mailTransfer(form) {
-	if(form.email.value.indexOf("@") == -1 || form.email.value.indexOf(".") == -1){ //check proper email format
-	      alert(emailfmterror);
-	      return false;
-	 }
-	var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
-	//open(URL, name, specs, replace)
-	window.open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
-}
+
 //Check authentication-key match
 function matchAuthKey() {
     if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ){ //null 값 입력시 emailcheckerror1 메시지 뜨는처리도 추가하기

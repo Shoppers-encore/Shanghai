@@ -76,4 +76,8 @@ public class UserDao{
 		return session.update("Admin.admModify", dto);
 	}
 
+	public int getMailCount(String email) {
+		return session.selectOne("User.getMailCount",email);
+	}
+
 }
