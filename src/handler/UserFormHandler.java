@@ -184,4 +184,14 @@ public class UserFormHandler {
 		}
 		return new ModelAndView("user/form/orderInputForm");
 	}
+	
+	//findId & Password
+	@RequestMapping("/findId")
+	public ModelAndView findId(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("user/form/findId");
+	}
+	@RequestMapping("/findPassword")
+	public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("user/form/findPassword");
+	}
 }
