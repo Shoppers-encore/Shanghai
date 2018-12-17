@@ -35,7 +35,13 @@
 						<c:forEach var="reviewlist" items="${reviewLists}">
 							<c:set var="prodRef" value="${fn:substring(reviewlist.productCode, 2, fn:length(reviewlist.productCode)-2)}"/>
 							<tr>
-								<td><a href="userProductDetail.jk?ref=${prodRef}">${reviewlist.productName}</a></td>
+								<td>
+								<c:if test="${reviewlist.productLevel ne 0}">
+									<a href="userProductDetail.jk?ref=${prodRef}">${reviewlist.productName}</a>
+								</c:if>
+								<c:if test="${reviewlist.productLevel eq 0}">
+									${reviewlist.productName}
+								</c:if></td>
 								<td><a href="reviewDetail.jk?reviewNo=${reviewlist.reviewNo}&pageNum=${pageNum}">
 									<input type="hidden" name="reviewNo" value="${reviewlist.reviewNo}"/>
 										
