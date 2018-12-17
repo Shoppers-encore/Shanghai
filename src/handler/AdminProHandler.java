@@ -168,11 +168,12 @@ public class AdminProHandler {
 			int price = 0;
 			try {
 				price = Integer.parseInt( multi.getParameter( "price" ) );
+				// System.out.println("가격 : " + price);	///////////////////////////////////////////
 				quantity=Integer.parseInt( multi.getParameter( "quantity" ) );
 				category=Integer.parseInt( multi.getParameter("category"));
 				sale=Integer.parseInt(multi.getParameter("sale"));
 			}catch(NumberFormatException | NullPointerException e1) {
-				price = 0;
+				// price = 0;
 				quantity=0;
 				category=14;
 				sale = 0;

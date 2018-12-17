@@ -91,7 +91,13 @@ $('input[name=btid]').attr('value', result)
                         </c:if>
                         </td>
                         <td>${order.orderAddress1} ${order.orderAddress2}<br></td>
-                        <td>${order.orderPrice}</td>
+   						<td id="sum_${order.orderCode}">
+							<script type="text/javascript">
+								var key='${order.orderCode}';
+								var orderSum=JSON.parse('${orderSum}')[key];
+								$('#sum_${order.orderCode}').text(orderSum+'${str_currencyUnit}');
+							</script>
+						</td>
                         <td><a class="btn btn-sm btn-primary" href="admOrderDetail.jk?orderCode=${order.orderCode}">${btn_orderDetails}</a> 
                        		<input type="hidden" name="orderCode" value="${order.orderCode}"> </td>
                      </tr>
@@ -102,9 +108,9 @@ $('input[name=btid]').attr('value', result)
           <div align="center">
              <c:if test="${count gt 0}">
             <c:if test="${currentPage ne 1}">
-               <a href="admOrderFind.jk">[◀◀]</a>
+               <a href="admOrderList.jk">[◀◀]</a>
             <c:if test="${startPage gt pageBlock}">
-               <a href="admOrderFind.jk?pageNum=${startPage-pageBlock}">[◀]</a>
+               <a href="admOrderList.jk?pageNum=${startPage-pageBlock}">[◀]</a>
                </c:if>
             </c:if>
             <c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -112,14 +118,14 @@ $('input[name=btid]').attr('value', result)
                <span>[${i}]</span>
                </c:if>
                <c:if test="${i ne currentPage}">
-               <a href="admOrderFind.jk?pageNum=${i}">[${i}]</a>
+               <a href="admOrderList.jk?pageNum=${i}">[${i}]</a>
                </c:if>
             </c:forEach>
             <c:if test="${currentPage ne pageCount}">
                <c:if test="${pageCount>endPage}">
-               <a href="admOrderFind.jk?pageNum=${startPage+pageBlock}">[▶]</a>
+               <a href="admOrderList.jk?pageNum=${startPage+pageBlock}">[▶]</a>
                </c:if>
-               <a href="admOrderFind.jk?pageNum=${pageCount}">[▶▶]</a>
+               <a href="admOrderList.jk?pageNum=${pageCount}">[▶▶]</a>
             </c:if>
          </c:if>
          </div>

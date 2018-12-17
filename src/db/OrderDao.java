@@ -17,14 +17,14 @@ public class OrderDao {
 	}
 	
 	
-	public List<OrderListDataBean> getList(Map<String, String> map){
-		if(map.get("id") == null || map.get("id").length()<=5) {
-			return session.selectList("Admin.selectAllOrderList",map);
-		}else {
-			return session.selectList("Admin.selectUserOrderList",map);
-	
-		}
-	}
+//	public List<OrderListDataBean> getList(Map<String, String> map){
+//		if(map.get("id") == null || map.get("id").length()<=5) {
+//			return session.selectList("Admin.selectAllOrderList",map);
+//		}else {
+//			return session.selectList("Admin.selectUserOrderList",map);
+//	
+//		}
+//	}
 	
 	public int getUserCount(String id) {
 		return session.selectOne("Admin.userCount", id);
@@ -76,7 +76,9 @@ public class OrderDao {
 	public int getCountOfItemsOrdered(int orderCode) {
 		return session.selectOne("User.getCountOfItemsOrdered", orderCode);
 	}
-	
+	public int getSumOfItemsOrdered(int orderCode) {
+		return session.selectOne("Admin.getSumOfItemsOrdered", orderCode);
+	}
 	public List<OrderListDataBean> getUserOrderList(Map<String, String> map){
 		List<OrderListDataBean> orderList = session.selectList("Admin.getUserOrderList", map);
 		return orderList;
