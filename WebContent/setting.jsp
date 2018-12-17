@@ -93,7 +93,7 @@
 <c:set var="str_productImage" value="상품 이미지" />
 <c:set var="str_quantityUnit" value="개" />
 
-<c:set var="str_orderList" value="주문내역" />
+<c:set var="str_orderList" value="주문 내역" />
 <c:set var="str_totalUser" value="총 회원수" />
 <c:set var="str_var" value="현재수량" />
 <c:set var="str_varPlus" value="추가할 수량" />
@@ -133,13 +133,15 @@
 <c:set var="str_quantityMod" value="추가할 수량" />
 <c:set var="str_productCode" value="상품코드" />
 <c:set var="str_product" value="PRODUCT" />
-<c:set var="str_userOrderList" value="님의 주문내역" />
+<c:set var="str_userOrderList" value="님의 주문 내역" />
 <c:set var="str_product_detail" value="상품 상세정보" />
 <c:set var="str_order_detail" value="주문 상세정보" />
 <c:set var="str_teamName" value="응답하라 8080"/>
 <c:set var="str_joinUsLine1" value="지금 그대의 소중한 멤버가 되어주세요!"/>
 <c:set var="str_joinUsLine2" value="다양한 할인 혜택이 기다리고 있어요 :)"/>
 <c:set var="str_noDash" value="-없이 입력해주세요"/>
+<c:set var="str_reviewIcon" value="리뷰 보기"/>
+<c:set var="str_searchIcon" value="상품 검색"/>
 
 
 <!-- color -->
