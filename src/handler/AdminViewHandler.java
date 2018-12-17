@@ -329,6 +329,7 @@ public class AdminViewHandler {
       ChatDataBean chat = new ChatDataBean();
 //      chat.setSender("admin");
 //      chat.setReceiver(id);
+      chat.setIsUser(0);
       chat.setId(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);

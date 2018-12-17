@@ -790,9 +790,9 @@ public class UserProHandler {
 		String id = (String) request.getSession().getAttribute("id");
 		String chatContent = request.getParameter("message");
 		ChatDataBean chat = new ChatDataBean();
-		chat.setSender(id);
 		chat.setChatContent(chatContent);
-		chat.setReceiver("admin");
+		chat.setId("id");
+		chat.setIsUser(1);
 		chatDao.chatInput(chat);
 	}
 	private void orderLog(String path, String log, Calendar cal) {
