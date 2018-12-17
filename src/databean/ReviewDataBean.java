@@ -16,7 +16,7 @@ public class ReviewDataBean {
 	private String photo2;
 	private int reviewScoreSum;
 	private boolean checkedme;
-	
+	private int productLevel;
 	public int getOrderCode() {
 		return orderCode;
 	}
@@ -94,5 +94,11 @@ public class ReviewDataBean {
 	}
 	public void setPhoto2(String photo2) {
 		this.photo2 = photo2;
+	}
+	public int getProductLevel() {
+		return productLevel;
+	}
+	public void setProductLevel(int productLevel) {
+		this.productLevel = productLevel;
 	}
 }
