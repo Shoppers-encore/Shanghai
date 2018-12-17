@@ -83,6 +83,7 @@
    			<thead>
    				<tr>
    					<th>${str_productCode}</th>
+   					<th>${str_productName}</th>
    					<th>${str_productQuantity}</th>
    					<th>${str_price}</th>
    				</tr>
@@ -99,6 +100,13 @@
 					<c:forEach var="order" items="${orderDetailList}">
 						<tr>
 							<td>${order.productCode}</td>
+							<td id="name_${order.productCode}">
+							<script type="text/javascript">
+								var key='${order.productCode}';
+								var prodName=JSON.parse('${prodNames}')[key];
+								$('#name_${order.productCode}').text(prodName);
+							</script>
+							</td>
 							<td>${order.orderQuantity}</td>
 							<td>${order.orderPrice}</td>
 						</tr>
