@@ -295,6 +295,16 @@ public class AdminViewHandler {
 				
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<OrderListDataBean> orders = orderDao.getOrderList(map);
+		/* Set Maps for OrderDate and OrderCount */
+		Map<String, String> orderSumMap = new HashMap<String, String>();
+
+		for (OrderListDataBean order : orders) {
+			String orderCode = String.valueOf(order.getOrderCode());
+			String orderSum = String.valueOf(orderDao.getSumOfItemsOrdered(order.getOrderCode()));
+			orderSumMap.put(orderCode, orderSum);
+		}
+		String orderSumJson = new Gson().toJson(orderSumMap);
+		request.setAttribute("orderSum", orderSumJson);
 		
 		request.setAttribute("orders", orders);
 		request.setAttribute("count", count);
@@ -363,7 +373,6 @@ public class AdminViewHandler {
 		//UserDataBean userDto = userDao.getUser(userid);
 		int count = orderDao.getDistinctOrderCountById(userid);
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
-		/////////////////////////////// 1212 ONGOING BY JH ///////////////////////////////////////
 		if (count > 0) {
 			Map<String, String> selectReferences = new HashMap<String, String>();
 			String startNum = String.valueOf(map.get("start"));
@@ -397,7 +406,6 @@ public class AdminViewHandler {
 			request.setAttribute("orderCount", orderCountJson);
 			request.setAttribute("distinctOrderList", distinctOrderList);
 		}
-		///////////////////////////////// 1212 ONGOING BY JH /////////////////////////// 
 		request.setAttribute("count", count);
 		request.setAttribute("userid", userid);
 		request.setAttribute("userDto", adminDto);

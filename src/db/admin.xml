@@ -24,18 +24,26 @@
 		WHERE productName LIKE '%'||#{searchWord}||'%' AND productLevel=1 GROUP BY ref) AND productCode=TO_CHAR(ref)
 	</select>
 	<select id="getOrderCount" resultType="int">
-	 	 SELECT count(*) FROM jk_orderList
+	 	 SELECT COUNT(*) FROM (SELECT DISTINCT orderCode FROM jk_orderList)
 	</select>
-	<select id="selectOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
+<!-- 	<select id="selectOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
 		  SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_orderList ORDER BY ordercode desc) list ORDER BY ordercode  desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
-	</select>
+	</select> -->
 	<select id="userCount" parameterType="String" resultType="int">
 	 	 SELECT count(orderCode) FROM jk_orderList WHERE id=#{id}
 	</select>
 	<select id="getOrderList" parameterType="java.util.Map" resultType="databean.OrderListDataBean">
-		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
+<!-- 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
-		(SELECT * FROM jk_orderList ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
+		(SELECT * FROM jk_orderList ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end}) -->
+		SELECT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate
+		FROM (SELECT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate, rownum r 
+		FROM (SELECT DISTINCT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate 
+		FROM jk_orderList ORDER BY orderDate DESC)
+		) WHERE r between #{start} and #{end}
+	</select>
+	<select id="getSumOfItemsOrdered" parameterType="int" resultType="int">
+		SELECT SUM(orderCode) FROM jk_orderList WHERE orderCode=#{orderCode} GROUP BY orderCode
 	</select>
  	<select id="getOrder" parameterType="String" resultType="databean.OrderListDataBean">
 		SELECT * FROM jk_orderList WHERE id=#{id}
