@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.media.jai.JAI;
@@ -817,5 +818,80 @@ public class UserProHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	//findId & find Password
+	@RequestMapping("/findIdPro")
+	@ResponseBody
+	public Map<Object, Object> findIdPro(HttpServletRequest request, HttpServletResponse response){
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		UserDataBean user = new UserDataBean();
+		user.setName(name);
+		user.setEmail(email);
+		int count = userDao.getIdCount(user);
+		map.put("result", count);
+		if(count>0) {
+			String id = userDao.getId(user);
+			map.put("id", id);
+			request.setAttribute("id", id);
+		}
+		request.setAttribute("result", count);
+		return map;
+	}
+	@RequestMapping("/findPasswordPro")
+	@ResponseBody
+	public Map<Object, Object> findPasswordPro(HttpServletRequest request, HttpServletResponse response){
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		String name=request.getParameter("name");
+		String email = request.getParameter("email");
+		UserDataBean user = new UserDataBean();
+		user.setName(name);
+		user.setEmail(email);
+		int count=userDao.getIdCount(user);
+		if(count>0) {
+			String id = request.getParameter("id");
+			if(id.equals(userDao.getId(user))) {
+				Random r = new Random();
+				StringBuffer sb = new StringBuffer();
+				for(int i=0;i<8+r.nextInt(5);i++) {
+					int rnum = r.nextInt(65);
+					if(rnum<10) {
+						sb.append(rnum);
+					}else if(rnum<36) {
+						sb.append((char)(rnum+55));
+					}else if(rnum<62) {
+						sb.append((char)(rnum+61));
+					}else {
+						if(rnum==62) {
+							sb.append('!');
+						}else if(rnum==63) {
+							sb.append('$');
+						}else if(rnum==64) {
+							sb.append('@');
+						}
+					}
+				}
+				String pw=sb.toString();
+				user.setId(id);
+				user.setPassword(pw);
+				int result = userDao.setPassword(user);
+				if(result >0) {
+					map.put("result", result);
+					request.setAttribute("result", result);
+					Map<String, String> mail = new HashMap<String, String>();
+					mail.put("sender", "hkk9331@gmail.com");
+					mail.put("receiver", email);
+					mail.put("subject", "'지금, 그대.' 쇼핑몰 임시비밀번호 메일입니다.");
+					mail.put("content", "임시 비밀번호 : "+pw);
+					try {
+						new SendMail().sendMail(mail);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return map;
 	}
 }

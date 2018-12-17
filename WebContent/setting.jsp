@@ -254,6 +254,7 @@
 <c:set var="btn_send" value="전송" />
 <c:set var="btn_orderList" value="주문목록" />
 <c:set var="btn_addImage" value="사진추가"/>
+<c:set var="btn_exit" value="닫기"/>
 
 
 <!-- Message -->
@@ -288,6 +289,7 @@
 <c:set var="msg_selectedColors" value="입력한 색상 : " />
 <c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해주세요." />
 <c:set var="msg_emailVerificationNeeded" value="이메일 인증을 해 주세요."/>
+<c:set var="msg_findId" value="등록하신 이름과 Email주소를 입력해주세요."/>
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum=" />

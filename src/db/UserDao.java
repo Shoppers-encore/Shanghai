@@ -79,5 +79,16 @@ public class UserDao{
 	public int getMailCount(String email) {
 		return session.selectOne("User.getMailCount",email);
 	}
+	public int getIdCount(UserDataBean user) {
+		return session.selectOne("User.getIdCount", user);
+	}
+
+	public String getId(UserDataBean user) {
+		return session.selectOne("User.getId", user);
+	}
+
+	public int setPassword(UserDataBean user) {
+		return session.update("User.setPassword", user);
+	}
 
 }
