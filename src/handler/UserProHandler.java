@@ -513,16 +513,20 @@ public class UserProHandler {
 		String pageNum = request.getParameter("pageNum");
 		String id = (String) request.getSession().getAttribute("id");
 		if (id != null) {
-			if (id.length() > 5) {
-				if (id.equals(boardDao.get(num).getId())) {
-					int result = boardDao.delete(num);
-					request.setAttribute("result", result);
-				} else {
-					int result = 0;
-					request.setAttribute("result", result);
+			if (id.equals(boardDao.get(num).getId())) {
+				ReviewDataBean rdb = boardDao.get(num);
+				String[] fileName = new String[2];
+				fileName[0]=rdb.getPhoto1();
+				fileName[1]=rdb.getPhoto2();
+				for(int i = 0 ; i<fileName.length;i++) {
+					String path =  request.getSession().getServletContext().getRealPath( "/save" );
+					File f = new File(path+fileName[i]);
+					if(f.exists()) f.delete();
 				}
-			} else {
 				int result = boardDao.delete(num);
+				request.setAttribute("result", result);
+			} else {
+				int result = 0;
 				request.setAttribute("result", result);
 			}
 		}
