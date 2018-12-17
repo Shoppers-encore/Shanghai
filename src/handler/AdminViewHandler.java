@@ -314,7 +314,7 @@ public class AdminViewHandler {
 	}
    @RequestMapping("/admChatting")
    public ModelAndView admChatting(HttpServletRequest request, HttpServletResponse response) {
-	   String id = (String)request.getSession().getAttribute("id");
+	   String id = request.getParameter("id");
 	   request.setAttribute("id", id);
 //	   String userid = request.getParameter("id");			// 1211 JH tried...
 //     request.setAttribute("userid", userid);
@@ -329,6 +329,7 @@ public class AdminViewHandler {
       ChatDataBean chat = new ChatDataBean();
 //      chat.setSender("admin");
 //      chat.setReceiver(id);
+      chat.setIsUser(0);
       chat.setId(id);
       chat.setChatContent(chatContent);
       chatDao.chatInput(chat);
@@ -338,6 +339,13 @@ public class AdminViewHandler {
    public List<ChatDataBean> admChat(HttpServletRequest request, HttpServletResponse response){
       String id = request.getParameter("id");		// id = admin
       List<ChatDataBean> chatData = chatDao.getList(id);
+      for(int i=0; i<chatData.size(); i++) {
+    	  if(chatData.get(i).getIsUser()==0) {
+    		  chatData.get(i).setSender("admin");
+    	  }else {
+    		  chatData.get(i).setSender(chatData.get(i).getId());
+    	  }
+      }
 //      String userid = (String) request.getAttribute("userid");	// 1211 JH tried..
 //      System.out.println(userid);
 //      List<ChatDataBean> chatData = chatDao.getList(userid);

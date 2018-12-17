@@ -51,14 +51,14 @@
 					$.ajax({
 						type : 'POST',
 						url : 'admChat.jk',
-						data : { id : '${chatList.id}'},
+						data : { id : '${id}'},
 						success : function( data ){
 							$('#content').html('');
 							if( data.length > 0 ){
 								$.each(data, function(key, chatData){
-									var html = chatData.id + ' : '
+									var html = chatData.sender + ' : '
 											 + chatData.chatContent + '\t'
-											 + chatData.chatTime + '\n';
+											 + new Date(chatData.chatTime).toDateString() + '\n';
 										$('#content').append( html );
 							
 								});
