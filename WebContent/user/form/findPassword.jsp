@@ -30,13 +30,13 @@
 					'input:submit',
 					function( event ){
 						$.ajax({
-							type : 'POST',
+							type : 'post',
 							url : 'findPasswordPro.jk',
 							data : $('form[name="findPasswordForm"]').serialize(),
 							success : function(data){
 								if(data.result>0){
 									alert('이메일로 비밀번호가 발송되었습니다.\n확인해주세요.');
-									self.close();
+									window.self.close();
 								}else{
 									alert('존재하지 않는정보입니다.');
 								}

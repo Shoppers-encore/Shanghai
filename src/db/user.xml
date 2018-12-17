@@ -127,7 +127,9 @@
 	<delete id="deleteComment" parameterType="int">
 		delete from jk_comment where commentNo = #{commentNo}
 	</delete>
-	
+	<select id="getProductLevel" parameterType="String" resultType="int">
+		SELECT productLevel FROM jk_product WHERE productCode=#{productCode}
+	</select>
 	<select id="getRvSearchList" parameterType="java.util.Map" resultType="databean.ReviewDataBean">
 		SELECT tmp.*, r FROM (SELECT list.*, rownum r FROM (SELECT * FROM jk_review <include refid="search"></include> ORDER BY reviewNo desc) list ORDER BY reviewNo desc) tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>

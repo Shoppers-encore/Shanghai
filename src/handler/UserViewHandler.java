@@ -433,6 +433,7 @@ public class UserViewHandler {
 				for (int i = 0; i < articles.size(); i++) {
 					String productName = new ProductDao().getProductName(articles.get(i).getProductCode());
 					articles.get(i).setProductName(productName);
+					articles.get(i).setProductLevel(productDao.getProductLevel(articles.get(i).getProductCode()));
 				}
 				request.setAttribute("reviewLists", articles);
 			}

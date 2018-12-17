@@ -885,8 +885,7 @@ public class UserProHandler {
 					mail.put("subject", "'지금, 그대.' 쇼핑몰 임시비밀번호 메일입니다.");
 					mail.put("content", "임시 비밀번호 : "+pw);
 					try {
-						int num = new SendMail().sendMail(mail);
-						System.out.println(num +" : " + pw);
+						new SendMail().sendMail(mail);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

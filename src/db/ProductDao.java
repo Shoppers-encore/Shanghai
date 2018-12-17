@@ -179,5 +179,9 @@ public class ProductDao{
 	public String getDeleteImageAddress(int deleteImageNo) {
 		return session.selectOne("Admin.getDeleteImageAddress", deleteImageNo);
 	}
+
+	public int getProductLevel(String productCode) {
+		return session.selectOne("User.getProductLevel", productCode);
+	}
 	
 }
