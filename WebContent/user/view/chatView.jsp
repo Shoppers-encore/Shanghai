@@ -57,7 +57,7 @@
 								$.each(data, function(key, chatData){
 									var html = chatData.sender + ' : '
 											 + chatData.chatContent + '\t'
-											 + new Date(chatData.chatDate).toDateString() + '\n';
+											 + new Date(chatData.chatTime).toDateString() + '\n';
 										$('#content').append( html );
 							
 								});

@@ -515,6 +515,13 @@ public class UserViewHandler {
 	public List<ChatDataBean> chatView(HttpServletRequest request, HttpServletResponse response) {
 		String id = (String) request.getSession().getAttribute("id");
 		List<ChatDataBean> chatdata = chatDao.getList(id);
+		for(int i = 0 ; i<chatdata.size();i++) {
+			if(chatdata.get(i).getIsUser()==0) {
+				chatdata.get(i).setSender("admin");
+			}else {
+				chatdata.get(i).setSender(chatdata.get(i).getId());
+			}
+		}
 		request.setAttribute("chatData", chatdata);
 		return chatdata;
 	}

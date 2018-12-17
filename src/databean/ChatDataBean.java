@@ -5,9 +5,16 @@ import java.sql.Timestamp;
 public class ChatDataBean {
 	private int isUser ;
 	private String id;
+	private String sender;
 	private String chatContent;
 	private Timestamp chatTime;
 	
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 	public int getIsUser() {
 		return isUser;
 	}
