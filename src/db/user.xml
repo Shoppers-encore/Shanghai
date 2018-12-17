@@ -221,6 +221,16 @@
   		INSERT INTO jk_chat VALUES(#{isUser},#{id}, #{chatContent}, sysdate)
   	</insert>
   	
+  	<!-- findId & Password -->
+  	<select id="getIdCount" parameterType="databean.UserDataBean" resultType="int">
+  		SELECT count(*) FROM jk_user WHERE name=#{name} AND email=#{email}
+  	</select>
+  	<select id="getId" parameterType="databean.UserDataBean" resultType="String">
+  		SELECT id FROM jk_user WHERE name=#{name} AND email=#{email}
+  	</select>
+  	<update id="setPassword" parameterType="databean.UserDataBean">
+  		UPDATE jk_user SET password=#{password} WHERE id=#{id}
+  	</update>
   	
   	<!-- Search -->
 	<sql id="search">
