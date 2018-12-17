@@ -396,6 +396,8 @@ public class AdminProHandler {
 		}
 		UserDataBean dto = new UserDataBean();
 		dto.setId((String)request.getSession().getAttribute("id"));
+//		String password = request.getParameter("passwd");					// 1217 ONGOING BY JH
+//		System.out.println(password);
 		dto.setPassword(request.getParameter("passwd"));
 		// System.out.println(request.getParameter("passwd"));		// 1205 ONGOING BY JH
 		dto.setName(request.getParameter("name"));

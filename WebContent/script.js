@@ -17,6 +17,7 @@ var noemailerror = "이메일은 필수 입력사항입니다.";
 var emailfmterror = "이메일 형식에 맞지 않습니다.";
 var onlynum = "숫자만 입력이 가능합니다.";
 var modcompleted = "수정이 완료되었습니다.";
+var inputcompleted = "상품등록이 완료되었습니다.";
 var adminonly = "관리자만 접근할 수 있습니다.";
 var addresserror="주소는 필수 입력사항입니다.";
 
@@ -242,6 +243,7 @@ function reviewDelete(reviewNo, pageNum){
 		location='reviewDeletePro.jk?reviewNo='+reviewNo+'&pageNum='+pageNum;
 	}
 }
+
 ///<Review Comment>
 function commentInsert(){
 	if($("[name='commentContent']").val()==null || $("[name='commentContent']").val().trim()==''){
@@ -499,4 +501,11 @@ function productInputCheck() {
     }
     
     /////////// PHOTO!!! /////////
+}
+
+function productDelete(ref){
+	var productdeleteconfirm = confirm(ref + '번 상품을 삭제하시겠습니까?');
+	if(productdeleteconfirm){
+		location='productDeletePro.jk?ref='+ref;
+	}
 }
