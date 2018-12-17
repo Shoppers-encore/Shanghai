@@ -388,7 +388,8 @@ function delImg(imgId){
                         </td>
                        	<th> ${str_productQuantity} </th>
                     	<td> 
-                        <input type="text" name="quantity" id="quantity"class="form-control">
+                        <input type="text" name="quantity" id="quantity"class="form-control" readonly
+                        	placeholder="${msg_gotoProductList}">
                     	</td> 
                   </tr>
                   <tr>

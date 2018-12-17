@@ -492,7 +492,6 @@ function productInputCheck() {
     	return false;
     } else if( price == "" || price == null ) {
     	alert( noProuctPrice );
-    	alert( quantity );
     	return false;
     } else if( content == "" || content == null ) {
     	alert( noProductContent );
