@@ -791,7 +791,7 @@ public class UserProHandler {
 		String chatContent = request.getParameter("message");
 		ChatDataBean chat = new ChatDataBean();
 		chat.setChatContent(chatContent);
-		chat.setId("id");
+		chat.setId(id);
 		chat.setIsUser(1);
 		chatDao.chatInput(chat);
 	}
