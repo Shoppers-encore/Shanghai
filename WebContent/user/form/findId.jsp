@@ -2,49 +2,62 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp"%>
+
 <html>
-<head>
-</head>
-<body>
-<form name="findIdForm">
-	<div class="container">
-			<div id="id">
-				<div id="findId">
-					<br> ${msg_findId} <br><br>
-					name : <input class="form-control" type="text"  name="name"> <br>
-					email : <input class="form-control" type="text" name="email"> <br>
+	<%@include file="../view/userHead.jsp"%>
+	<body>
+		<div class="container col-10 mt-3">
+			<form name="findIdForm">
+				<div>
+					<strong class="mt-5">${page_findId}</strong>
 				</div>
-			</div>
-			<div class="text-center">
-				<input class="btn btn-sm" type="submit" name="confirm" value="${btn_confirm}">
-				<input class="btn btn-sm" type="button" name="cancel" value="${btn_exit}" onclick="self.close()">
-			</div>
-	</div>
-</form>
-</body>
-<script type="text/javascript">
-	//<!--
-		$(document).on(
-					'click',
-					'input:submit',
-					function( event ){
-						$.ajax({
-							type : 'POST',
-							url : 'findIdPro.jk',
-							data : $('form[name="findIdForm"]').serialize(),
-							success : function(data){
-								if(data.result>0){
-									var a = alert('아이디는 '+data.id+'입니다.');
-									if(a){
-										self.close();
-									}
-								}else{
-									alert('존재하지 않는정보입니다.');
-								}
+				<div>
+					<small>${msg_findId}</small>
+				</div>
+				<div id="id" class="mt-3">
+					<div id="findId">
+						<div class="mt-1">
+							${str_name}
+						</div>
+						<div class="mt-1">
+							<input class="form-control" type="text"  name="name">
+						</div>
+						<div class="mt-1">
+							${str_email}
+						</div>
+						<div class="mt-1">
+							<input class="form-control" type="text" name="email">
+						</div>
+					</div>
+				</div>
+				<div class="text-center mt-4">
+					<input class="btn btn-sm" type="submit" name="confirm" value="${btn_confirm}">
+					<input class="btn btn-sm" type="button" name="cancel" value="${btn_exit}" onclick="self.close()">
+				</div>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//<!--
+			$(document).on(
+				'click',
+				'input:submit',
+				function( event ){
+					$.ajax({
+						type : 'POST',
+						url : 'findIdPro.jk',
+						data : $('form[name="findIdForm"]').serialize(),
+						success : function(data){
+							if(data.result>0){
+								alert('아이디는 '+data.id+'입니다.');
+								self.close();
+							}else{
+								alert('존재하지 않는정보입니다.');
 							}
+						}
 					});
-				});
-	
-	//-->
-</script>
+				}
+			);
+		//-->
+	</script>
 </html>
