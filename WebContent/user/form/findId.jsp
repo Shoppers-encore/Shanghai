@@ -6,7 +6,7 @@
 <html>
 	<%@include file="../view/userHead.jsp"%>
 	<body>
-		<div class="container col-10 mt-3">
+		<div class="container col-10 mt-3 pt-1">
 			<form name="findIdForm">
 				<div>
 					<strong class="mt-5">${page_findId}</strong>
@@ -14,7 +14,7 @@
 				<div>
 					<small>${msg_findId}</small>
 				</div>
-				<div id="id" class="mt-3">
+				<div id="id" class="mt-3 pt-5">
 					<div id="findId">
 						<div class="mt-1">
 							${str_name}
@@ -36,6 +36,7 @@
 				</div>
 			</form>
 		</div>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
 	<script type="text/javascript">
 		//<!--

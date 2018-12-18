@@ -5,8 +5,9 @@
 
 <html>
 	<%@include file="../view/userHead.jsp"%>
+
 	<body onload="findPassword(${result})">
-		<div class="container col-10 mt-3">
+		<div class="container col-10 mt-3 pt-1">
 			<form name="findPasswordForm" method="post" action="findPasswordPro.jk">
 				<div>
 					<strong class="mt-5">${page_findPasswd}</strong>
@@ -14,7 +15,7 @@
 				<div>
 					<small>${msg_findPasswd}</small>
 				</div>
-				<div id="password" class="mt-3">
+				<div id="password" class="mt-3 pt-4">
 					<div id="findPassword">
 						<div class="mt-1">
 							${str_id}
@@ -42,6 +43,7 @@
 				</div>
 			</form>
 		</div>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
 	<script type="text/javascript">
 		//<!--
