@@ -64,7 +64,7 @@ function findPw() {
 	url='findPassword.jk';
 	title='비밀번호 찾기';
 	window.open(url, title, 
-		'width=500, height=400, location=no, status=no, scrollbars=no');
+		'width=500, height=355, location=no, status=no, scrollbars=no');
 }
 
 /*Function*/

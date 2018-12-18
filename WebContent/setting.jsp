@@ -292,6 +292,8 @@
 <c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해 주세요." />
 <c:set var="msg_emailVerificationNeeded" value="이메일 인증을 해 주세요."/>
 <c:set var="msg_findId" value="등록하신 이름과 이메일 주소를 입력해 주세요."/>
+<c:set var="msg_findPasswd" value="등록하신 아이디와 이름, 이메일 주소를 입력해 주세요."/>
+
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum=" />
