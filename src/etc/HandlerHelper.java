@@ -171,4 +171,7 @@ public class HandlerHelper {
 			e.printStackTrace();
 		}
 	}
+	public void logWriter(String page1, String page2, String exer) {
+		
+	}
 }
