@@ -18,11 +18,11 @@
   }
   ul.nav-pills {
       top: 20px;
-      position: fixed;
+      position: relative;
   }
   div.card {
     text-align: center;
-
+	margin: 0% 0% 20%
   }
 
   </style>
@@ -83,7 +83,7 @@ $('input[name=btid]').attr('value', result)
 	                        		<input type="text" value="${str_orderStatus2}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
 	                        	</c:when>
 	                        	<c:when test="${order.orderStatus eq 3}">
-	                        		<input type="text" value="${str_orderStatus3}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:80px" readonly>
+	                        		<input type="text" value="${str_orderStatus3}" class="btn btn-outline-info btn-sm" id="status" name="${order.orderStatus}" style="width:90px" readonly>
 	                        	</c:when>
                         	</c:choose>
                         <c:if test="${order.orderStatus lt 3}">
