@@ -24,7 +24,7 @@ img#cartImg {
 /* ====userSideNavbar==== */
 .sidebar {
 	position: fixed;
-	top: 22.6vh;
+	bottom: 0vh;
 	right: 0vw;
 }
 

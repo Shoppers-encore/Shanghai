@@ -6,6 +6,11 @@
 <html>
 	<%@include file="../view/userHead.jsp"%>
 	<body>
+		<!-- Status: User logged-in -->
+		<c:if test="${sessionScope.id ne null}">
+			<c:redirect url="userMyPage.jk"/>		
+		</c:if>
+		
 		<div class="jumbotron bg-white mb-1 text-center">
 		  	<a href="main.jk">
 	  			<img class="brandLogo" src="/urPresent/images/brandLogo.png" alt="UrPresent Brand Logo">
@@ -19,6 +24,10 @@
 			 	 	<input type="password" name="password" class="form-control" placeholder="${str_passwd}" required>	 		
 			  		<button class="btn btn-secondary btn-block" type="submit">${btn_login}</button>
 			  	</form>
+			  	<small>
+				  	<a onclick="findId()" class="ml-3 mr-3" href="#">${page_findId}</a>||
+					<a onclick="findPw()" class="ml-3 mr-3" href="#">${page_findPasswd}</a>
+				</small>
 			</c:if>
 		</div>
 		
@@ -44,11 +53,6 @@
 		</div>
 
 		<%@include file="../view/userFooter.jsp"%>
-		
-		<!-- Status: User logged-in -->
-		 <c:if test="${sessionScope.id ne null}">
-			<c:redirect url="userMyPage.jk"/>		
-		</c:if>
 	</body>
 </html>
 
