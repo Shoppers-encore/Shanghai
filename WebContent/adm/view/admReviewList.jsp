@@ -20,10 +20,11 @@
   }
   ul.nav-pills {
       top: 20px;
-      position: fixed;
+      position: relative;
   }
   div.card {
  	text-align: center;
+ 	margin: 0% 0% 20%
   }
   .btn.write {
   	float: right;
