@@ -25,7 +25,7 @@
 			  		<button class="btn btn-secondary btn-block" type="submit">${btn_login}</button>
 			  	</form>
 			  	<small>
-				  	<a onclick="findId()" class="ml-3 mr-3" href="#">${page_findId}</a>||
+				  	<a onclick="findId()" class="ml-3 mr-3" href="#">${page_findId}</a>
 					<a onclick="findPw()" class="ml-3 mr-3" href="#">${page_findPasswd}</a>
 				</small>
 			</c:if>

@@ -141,10 +141,19 @@
 																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
 																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
 																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
-																$('input[type=checkbox]').removeAttr('checked');
-																$('input[type=checkbox]').attr('disabled', true);
-															} else if(prodQty<5) {
-																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+																$('#itemChecked_${basketList.productCode}').removeAttr('checked');
+																$('#itemChecked_${basketList.productCode}').attr('disabled', true);
+															} else {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', false);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '1');
+																$('#basketQuantity_${basketList.productCode}').attr('max', prodQty);																
+																$('#productPrice_${basketList.productCode}').text(('${basketList.productPrice}'*(100-'${basketList.discount}')/100)+'${str_currencyUnit}');
+																$('#itemChecked_${basketList.productCode}').attr('checked', true);
+																$('#itemChecked_${basketList.productCode}').attr('disabled', false);
+															}
+															
+															if(prodQty<5) {
+																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);	
 															}
 														},
 														error: function(e) {
@@ -184,9 +193,18 @@
 																$('#basketQuantity_${basketList.productCode}').attr('min', '0');
 																$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
 																$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
-																$('input[type=checkbox]').removeAttr('checked');
-																$('input[type=checkbox]').attr('disabled', true);
-															} else if(prodQty<5) {
+																$('#itemChecked_${basketList.productCode}').removeAttr('checked');
+																$('#itemChecked_${basketList.productCode}').attr('disabled', true);
+															} else {
+																$('#basketQuantity_${basketList.productCode}').attr('disabled', false);
+																$('#basketQuantity_${basketList.productCode}').attr('min', '1');
+																$('#basketQuantity_${basketList.productCode}').attr('max', prodQty);
+																$('#productPrice_${basketList.productCode}').text(('${basketList.productPrice}'*(100-'${basketList.discount}')/100)+'${str_currencyUnit}');
+																$('#itemChecked_${basketList.productCode}').attr('checked', true);
+																$('#itemChecked_${basketList.productCode}').attr('disabled', false);
+															}
+															
+															if(prodQty<5) {
 																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
 															}
 														},
@@ -212,9 +230,11 @@
 													$('#basketQuantity_${basketList.productCode}').attr('min', '0');
 													$('#productPrice_${basketList.productCode}').text(0+'${str_currencyUnit}');
 													$('#soldOut_${basketList.productCode}').text('${str_soldOut}');
-													$('input[type=checkbox]').removeAttr('checked');
-													$('input[type=checkbox]').attr('disabled', true);
-												} else if('${basketList.productQuantity}'<5) {
+													$('#itemChecked_${basketList.productCode}').removeAttr('checked');
+													$('#itemChecked_${basketList.productCode}').attr('disabled', true);
+												}
+												
+												if('${basketList.productQuantity}'<5) {
 													$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: ${basketList.productQuantity}');						
 												}
 											}
