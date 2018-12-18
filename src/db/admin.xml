@@ -140,7 +140,7 @@
 		MERGE INTO jk_product USING DUAL ON (productCode = #{productCode}) WHEN MATCHED THEN UPDATE SET productName=#{productName}, productContent=#{productContent}, discount=#{discount, jdbcType=INTEGER}, 
 		productPrice=#{productPrice}, productCategory=#{productCategory}, productLevel=1 WHERE productCode=#{productCode}
 		WHEN NOT MATCHED THEN INSERT (ref, productCode, productCategory, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productLevel) 
-		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},'abc.jpg', 1)
+		VALUES (#{ref},#{productCode},#{productCategory},#{productName},#{productContent},#{discount, jdbcType=INTEGER},#{productPrice},sysdate ,#{productQuantity},#{thumbnail}, 1)
 	</update>
 	<delete id="deleteProduct" parameterType="String">
 		UPDATE jk_product SET productLevel=0 WHERE productCode=#{product}
