@@ -133,6 +133,9 @@
 	<select id="getProductCodeList" parameterType="int" resultType="String">
 		SELECT productCode FROM jk_product WHERE ref=#{ref}
 	</select>
+	<select id="getProdDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT * FROM jk_product WHERE ref=#{ref}
+	</select>
 	<update id="modifyProduct" parameterType="databean.ProductDataBean">
 		MERGE INTO jk_product USING DUAL ON (productCode = #{productCode}) WHEN MATCHED THEN UPDATE SET productName=#{productName}, productContent=#{productContent}, discount=#{discount, jdbcType=INTEGER}, 
 		productPrice=#{productPrice}, productCategory=#{productCategory}, productLevel=1 WHERE productCode=#{productCode}

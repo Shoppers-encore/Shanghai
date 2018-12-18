@@ -131,7 +131,7 @@
 		<div align="center" style="width:100%;">
 			${productList.get(0).productContent}
 			<c:forEach var="img" items="${imageList}">
-				<img src="/WebProject/save/${img.image_address}">
+				<img src="/urPresent/save/${img.image_address}">
 			</c:forEach>
 		</div>
 	<hr><br><br><br>
