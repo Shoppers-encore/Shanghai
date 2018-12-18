@@ -53,6 +53,11 @@ public class ProductDao{
 	
 	public int getRef() {
 		return session.selectOne("Admin.getRef");
+		// used when adding new product, by returning max(ref)
+	}
+	public int getRefNo() {
+		return session.selectOne("Admin.getRefNo");
+		// used when extracting ref number from productCode
 	}
 	
 	public int input(ProductDataBean productDto) {
