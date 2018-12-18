@@ -162,20 +162,13 @@ public class AdminProHandler {
 			ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 			String product_name = multi.getParameter( "product_name" );
 			int quantity = 0;
-			int category = 0;
+			int category = Integer.parseInt( multi.getParameter("category"));
 			String good_content = multi.getParameter("good_content");
 			int sale=0;
-			int price = 0;
+			int price = Integer.parseInt( multi.getParameter( "price" ) );
 			try {
-				price = Integer.parseInt( multi.getParameter( "price" ) );
-				// System.out.println("가격 : " + price);	///////////////////////////////////////////
-				quantity=Integer.parseInt( multi.getParameter( "quantity" ) );
-				category=Integer.parseInt( multi.getParameter("category"));
 				sale=Integer.parseInt(multi.getParameter("sale"));
 			}catch(NumberFormatException | NullPointerException e1) {
-				// price = 0;
-				quantity=0;
-				category=14;
 				sale = 0;
 			}
 			productDto.setRef( ref );
@@ -409,6 +402,8 @@ public class AdminProHandler {
 		}
 		UserDataBean dto = new UserDataBean();
 		dto.setId((String)request.getSession().getAttribute("id"));
+//		String password = request.getParameter("passwd");					// 1217 ONGOING BY JH
+//		System.out.println(password);
 		dto.setPassword(request.getParameter("passwd"));
 		// System.out.println(request.getParameter("passwd"));		// 1205 ONGOING BY JH
 		dto.setName(request.getParameter("name"));
