@@ -216,6 +216,7 @@ public class AdminProHandler {
 	    	}
 	    }
 	    String systemName = null;
+	    String thumbnail = null;
 		Enumeration<?> e = multi.getFileNames();
 		while( e.hasMoreElements() ) {
 			String inputName = (String) e.nextElement();
@@ -241,6 +242,7 @@ public class AdminProHandler {
 			ImageIO.write( tbuffer, "png", new File( path + "\\"+tname ) );
 			ImageIO.write( tbuffer, "gif", new File( path + "\\"+tname ) );
 			if(inputName.equals("thumb")) {
+				thumbnail=tname;
 			}else {
 				ImageInfoDataBean imgDto = new ImageInfoDataBean();
 				imgDto.setImageNo(imageNo);
@@ -268,6 +270,9 @@ public class AdminProHandler {
 			sizes[i]=Integer.parseInt(size[i]);
 		}
 		List<String> list = productDao.getProductCodeList(ref);
+		if(thumbnail==null||"".equals(thumbnail)) {
+			thumbnail=productDao.getThumbnail(list.get(0));
+		}
 		String[] productCodes = new HandlerHelper().makeProductCode(colors, sizes, ref);
 		for(int i = 0 ; i<productCodes.length ; i++) {
 			ProductDataBean product = new ProductDataBean();
@@ -279,6 +284,7 @@ public class AdminProHandler {
 			if(multi.getParameter("sale") !=null) {
 				product.setDiscount(Integer.parseInt(multi.getParameter("sale")));
 			}
+			product.setThumbnail(thumbnail);
 			product.setProductCategory(Integer.parseInt(multi.getParameter("category")));
 			int result =productDao.modifyProduct(product);
 			if(result ==1) {
