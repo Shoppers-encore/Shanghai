@@ -61,7 +61,7 @@
 		<article class="row">
 			<!-- Good Picture -->
 			<div class="col-sm-6" >
-				<img src="/Shanghai/save/${productList.get(0).thumbnail}" style="width: 100%; height: 600px; padding: 10%;">
+				<img src="/urPresent/save/${productList.get(0).thumbnail}" style="width: 100%; height: 600px; padding: 10%;">
 			</div>
 			<!-- Good Detail -->
 			<div class="col-sm-6" align="center" style="padding:10%;">
@@ -131,7 +131,7 @@
 		<div align="center" style="width:100%;">
 			${productList.get(0).productContent}
 			<c:forEach var="img" items="${imageList}">
-				<img src="/urPresent/save/${img.image_address}">
+				<img src="/urPresent/save/${img.imageAddress}">
 			</c:forEach>
 		</div>
 	<hr><br><br><br>

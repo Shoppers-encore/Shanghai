@@ -53,6 +53,19 @@ var noProductContent = "상품 소개를 입력해 주세요.";
 	
 	
 ////// <User>
+function findId() {
+	url='findId.jk';
+	title='아이디 찾기';
+	window.open(url, title, 
+		'width=500, height=290, location=no, status=no, scrollbars=no');
+}
+
+function findPw() {
+	url='findPassword.jk';
+	title='비밀번호 찾기';
+	window.open(url, title, 
+		'width=500, height=400, location=no, status=no, scrollbars=no');
+}
 
 /*Function*/
 /////////////////////////////<userLoginPro-User Login>///////////////////////////////////

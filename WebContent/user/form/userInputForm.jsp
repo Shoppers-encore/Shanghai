@@ -184,7 +184,7 @@ function mailTransfer(form) {
 	);
 	$(document).ready(
 			$("input[name='id']").change(function(){
-				 $('#confirmIdResult').html('이메일 인증을 해 주세요.');
+				 $('#confirmIdResult').html('아이디 인증을 해 주세요.');
 				 $('#confirmIdResult').css({color: 'brown'});
 				 idCheck=0;
 			})
