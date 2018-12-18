@@ -5,9 +5,9 @@
 
 <html>
 	<%@include file="../view/userHead.jsp"%>
-	<body>
+	<body onload="findPassword(${result})">
 		<div class="container col-10 mt-3">
-			<form name="findPasswordForm">
+			<form name="findPasswordForm" method="post" action="findPasswordPro.jk">
 				<div>
 					<strong class="mt-5">${page_findPasswd}</strong>
 				</div>
@@ -45,28 +45,15 @@
 	</body>
 	<script type="text/javascript">
 		//<!--
-			$(document).on(
-				'click',
-				'input:submit',
-				function( event ){
-					$.ajax({
-						type : 'post',
-						url : 'findPasswordPro.jk',
-						data : $('form[name="findPasswordForm"]').serialize(),
-						success : function(data){
-							alert(data.result)
-							
- 							if(data.result>0){
-								alert(data.result);
-								alert('이메일로 비밀번호가 발송되었습니다.\n확인해주세요.');
-								self.close();
-							}else{
-								alert('존재하지 않는정보입니다.');
-							}
-						}
-					});
+			function findPassword(result){
+				if(result==null){
+				}else if(result==1){
+					alert('입력된 주소로 비밀번호를 전송하였습니다.\n메일을 확인해주세요');
+					self.close();
+				}else{
+					alert('해당 정보가 존재하지 않습니다. 다시 시도해주세요!');
 				}
-			);
+			}
 		//-->
 	</script>
 </html>
