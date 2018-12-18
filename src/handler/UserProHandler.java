@@ -840,15 +840,14 @@ public class UserProHandler {
 		return map;
 	}
 	@RequestMapping("/findPasswordPro")
-	@ResponseBody
-	public Map<Object, Object> findPasswordPro(HttpServletRequest request, HttpServletResponse response){
-		Map<Object, Object> map = new HashMap<Object, Object>();
+	public ModelAndView findPasswordPro(HttpServletRequest request, HttpServletResponse response){
 		String name=request.getParameter("name");
 		String email = request.getParameter("email");
 		UserDataBean user = new UserDataBean();
 		user.setName(name);
 		user.setEmail(email);
 		int count=userDao.getIdCount(user);
+		int result = 0;
 		if(count>0) {
 			String id = request.getParameter("id");
 			if(id.equals(userDao.getId(user))) {
@@ -875,10 +874,9 @@ public class UserProHandler {
 				String pw=sb.toString();
 				user.setId(id);
 				user.setPassword(pw);
-				int result = userDao.setPassword(user);
+				result = userDao.setPassword(user);
+				System.out.println(result);
 				if(result >0) {
-					map.put("result", result);
-					request.setAttribute("result", result);
 					Map<String, String> mail = new HashMap<String, String>();
 					mail.put("sender", "hkk9331@gmail.com");
 					mail.put("receiver", email);
@@ -892,6 +890,8 @@ public class UserProHandler {
 				}
 			}
 		}
-		return map;
+		request.setAttribute("result", result);
+		
+		return new ModelAndView("user/form/findPassword");
 	}
 }
