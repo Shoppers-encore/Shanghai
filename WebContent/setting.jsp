@@ -289,9 +289,9 @@
 <c:set var="msg_gotoProductList" value="상품관리에서 조정 가능합니다." />
 <c:set var="msg_selectItemsToOrder" value="주문하실 상품을 선택해 주세요." />
 <c:set var="msg_selectedColors" value="입력한 색상 : " />
-<c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해주세요." />
+<c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해 주세요." />
 <c:set var="msg_emailVerificationNeeded" value="이메일 인증을 해 주세요."/>
-<c:set var="msg_findId" value="등록하신 이름과 Email주소를 입력해주세요."/>
+<c:set var="msg_findId" value="등록하신 이름과 이메일 주소를 입력해 주세요."/>
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum=" />
