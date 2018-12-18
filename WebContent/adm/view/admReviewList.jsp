@@ -16,6 +16,7 @@
  }
    body {
       position: relative;
+      clear: all;
   }
   ul.nav-pills {
       top: 20px;
@@ -30,12 +31,12 @@
 
   </style>
 </head>
-<body class="container-fulid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+<body class="container-fluid row" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 <!-- Admin Menu Bar -->
 <%@ include file="../view/admMenubar.jsp"%>
 	    
 	    <!-- Board List View Page -->
-	    <article class="col-sm-10 col-8" ><br><br>
+	    <article class="col-sm-10 col-8"><br><br>
 	    	<h4>${str_reviewList}</h4>
 	    	<table class="table table-striped">
 	   			<thead>
