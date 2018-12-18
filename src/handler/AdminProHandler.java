@@ -97,16 +97,9 @@ public class AdminProHandler {
 				imageNo = productDao.getImgNo()+1;
 				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
 			}
-			RenderedOp op = JAI.create("fileload", sname);
-			BufferedImage sbuffer = op.getAsBufferedImage();
-			int width = sbuffer.getWidth();
-			int height = sbuffer.getHeight();
-			BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
-			Graphics g = tbuffer.getGraphics();
-			g.drawImage(sbuffer, 0, 0, width, height, null );   
-			ImageIO.write( tbuffer, "jpg", new File( path + "\\"+tname ) );   
-			ImageIO.write( tbuffer, "png", new File( path + "\\"+tname ) );
-			ImageIO.write( tbuffer, "gif", new File( path + "\\"+tname ) );
+			File f = new File(sname);
+			boolean a = f.renameTo(new File(path+"/"+tname));
+			System.out.println(a);
 			if(inputName.equals("thumb")) {
 				thumbnail = tname;
 			}else {
@@ -119,8 +112,8 @@ public class AdminProHandler {
 					new HandlerHelper().fileWriter(sql);
 				}
 			}
-			File f = new File(sname);
-			if(f.exists()) f.delete();
+//			File f = new File(path+sname);
+//			if(f.exists()) f.delete();
 			request.setAttribute( "systemName", systemName );
 		}      
 		String col[] = multi.getParameterValues( "color" );
@@ -231,16 +224,8 @@ public class AdminProHandler {
 				imageNo = productDao.getImgNo()+1;
 				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
 			}
-			RenderedOp op = JAI.create("fileload", sname);
-			BufferedImage sbuffer = op.getAsBufferedImage();
-			int width = sbuffer.getWidth();
-			int height = sbuffer.getHeight();
-			BufferedImage tbuffer = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
-			Graphics g = tbuffer.getGraphics();
-			g.drawImage(sbuffer, 0, 0, width, height, null );   
-			ImageIO.write( tbuffer, "jpg", new File( path + "\\"+tname ) );   
-			ImageIO.write( tbuffer, "png", new File( path + "\\"+tname ) );
-			ImageIO.write( tbuffer, "gif", new File( path + "\\"+tname ) );
+			File f = new File(sname);
+			f.renameTo(new File(path+"/"+tname));
 			if(inputName.equals("thumb")) {
 				thumbnail=tname;
 			}else {
@@ -255,8 +240,8 @@ public class AdminProHandler {
 				}
 			}
 			
-			File f = new File(sname);
-			if(f.exists()) f.delete();
+//			File f = new File(sname);
+//			if(f.exists()) f.delete();
 			request.setAttribute( "systemName", systemName );
 		}  
 		String[] color = multi.getParameterValues("color");
