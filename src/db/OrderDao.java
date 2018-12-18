@@ -58,7 +58,7 @@ public class OrderDao {
 	}
 	
 	public int prodFromOrder(int orderCode) {
-		return session.update("Admin.prodFromOrder", orderCode);
+		return session.selectOne("Admin.prodFromOrder", orderCode);
 	}
 
 	public List<OrderListDataBean> getOrderDetail(int orderCode) {

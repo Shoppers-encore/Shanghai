@@ -178,7 +178,7 @@ public class AdminViewHandler {
 		int count = 0;
 		if(searchWord != null && searchWord != "") {	// IF there IS an input for searchWord
 			map.put("searchWord", searchWord);
-			count = productDao.getSearchCount(searchWord);			/////////////// 1116�⑥쥙�뒊�⑨옙
+			count = productDao.getSearchCount(searchWord);	
 			if( count == 0 ) {
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("count", count);
@@ -188,7 +188,7 @@ public class AdminViewHandler {
 				map.put("searchWord", searchWord);
 				Map<String, String> cmap = hh.makeCount(count, request);
 				cmap.put("searchWord", searchWord);
-				List<ProductDataBean> productList = productDao.getNameSearch(cmap);			////////// 1116 �⑥쥙�뒊�⑨옙
+				List<ProductDataBean> productList = productDao.getNameSearch(cmap);		
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("productList", productList);
 				return new ModelAndView("adm/view/admProductView");
@@ -274,7 +274,17 @@ public class AdminViewHandler {
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int count = orderDao.prodFromOrder(orderCode);
 		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
-		
+		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		List<OrderListDataBean> prods = orderDao.getOrderListByOrderCode(orderCode);
+		/* Set Maps for OrderDate and OrderCount */
+		Map<String, String> prodNameMap = new HashMap<String, String>();
+		for (OrderListDataBean prod : prods) {
+			String prodCode = String.valueOf(prod.getProductCode());
+			String prodName = String.valueOf(productDao.getProductName(prodCode));
+			prodNameMap.put(prodCode, prodName);
+		}
+		String prodNameJson = new Gson().toJson(prodNameMap);
+		request.setAttribute("prodNames", prodNameJson);
 		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("count", count);
 		request.setAttribute("orderDetailList", orderDetailList);
@@ -295,7 +305,7 @@ public class AdminViewHandler {
 				
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<OrderListDataBean> orders = orderDao.getOrderList(map);
-		/* Set Maps for OrderDate and OrderCount */
+		/* Set Maps for OrderSum */
 		Map<String, String> orderSumMap = new HashMap<String, String>();
 
 		for (OrderListDataBean order : orders) {

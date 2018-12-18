@@ -81,7 +81,7 @@
                   <th colspan="2"><input type="button" class="btn-block" value="${btn_modify}" onclick="location='productModifyForm.jk?ref=${productList.get(0).ref}'"></th>
                </tr>
                <tr>
-                  <th colspan="2"><input type="button" class="btn-block" value="${btn_productDel}" onclick="location='productDeletePro.jk?ref=${productList.get(0).ref}'"></th>
+                  <th colspan="2"><input type="button" class="btn-block" value="${btn_productDel}" onclick ="productDelete('${productList.get(0).ref}')"></th>
                </tr>
             </tbody>
          </table>
