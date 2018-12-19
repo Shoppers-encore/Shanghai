@@ -198,7 +198,6 @@
   </style>
 
 </head>
-
 <body>
    <div class="aa">
        <div class="border" id="productInput">
@@ -342,7 +341,8 @@
                         </td>
                        	<th> ${str_productQuantity} </th>
                     	<td> 
-                        <input type="text" name="quantity" class="form-control" readonly value="${products.get(0).productQuantity}">
+                        <input type="text" name="quantity" class="form-control" readonly value="${products.get(0).productQuantity}"
+                        data-toggle="tooltip" data-placement="bottom" title="${msg_gotoProductList}">
                     	</td> 
                   </tr>
                   <tr>
@@ -385,6 +385,9 @@
 		function delImg(imgId){
 			$("input[id='"+imgId+"']").remove();
 		}
+		$(document).ready(function(){
+		    $('[data-toggle="tooltip"]').tooltip();   
+		});
 </script>  
 
 </html>

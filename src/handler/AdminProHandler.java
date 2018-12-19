@@ -386,7 +386,8 @@ public class AdminProHandler {
 		dto.setName(request.getParameter("name"));
 		dto.setTel(request.getParameter("tel"));
 		dto.setEmail(request.getParameter("email"));
-		int result = userDao.admModify(dto);
+		int result = 0;
+		result = userDao.admModify(dto);
 		request.setAttribute("result", result);
 		return new ModelAndView ("adm/pro/admModifyPro");
 	}
