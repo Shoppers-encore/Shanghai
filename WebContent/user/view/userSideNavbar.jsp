@@ -36,6 +36,22 @@
 	</div>
 	<div class="sidebarItem pt-1">
 		<c:if test="${sessionScope.id eq null}">
+			<button class="btn btn-outline-dark btn-block border basketLoginIconPanel text-secondary" onclick="location='userLoginForm.jk'">
+				<img class="basketLoginIcon sidebarIcon" src="/urPresent/images/basket2.png">
+				<br>
+				<small class="basketLoginIconText iconText">${btn_inputCart}</small>
+			</button>
+		</c:if>
+		<c:if test="${sessionScope.id ne null}">
+			<button class="btn btn-outline-dark btn-block border basketIconPanel text-secondary" onclick="location='basketList.jk'">
+				<img class="basketIcon sidebarIcon" src="/urPresent/images/basket2.png">
+				<br>
+				<small class="basketIconText iconText">${btn_inputCart}</small>
+			</button>
+		</c:if>
+	</div>
+	<div class="sidebarItem pt-1">
+		<c:if test="${sessionScope.id eq null}">
 			<button class="btn btn-outline-dark btn-block border orderLoginIconPanel text-secondary" onclick="location='userLoginForm.jk'">
 				<img class="orderLoginIcon sidebarIcon" src="/urPresent/images/order.png">
 				<br>
@@ -83,7 +99,7 @@
 </div>
 
 <script type="text/javascript">
-	var hoverItems=['.loginIcon', '.logoutIcon', '.myPageLoginIcon', '.myPageIcon', 
+	var hoverItems=['.loginIcon', '.logoutIcon', '.myPageLoginIcon', '.myPageIcon', '.basketLoginIcon', '.basketIcon',
 		'.orderLoginIcon', '.orderIcon', '.reviewIcon', '.searchIcon', '.chatLoginIcon', '.chatIcon']
 	
 	$(document).ready(
