@@ -50,10 +50,10 @@
 			function findPassword(result){
 				if(result==null){
 				}else if(result==1){
-					alert('입력된 주소로 비밀번호를 전송하였습니다.\n메일을 확인해주세요');
+					alert('입력하신 이메일로 임시 비밀번호를 전송하였습니다.\n메일을 확인해 주세요.');
 					self.close();
 				}else{
-					alert('해당 정보가 존재하지 않습니다. 다시 시도해주세요!');
+					alert('회원정보를 찾지 못했습니다. \n입력하신 정보를 다시 확인해 주세요.');
 				}
 			}
 		//-->
