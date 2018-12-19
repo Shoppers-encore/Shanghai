@@ -35,14 +35,5 @@
 				</li>
 			</ul>
 		</div>
-		
-		<c:if test="${sessionScope.id ne null}">
-	        <a href="basketList.jk"><img id="cartImg" src="images/bag.png"></a>
-		</c:if>
-			&nbsp;&nbsp;
-		<a href="userSearchProduct.jk" id="search">
-			<img src="images/red_magnifier.png" style="width:25px;">
-			<span class="tooltiptext" id="search">${str_searchGood}</span>
-		</a>
 	</div>
 </nav>
