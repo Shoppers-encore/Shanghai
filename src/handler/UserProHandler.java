@@ -841,6 +841,12 @@ public class UserProHandler {
 	}
 	@RequestMapping("/findPasswordPro")
 	public ModelAndView findPasswordPro(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String name=request.getParameter("name");
 		String email = request.getParameter("email");
 		UserDataBean user = new UserDataBean();
