@@ -43,7 +43,7 @@
 		) WHERE r between #{start} and #{end}
 	</select>
 	<select id="getSumOfItemsOrdered" parameterType="int" resultType="int">
-		SELECT SUM(orderCode) FROM jk_orderList WHERE orderCode=#{orderCode} GROUP BY orderCode
+		SELECT SUM(orderPrice) FROM jk_orderList WHERE orderCode=#{orderCode} GROUP BY orderCode
 	</select>
  	<select id="getOrder" parameterType="String" resultType="databean.OrderListDataBean">
 		SELECT * FROM jk_orderList WHERE id=#{id}

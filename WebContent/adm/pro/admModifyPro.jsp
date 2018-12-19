@@ -11,11 +11,14 @@
 	</script>
 	<meta http-equiv="refresh" content="0; url=admModifyView.jk">
 </c:if>
-<c:if test="${result eq 1}">
+<c:if test="${result ne 0}">
 	<script type = "text/javascript">
 			//<!--
 				alert(modcompleted);
+				// window.location.href="admModifyView.jk";
+				// location.replace("admMain.jk");
 			//-->
 	</script>
-	<c:redirect url="admModifyPro.jk"/>		<!-- ONGOING BY JH -->
+	<!-- <c:redirect url="admModifyView.jk"/>		<!-- ONGOING BY JH -->
+	<meta http-equiv="refresh" content="0; url=admMain.jk">
 </c:if>

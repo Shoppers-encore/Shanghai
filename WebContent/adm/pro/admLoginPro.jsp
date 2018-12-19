@@ -8,7 +8,7 @@
 <c:if test="${result eq 0}">
 	<script type="text/javascript">
 		//<!-- ID does not exist
-		erroralert( loginiderror );
+		alert( loginiderror );
 		window.location="admMain.jk";
 		//-->
 	</script>
@@ -16,15 +16,15 @@
 <c:if test="${result eq -9}">
 	<script type="text/javascript">
 		//<!-- user is not admin
-		erroralert( adminonly );
-		window.location="admMain.jk";
+		alert( adminonly );
+		window.location.href="userLoginForm.jk";
 		//-->
 	</script>
 </c:if>
 <c:if test="${result eq -1}">
 	<script type="text/javascript">
 		//<!-- password does not match ID
-		erroralert( loginpasswderror );
+		alert( loginpasswderror );
 		window.location="admMain.jk";
 		//-->
 	</script>
