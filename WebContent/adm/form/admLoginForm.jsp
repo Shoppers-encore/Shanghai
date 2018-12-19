@@ -37,7 +37,7 @@
 					<p>
 			      	<br> ${msg_admLogin} <br>
 					</p>
-					<form name="loginform" method="post" action="admLoginPro.jk" onsubmit="return logincheck()">
+					<form name="loginform" method="post" action="admLoginPro.jk">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend" >
 								<span class="input-group-text" >${str_id}</span>
