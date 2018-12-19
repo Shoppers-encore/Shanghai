@@ -26,34 +26,28 @@ img#cartImg {
 	position: fixed;
 	bottom: 0vh;
 	right: 0vw;
-	width: 6vw;
-	min-width: 5rem;
  	display: flex;
 	align-items: center;
 }
 
-/* .sidebarItems {
- 	display: flex;
-	align-items: center;
-} */
-
 .sidebarItem {
 	width: 5vw;
-	min-width: 4.2rem;
+	min-width: 4rem;
 }
 
 .sidebarIcon {
 	width: 2vw;
-	min-width: 1rem;
-	align-items: center;
+	min-width: 1.5rem;
 }
 
 .iconText {
-	font-size: 0.8vw;
+	font-size: calc(8px + 0.2vw);
+	display: inline-block;
 }
 
-@media (max-width: 450px) {
-#secondary {clear: both;}
+.chatText {
+	font-size: calc(7px + 0.1vw);
+	display: inline-block;
 }
 
 /* ====userFooter==== */

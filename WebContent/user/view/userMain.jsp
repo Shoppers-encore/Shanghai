@@ -94,10 +94,6 @@
 		  			);
 				}
 			);
-				
-		function chatting(){
-			window.open("chatView.jk");
-		}
 		//-->
 	</script>
 </html>
