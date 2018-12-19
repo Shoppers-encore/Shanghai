@@ -15,8 +15,10 @@
 	<script type = "text/javascript">
 			//<!--
 				alert(modcompleted);
+				// window.location.href="admModifyView.jk";
+				location.replace("admMain.jk");
 			//-->
 	</script>
 	<!-- <c:redirect url="admModifyView.jk"/>		<!-- ONGOING BY JH -->
-	<meta http-equiv="refresh" content="0; url=admModifyView.jk">
+	<!-- <meta http-equiv="refresh" content="0; url=admModifyView.jk"> -->
 </c:if>
