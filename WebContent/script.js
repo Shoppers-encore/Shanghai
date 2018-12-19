@@ -57,14 +57,14 @@ function findId() {
 	url='findId.jk';
 	title='아이디 찾기';
 	window.open(url, title, 
-		'width=500, height=290, location=no, status=no, scrollbars=no');
+		'width=500, height=450, location=no, status=no, scrollbars=no');
 }
 
 function findPw() {
 	url='findPassword.jk';
 	title='비밀번호 찾기';
 	window.open(url, title, 
-		'width=500, height=355, location=no, status=no, scrollbars=no');
+		'width=500, height=515, location=no, status=no, scrollbars=no');
 }
 
 /*Function*/
