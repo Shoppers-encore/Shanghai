@@ -155,6 +155,10 @@
 															if(prodQty<5) {
 																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);	
 															}
+															
+															if(prodQty>=5) {
+																$('#soldOut_${basketList.productCode}').text('');
+															}
 														},
 														error: function(e) {
 															console.log('product quantity fetch ${msg_failure}');
@@ -206,6 +210,10 @@
 															
 															if(prodQty<5) {
 																$('#soldOut_${basketList.productCode}').text('${str_remainingProdQty}: '+prodQty);						
+															}
+															
+															if(prodQty>=5) {
+																$('#soldOut_${basketList.productCode}').text('');
 															}
 														},
 														error: function(e) {
