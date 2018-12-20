@@ -71,20 +71,9 @@
 
 .cardItem {
 	width: calc(97.52px + 13vw);
-	margin: auto;
-	/* width: 20.25vw;
-	min-width: 142px; */
-	/* width: calc(100px + 20.25vw); */
-	/* min-width: 50rem; */
 }
 
-/* .cardForm {
-	width: 20vw;
-	min-width: 20rem;
-} */
-
 /*
-
 ===userInputForm.jsp===
 .iconMargin img {
 	margin-botton : -5px;
