@@ -7,42 +7,112 @@
 	</a>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top border bg-white">
-	<div class="container-fluid">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+<nav class="navbar navbar-expand-xl navbar-light sticky-top border bg-white">
+	<button class="navbar-toggler menuToggler" type="button" data-toggle="collapse" data-target="#collapsibleMenuNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 	
-		<div class="navbar-collapse collapse w-100" id="collapsibleNavbar">
-			<div class="dropdown">
-				<a class="navbar-brand" href="#" data-toggle="dropdown">${str_product}</a>
-				<div class="dropdown-menu">
-					
-					<a class="dropdown-item" href="userProductOuterList.jk">${str_cat_OUTER}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a>
-					<a class="dropdown-item" href="userProductShirtsList.jk">${str_cat_BLnSHIRTS}</a>
-					<a class="dropdown-item" href="userProductTopList.jk">${str_cat_TnTOP}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=SKIRT">${str_cat_SKIRT}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=PANTS">${str_cat_PANTS}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=SHOES">${str_cat_SHOES}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=BAG">${str_cat_BAG}</a>
-					<a class="dropdown-item" href="userProductList.jk?category=ACCESSORY">${str_cat_ACCESSORY}</a>
-				</div>
-			</div>
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="userBestProductList.jk">BEST</a>
-				</li>
-			</ul>
-		</div>
-		
-		<c:if test="${sessionScope.id ne null}">
-	        <a href="basketList.jk"><img id="cartImg" src="images/bag.png"></a>
-		</c:if>
-			&nbsp;&nbsp;
-		<a href="userSearchProduct.jk" id="search">
-			<img src="images/red_magnifier.png" style="width:25px;">
-			<span class="tooltiptext" id="search">${str_searchGood}</span>
-		</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
+		<img class="topNavIcon" src="/urPresent/images/basket.png">
+	</button>
+
+	<div class="navbar-collapse collapse w-100" id="collapsibleMenuNavbar">
+		<ul class="navbar-nav mr-auto" id="topNavbar">
+			<li class="nav-item">
+				<small><a class="nav-link" href="userBestProductList.jk">BEST</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductOuterList.jk">${str_cat_OUTER}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductShirtsList.jk">${str_cat_BLnSHIRTS}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductTopList.jk">${str_cat_TnTOP}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=SKIRT">${str_cat_SKIRT}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=PANTS">${str_cat_PANTS}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=SHOES">${str_cat_SHOES}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=BAG">${str_cat_BAG}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userProductList.jk?category=ACCESSORY">${str_cat_ACCESSORY}</a></small>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="navbar-collapse collapse w-100" id="collapsibleSideNavbar">
+		<ul class="navbar-nav ml-auto text-right" id="sideNavbarOnTop">
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_login}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="logout.jk">${btn_logout}</a></small>
+				</c:if>
+			</li>
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_myPage}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="userMyPage.jk">${btn_myPage}</a></small>
+				</c:if>
+			</li>
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_inputCart}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="basketList.jk">${btn_inputCart}</a></small>
+				</c:if>
+			</li>
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${str_orderList}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="userOrderList.jk">${str_orderList}</a></small>
+				</c:if>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="reviewList.jk">${str_reviewIcon}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userSearchProduct.jk">${str_searchIcon}</a></small>
+			</li>
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${str_chat}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="chatView.jk">${str_chat}</a></small>
+				</c:if>
+			</li>
+		</ul>
 	</div>
 </nav>
+<script type="text/javascript">
+	$('.menuToggler').on(
+		'click',
+		function(event) {
+			$('#collapsibleSideNavbar').collapse('hide')
+		}
+	);
+	$('.topNavIcon').on(
+		'click',
+		function(event) {
+			$('#collapsibleMenuNavbar').collapse('hide')
+		}
+	);
+</script>
