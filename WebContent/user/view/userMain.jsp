@@ -7,17 +7,17 @@
 	<%@include file="../view/userHead.jsp"%>
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
-		<%-- <%@ include file="../../user/view/userSideNavbar.jsp" %> --%>		
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
 	
-		<div class="container col-lg-10 pl-0 pr-0">
+		<div class="container col-xl-10 text-center">
 			<c:if test="${productCount eq null or productCount eq 0}">
 				<p align="center">${msg_list_x}</p>
 			</c:if>
 			
 			<c:if test="${productCount ne 0}">
 				<c:forEach var="product" items="${productList}">
-					<div class="card cardItem mt-4 mb-4 pl-0 pr-0 col-lg-3 ml-0 mr-0">
-						<form name="${product.ref}" class="cardForm">
+					<div class="card cardItem d-inline-flex mt-4 mb-4">
+						<form name="${product.ref}">
 							<a href="userProductDetail.jk?ref=${product.ref}"> 
 								<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
 								<span>${product.productName}</span>

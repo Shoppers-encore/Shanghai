@@ -69,18 +69,11 @@
 
 /* ====userMain==== */
 
-/* .cardItem {
-	width: 20vw;
-	min-width: 20rem;
-} */
-
-.cardForm {
-	width: 20vw;
-	/* min-width: 20rem; */
+.cardItem {
+	width: calc(97.52px + 13vw);
 }
 
 /*
-
 ===userInputForm.jsp===
 .iconMargin img {
 	margin-botton : -5px;
