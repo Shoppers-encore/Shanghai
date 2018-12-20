@@ -11,18 +11,11 @@
 	min-width: 19rem;
 }
 
-img#cartImg {
-	width: 40px;
-	height: 40px;
-}
-
-.cardItem {
-	
-}
-
 /* ====userTopNavbar==== */
-
-
+.topNavIcon {
+	width: 1.875rem;
+	height: 1.875rem;
+}
 
 /* ====userSideNavbar==== */
 .sidebar {
@@ -74,6 +67,17 @@ img#cartImg {
 	color: brown;
 }
 
+/* ====userMain==== */
+
+/* .cardItem {
+	width: 20vw;
+	min-width: 20rem;
+} */
+
+.cardForm {
+	width: 20vw;
+	/* min-width: 20rem; */
+}
 
 /*
 

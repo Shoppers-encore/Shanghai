@@ -7,98 +7,112 @@
 	</a>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top border bg-white">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleMenuNavbar">
+<nav class="navbar navbar-expand-xl navbar-light sticky-top border bg-white">
+	<button class="navbar-toggler menuToggler" type="button" data-toggle="collapse" data-target="#collapsibleMenuNavbar">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
-		<img class="myPageIcon sidebarIcon" src="/urPresent/images/myPage.png">
+		<img class="topNavIcon" src="/urPresent/images/basket.png">
 	</button>
 
 	<div class="navbar-collapse collapse w-100" id="collapsibleMenuNavbar">
-		<ul class="navbar-nav" id="topNavbar">
+		<ul class="navbar-nav mr-auto" id="topNavbar">
 			<li class="nav-item">
-				<a class="nav-link" href="userBestProductList.jk">BEST</a>
+				<small><a class="nav-link" href="userBestProductList.jk">BEST</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductOuterList.jk">${str_cat_OUTER}</a>
+				<small><a class="nav-link" href="userProductOuterList.jk">${str_cat_OUTER}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=DRESS">${str_cat_DRESS}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductShirtsList.jk">${str_cat_BLnSHIRTS}</a>
+				<small><a class="nav-link" href="userProductShirtsList.jk">${str_cat_BLnSHIRTS}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductTopList.jk">${str_cat_TnTOP}</a>
+				<small><a class="nav-link" href="userProductTopList.jk">${str_cat_TnTOP}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=SKIRT">${str_cat_SKIRT}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=SKIRT">${str_cat_SKIRT}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=PANTS">${str_cat_PANTS}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=PANTS">${str_cat_PANTS}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=SHOES">${str_cat_SHOES}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=SHOES">${str_cat_SHOES}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=BAG">${str_cat_BAG}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=BAG">${str_cat_BAG}</a></small>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="userProductList.jk?category=ACCESSORY">${str_cat_ACCESSORY}</a>
+				<small><a class="nav-link" href="userProductList.jk?category=ACCESSORY">${str_cat_ACCESSORY}</a></small>
 			</li>
 		</ul>
 	</div>
 	
 	<div class="navbar-collapse collapse w-100" id="collapsibleSideNavbar">
-		<ul class="navbar-nav" id="topNavbar">
+		<ul class="navbar-nav ml-auto text-right" id="sideNavbarOnTop">
 			<li class="nav-item">
 				<c:if test="${sessionScope.id eq null}">
-					<a class="nav-link" href="userLoginForm.jk">${btn_login}</a>
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_login}</a></small>
 				</c:if>
 				<c:if test="${sessionScope.id ne null}">
-					<a class="nav-link" href="logout.jk">${btn_logout}</a>
-				</c:if>
-			</li>
-			<li class="nav-item">
-				<c:if test="${sessionScope.id eq null}">
-					<a class="nav-link" href="userLoginForm.jk">${btn_myPage}</a>
-				</c:if>
-				<c:if test="${sessionScope.id ne null}">
-					<a class="nav-link" href="userMyPage.jk">${btn_myPage}</a>
+					<small><a class="nav-link" href="logout.jk">${btn_logout}</a></small>
 				</c:if>
 			</li>
 			<li class="nav-item">
 				<c:if test="${sessionScope.id eq null}">
-					<a class="nav-link" href="userLoginForm.jk">${btn_inputCart}</a>
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_myPage}</a></small>
 				</c:if>
 				<c:if test="${sessionScope.id ne null}">
-					<a class="nav-link" href="basketList.jk">${btn_inputCart}</a>
+					<small><a class="nav-link" href="userMyPage.jk">${btn_myPage}</a></small>
 				</c:if>
 			</li>
 			<li class="nav-item">
 				<c:if test="${sessionScope.id eq null}">
-					<a class="nav-link" href="userLoginForm.jk">${str_orderList}</a>
+					<small><a class="nav-link" href="userLoginForm.jk">${btn_inputCart}</a></small>
 				</c:if>
 				<c:if test="${sessionScope.id ne null}">
-					<a class="nav-link" href="userOrderList.jk">${str_orderList}</a>
+					<small><a class="nav-link" href="basketList.jk">${btn_inputCart}</a></small>
 				</c:if>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="reviewList.jk">${str_reviewIcon}</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="userSearchProduct.jk">${str_searchIcon}</a>
 			</li>
 			<li class="nav-item">
 				<c:if test="${sessionScope.id eq null}">
-					<a class="nav-link" href="userLoginForm.jk">${str_chat}</a>
+					<small><a class="nav-link" href="userLoginForm.jk">${str_orderList}</a></small>
 				</c:if>
 				<c:if test="${sessionScope.id ne null}">
-					<a class="nav-link" href="chatView.jk">${str_chat}</a>
+					<small><a class="nav-link" href="userOrderList.jk">${str_orderList}</a></small>
+				</c:if>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="reviewList.jk">${str_reviewIcon}</a></small>
+			</li>
+			<li class="nav-item">
+				<small><a class="nav-link" href="userSearchProduct.jk">${str_searchIcon}</a></small>
+			</li>
+			<li class="nav-item">
+				<c:if test="${sessionScope.id eq null}">
+					<small><a class="nav-link" href="userLoginForm.jk">${str_chat}</a></small>
+				</c:if>
+				<c:if test="${sessionScope.id ne null}">
+					<small><a class="nav-link" href="chatView.jk">${str_chat}</a></small>
 				</c:if>
 			</li>
 		</ul>
 	</div>
 </nav>
+<script type="text/javascript">
+	$('.menuToggler').on(
+		'click',
+		function(event) {
+			$('#collapsibleSideNavbar').collapse('hide')
+		}
+	);
+	$('.topNavIcon').on(
+		'click',
+		function(event) {
+			$('#collapsibleMenuNavbar').collapse('hide')
+		}
+	);
+</script>
