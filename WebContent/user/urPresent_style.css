@@ -68,9 +68,18 @@
 }
 
 /* ====userMain==== */
-
 .cardItem {
 	width: calc(97.52px + 13vw);
+	cursor: pointer;
+	font-size: calc(12px + 0.2vw);
+}
+
+.rewindAndFastForward {
+	width: 20px;
+}
+
+.returnAndForward {
+	width: 9px;
 }
 
 /*
