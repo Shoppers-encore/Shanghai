@@ -90,11 +90,11 @@
 					<c:if test="${count ne 0}">
 						<c:if test="${startPage gt pageBlock}">
 							<a href="userOrderList.jk">
-								<img src="/Shanghai/images/rewind.png" style="width: 20px;">
+								<img src="/urPresent/images/rewind.png" class="rewindAndFastForward">
 							</a>
 							&ensp;
 							<a href="userOrderList.jk?pageNum=${startPage-pageBlock}">
-								<img src="/Shanghai/images/return.png" style="width: 9px;">
+								<img src="/urPresent/images/return.png" class="returnAndForward">
 							</a>
 						</c:if>
 						&ensp;
@@ -109,11 +109,11 @@
 						&ensp;
 						<c:if test="${pageCount gt endPage}">
 							<a href="userOrderList.jk?pageNum=${startPage+pageBlock}">
-								<img src="/Shanghai/images/forward.png" style="width: 9px;">
+								<img src="/urPresent/images/forward.png" class="returnAndForward">
 							</a>
 							&ensp;
 							<a href="userOrderList.jk?pageNum=${pageCount}">
-								<img src="/Shanghai/images/fastForward.png" style="width: 20px;">
+								<img src="/urPresent/images/fastForward.png" class="rewindAndFastForward">
 							</a>
 						</c:if>
 					</c:if>

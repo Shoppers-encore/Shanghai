@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>${productList.get(0).productName} 상세페이지</title>
+	<title>${productList.get(0).productName}</title>
 	
 </head>
 	<body class="container">
@@ -13,6 +13,14 @@
 	<%@ include file="../../user/view/userTopNavbar.jsp" %>
 	<script type="text/javascript">
 		//<!--
+		$(document).ready(
+			function() {
+				if(performance.navigation.type == 2){
+					   location.reload(true);
+				}
+			}
+		);
+		
 		$(document).ready(function(){
 			$("select").change(function(){
 				$("input[name='productCode']").val($("select[name='cl']").val()+$("input[name='reff']").val()+$("select[name='sz']").val());
@@ -38,7 +46,7 @@
 				if($("input[name='productCode']").val()==$("input[name='reff']").val()){
 					checkSizeColor();
 				}else if($("input[name='quantity']").val()==0 || $("input[name='remainQuantity']").val()==0){
-					alert('0개를 구매할수 없습니다!');
+					alert('수량을 선택해 주세요.');
 				}else{
 					location.href="basketInput.jk?productCode="+$("input[name='productCode']").val()+"&quantity="+$("input[name='quantity']").val()+"&ref="+$("input[name='reff']").val();
 				}
@@ -50,7 +58,7 @@
 				return false;
 			}
 			if($("input[name='quantity']").val()==0){
-				alert('품절상품입니다.');
+				alert('수량을 선택해 주세요.');
 				return false;
 			}
 		}

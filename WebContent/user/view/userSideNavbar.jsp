@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="sidebar flex-column border pt-1 pb-1 pl-1 pr-1">
+<div class="sidebar flex-column border bg-white pt-1 pb-1 pl-1 pr-1">
 	<div class="sidebarItem">
 		<c:if test="${sessionScope.id eq null}">
 			<button class="btn btn-outline-dark btn-block border loginIconPanel text-secondary" onclick="location='userLoginForm.jk'">
@@ -103,7 +103,7 @@
 		'.orderLoginIcon', '.orderIcon', '.reviewIcon', '.searchIcon', '.chatLoginIcon', '.chatIcon']
 	
 	$(document).ready(
-		function(event) {
+		function() {
 			$.each(hoverItems, function(index, hoverItem){
 				$(hoverItem+'Panel').hover(
 					function(event) {
@@ -132,4 +132,31 @@
 			});			
 		}	
 	);
+	
+	$(window).on(
+		'load',
+		function() {
+			var vpWidth=$(window).width();
+			
+			if(vpWidth<768) {
+				$('.sidebar').hide();
+			} else {
+				$('.sidebar').show();
+			}
+		}
+	);
+	
+	$(window).on(
+		'resize',
+		function() {
+			var vpWidth=$(window).width();
+			
+			if(vpWidth<768) {
+				$('.sidebar').hide();
+			} else {
+				$('.sidebar').show();
+			}
+		}		
+	);
+	
 </script>
