@@ -7,12 +7,12 @@
 	</a>
 </div>
 
-<nav class="navbar navbar-expand-xl navbar-light sticky-top border bg-white">
+<nav class="navbar navbar-expand-md navbar-light sticky-top border bg-white topNav">
 	<button class="navbar-toggler menuToggler" type="button" data-toggle="collapse" data-target="#collapsibleMenuNavbar">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
+	<button class="navbar-toggler sideToggler" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
 		<img class="topNavIcon" src="/urPresent/images/basket.png">
 	</button>
 
@@ -105,14 +105,41 @@
 <script type="text/javascript">
 	$('.menuToggler').on(
 		'click',
-		function(event) {
+		function() {
 			$('#collapsibleSideNavbar').collapse('hide')
 		}
 	);
+	
 	$('.topNavIcon').on(
 		'click',
-		function(event) {
+		function() {
 			$('#collapsibleMenuNavbar').collapse('hide')
 		}
 	);
+	
+	function hideShowNav() {
+		var vpWidth=$(window).width();
+		
+		if(vpWidth>=768) {
+			$('#sideNavbarOnTop').attr('hidden', true);
+		} else {
+			$('.sideToggler').show();
+			$('#sideNavbarOnTop').attr('hidden', false);
+			
+		}
+	}
+	
+	$(document).ready(
+		function() {
+			hideShowNav();
+			
+			$(window).on(
+				'resize',
+				function() {
+					hideShowNav();
+				}		
+			);	
+		}
+	);
+		
 </script>

@@ -50,8 +50,6 @@ var noProuctPrice = "상품 가격을 입력해 주세요.";
 var noProductQuantity = "상품 초기 수량을 입력해 주세요.";
 var noProductContent = "상품 소개를 입력해 주세요.";
 
-	
-	
 ////// <User>
 function findId() {
 	url='findId.jk';

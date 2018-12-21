@@ -103,7 +103,7 @@
 		'.orderLoginIcon', '.orderIcon', '.reviewIcon', '.searchIcon', '.chatLoginIcon', '.chatIcon']
 	
 	$(document).ready(
-		function(event) {
+		function() {
 			$.each(hoverItems, function(index, hoverItem){
 				$(hoverItem+'Panel').hover(
 					function(event) {
@@ -132,4 +132,31 @@
 			});			
 		}	
 	);
+	
+	$(window).on(
+		'load',
+		function() {
+			var vpWidth=$(window).width();
+			
+			if(vpWidth<768) {
+				$('.sidebar').hide();
+			} else {
+				$('.sidebar').show();
+			}
+		}
+	);
+	
+	$(window).on(
+		'resize',
+		function() {
+			var vpWidth=$(window).width();
+			
+			if(vpWidth<768) {
+				$('.sidebar').hide();
+			} else {
+				$('.sidebar').show();
+			}
+		}		
+	);
+	
 </script>
