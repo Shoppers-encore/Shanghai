@@ -12,11 +12,11 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	
-	<button class="navbar-toggler sideToggler" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
+	<button class="navbar-toggler sideToggler d-md-none" type="button" data-toggle="collapse" data-target="#collapsibleSideNavbar">
 		<img class="topNavIcon" src="/urPresent/images/basket.png">
 	</button>
 
-	<div class="navbar-collapse collapse w-100" id="collapsibleMenuNavbar">
+	<div class="navbar-collapse collapse" id="collapsibleMenuNavbar">
 		<ul class="navbar-nav mr-auto" id="topNavbar">
 			<li class="nav-item">
 				<small><a class="nav-link" href="userBestProductList.jk">BEST</a></small>
@@ -51,8 +51,8 @@
 		</ul>
 	</div>
 	
-	<div class="navbar-collapse collapse w-100" id="collapsibleSideNavbar">
-		<ul class="navbar-nav ml-auto text-right" id="sideNavbarOnTop">
+	<div class="navbar-collapse collapse" id="collapsibleSideNavbar">
+		<ul class="navbar-nav ml-auto text-right d-md-none" id="sideNavbarOnTop">
 			<li class="nav-item">
 				<c:if test="${sessionScope.id eq null}">
 					<small><a class="nav-link" href="userLoginForm.jk">${btn_login}</a></small>
@@ -115,31 +115,5 @@
 		function() {
 			$('#collapsibleMenuNavbar').collapse('hide')
 		}
-	);
-	
-	function hideShowNav() {
-		var vpWidth=$(window).width();
-		
-		if(vpWidth>=768) {
-			$('#sideNavbarOnTop').attr('hidden', true);
-		} else {
-			$('.sideToggler').show();
-			$('#sideNavbarOnTop').attr('hidden', false);
-			
-		}
-	}
-	
-	$(document).ready(
-		function() {
-			hideShowNav();
-			
-			$(window).on(
-				'resize',
-				function() {
-					hideShowNav();
-				}		
-			);	
-		}
-	);
-		
+	);	
 </script>
