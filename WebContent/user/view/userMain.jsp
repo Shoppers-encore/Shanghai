@@ -9,7 +9,7 @@
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
 	
-		<div class="container col-xl-10 text-center">
+		<div class="container col-10 text-center">
 			<c:if test="${productCount eq null or productCount eq 0}">
 				<p align="center">${msg_list_x}</p>
 			</c:if>
