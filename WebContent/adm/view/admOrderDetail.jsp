@@ -29,9 +29,6 @@
   .buttons {
   	float:right;
   }
-  .price {
-  	text-align: right;
-  }
 
   </style>
 </head>
@@ -88,7 +85,7 @@
    					<th>${str_productCode}</th>
    					<th>${str_productName}</th>
    					<th>${str_productQuantity}</th>
-   					<th class="price">${str_price}</th>
+   					<th>${str_price}</th>
    				</tr>
    			</thead>
    			<tbody>
@@ -111,13 +108,7 @@
 							</script>
 							</td>
 							<td>${order.orderQuantity}</td>
-							<td class="price">
-								<!-- ${order.orderPrice} -->
-								<script type="text/javascript">
-									var orderPrice='${order.orderPrice}'.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-									document.write(orderPrice + ' ${str_currencyUnit}');
-								</script>
-							</td>
+							<td>${order.orderPrice}</td>
 						</tr>
 					</c:forEach>
 				</c:if>

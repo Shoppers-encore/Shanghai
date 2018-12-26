@@ -23,9 +23,6 @@
   div.card {
     text-align: center;
   }
-  .price {
-  	text-align: right;
-  }
 
   </style>
 <script type="text/javascript">
@@ -57,7 +54,7 @@ $('input[name=btid]').attr('value', result)
                      <th>${str_orderId}</th>
                      <th>${str_orderStatus}</th>
                      <th>${str_address}</th>
-                     <th class="price">${str_totalPrice}</th>
+                     <th style="text-align:right">${str_totalPrice}</th>
                      <th>${str_orderDetail}</th>
                   </tr>
                </thead>
@@ -93,7 +90,7 @@ $('input[name=btid]').attr('value', result)
                         </c:if>
                         </td>
                         <td>${order.orderAddress1} ${order.orderAddress2}<br></td>
-   						<td id="sum_${order.orderCode}" class="price">
+   						<td id="sum_${order.orderCode}" style="text-align:right">
 							<script type="text/javascript">
 								var key='${order.orderCode}';
 								var orderSum=JSON.parse('${orderSum}')[key].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
