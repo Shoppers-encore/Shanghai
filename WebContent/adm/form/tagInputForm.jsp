@@ -4,6 +4,7 @@
 <%@ include file="../../setting.jsp" %>
 <html>
 <head>
+	<title>태그추가</title>
   <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   * {

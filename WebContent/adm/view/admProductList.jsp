@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <title>상품관리</title>
   <style>
    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
  * {
@@ -34,7 +34,7 @@
        <!-- Admin Good List View Page -->
 	<article class="col-sm-10 col-8" ><br><br>
 		<h4>${str_admProductList}</h4>
-		<div class="col-sm-4 container-fluid" style="float:none; margin:0 auto;">
+		<div class="col-sm-4 container-fluid centered">
 	    	<form name="searchForm" action="admProductList.jk" method="post">
 					<div class="input-group">
 					    <input type="text" class="form-control" name="searchWord" style="width:60%">
