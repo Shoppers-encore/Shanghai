@@ -1,53 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
 
 <html>
-	<head>
-		<title>${head_best}</title>
-		<style>
-			div#cart {
-				position: sticky;
-				top: 300px;
-				width: 120px;
-				height: 150px;
-				font-size: 20px;
-				float: right;
-			}
-			div#chat {
-				position: sticky;
-				top: 600px;
-				right: 120px;
-				float: right;
-			}
-			img#cartImg {
-				width: 30px;
-				height: 30px;
-			}
-			img#chatImg {
-				width: 40px;
-				height: 40px;
-			}
-			img#thumb {
-				width:80px;
-				height:120px;
-			}
-		</style>
-	</head>
-	<body class="container">
-      	<c:if test="${sessionScope.id ne null}">
-			<div id="chat">
-	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">
-	      	</div>
-		</c:if>
+	<%@include file="../view/userHead.jsp"%>
+	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
-		<article><br>
-	    	<c:if test="${productCount eq null or productCount eq 0}">	
-					<br><br><br><br><br>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
+	
+		<div class="container col-10 text-center">
+	    	<c:if test="${productCount eq null or productCount eq 0 or productList eq '[]'}">
+	    		<div class="mt-5 pt-5">
 					<p align="center">${msg_list_x}</p>
+				</div>
 			</c:if>
-			<c:if test="${productCount ne 0}">
+			<c:if test="${productCount ne 0 and productList ne '[]'}">
 		    	<div class="row">
 		    		<c:forEach var="product" items="${productList}">
 						<div class="col-md-3"  align="center"><br>
@@ -74,7 +41,7 @@
 				     </c:forEach>
 		    	</div>
 		    </c:if>
-		</article>
+		</div>
 	</body>
 	
 	<script type="text/javascript">
