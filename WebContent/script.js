@@ -65,6 +65,16 @@ function findPw() {
 		'width=500, height=515, location=no, status=no, scrollbars=no');
 }
 
+
+//chat
+
+function chatting(){
+	url='chatView.jk';
+	title='1:1상담';
+	window.open(url, title, 
+		'width=310, height=500, location=no, status=no');
+}
+
 /*Function*/
 /////////////////////////////<userLoginPro-User Login>///////////////////////////////////
 function erroralert( msg ) {
