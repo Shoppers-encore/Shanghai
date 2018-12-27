@@ -198,6 +198,7 @@ public class UserProHandler {
 		userDto.setPassword(request.getParameter("password"));
 		userDto.setTel(request.getParameter("tel"));
 		userDto.setEmail(request.getParameter("email"));
+		userDto.setZipcode(request.getParameter("zipcode"));
 		userDto.setAddress(request.getParameter("address"));
 		userDto.setAddressDetail(request.getParameter("addressDetail"));
 		String heightValue = request.getParameter("height");

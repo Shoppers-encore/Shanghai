@@ -152,14 +152,13 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+
 //Input Validation: block special character & accept input of only numbers
 function checkHeight(){
 	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
     if((event.keyCode<48)||(event.keyCode>57) && (event.keyCode==num))  //input only numbers
        event.returnValue=false;
 }
-
-
 
 //Check authentication-key match
 function matchAuthKey() {
@@ -236,6 +235,12 @@ function joincheck() {
 		return false;
 	}
 }
+
+/*function modifyCheck() {
+	alert(document.getElementById('zipcode').value);
+	return false;
+}*/
+
 
 ///<Review>
 function scoring() {

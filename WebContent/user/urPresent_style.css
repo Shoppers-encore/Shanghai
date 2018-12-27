@@ -6,10 +6,6 @@
 	font-family: 'Nanum Gothic';
 }
 
-/* html {
-  height: 100%;
-} */
-
 .brandLogo {
 	width: 30vw;
 	min-width: 19rem;
@@ -70,6 +66,9 @@ a, a:link, a:visited, a:hover, a:active{
 	width: 7rem;
 }
 
+/* ====userMyPage==== */
+
+
 /* ====userInputForm==== */
 #emailVerificationMsg {
 	color: brown;
@@ -77,7 +76,6 @@ a, a:link, a:visited, a:hover, a:active{
 
 /* ====userMain==== */
 .cardItem {
-	/* width: calc(97.52px + 13vw); */
 	cursor: pointer;
 	font-size: calc(12px + 0.2vw);
 }
@@ -93,6 +91,20 @@ a, a:link, a:visited, a:hover, a:active{
 @media only screen and (min-width: 320px) and (max-width: 364px) {
 	.cardItem {
 		width: 34vw;
+	}
+	
+	.myPageLabel {
+		margin-left: 5vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 28vw;
+	}
+	
+	.myPageInfo {
+		margin-left: 2vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 45vw;
 	}
 }
 
@@ -123,6 +135,19 @@ a, a:link, a:visited, a:hover, a:active{
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
 	.cardItem {
 		width: 19vw;
+	}
+	
+	.myPageLabel {
+		margin-left: 10vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 15vw;
+	}
+	
+	.myPageInfo {
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 30vw;
 	}
 }
 
