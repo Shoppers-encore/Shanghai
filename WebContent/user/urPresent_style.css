@@ -94,7 +94,7 @@ a, a:link, a:visited, a:hover, a:active{
 	}
 	
 	.myPageLabel {
-		margin-left: 5vw;
+		margin-left: 10vw;
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
 		width: 28vw;
@@ -112,23 +112,79 @@ a, a:link, a:visited, a:hover, a:active{
 	.cardItem {
 		width: 35vw;
 	}
+	
+	.myPageLabel {
+		margin-left: 10vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 28vw;
+	}
+	
+	.myPageInfo {
+		margin-left: 2vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 45vw;
+	}
 }
 
 @media only screen and (min-width: 428px) and (max-width: 520px) {
 	.cardItem {
 		width: 36vw;
 	}
+	
+	.myPageLabel {
+		margin-left: 13vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 28vw;
+	}
+	
+	.myPageInfo {
+		margin-left: 2vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 45vw;
+	}	
 }
 
 @media only screen and (min-width: 520px) and (max-width: 636px) {
 	.cardItem {
 		width: 37vw;
 	}
+	
+	.myPageLabel {
+		margin-left: 10vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 28vw;
+	}
+	
+	.myPageInfo {
+		margin-left: 1vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 45vw;
+	}	
 }
 
 @media only screen and (min-width: 636px) and (max-width: 1024px) {
 	.cardItem {
 		width: 25vw;
+	}
+	
+	.myPageLabel {
+		margin-left: 15vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 15vw;
+	}
+	
+	.myPageInfo {
+		margin-left: 1vw;
+		margin-top: 0.5vh;
+		margin-bottom: 0.5vh;
+		width: 38vw;
 	}
 }
 
@@ -138,10 +194,10 @@ a, a:link, a:visited, a:hover, a:active{
 	}
 	
 	.myPageLabel {
-		margin-left: 10vw;
+		margin-left: 20vw;
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
-		width: 15vw;
+		width: 13vw;
 	}
 	
 	.myPageInfo {
