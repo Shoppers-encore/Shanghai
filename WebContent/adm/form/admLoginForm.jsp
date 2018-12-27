@@ -6,6 +6,7 @@
 
 <html>
 <head>
+	<title>관리자 로그인</title>
 	  <meta charset="utf-8">
 	  
 	  <style>

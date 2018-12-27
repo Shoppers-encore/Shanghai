@@ -36,7 +36,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background: url('../../images/star.png');
+    background: url('../urPresent/images/star.png');
     cursor: pointer;
 }
 

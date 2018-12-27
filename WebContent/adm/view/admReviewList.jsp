@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html>
-	<title>${str_boardList}</title>
+	<title>리뷰관리</title>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">

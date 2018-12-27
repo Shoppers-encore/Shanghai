@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html>
-	<title>${str_goodList}</title>
+	<title>상품목록</title>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
