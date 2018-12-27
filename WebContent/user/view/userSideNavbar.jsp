@@ -89,7 +89,7 @@
 			</button>
 		</c:if>
 		<c:if test="${sessionScope.id ne null}">
-			<button class="btn btn-outline-dark btn-block border chatIconPanel text-secondary" onclick="location='chatView.jk'">
+			<button class="btn btn-outline-dark btn-block border chatIconPanel text-secondary" onclick="chatting()">
 				<img class="chatIcon sidebarIcon" src="/urPresent/images/chat.png">
 				<br>
 				<small class="chatIconText chatText">${str_chat}</small>

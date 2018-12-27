@@ -62,7 +62,7 @@
 <c:set var="str_admOrderList" value="주문관리" />
 <c:set var="str_admProductList" value="상품관리" />
 <c:set var="str_chat" value="실시간 상담" />
-<c:set var="str_mypage" value="마이 페이지" />
+<c:set var="str_myPage" value="회원 정보" />
 <c:set var="str_name" value="이름" />
 <c:set var="str_tel" value="전화번호" />
 <c:set var="str_email" value="이메일" />
@@ -142,7 +142,7 @@
 <c:set var="str_noDash" value="-없이 입력해주세요"/>
 <c:set var="str_reviewIcon" value="리뷰 보기"/>
 <c:set var="str_searchIcon" value="상품 검색"/>
-
+<c:set var="str_modifyMyInfo" value="회원 정보 수정"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />
