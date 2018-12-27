@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>사용하지 않는 파일입니다. 발견 시 지워주세요.</title>
 </head>
 <body>
 

@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 
 <html>
-	<title>${str_userList}</title>
 <head>
+	<title>회원목록</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>

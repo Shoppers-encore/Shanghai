@@ -5,6 +5,7 @@
 
 <html>
 <head>
+	<title>관리자 메인</title>
   <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   * {
