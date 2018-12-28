@@ -53,6 +53,14 @@ a, a:link, a:visited, a:hover, a:active{
 	display: inline-block;
 }
 
+.anchorPanel {
+	height: 22.5px;
+}
+
+.anchorText {
+	font-size: 9px;
+}
+
 /* ====userFooter==== */
 .footer {
 	position: relative;
@@ -105,6 +113,10 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
 		width: 45vw;
+	}
+	
+	.mailCheckContainer {
+		width: 50vw;
 	}
 }
 

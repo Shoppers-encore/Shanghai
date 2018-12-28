@@ -166,7 +166,7 @@ function matchAuthKey() {
     	 alert( emailcheckerror2 );
     } else {
         alert( '인증 완료되었습니다' );
-        $('#emailVerificationMsg', window.opener.document.inputform).html('이메일이 인증되었습니다.');
+        $('#emailVerificationMsg', window.opener.document.inputform).text('이메일이 인증되었습니다.');
         $('#emailVerificationMsg', window.opener.document.inputform).css({
         	color: 'green'
 		});
