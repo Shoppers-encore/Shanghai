@@ -15,5 +15,5 @@
 				alert('리뷰가 삭제 됐습니다.');
 			//-->
 		</script>	
-	<meta http-equiv="refresh" content="0; url=reviewList.jk?pageNum=${pageNum}">	
+	<meta http-equiv="refresh" content="0; url=admReviewList.jk?pageNum=${pageNum}">	
 </c:if>

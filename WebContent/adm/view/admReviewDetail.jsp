@@ -110,7 +110,7 @@
 						<tr>
 							<th colspan="2">
 								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
-									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='admReviewDelete.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
+									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="admReviewDelete(${reviewDto.reviewNo}, ${pageNum})">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='admReviewList.jk?pageNum=${pageNum}'">
 							</th>
