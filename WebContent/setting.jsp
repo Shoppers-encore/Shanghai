@@ -295,7 +295,7 @@
 <c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요." />
 <c:set var="msg_main_login" value="님 안녕하세요" />
 <c:set var="msg_noPhoto" value="사진을 등록해주세요!" />
-<c:set var="msg_gotoProductList" value="상품관리에서 조정 가능합니다." />
+<c:set var="msg_gotoProductList" value="상품관리에서 추가 가능합니다." />
 <c:set var="msg_selectItemsToOrder" value="주문하실 상품을 선택해 주세요." />
 <c:set var="msg_selectedColors" value="입력한 색상 : " />
 <c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해 주세요." />
