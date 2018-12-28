@@ -94,6 +94,7 @@ public class AdminViewHandler {
 	public ModelAndView admReviewDetail(HttpServletRequest request, HttpServletResponse response) {
 		int reviewNo = Integer.parseInt( request.getParameter( "reviewNo" ) );
 		String pageNum = request.getParameter( "pageNum" );
+		// System.out.println(pageNum);
 		String number = request.getParameter( "number" );
 		String productCode = request.getParameter( "productCode" );
 		ProductDao productDao = new ProductDao();

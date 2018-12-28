@@ -520,3 +520,9 @@ function productDelete(ref){
 		location='productDeletePro.jk?ref='+ref;
 	}
 }
+function admReviewDelete(reviewNo, pageNum){
+	var reviewdeleteconfirm = confirm('리뷰를삭제하시겠습니까?');
+	if(reviewdeleteconfirm){
+		location='admReviewDelete.jk?reviewNo='+reviewNo+'&pageNum='+pageNum;
+	}
+}
