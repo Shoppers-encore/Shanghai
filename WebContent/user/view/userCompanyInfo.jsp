@@ -10,6 +10,37 @@
 	<div class="text-muted row ml-3 mr-3">
 		<h4 class="col-12">1800-8080</h4>
 	</div>
+	<div class="text-muted row ml-3 mr-3">
+		<small>
+			<strong>HOURS</strong>
+		</small> &ensp;
+		<small>
+			MON-FRI 12PM - 1PM
+		</small>
+	
+<!-- 		<small class="col-12">
+			<strong>HOURS</strong> &ensp;
+			<span>MON-FRI 10AM - 5PM</span>
+		</small> -->
+	</div>
+	<div class="text-muted row ml-3 mr-3">
+		<small>
+			<strong>LUNCH BREAK</strong>
+		</small> &ensp;
+		<small>
+			12PM - 1PM
+		</small>
+	
+<!-- 		<small class="col-12">
+			<strong>LUNCH BREAK</strong> &ensp;
+			<span>12PM - 1PM</span>
+		</small> -->
+	</div>
+	<div class="text-muted row ml-3 mr-3">
+		<small>
+			<strong>WEEKENDS/HOLIDAYS OFF</strong>
+		</small>
+	</div>
 </div>
 <hr>
 <div class="container col-10">
