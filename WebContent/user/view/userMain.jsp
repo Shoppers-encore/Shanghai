@@ -72,7 +72,7 @@
 								<span><strong>${i}</strong></span>
 							</c:if>
 							<c:if test="${i ne currentPage}">
-								<a href="main.jk?pageNum=${i}"><strong>${i}</strong></a>
+								<a href="main.jk?pageNum=${i}" class="text-secondary"><strong>${i}</strong></a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${currentPage ne pageCount}">
