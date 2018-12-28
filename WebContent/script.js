@@ -65,6 +65,16 @@ function findPw() {
 		'width=500, height=515, location=no, status=no, scrollbars=no');
 }
 
+
+//chat
+
+function chatting(){
+	url='chatView.jk';
+	title='1:1상담';
+	window.open(url, title, 
+		'width=310, height=500, location=no, status=no');
+}
+
 /*Function*/
 /////////////////////////////<userLoginPro-User Login>///////////////////////////////////
 function erroralert( msg ) {
@@ -142,14 +152,13 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+
 //Input Validation: block special character & accept input of only numbers
 function checkHeight(){
 	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
     if((event.keyCode<48)||(event.keyCode>57) && (event.keyCode==num))  //input only numbers
        event.returnValue=false;
 }
-
-
 
 //Check authentication-key match
 function matchAuthKey() {
@@ -226,6 +235,12 @@ function joincheck() {
 		return false;
 	}
 }
+
+/*function modifyCheck() {
+	alert(document.getElementById('zipcode').value);
+	return false;
+}*/
+
 
 ///<Review>
 function scoring() {

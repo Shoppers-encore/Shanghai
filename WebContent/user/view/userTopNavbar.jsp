@@ -96,7 +96,7 @@
 					<small><a class="nav-link" href="userLoginForm.jk">${str_chat}</a></small>
 				</c:if>
 				<c:if test="${sessionScope.id ne null}">
-					<small><a class="nav-link" href="chatView.jk">${str_chat}</a></small>
+					<small><a class="nav-link" href="" onclick="chatting()">${str_chat}</a></small>
 				</c:if>
 			</li>
 		</ul>
@@ -115,5 +115,5 @@
 		function() {
 			$('#collapsibleMenuNavbar').collapse('hide')
 		}
-	);	
+	);
 </script>
