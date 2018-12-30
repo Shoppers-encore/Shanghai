@@ -3,6 +3,11 @@
 
 <div class="sidebar flex-column border bg-white pt-1 pb-1 pl-1 pr-1 d-none d-md-block">
 	<div class="sidebarItem">
+		<a class="btn btn-outline-dark btn-block btn-sm border topAnchorPanel anchorPanel text-secondary" href="#topAnchor">
+			<small class="topAnchorText anchorText align-top">TOP</small>
+		</a>
+	</div>
+	<div class="sidebarItem pt-1">
 		<c:if test="${sessionScope.id eq null}">
 			<button class="btn btn-outline-dark btn-block border loginIconPanel text-secondary" onclick="location='userLoginForm.jk'">
 				<img class="loginIcon sidebarIcon" src="/urPresent/images/login.png">
@@ -96,14 +101,42 @@
 			</button>
 		</c:if>
 	</div>
+	<div class="sidebarItem pt-1">
+		<a class="btn btn-outline-dark btn-block btn-sm border bottomAnchorPanel anchorPanel text-secondary" href="#bottomAnchor">
+			<small class="bottomAnchorText anchorText align-top">BOTTOM</small>
+		</a>
+	</div>
 </div>
 
 <script type="text/javascript">
 	var hoverItems=['.loginIcon', '.logoutIcon', '.myPageLoginIcon', '.myPageIcon', '.basketLoginIcon', '.basketIcon',
 		'.orderLoginIcon', '.orderIcon', '.reviewIcon', '.searchIcon', '.chatLoginIcon', '.chatIcon']
 	
+	var topBottom=['.topAnchor', '.bottomAnchor'];
+	
 	$(document).ready(
 		function() {
+			$.each(topBottom, function(index, item){
+				$(item+'Panel').hover(
+					function(event) {
+						$(item+'Panel').css({
+							'background-color': '#c1c1c1'
+						});
+						$(item+'Text').css({
+							'color': 'white'
+						});
+					}, 
+					function(event) {
+						$(item+'Panel').css({
+							'background-color': 'white'
+						});
+						$(item+'Text').css({
+							'color': '#6c757d'
+						});
+					}
+				);
+			});
+			
 			$.each(hoverItems, function(index, hoverItem){
 				$(hoverItem+'Panel').hover(
 					function(event) {

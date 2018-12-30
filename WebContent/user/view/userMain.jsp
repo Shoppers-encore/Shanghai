@@ -6,8 +6,18 @@
 	<%@include file="../view/userHead.jsp"%>
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
-		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
-	
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
+		
+		<div class="container col-10 text-center">
+			<c:if test="${everOrdered eq null or everOrdered eq 0}">
+				
+			</c:if>
+			
+			<c:if test="${everOrdered gt 0}">
+				
+			</c:if>		
+		</div>	
+		<hr>	
 		<div class="container col-10 text-center">
 			<c:if test="${productCount eq null or productCount eq 0}">
 				<div class="mt-5 pt-5">
@@ -15,17 +25,7 @@
 				</div>
 			</c:if>
 			
-			<c:if test="${productCount ne 0}">
-				<c:if test="${everOrdered eq null or everOrdered eq 0}">
-					
-				</c:if>
-				
-				<c:if test="${everOrdered gt 0}">
-					
-				</c:if>
-				
-				<hr>
-				
+			<c:if test="${productCount ne 0}">				
 				<c:forEach var="product" items="${productList}">
 					<div class="card cardItem d-inline-flex border-0 mt-4 mb-4">
 						<form name="${product.ref}">
@@ -72,7 +72,7 @@
 								<span><strong>${i}</strong></span>
 							</c:if>
 							<c:if test="${i ne currentPage}">
-								<a href="main.jk?pageNum=${i}"><strong>${i}</strong></a>
+								<a href="main.jk?pageNum=${i}" class="text-secondary"><strong>${i}</strong></a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${currentPage ne pageCount}">
@@ -89,6 +89,7 @@
 				</div>
 			</c:if>
 		</div>
+		<%@include file="../view/userCompanyInfo.jsp"%>
 		<%@include file="../view/userFooter.jsp"%>
 	</body>
 
@@ -108,7 +109,10 @@
 								url : 'cartInsert.jk',
 								data : $('form[name="' + name + '"]').serialize(),
 								success: setTimeout( function(){
-									alert('장바구니에 상품이 들어갔습니다.');
+									var goToBasket=confirm('장바구니에 상품이 들어갔습니다. \n장바구니로 이동하시겠습니까?');
+									if(goToBasket) {
+										window.location.href='basketList.jk';
+									}
 								}, 500 )
 		  					});
 		  				}

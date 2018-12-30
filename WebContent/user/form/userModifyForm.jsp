@@ -4,10 +4,10 @@
 
 <html>
 	<%@include file="../view/userHead.jsp"%>
-
-	<body class="registration">
+	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
-		<%@ include file="../../user/view/userSideNavbar.jsp" %>	       
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
+      
 	<!-- id, password, name, birthday, tel, email, gender, 
 		userLevel=default 1, height(3,0), weight(3,0), address, addressDetail, zipcode -->
 		<div class="container col-6">
