@@ -96,6 +96,23 @@ a, a:link, a:visited, a:hover, a:active{
 	width: 9px;
 }
 
+/* .companyInfoCol {
+	font-size: calc(8px + 0.3vw);
+} */
+
+.wrappableContent {
+	word-break: break-all;
+}
+
+.hangingIndent {
+	word-break: keep-all;
+	text-indent: 0;
+}
+
+.rightMarginAdded {
+	margin-right: 2vw;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 364px) {
 	.cardItem {
 		width: 34vw;
@@ -118,6 +135,29 @@ a, a:link, a:visited, a:hover, a:active{
 	.mailCheckContainer {
 		width: 50vw;
 	}
+	
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		word-break: keep-all;
+		width: 64vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 2vw;
+	}
 }
 
 @media only screen and (min-width: 364px) and (max-width: 428px) {
@@ -138,6 +178,29 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-bottom: 0.5vh;
 		width: 45vw;
 	}
+		
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		word-break: keep-all;
+		width: 70vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 2vw;
+	}
 }
 
 @media only screen and (min-width: 428px) and (max-width: 520px) {
@@ -157,7 +220,30 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
 		width: 45vw;
-	}	
+	}
+		
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		word-break: keep-all;
+		width: 70vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 2vw;
+	}
 }
 
 @media only screen and (min-width: 520px) and (max-width: 636px) {
@@ -177,7 +263,30 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
 		width: 45vw;
-	}	
+	}
+	
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		word-break: keep-all;
+		width: 70vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 2vw;
+	}		
 }
 
 @media only screen and (min-width: 636px) and (max-width: 1024px) {
@@ -198,6 +307,30 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-bottom: 0.5vh;
 		width: 38vw;
 	}
+	
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		overflow-wrap: none;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		overflow-wrap: none;
+		width: 30vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 1vw;
+	}
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
@@ -216,6 +349,30 @@ a, a:link, a:visited, a:hover, a:active{
 		margin-top: 0.5vh;
 		margin-bottom: 0.5vh;
 		width: 30vw;
+	}
+	
+	.csInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		overflow-wrap: none;
+	}
+	
+	.companyInfoRow {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.companyInfoCol {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		overflow-wrap: none;
+		width: 30vw;
+	}
+	
+	.spaceAdded {
+		padding-right: 1vw;
 	}
 }
 

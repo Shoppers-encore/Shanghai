@@ -143,15 +143,16 @@
 <c:set var="str_reviewIcon" value="리뷰 보기"/>
 <c:set var="str_searchIcon" value="상품 검색"/>
 <c:set var="str_modifyMyInfo" value="회원 정보 수정"/>
-<c:set var="str_companyInfoWarning" value="(하단의 회사 정보는 모두 사실이 아니며 웹 프로젝트를 위해 만들어진 내용임을 적시합니다.)"/>
+<c:set var="str_companyInfoWarning" value="(하단의 회사 정보는 모두 사실이 아니며 웹 프로젝트를 위해 임의로 만들어 낸 내용임을 적시합니다.)"/>
 <c:set var="str_companyName" value="(주) R:8080 스튜디오"/>
 <c:set var="str_CEO" value="정원형"/>
 <c:set var="str_companyTel" value="080-8080-8080"/>
 <c:set var="str_companyAddress" value="(본사) 06643 서울특별시 서초구 효령로 335 104호"/>
 <c:set var="str_onlineBusinessLicense" value="제2018-서울서초-0808호"/>
 <c:set var="str_webMaster" value="양희윤"/>
-<c:set var="str_companyBankAccount" value="엔코아 808080-808-080808"/>
-<c:set var="str_csInfoWarning" value="(하단의 CS 정보는 모두 사실이 아니며 웹 프로젝트를 위해 만들어진 내용임을 적시합니다.)"/>
+<c:set var="str_companyBankAccount" value="808080-808-080808"/>
+<c:set var="str_csInfoWarning" value="(하단의 CS 정보는 모두 사실이 아니며 웹 프로젝트를 위해 임의로 만들어 낸 내용임을 적시합니다.)"/>
+<c:set var="str_bank" value="엔코아"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />
