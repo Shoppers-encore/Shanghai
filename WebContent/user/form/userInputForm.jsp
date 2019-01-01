@@ -6,9 +6,10 @@
 	<%@include file="../view/userHead.jsp"%>
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
   		
   		<div class="container">
-			<h4 class="mb-5"><b>${page_input}</b></h4>
+			<h4 class="mb-5 mt-5"><b>${page_input}</b></h4>
 			
 			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return joincheck()">
 				<div class="form-group row">
