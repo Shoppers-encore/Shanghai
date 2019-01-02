@@ -15,7 +15,7 @@
 				<div class="form-group row">
 					<!-- Id -->
 					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="text" name="id" 
 						id="id" placeholder="ID" maxlength="12" required autofocus>
 						<small id="confirmIdResult"></small>
@@ -27,7 +27,7 @@
 				<div class="form-group row pass">
 					<!-- password -->
 					<label for="password1" class="col-sm-2 col-form-label">${str_passwd}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="password" name="password"
 							id="password1" placeholder="${str_passwd}" maxlength="20" required
 							onkeyup="passwordCheckFunction()">
@@ -36,7 +36,7 @@
 				<div class="form-group row">
 					<!-- re-confirm password-->
 					<div class="col-sm-2"></div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="password" name="repassword"
 							id="password2" placeholder="${str_repasswd}" maxlength="20"
 							required onkeyup="passwordCheckFunction()">
@@ -46,7 +46,7 @@
 				<div class="form-group row">
 					<!-- name -->
 					<label for="name" class="col-sm-2 col-form-label">${str_name}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="text" name=name
 							placeholder="name" maxlength="10" required onkeyup="checkNumber()">
 					</div>
@@ -54,14 +54,14 @@
 				<div class="form-group row">
 					<!-- birthday -->
 					<label for="birthday" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="date" name="birthday" maxlength="10" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- tel -->
 					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="tel" name="tel" pattern="[0-9]{10}||[0-9]{11}"
 							placeholder="${str_noDash}" maxlength="12" required>
 					</div>
@@ -81,7 +81,7 @@
 				<div class="form-group row">
 					<!--zip code -->
 					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="text" name=zipcode id="zipcode"
 							placeholder="${str_addressPlaceholder}" required readonly>
 					</div>
@@ -93,14 +93,14 @@
 				<div class="form-group row">
 					<!--address -->
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="text" name=address id="address" required readonly>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!--addressDetail -->
 					<div class="col-sm-2"></div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 mb-2">
 						<input class="form-control" type="text" name=addressDetail
 							placeholder="${str_addressDetail}" required>
 					</div>
@@ -124,16 +124,17 @@
 				<div class="form-group row">
 					<!--height / weight-->
 					<label for="height" class="col-sm-2 col-form-label">${str_height} / ${str_weight}</label>
-					<div class="col-sm-3">
-						<input class="form-control" type="number" name="height"
+					<div class="col-sm-2">
+						<input class="form-control heightWeight" type="number" name="height"
 							placeholder="height (optional)" onkeyup="return checkHeight()">
-					</div>
-					cm <label class="col-sm-1 col-form-label"> &nbsp;&nbsp;/ </label>
-					<div class="col-sm-3">
-						<input class="form-control" type="number" name=weight
+					</div>	
+					<div class="col-sm-1">cm</div>
+					<div class="col-sm-1 text-center">/</div>
+					<div class="col-sm-2">
+						<input class="form-control heightWeight" type="number" name=weight
 							placeholder="weight (optional)" onkeyup="return checkHeight()">
 					</div>
-					kg
+					<div class="col-sm-1">kg</div>
 				</div>
 				<div class="col-sm-12 text-center mt-4">
 					<!-- button -->
