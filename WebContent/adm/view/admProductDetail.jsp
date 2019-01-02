@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <html>
-   <title>${str_goodDetail}</title>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <title>${productList.get(0).productName}</title>
   <style>
    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
  * {

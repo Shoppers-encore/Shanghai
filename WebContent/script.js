@@ -65,6 +65,16 @@ function findPw() {
 		'width=500, height=515, location=no, status=no, scrollbars=no');
 }
 
+
+//chat
+
+function chatting(){
+	url='chatView.jk';
+	title='1:1상담';
+	window.open(url, title, 
+		'width=310, height=500, location=no, status=no');
+}
+
 /*Function*/
 /////////////////////////////<userLoginPro-User Login>///////////////////////////////////
 function erroralert( msg ) {
@@ -142,6 +152,7 @@ function checkNumber() {
 		 objEv.value="";
 	 }
 }
+
 //Input Validation: block special character & accept input of only numbers
 function checkHeight(){
 	var num ="{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
@@ -149,15 +160,13 @@ function checkHeight(){
        event.returnValue=false;
 }
 
-
-
 //Check authentication-key match
 function matchAuthKey() {
     if( mailCheckForm.mailnum.value != mailCheckForm.emailcode.value ){ //null 값 입력시 emailcheckerror1 메시지 뜨는처리도 추가하기
     	 alert( emailcheckerror2 );
     } else {
         alert( '인증 완료되었습니다' );
-        $('#emailVerificationMsg', window.opener.document.inputform).html('이메일이 인증되었습니다.');
+        $('#emailVerificationMsg', window.opener.document.inputform).text('이메일이 인증되었습니다.');
         $('#emailVerificationMsg', window.opener.document.inputform).css({
         	color: 'green'
 		});
@@ -226,6 +235,12 @@ function joincheck() {
 		return false;
 	}
 }
+
+/*function modifyCheck() {
+	alert(document.getElementById('zipcode').value);
+	return false;
+}*/
+
 
 ///<Review>
 function scoring() {
@@ -518,5 +533,11 @@ function productDelete(ref){
 	var productdeleteconfirm = confirm(ref + '번 상품을 삭제하시겠습니까?');
 	if(productdeleteconfirm){
 		location='productDeletePro.jk?ref='+ref;
+	}
+}
+function admReviewDelete(reviewNo, pageNum){
+	var reviewdeleteconfirm = confirm('리뷰를삭제하시겠습니까?');
+	if(reviewdeleteconfirm){
+		location='admReviewDelete.jk?reviewNo='+reviewNo+'&pageNum='+pageNum;
 	}
 }

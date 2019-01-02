@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html>
-   <title>${str_chat}</title>
+   <title>실시간 상담</title>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,14 +71,14 @@
 									var hours = dateobj.getHours();
 									var minutes = dateobj.getMinutes();
 									var seconds = dateobj.getSeconds();
-  									var html = "<tr><th><a href='admChatting.jk?id="+chatList.id+"''>"+chatList.id
+  									var html = "<tr><th><a id='taga' href='admChatting.jk?id="+chatList.id+"''>"+chatList.id
 										+"</a></th><td>"+chatList.chatContent+"</td><td>"
 										+year+"-"+month+"-"+date+"&nbsp;&nbsp;"+hours+":"+minutes+":"+seconds+"</td></tr>";
 										$('#content').append( html );  
 
 								});
 
-				  				$("a").attr('target','_blank');
+				  				$("#taga").attr('target','_blank');
 							}else{
 								var html="<th colspan='2'>목록이 존재하지 않습니다.</th>";
 								$('#content').append(html);

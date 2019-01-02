@@ -1,18 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp"%>
 
 <html>
 	<%@include file="../view/userHead.jsp"%>
 	<body>
-		<div class="jumbotron bg-white mb-1 text-center">
-		  	<a href="main.jk">
-	  			<img class="brandLogo" src="/urPresent/images/brandLogo.png" alt="UrPresent Brand Logo">
-	  		</a>
-  		</div>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
   		
-  		<div class="container col-lg-6">
+  		<div class="container">
 			<h4 class="mb-5"><b>${page_input}</b></h4>
 			
 			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return joincheck()">
@@ -66,9 +61,8 @@
 					<!-- tel -->
 					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
 					<div class="col-sm-8">
-						<input class="form-control" type="text" name=tel
-							placeholder="${str_noDash}" maxlength="12" required
-							onkeyup="numberonly(event, inputform)">
+						<input class="form-control" type="tel" name="tel" pattern="[0-9]{10}||[0-9]{11}"
+							placeholder="${str_noDash}" maxlength="12" required>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -165,22 +159,22 @@ function mailTransfer(form) {
 			success : function(data){
 				console.log(data.result)
 				if(data.result>0){
-					alert('존재하는 이메일입니다.\n다른 주소를 입력해주세요');
+					alert('사용 중인 이메일입니다.\n다른 이메일 주소를 입력해주세요');
 					$("input[name='email']").focus();
 				}else{
 					var url = "userMailCheck.jk?email="+form.email.value;	//direct to UserProHandler.java with email value
 					//open(URL, name, specs, replace)
-					window.open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=250, top=180, left=630");
+					window.open(url,"name", "status=no, scrollbars=no, menubar=no, resizable=no, width=500, height=180, top=180, left=630");
 
 				}
 			}
 		});
 	}
 	$(document).ready(
-			$("input[name='email']").change(function(){
-				 $('#emailVerificationMsg').html('이메일 인증을 해 주세요.');
-				 $('#emailVerificationMsg').css({color: 'brown'});
-			})
+		$("input[name='email']").change(function(){
+			 $('#emailVerificationMsg').text('이메일 인증을 해 주세요.');
+			 $('#emailVerificationMsg').css({color: 'brown'});
+		})
 	);
 	$(document).ready(
 			$("input[name='id']").change(function(){

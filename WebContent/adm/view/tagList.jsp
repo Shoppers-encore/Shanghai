@@ -5,6 +5,7 @@
 
 <html>
 <head>
+	<title>태그관리</title>
   <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   * {

@@ -34,7 +34,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background: url('../images/star.png');
+    background: url('../urPresent/images/star.png');
     cursor: pointer;
 }
 
@@ -99,7 +99,7 @@
 										<div class="input-group">
 											<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"/>
 											<input type="hidden" name="session" value="${sessionScope.id}"/>
-											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${mgs_insertComment}">
+											<input type="text" class="input col-10" id="commentContent" name="commentContent" placeholder="${msg_insertComment}">
 											&nbsp;<button class="btn btn-default" type="submit">${btn_writeComment}</button>
 										</div>
 									</form>
@@ -110,7 +110,7 @@
 						<tr>
 							<th colspan="2">
 								<c:if test="${sessionScope.id.length() le 5 or reviewDto.id eq sessionScope.memid}">
-									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="location='admReviewDelete.jk?reviewNo=${reviewDto.reviewNo}&pageNum=${pageNum}'">
+									<input class="btn btn-danger" type="button" value="${btn_delete}" onclick ="admReviewDelete(${reviewDto.reviewNo}, ${pageNum})">
 								</c:if>
 									<input class="btn btn-secondary" type="button" value="${btn_list}" onclick="location='admReviewList.jk?pageNum=${pageNum}'">
 							</th>

@@ -6,7 +6,7 @@
 <meta charset="utf-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <title>관리자 마이페이지</title>
   <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   * {
