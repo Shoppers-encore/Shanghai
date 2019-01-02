@@ -5,7 +5,7 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>${id}1:1상담</title>
+		<title>${id} 실시간 상담</title>
 			
 	</head>
 	<body onload="messagefocus()">

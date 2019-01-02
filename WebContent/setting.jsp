@@ -62,7 +62,7 @@
 <c:set var="str_admOrderList" value="주문관리" />
 <c:set var="str_admProductList" value="상품관리" />
 <c:set var="str_chat" value="실시간 상담" />
-<c:set var="str_mypage" value="마이 페이지" />
+<c:set var="str_myPage" value="회원 정보" />
 <c:set var="str_name" value="이름" />
 <c:set var="str_tel" value="전화번호" />
 <c:set var="str_email" value="이메일" />
@@ -142,7 +142,17 @@
 <c:set var="str_noDash" value="-없이 입력해주세요"/>
 <c:set var="str_reviewIcon" value="리뷰 보기"/>
 <c:set var="str_searchIcon" value="상품 검색"/>
-
+<c:set var="str_modifyMyInfo" value="회원 정보 수정"/>
+<c:set var="str_companyInfoWarning" value="(하단의 회사 정보는 모두 사실이 아니며 웹 프로젝트를 위해 임의로 만들어 낸 내용임을 적시합니다.)"/>
+<c:set var="str_companyName" value="(주) R:8080 스튜디오"/>
+<c:set var="str_CEO" value="정원형"/>
+<c:set var="str_companyTel" value="080-8080-8080"/>
+<c:set var="str_companyAddress" value="(본사) 06643 서울특별시 서초구 효령로 335 104호"/>
+<c:set var="str_onlineBusinessLicense" value="제2018-서울서초-0808호"/>
+<c:set var="str_webMaster" value="양희윤"/>
+<c:set var="str_companyBankAccount" value="808080-808-080808"/>
+<c:set var="str_csInfoWarning" value="(하단의 CS 정보는 모두 사실이 아니며 웹 프로젝트를 위해 임의로 만들어 낸 내용임을 적시합니다.)"/>
+<c:set var="str_bank" value="엔코아"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />
@@ -286,7 +296,7 @@
 <c:set var="msg_confirmAuthKey" value="메일로 전송된 인증번호를 입력하세요." />
 <c:set var="msg_main_login" value="님 안녕하세요" />
 <c:set var="msg_noPhoto" value="사진을 등록해주세요!" />
-<c:set var="msg_gotoProductList" value="상품관리에서 조정 가능합니다." />
+<c:set var="msg_gotoProductList" value="상품관리에서 추가 가능합니다." />
 <c:set var="msg_selectItemsToOrder" value="주문하실 상품을 선택해 주세요." />
 <c:set var="msg_selectedColors" value="입력한 색상 : " />
 <c:set var="msg_searchWithWord" value="색상은  검색어와 함께 입력해 주세요." />

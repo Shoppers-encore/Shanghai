@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<title>상품등록</title>
   <style>
    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   * {

@@ -4,9 +4,48 @@
 <%@ include file="../../setting.jsp" %>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${str_review}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${str_review}</title>
+	<style>
+	.slidecontainer {
+	   width: 100%;
+	}
+	
+	.slider {
+	    -webkit-appearance: none;
+	    width: 100%;
+	    height: 10px;
+	    border-radius: 5px;
+	    background: #d3d3d3;
+	    outline: none;
+	    opacity: 0.7;
+	    -webkit-transition: .2s;
+	    transition: opacity .2s;
+	}
+	
+	.slider:hover {
+	    opacity: 1;
+	}
+	
+	.slider::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    width: 30px;
+	    height: 30px;
+	    border: 0;
+	    background: url('../urPresent/images/star.png');
+	    cursor: pointer;
+	}
+	
+	.slider::-moz-range-thumb {
+	    width: 15px;
+	    height: 15px;
+	    border: 1;
+	    background: url('contrasticon.png');
+	    cursor: pointer;
+	}
+	</style>
 </head>
 <body class="container" onload="commentList(${reviewDto.reviewNo})">
 	<article class="centered">
