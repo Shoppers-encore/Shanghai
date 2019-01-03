@@ -171,6 +171,77 @@ public class HandlerHelper {
 			e.printStackTrace();
 		}
 	}
+	public int categoryDetail(int price, int category) {
+		int categoryDetail = 0;
+		if(category==1) {
+			int maxPrice=130000;
+			int gap = 16250;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==2) {
+			int maxPrice=249000;
+			int gap = 37500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==3) {
+			int maxPrice=55000;
+			int gap = 7500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==4) {
+			int maxPrice=110000;
+			int gap = 19750;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==5) {
+			int maxPrice=50000;
+			int gap = 7500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==6) {
+			int maxPrice=50000;
+			int gap = 7500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==7) {
+			int maxPrice=30000;
+			int gap = 5000;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==8) {
+			int maxPrice=45000;
+			int gap = 6250;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==9) {
+			int maxPrice=60000;
+			int gap = 7500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==10) {
+			int maxPrice=60000;
+			int gap = 12500;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==11) {
+			int maxPrice=75000;
+			int gap = 11250;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==12) {
+			int maxPrice=30000;
+			int gap = 5000;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else if(category==13) {
+			int maxPrice=19000;
+			int gap = 4000;
+			categoryDetail = category(price, category, maxPrice, gap);
+		}else {
+		}
+		return categoryDetail;
+	}
+	public int category(int price, int category, int maxPrice, int gap) {
+		int categoryDetail=0;
+		if(price>maxPrice-gap) {
+			categoryDetail = (category-1)*4+1;
+		}else if(price>maxPrice-(gap*2)) {
+			categoryDetail = (category-1)*4+2;
+		}else if(price>maxPrice-(gap*3)) {
+			categoryDetail = (category-1)*4+3;
+		}else {
+			categoryDetail = (category-1)*4+4;
+		}
+		return categoryDetail;
+	}
 	public void logWriter(String page1, String page2, String exer) {
 		
 	}
