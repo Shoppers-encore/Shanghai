@@ -93,7 +93,7 @@
 				<div class="form-group row">
 					<!--address -->
 					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<div class="col-sm-8">
 						<input class="form-control" type="text" name=address id="address" required readonly>
 					</div>
 				</div>
@@ -124,20 +124,18 @@
 				<div class="form-group row">
 					<!--height / weight-->
 					<label for="height" class="col-sm-2 col-form-label">${str_height} / ${str_weight}</label>
-					<div class="col-sm-2">
-						<input class="form-control heightWeight" type="number" name="height"
+					<div class="heightWeight">
+						<input class="form-control" type="number" name="height"
 							placeholder="height (optional)" onkeyup="return checkHeight()">
 					</div>	
-					<div class="col-sm-1">cm</div>
-					<div class="col-sm-1 text-center">/</div>
-					<div class="col-sm-2">
-						<input class="form-control heightWeight" type="number" name=weight
+					<div class="units text-center pt-2">cm &ensp;/</div>
+					<div class="heightWeight">
+						<input class="form-control" type="number" name=weight
 							placeholder="weight (optional)" onkeyup="return checkHeight()">
 					</div>
-					<div class="col-sm-1">kg</div>
+					<div class="units text-center pt-2">kg</div>
 				</div>
 				<div class="col-sm-12 text-center mt-4">
-					<!-- button -->
 					<button class="btn btn_join" type="submit">회원가입</button>
 					<button class="btn btn_cancel" type="reset">가입취소</button>
 				</div>
@@ -148,7 +146,7 @@
 	<script type="text/javascript">
 	//<--
 	//SMTP - Simple Mail Transfer Protocol
-function mailTransfer(form) {
+	function mailTransfer(form) {
 		if(form.email.value.indexOf("@") == -1 || form.email.value.indexOf(".") == -1){ //check proper email format
 		      alert(emailfmterror);
 		      return false;

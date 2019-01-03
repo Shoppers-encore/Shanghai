@@ -113,6 +113,14 @@ a, a:link, a:visited, a:hover, a:active{
 	margin-right: 2vw;
 }
 
+/* .heightWeight {
+	width: 20vw;
+} */
+
+/* .units {
+	width: 8vw;
+} */
+
 @media only screen and (min-width: 320px) and (max-width: 364px) {
 	.cardItem {
 		width: 34vw;
@@ -158,6 +166,14 @@ a, a:link, a:visited, a:hover, a:active{
 	.spaceAdded {
 		padding-right: 2vw;
 	}
+	
+/* 	.heightWeight {
+		width: 20vw;
+	}
+	
+	.units {
+		width: 5vw;
+	} */
 }
 
 @media only screen and (min-width: 364px) and (max-width: 428px) {
