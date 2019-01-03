@@ -14,6 +14,7 @@ public class ProductDataBean {
 	private int productCategory;
 	private String thumbnail;
 	private int productLevel;
+	private int categoryDetail;
 	
 	
 	public int getRef() {
@@ -81,5 +82,11 @@ public class ProductDataBean {
 	}
 	public void setProductLevel(int productLevel) {
 		this.productLevel = productLevel;
+	}
+	public int getCategoryDetail() {
+		return categoryDetail;
+	}
+	public void setCategoryDetail(int categoryDetail) {
+		this.categoryDetail = categoryDetail;
 	}
 }

@@ -1,7 +1,5 @@
 package handler;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.media.jai.JAI;
-import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,6 +44,7 @@ public class AdminProHandler {
 	@Resource
 	private BoardDao boardDao;
 	
+	private HandlerHelper hh = new HandlerHelper();
 	@RequestMapping("/admLoginPro")
 	public ModelAndView admLoginPro ( HttpServletRequest request, HttpServletResponse response ) {
 		String id = request.getParameter( "id" );
@@ -109,7 +105,7 @@ public class AdminProHandler {
 				int result = productDao.insertImgInfo(imgDto);
 				if( result == 1 ) {
 					String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"+ "VALUES ("+imageNo+", "+ ref+", '"+imgDto.getImageAddress()+"' );";
-					new HandlerHelper().fileWriter(sql);
+					hh.fileWriter(sql);
 				}
 			}
 //			File f = new File(path+sname);
@@ -144,13 +140,13 @@ public class AdminProHandler {
 				int result1 = tagDao.insertProdTag(productTagDto);
 				if( result1 == 1 ) {
 					String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES "+ ref + ", " + tagId + ");";
-					new HandlerHelper().fileWriter(sql);
+					hh.fileWriter(sql);
 				}
 			}
 		}
 		//yint ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 		ProductDataBean productDto = new ProductDataBean();
-		String[] product_codes = new HandlerHelper().makeProductCode(colors, sizes, ref);
+		String[] product_codes = hh.makeProductCode(colors, sizes, ref);
 		for( int i=0; i<product_codes.length; i++ ) {
 			ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 			String product_name = multi.getParameter( "product_name" );
@@ -175,13 +171,13 @@ public class AdminProHandler {
 			productDto.setThumbnail( thumbnail );   
 			productDto.setDiscount( sale );
 			productDto.setProductLevel( 1 );
-			 
+			productDto.setCategoryDetail(hh.categoryDetail(price, category));
 			int result2 = productDao.input( productDto );
 			 
 			productDao.getProdCount();
 			if( result2 >= 1 ) {
-				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1);";
-				new HandlerHelper().fileWriter(sql);
+				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, productLevel,categoryDetail) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1, "+productDto.getCategoryDetail()+");";
+				hh.fileWriter(sql);
 			}
 			request.setAttribute( "result", result2 );
 		}  
@@ -234,7 +230,7 @@ public class AdminProHandler {
 				int result = productDao.insertImgInfo(imgDto);
 				if( result == 1 ) {
 					String sql = "INSERT INTO jk_imageInfo (imageno, ref, imageAddress)"+ "VALUES ("+imageNo+", "+ ref+", '"+imgDto.getImageAddress()+"' );";
-					new HandlerHelper().fileWriter(sql);
+					hh.fileWriter(sql);
 				}
 			}
 			
@@ -253,7 +249,7 @@ public class AdminProHandler {
 			sizes[i]=Integer.parseInt(size[i]);
 		}
 		List<String> list = productDao.getProductCodeList(ref);
-		String[] productCodes = new HandlerHelper().makeProductCode(colors, sizes, ref);
+		String[] productCodes = hh.makeProductCode(colors, sizes, ref);
 		for(int i = 0 ; i<productCodes.length ; i++) {
 			ProductDataBean product = new ProductDataBean();
 			product.setProductCode(productCodes[i]);
@@ -265,6 +261,7 @@ public class AdminProHandler {
 				product.setDiscount(Integer.parseInt(multi.getParameter("sale")));
 			}
 			product.setProductCategory(Integer.parseInt(multi.getParameter("category")));
+			product.setCategoryDetail(hh.categoryDetail(Integer.parseInt(multi.getParameter("price")), Integer.parseInt(multi.getParameter("sale"))));
 			int result =productDao.modifyProduct(product);
 			if(result ==1) {
 				list.remove(productCodes[i]);
@@ -276,7 +273,7 @@ public class AdminProHandler {
 
 		List<Integer> oldTagList = tagDao.getProductTagId(ref);
 		String tag[] = multi.getParameterValues( "tag" );
-		List<Integer> newTagList = new ArrayList();
+		List<Integer> newTagList = new ArrayList<Integer>();
 		for(int i=0; i<tag.length; i++) {
 			newTagList.add( Integer.parseInt( tag[i] ) );
 		}

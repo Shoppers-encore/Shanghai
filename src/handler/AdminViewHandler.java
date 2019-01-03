@@ -275,7 +275,7 @@ public class AdminViewHandler {
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int count = orderDao.prodFromOrder(orderCode);
 		List<OrderListDataBean> orderDetailList=orderDao.getOrderDetail(orderCode);
-		Map<String, String> map = new HandlerHelper().makeCount(count, request);
+		new HandlerHelper().makeCount(count, request);
 		List<OrderListDataBean> prods = orderDao.getOrderListByOrderCode(orderCode);
 		/* Set Maps for OrderDate and OrderCount */
 		Map<String, String> prodNameMap = new HashMap<String, String>();
