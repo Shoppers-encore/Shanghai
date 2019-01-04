@@ -14,20 +14,20 @@
 			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return joincheck()">
 				<div class="form-group row">
 					<!-- Id -->
-					<label for="id" class="col-sm-2 col-form-label">${str_id}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="id" class="inputformLabel col-form-label">${str_id}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name="id" 
-						id="id" placeholder="ID" maxlength="12" required autofocus>
+							id="id" placeholder="ID" maxlength="12" required autofocus>
 						<small id="confirmIdResult"></small>
 					</div>
-					<div class="col-sm-2">
+					<div class="inputformBtn">
 						<button class="btn btn-md btn-secondary" type="button" onclick="confirmId()">${btn_confirm}</button>
 					</div>
 				</div>
 				<div class="form-group row pass">
 					<!-- password -->
-					<label for="password1" class="col-sm-2 col-form-label">${str_passwd}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="password1" class="inputformLabel col-form-label">${str_passwd}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="password" name="password"
 							id="password1" placeholder="${str_passwd}" maxlength="20" required
 							onkeyup="passwordCheckFunction()">
@@ -35,8 +35,8 @@
 				</div>
 				<div class="form-group row">
 					<!-- re-confirm password-->
-					<div class="col-sm-2"></div>
-					<div class="col-sm-8 mb-2">
+					<div class="inputformLabel"></div>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="password" name="repassword"
 							id="password2" placeholder="${str_repasswd}" maxlength="20"
 							required onkeyup="passwordCheckFunction()">
@@ -45,70 +45,70 @@
 				</div>
 				<div class="form-group row">
 					<!-- name -->
-					<label for="name" class="col-sm-2 col-form-label">${str_name}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="name" class="inputformLabel col-form-label">${str_name}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name=name
 							placeholder="name" maxlength="10" required onkeyup="checkNumber()">
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- birthday -->
-					<label for="birthday" class="col-sm-2 col-form-label">${str_bday}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="birthday" class="inputformLabel col-form-label">${str_bday}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="date" name="birthday" maxlength="10" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- tel -->
-					<label for="tel" class="col-sm-2 col-form-label">${str_tel}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="tel" class="inputformLabel col-form-label">${str_tel}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="tel" name="tel" pattern="[0-9]{10}||[0-9]{11}"
 							placeholder="${str_noDash}" maxlength="12" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- email -->
-					<label for="email" class="col-sm-2 col-form-label">${str_email}<b>*</b></label>
-					<div class="col-sm-8">
+					<label for="email" class="inputformLabel col-form-label">${str_email}<b>*</b></label>
+					<div class="inputfield">
 						<input class="form-control" type="email" name="email" id="email" 
 							placeholder="e-mail" maxlength="70" required>
 						<small id="emailVerificationMsg">${msg_emailVerificationNeeded}</small>
 					</div>
-					<div class="col-sm-2" id="maildiv">
-						<button class='btn btn-md btn-secondary emailVerificationBtn' type='button' onclick='mailTransfer(inputform)'>${btn_selfConfirm}</button>
+					<div class="inputformBtn" id="maildiv">
+						<button class="btn btn-md btn-secondary emailVerificationBtn" type="button" onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!--zip code -->
-					<label for="zipcode" class="col-sm-2 col-form-label">${str_zipcode}<b>*</b></label>
-					<div class="col-sm-8 mb-2">
+					<label for="zipcode" class="inputformLabel col-form-label">${str_zipcode}<b>*</b></label>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name=zipcode id="zipcode"
 							placeholder="${str_addressPlaceholder}" required readonly>
 					</div>
-					<div class="col-sm-2">
+					<div class="inputformBtn">
 						<button class="btn btn-md btn-secondary addressSearchBtn" type="button"
 							value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!--address -->
-					<label for="address" class="col-sm-2 col-form-label">${str_address}<b>*</b></label>
-					<div class="col-sm-8">
+					<label for="address" class="inputformLabel col-form-label">${str_address}<b>*</b></label>
+					<div class="inputfield">
 						<input class="form-control" type="text" name=address id="address" required readonly>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!--addressDetail -->
-					<div class="col-sm-2"></div>
-					<div class="col-sm-8 mb-2">
+					<div class="inputformLabel"></div>
+					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name=addressDetail
 							placeholder="${str_addressDetail}" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- gender -->
-					<label for="gender" class="col-sm-2 col-form-label">${str_gender}</label>
-					<div class="col-sm-10">
+					<label for="gender" class="inputformLabel col-form-label">${str_gender}</label>
+					<div class="inputfield">
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gender"
 								value="0" checked> <label class="form-check-label">${str_gender_m}
@@ -123,21 +123,21 @@
 				</div>
 				<div class="form-group row">
 					<!--height / weight-->
-					<label for="height" class="col-sm-2 col-form-label">${str_height} / ${str_weight}</label>
+					<label for="height" class="inputformLabel col-form-label">${str_height} / ${str_weight}</label>
 					<div class="heightWeight">
-						<input class="form-control" type="number" name="height"
+						<input class="form-control" type="number" name="height" min="0"
 							placeholder="height (optional)" onkeyup="return checkHeight()">
 					</div>	
-					<div class="units text-center pt-2">cm &ensp;/</div>
+					<div class="units pt-2 pb-2">cm &ensp;/</div>
 					<div class="heightWeight">
-						<input class="form-control" type="number" name=weight
+						<input class="form-control" type="number" name="weight" min="0"
 							placeholder="weight (optional)" onkeyup="return checkHeight()">
 					</div>
-					<div class="units text-center pt-2">kg</div>
+					<div class="units pt-2 pb-2">kg</div>
 				</div>
-				<div class="col-sm-12 text-center mt-4">
-					<button class="btn btn_join" type="submit">회원가입</button>
-					<button class="btn btn_cancel" type="reset">가입취소</button>
+				<div class="col-12 col-sm-12 text-center mt-4">
+					<button class="btn btn-secondary btn_join" type="submit">회원가입</button>
+					<button class="btn btn-secondary btn_cancel" type="reset">가입취소</button>
 				</div>
 			</form>
 		</div>
