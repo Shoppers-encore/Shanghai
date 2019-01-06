@@ -8,13 +8,13 @@
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>
   		
-  		<div class="container">
+  		<div class="container-fluid justify-content-center">
 			<h4 class="mb-5 mt-5"><b>${page_input}</b></h4>
 			
 			<form class="form-horizontal" method="post" action="userInputPro.jk" name="inputform" onsubmit="return joincheck()">
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- Id -->
-					<label for="id" class="inputformLabel col-form-label">${str_id}<b>*</b></label>
+					<label for="id" class="inputformLabel">${str_id}<b>*</b></label>
 					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name="id" 
 							id="id" placeholder="ID" maxlength="12" required autofocus>
@@ -24,16 +24,16 @@
 						<button class="btn btn-md btn-secondary" type="button" onclick="confirmId()">${btn_confirm}</button>
 					</div>
 				</div>
-				<div class="form-group row pass">
+				<div class="form-group pass">
 					<!-- password -->
-					<label for="password1" class="inputformLabel col-form-label">${str_passwd}<b>*</b></label>
-					<div class="inputfield mb-2">
+					<label for="password1" class="inputformLabel">${str_passwd}<b>*</b></label>
+					<div class="inputfield">
 						<input class="form-control" type="password" name="password"
 							id="password1" placeholder="${str_passwd}" maxlength="20" required
 							onkeyup="passwordCheckFunction()">
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- re-confirm password-->
 					<div class="inputformLabel"></div>
 					<div class="inputfield mb-2">
@@ -43,32 +43,32 @@
 						<small id="passwordCheckMessage"></small>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- name -->
-					<label for="name" class="inputformLabel col-form-label">${str_name}<b>*</b></label>
+					<label for="name" class="inputformLabel">${str_name}<b>*</b></label>
 					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name=name
 							placeholder="name" maxlength="10" required onkeyup="checkNumber()">
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- birthday -->
-					<label for="birthday" class="inputformLabel col-form-label">${str_bday}<b>*</b></label>
+					<label for="birthday" class="inputformLabel">${str_bday}<b>*</b></label>
 					<div class="inputfield mb-2">
 						<input class="form-control" type="date" name="birthday" maxlength="10" required>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- tel -->
-					<label for="tel" class="inputformLabel col-form-label">${str_tel}<b>*</b></label>
+					<label for="tel" class="inputformLabel">${str_tel}<b>*</b></label>
 					<div class="inputfield mb-2">
 						<input class="form-control" type="tel" name="tel" pattern="[0-9]{10}||[0-9]{11}"
 							placeholder="${str_noDash}" maxlength="12" required>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- email -->
-					<label for="email" class="inputformLabel col-form-label">${str_email}<b>*</b></label>
+					<label for="email" class="inputformLabel">${str_email}<b>*</b></label>
 					<div class="inputfield">
 						<input class="form-control" type="email" name="email" id="email" 
 							placeholder="e-mail" maxlength="70" required>
@@ -78,9 +78,9 @@
 						<button class="btn btn-md btn-secondary emailVerificationBtn" type="button" onclick="mailTransfer(inputform)">${btn_selfConfirm}</button>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!--zip code -->
-					<label for="zipcode" class="inputformLabel col-form-label">${str_zipcode}<b>*</b></label>
+					<label for="zipcode" class="inputformLabel">${str_zipcode}<b>*</b></label>
 					<div class="inputfield mb-2">
 						<input class="form-control" type="text" name=zipcode id="zipcode"
 							placeholder="${str_addressPlaceholder}" required readonly>
@@ -90,14 +90,14 @@
 							value="주소 찾기" onclick="sample4_execDaumPostcode()">${btn_search}</button>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!--address -->
-					<label for="address" class="inputformLabel col-form-label">${str_address}<b>*</b></label>
+					<label for="address" class="inputformLabel">${str_address}<b>*</b></label>
 					<div class="inputfield">
 						<input class="form-control" type="text" name=address id="address" required readonly>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!--addressDetail -->
 					<div class="inputformLabel"></div>
 					<div class="inputfield mb-2">
@@ -105,9 +105,9 @@
 							placeholder="${str_addressDetail}" required>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group">
 					<!-- gender -->
-					<label for="gender" class="inputformLabel col-form-label">${str_gender}</label>
+					<label for="gender" class="inputformLabel">${str_gender}</label>
 					<div class="inputfield">
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gender"
@@ -121,9 +121,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group inline-block">
 					<!--height / weight-->
-					<label for="height" class="inputformLabel col-form-label">${str_height} / ${str_weight}</label>
+					<label for="height" class="heightLabel">${str_height} / ${str_weight}</label>
 					<div class="heightWeight">
 						<input class="form-control" type="number" name="height" min="0"
 							placeholder="height (optional)" onkeyup="return checkHeight()">
@@ -136,8 +136,8 @@
 					<div class="units pt-2 pb-2">kg</div>
 				</div>
 				<div class="col-12 col-sm-12 text-center mt-4">
-					<button class="btn btn-secondary btn_join" type="submit">회원가입</button>
-					<button class="btn btn-secondary btn_cancel" type="reset">가입취소</button>
+					<button class="btn btn-secondary btn_join" type="submit">${btn_join}</button>
+					<button class="btn btn-secondary btn_cancel" type="reset">${btn_cancelJoin}</button>
 				</div>
 			</form>
 		</div>

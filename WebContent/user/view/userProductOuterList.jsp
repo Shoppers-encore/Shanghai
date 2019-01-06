@@ -1,40 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../../setting.jsp" %>
+
 <html>
-	<head>
-		<title>${category} 페이지</title>
-		<style>
-			div#cart {
-				position: sticky;
-				top: 300px;
-				width: 120px;
-				height: 150px;
-				font-size: 20px;
-				float: right;
-			}
-			div#chat {
-				position: sticky;
-				top: 600px;
-				right: 120px;
-				float: right;
-			}
-			img#cartImg {
-				width: 30px;
-				height: 30px;
-			}
-			img#chatImg {
-				width: 40px;
-				height: 40px;
-			}
-			img#thumb {
-				width:80px;
-				height:120px;
-			}
-		</style>
-	</head>
-	<body class="container">
+	<%@include file="../view/userHead.jsp"%>
+	<body>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
+	
+		<div class="container col-10 text-center">
       	<c:if test="${sessionScope.id ne null}">
 			<div id="chat">
 	        	<img id="chatImg" src="images/chaticon.jpg" onclick="chatting()">

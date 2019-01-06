@@ -221,6 +221,7 @@
 <!-- Button -->
 <c:set var="btn_login" value="로그인" />
 <c:set var="btn_join" value="회원가입" />
+<c:set var="btn_cancelJoin" value="가입취소"/>
 <c:set var="btn_findPw" value="비밀번호 찾기" />
 <c:set var="btn_myPage" value="내 정보" />
 <c:set var="btn_logout" value="로그아웃" />
