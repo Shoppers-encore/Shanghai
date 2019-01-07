@@ -139,7 +139,7 @@
 <c:set var="str_teamName" value="응답하라 8080"/>
 <c:set var="str_joinUsLine1" value="지금 그대의 소중한 멤버가 되어주세요!"/>
 <c:set var="str_joinUsLine2" value="다양한 할인 혜택이 기다리고 있어요 :)"/>
-<c:set var="str_noDash" value="-없이 입력해주세요"/>
+<c:set var="str_noDash" value="-없이 입력해 주세요."/>
 <c:set var="str_reviewIcon" value="리뷰 보기"/>
 <c:set var="str_searchIcon" value="상품 검색"/>
 <c:set var="str_modifyMyInfo" value="회원 정보 수정"/>
@@ -221,6 +221,7 @@
 <!-- Button -->
 <c:set var="btn_login" value="로그인" />
 <c:set var="btn_join" value="회원가입" />
+<c:set var="btn_cancelJoin" value="가입취소"/>
 <c:set var="btn_findPw" value="비밀번호 찾기" />
 <c:set var="btn_myPage" value="내 정보" />
 <c:set var="btn_logout" value="로그아웃" />

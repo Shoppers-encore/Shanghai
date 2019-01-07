@@ -6,11 +6,6 @@
 	font-family: 'Nanum Gothic';
 }
 
-.brandLogo {
-	width: 30vw;
-	min-width: 19rem;
-}
-
 a, a:link, a:visited, a:hover, a:active{
 	text-decoration: none !important;
 }
@@ -69,6 +64,14 @@ a, a:link, a:visited, a:hover, a:active{
 	width: 100vw;
 }
 
+/* ====ProductList==== */
+.bestProductJumbotron {
+	height: 70px;
+}
+
+.productCategoryJumbotron {
+	height: 150px;
+}
 /* ====userLoginForm==== */
 .joinUs {
 	width: 7rem;
@@ -113,9 +116,26 @@ a, a:link, a:visited, a:hover, a:active{
 	margin-right: 2vw;
 }
 
+/* .heightWeight {
+	width: 20vw;
+} */
+
+/* .units {
+	width: 8vw;
+} */
+
 @media only screen and (min-width: 320px) and (max-width: 364px) {
+	.brandLogo {
+		width: 90vw;
+		margin-left: 4vw;
+	}
+	
 	.cardItem {
 		width: 34vw;
+	}
+	
+	.loginContainer {
+		width: 90vw;
 	}
 	
 	.myPageLabel {
@@ -158,11 +178,53 @@ a, a:link, a:visited, a:hover, a:active{
 	.spaceAdded {
 		padding-right: 2vw;
 	}
+	
+	.inputformLabel {
+		width: 100%;
+		/* margin-left: 5vw; */
+	}
+	
+	.heightLabel {
+		width: 100%;
+		/* margin-left: 5vw; */
+	}
+	
+	.inputfield {
+		width: 100%;
+		/* margin-left: 5vw; */
+	}
+	
+	.heightWeight {
+		width: 50%;
+		/* margin-left: 5vw; */
+	}
+	
+	.units {
+		width: 15%;
+		margin-left: 5vw;
+	}
+	
+/* 	.inputformBtn {
+		margin-left: 5vw;
+	} */
+	
+	input::-webkit-input-placeholder {
+    	font-size: 14px;
+	}
 }
 
-@media only screen and (min-width: 364px) and (max-width: 428px) {
+@media only screen and (min-width: 365px) and (max-width: 428px) {
+	.brandLogo {
+		width: 90vw;
+		margin-left: 4vw;
+	}
+	
 	.cardItem {
 		width: 35vw;
+	}
+		
+	.loginContainer {
+		width: 90vw;
 	}
 	
 	.myPageLabel {
@@ -201,11 +263,51 @@ a, a:link, a:visited, a:hover, a:active{
 	.spaceAdded {
 		padding-right: 2vw;
 	}
+
+	.inputformLabel {
+		width: 40vw;
+		margin-left: 5vw;
+	}
+	
+	.heightLabel {
+		width: 40vw;
+		margin-left: 5vw;
+	}
+	
+	.inputfield {
+		width: 85vw;
+		margin-left: 5vw;
+	}
+	
+	.heightWeight {
+		width: 64vw;
+		margin-left: 5vw;
+	}
+	
+	.units {
+		width: 20vw;
+		margin-left: 5vw;
+	}
+	
+	.inputformBtn {
+		width: 25vw;
+		margin-left: 5vw;
+	}
 }
 
-@media only screen and (min-width: 428px) and (max-width: 520px) {
+@media only screen and (min-width: 429px) and (max-width: 520px) {
+	.brandLogo {
+		width: 90vw;
+		max-width: 28.8rem;
+		margin-left: 4vw;
+	}
+	
 	.cardItem {
 		width: 36vw;
+	}
+		
+	.loginContainer {
+		width: 90vw;
 	}
 	
 	.myPageLabel {
@@ -244,11 +346,50 @@ a, a:link, a:visited, a:hover, a:active{
 	.spaceAdded {
 		padding-right: 2vw;
 	}
+
+	.inputformLabel {
+		width: 40vw;
+		margin-left: 5vw;
+	}
+		
+	.heightLabel {
+		width: 40vw;
+		margin-left: 5vw;
+	}
+	
+	.inputfield {
+		width: 86vw;
+		margin-left: 5vw;
+	}
+	
+	.heightWeight {
+		width: 64vw;
+		margin-left: 5vw;
+	}
+	
+	.units {
+		width: 20vw;
+		margin-left: 5vw;
+	}
+	
+	.inputformBtn {
+		width: 25vw;
+		margin-left: 5vw;
+	}
 }
 
-@media only screen and (min-width: 520px) and (max-width: 636px) {
+@media only screen and (min-width: 521px) and (max-width: 636px) {
+	.brandLogo {
+		width: 28.8rem;
+		margin-left: 4vw;
+	}
+	
 	.cardItem {
 		width: 37vw;
+	}
+	
+	.loginContainer {
+		width: 468px;
 	}
 	
 	.myPageLabel {
@@ -286,12 +427,53 @@ a, a:link, a:visited, a:hover, a:active{
 	
 	.spaceAdded {
 		padding-right: 2vw;
-	}		
+	}
+
+	.inputformLabel {
+		width: 16vw;
+		/* margin-left: 4vw; */
+		/* padding-left: 4vw; */
+	}
+	
+	.heightLabel {
+		width: 81vw;
+		/* margin-left: 4vw; */
+		/* padding-left: 4vw; */
+	}
+	
+	.inputfield {
+		width: 63vw;
+		/* margin-left: 5vw; */
+	}
+	
+	.heightWeight {
+		width: 63vw;
+		/* margin-left: 5vw; */
+	}
+	
+	.units {
+		width: 20vw;
+		margin-left: 5vw;
+	}
+	
+	.inputformBtn {
+		width: 10vw;
+		margin-left: 2vw;
+	}
 }
 
-@media only screen and (min-width: 636px) and (max-width: 1024px) {
+@media only screen and (min-width: 637px) and (max-width: 1024px) {
+	.brandLogo {
+		width: 28.8rem;
+		margin-left: 4vw;
+	}	
+	
 	.cardItem {
 		width: 25vw;
+	}
+	
+	.loginContainer {
+		width: 468px;
 	}
 	
 	.myPageLabel {
@@ -333,9 +515,17 @@ a, a:link, a:visited, a:hover, a:active{
 	}
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+@media only screen and (min-width: 1025px) and (max-width: 1600px) {
+	.brandLogo {
+		width: 28.8rem;
+	}	
+	
 	.cardItem {
 		width: 19vw;
+	}
+	
+	.loginContainer {
+		width: 468px;
 	}
 	
 	.myPageLabel {
