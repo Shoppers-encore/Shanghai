@@ -20,8 +20,8 @@
 		<hr>	
 		<div class="container col-10 text-center">
 			<c:if test="${productCount eq null or productCount eq 0}">
-				<div class="mt-5 pt-5">
-					<p align="center">${msg_list_x}</p>
+				<div class="mt-5 pt-5 mb-5 pb-5">
+					<p class="mb-5 pb-5">${msg_list_x}</p>
 				</div>
 			</c:if>
 			

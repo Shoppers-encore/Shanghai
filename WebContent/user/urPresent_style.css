@@ -64,6 +64,14 @@ a, a:link, a:visited, a:hover, a:active{
 	width: 100vw;
 }
 
+/* ====ProductList==== */
+.bestProductJumbotron {
+	height: 70px;
+}
+
+.productCategoryJumbotron {
+	height: 150px;
+}
 /* ====userLoginForm==== */
 .joinUs {
 	width: 7rem;

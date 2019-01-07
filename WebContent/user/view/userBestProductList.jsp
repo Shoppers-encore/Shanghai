@@ -8,10 +8,15 @@
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
 	
+		<div class="jumbotron bg-white col-12 text-center bestProductJumbotron mb-0">
+			<h5>BEST</h5>		
+		</div>
+		
 		<div class="container col-10 text-center">
+			<hr>
 	    	<c:if test="${productCount eq null or productCount eq 0 or productList eq '[]'}">
 	    		<div class="mt-5 pt-5">
-					<p align="center">${msg_list_x}</p>
+					<p class="mt-5 pt-5 mb-5 pb-5">${msg_list_x}</p>
 				</div>
 			</c:if>
 			<c:if test="${productCount ne 0 and productList ne '[]'}">
