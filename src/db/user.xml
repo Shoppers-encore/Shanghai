@@ -367,4 +367,15 @@
 	<select id="getBestList" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT DISTINCT(ref), productName, productPrice, thumbnail FROM jk_product WHERE ref =#{ref}
 	</select>
+	
+	<!-- Main: Product Recommendations -->
+	<select id="getClusterCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM jk_clusterId WHERE id=#{id} 
+	</select>
+	<select id="getRecCategories" parameterType="String" resultType="databean.RecDataBean">
+		SELECT c.clusterid, r.categoryDetail, r.prediction 
+		FROM jk_clusterId c, jk_recommendations r 
+		WHERE c.clusterId=r.clusterId And id=#{id} 
+		ORDER BY prediction DESC
+	</select>
 </mapper>

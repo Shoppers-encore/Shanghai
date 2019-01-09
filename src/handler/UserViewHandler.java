@@ -31,6 +31,7 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import db.RecDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
@@ -48,6 +49,8 @@ public class UserViewHandler {
 	private ChatDao chatDao;
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private RecDao recDao;
 
 	// Main
 	@RequestMapping("/main")
@@ -66,7 +69,7 @@ public class UserViewHandler {
 		if(id==null) {
 			everOrdered=0;
 		} else {
-			everOrdered=orderDao.getDistinctOrderCountById(id);
+			everOrdered=recDao.getClusterCount(id);
 		}
 		
 		List<Integer> ref = productDao.getBestProduct();
