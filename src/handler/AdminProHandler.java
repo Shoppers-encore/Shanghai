@@ -173,7 +173,6 @@ public class AdminProHandler {
 			productDto.setProductLevel( 1 );
 			productDto.setCategoryDetail(hh.categoryDetail(price, category));
 			int result2 = productDao.input( productDto );
-			 
 			productDao.getProdCount();
 			if( result2 >= 1 ) {
 				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, productLevel,categoryDetail) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1, "+productDto.getCategoryDetail()+");";

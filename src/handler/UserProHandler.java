@@ -798,7 +798,7 @@ public class UserProHandler {
 		chatDao.chatInput(chat);
 	}
 	private void orderLog(String path, String log, Calendar cal) {
-		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		File file = new File(path+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
@@ -810,7 +810,7 @@ public class UserProHandler {
 		
 	}
 	private void productLog(String path, String log, Calendar cal) {
-		File file = new File(path+"/"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		File file = new File(path+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
@@ -844,9 +844,9 @@ public class UserProHandler {
 	public ModelAndView findPasswordPro(HttpServletRequest request, HttpServletResponse response){
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e1) {
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		String name=request.getParameter("name");
 		String email = request.getParameter("email");
