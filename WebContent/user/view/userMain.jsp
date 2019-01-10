@@ -72,7 +72,66 @@
 			</c:if>
 			
 			<c:if test="${everOrdered gt 0}">
-
+				<c:if test="${recCount eq null or recCount eq 0 or recList eq '[]'}">
+				  	<div class="mt-5 pt-5">
+						<p class="mt-5 pt-5 mb-5 pb-5">${msg_list_x}</p>
+					</div>
+				</c:if>
+				<c:if test="${recCount ne 0 and recList ne '[]'}">
+					<div class="jumbotron bg-white col-12 text-center bestProductJumbotron mb-0 h-100">
+						<h5>${id}${str_recommendations}</h5>
+						<small>${str_recDescription}</small>		
+					</div>
+					<hr class="mt-0">
+					<div class="d-flex">
+						<div class="border col-1">
+							<a class="carousel-control-prev" href="#recCarousel" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true">
+								</span>
+							</a>
+						</div>
+						<div id="recCarousel" class="carousel slide col-10" data-ride="carousel">
+							<div class="carousel-inner row w-100 mx-auto border">
+							  	<c:forEach var="product" items="${recList}">
+							  		<div class="carousel-item bg-white col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+										<div class="card border-0 mt-4 mb-4">
+									  		<form name="${product.ref}">
+									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
+													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
+													<div class="mt-1 mb-1">
+														<small>
+															<span>${product.productName}</span>
+															<br>
+															<c:if test="${product.discount eq null or product.discount eq 0}">
+																<fmt:formatNumber value="${product.productPrice}" type="currency" currencySymbol="￦"/>
+															</c:if> 
+															<c:if test="${product.discount ne 0}">
+																<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" 
+																type="currency" currencySymbol="￦"/>
+															</c:if>
+														</small>
+													</div>
+													<input type="hidden" name="id" value="${sessionScope.id}">
+													<input type="hidden" name="productCode" value="${product.ref}">
+													<input type="hidden" name="var" value="1">
+												</div>
+												<c:if test="${sessionScope.id ne null}">
+													<input class="btn btn-sm btn-outline-dark mt-1 mb-3" type="button" id="cart" name="${product.ref}" value="${btn_inputCart}">
+												</c:if>	
+											</form>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="border col-1">
+							<a class="carousel-control-next" href="#recCarousel" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</c:if>
 			</c:if>		
 		</div>	
 		<hr>	
@@ -159,11 +218,9 @@
 		//<!--
 			$(document).ready(
 				function(){
-					var i=0;
-					var bpCount='${bpCount}';
 					$('.carousel-item').first().addClass('active');
 										
- 					$("#bestCarousel").on(
+ 					$(".carousel").on(
 						"slide.bs.carousel", 
 						function(e) {
 							var $e = $(e.relatedTarget);
@@ -177,9 +234,9 @@
 								} else if(vpWidth>=768 && vpWidth<992) {
 									itemsPerSlide=2;
 								}
-							
+								
 							var totalItems = $(".carousel-item").length;
-	
+
 							if (idx >= totalItems - (itemsPerSlide - 1)) {
 								var it = itemsPerSlide - (totalItems - idx);
 								for (var i = 0; i < it; i++) {
@@ -191,7 +248,8 @@
 									}
 								}
 							}
-						});
+						}
+					);
 
 					
 		  			var cartDiv = document.getElementById( 'cart' );

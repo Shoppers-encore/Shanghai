@@ -68,7 +68,6 @@
 		SELECT * FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	
-	
 	<!-- Review -->
 	<select id="getMaxReview" resultType="int">
 			SELECT max(reviewNo) FROM jk_review
@@ -375,7 +374,25 @@
 	<select id="getRecCategories" parameterType="String" resultType="databean.RecDataBean">
 		SELECT c.clusterid, r.categoryDetail, r.prediction 
 		FROM jk_clusterId c, jk_recommendations r 
-		WHERE c.clusterId=r.clusterId And id=#{id} 
+		WHERE c.clusterId=r.clusterId AND id=#{id} 
 		ORDER BY prediction DESC
+	</select>
+	<select id="getBestProductByCategoryDetail" parameterType="int" resultType="databean.ProductDataBean">	
+		SELECT DISTINCT(ref), thumbnail, productName, productPrice, discount 
+		FROM jk_product 
+		WHERE ref=
+		(SELECT ref 
+		FROM 
+		(SELECT p.ref, SUM(orderQuantity) sum 
+		FROM jk_product p, jk_orderList o 
+		WHERE p.productCode=o.productCode AND categoryDetail=#{categoryDetail} AND productLevel=1
+		GROUP BY p.ref 
+		ORDER BY sum DESC) 
+		WHERE ROWNUM=1)
+	</select>
+	<select id="getOneProductByCategoryDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT DISTINCT(ref), thumbnail, productName, productPrice, discount 
+		FROM jk_product 
+		WHERE categoryDetail=#{categoryDetail} AND productLevel=1 AND ROWNUM=1
 	</select>
 </mapper>

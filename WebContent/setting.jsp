@@ -153,6 +153,8 @@
 <c:set var="str_companyBankAccount" value="808080-808-080808"/>
 <c:set var="str_csInfoWarning" value="(하단의 CS 정보는 모두 사실이 아니며 웹 프로젝트를 위해 임의로 만들어 낸 내용임을 적시합니다.)"/>
 <c:set var="str_bank" value="엔코아"/>
+<c:set var="str_recommendations" value="님을 위한 맞춤 추천"/>
+<c:set var="str_recDescription" value="회원님의 구매 이력을 바탕으로 추천해 드리는 상품입니다."/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />
@@ -304,7 +306,7 @@
 <c:set var="msg_emailVerificationNeeded" value="이메일 인증을 해 주세요."/>
 <c:set var="msg_findId" value="등록하신 이름과 이메일 주소를 입력해 주세요."/>
 <c:set var="msg_findPasswd" value="등록하신 아이디와 이름, 이메일 주소를 입력해 주세요."/>
-
+<c:set var="msg_userDelete" value="탈퇴 후 아이디 복구는 불가능하며 \n재가입을 하셔도 기존의 정보는 되돌릴 수 없습니다.\n정말 탈퇴하시겠습니까?"/>
 
 <!-- url -->
 <c:set var="url_pageNum" value="?pageNum=" />

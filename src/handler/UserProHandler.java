@@ -778,7 +778,6 @@ public class UserProHandler {
 	@ResponseBody
 	public Map<Object, Object> isMail(HttpServletRequest request, HttpServletResponse response) {
 		String mailAddress = request.getParameter("email");
-		System.out.println(mailAddress);
 		int result = userDao.getMailCount(mailAddress);
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("result", result);
@@ -882,7 +881,6 @@ public class UserProHandler {
 				user.setId(id);
 				user.setPassword(pw);
 				result = userDao.setPassword(user);
-				System.out.println(result);
 				if(result >0) {
 					Map<String, String> mail = new HashMap<String, String>();
 					mail.put("sender", "hkk9331@gmail.com");

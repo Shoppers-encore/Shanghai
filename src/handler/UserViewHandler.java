@@ -24,6 +24,7 @@ import databean.ChatDataBean;
 import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
+import databean.RecDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
 import databean.UserDataBean;
@@ -72,18 +73,41 @@ public class UserViewHandler {
 			everOrdered=recDao.getClusterCount(id);
 		}
 		
-		List<Integer> ref = productDao.getBestProduct();
-		List<ProductDataBean> bpList = new ArrayList<ProductDataBean>();
-		int num = ref.size();
-		if (ref.size() > 12) {
-			num = 12;
-		}
-		for (int i = 0; i < num; i++) {
-			bpList.addAll(productDao.getBestList(ref.get(i)));
+		if(everOrdered==0) {
+			List<Integer> ref = productDao.getBestProduct();
+			List<ProductDataBean> bpList = new ArrayList<ProductDataBean>();
+			int num = ref.size();
+			if (ref.size() > 12) {
+				num = 12;
+			}
+			for (int i = 0; i < num; i++) {
+				bpList.addAll(productDao.getBestList(ref.get(i)));
+			}
+			
+			request.setAttribute("bpCount", num);
+			request.setAttribute("bpList", bpList);					
+			
+		} else {
+			List<RecDataBean> recCategories=recDao.getRecCategories(id);
+			
+			int recCount=recCategories.size();
+			
+			List<ProductDataBean> recList=new ArrayList<ProductDataBean>();
+			for(RecDataBean recCategory:recCategories) {
+				ProductDataBean product=productDao.getBestProductByCategoryDetail(recCategory.getCategoryDetail());
+				
+				if(product==null) {
+					product=productDao.getOneProductByCategoryDetail(recCategory.getCategoryDetail());
+					recList.add(product);
+				} else {
+					recList.add(product);
+				}
+			}
+			
+			request.setAttribute("recCount", recCount);
+			request.setAttribute("recList", recList);
 		}
 		
-		request.setAttribute("bpCount", num);
-		request.setAttribute("bpList", bpList);		
 		request.setAttribute("everOrdered", everOrdered);
 		request.setAttribute("productList", productList);
 		request.setAttribute("productCount", count);
