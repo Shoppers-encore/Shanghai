@@ -69,8 +69,8 @@
 		SELECT max(ref) FROM jk_product
 	</select>
 	<insert id="input" parameterType="databean.ProductDataBean">
-	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail, productLevel) 
-	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail}, #{productLevel})
+	INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, productCategory, thumbnail, productLevel, categoryDetail) 
+	VALUES (#{ref}, #{productCode}, #{productName}, #{productContent}, #{discount, jdbcType=INTEGER}, #{productPrice}, #{productRegDate}, #{productQuantity}, #{productCategory}, #{thumbnail}, #{productLevel}, #{categoryDetail})
 	</insert>
 	<select id="maxImg" resultType="int">
 		SELECT max(imageNo) FROM jk_imageInfo
