@@ -68,7 +68,6 @@
 		SELECT * FROM jk_product WHERE productCode=#{productCode}
 	</select>
 	
-	
 	<!-- Review -->
 	<select id="getMaxReview" resultType="int">
 			SELECT max(reviewNo) FROM jk_review
@@ -366,5 +365,34 @@
 	</select>
 	<select id="getBestList" parameterType="int" resultType="databean.ProductDataBean">
 		SELECT DISTINCT(ref), productName, productPrice, thumbnail FROM jk_product WHERE ref =#{ref}
+	</select>
+	
+	<!-- Main: Product Recommendations -->
+	<select id="getClusterCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM jk_clusterId WHERE id=#{id} 
+	</select>
+	<select id="getRecCategories" parameterType="String" resultType="databean.RecDataBean">
+		SELECT c.clusterid, r.categoryDetail, r.prediction 
+		FROM jk_clusterId c, jk_recommendations r 
+		WHERE c.clusterId=r.clusterId AND id=#{id} 
+		ORDER BY prediction DESC
+	</select>
+	<select id="getBestProductByCategoryDetail" parameterType="int" resultType="databean.ProductDataBean">	
+		SELECT DISTINCT(ref), thumbnail, productName, productPrice, discount 
+		FROM jk_product 
+		WHERE ref=
+		(SELECT ref 
+		FROM 
+		(SELECT p.ref, SUM(orderQuantity) sum 
+		FROM jk_product p, jk_orderList o 
+		WHERE p.productCode=o.productCode AND categoryDetail=#{categoryDetail} AND productLevel=1
+		GROUP BY p.ref 
+		ORDER BY sum DESC) 
+		WHERE ROWNUM=1)
+	</select>
+	<select id="getOneProductByCategoryDetail" parameterType="int" resultType="databean.ProductDataBean">
+		SELECT DISTINCT(ref), thumbnail, productName, productPrice, discount 
+		FROM jk_product 
+		WHERE categoryDetail=#{categoryDetail} AND productLevel=1 AND ROWNUM=1
 	</select>
 </mapper>

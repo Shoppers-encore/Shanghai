@@ -9,7 +9,7 @@
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
 	
 		<div class="jumbotron bg-white col-12 text-center bestProductJumbotron mb-0 h-100">
-			<h5>BEST</h5>		
+			<h5>BEST SELLING</h5>		
 		</div>
 		
 		<div class="container col-10 text-center">

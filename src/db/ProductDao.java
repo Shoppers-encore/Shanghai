@@ -189,4 +189,11 @@ public class ProductDao{
 		return session.selectOne("User.getProductLevel", productCode);
 	}
 	
+	public ProductDataBean getBestProductByCategoryDetail(int categoryDetail) {
+		return session.selectOne("User.getBestProductByCategoryDetail", categoryDetail);
+	}
+	
+	public ProductDataBean getOneProductByCategoryDetail(int categoryDetail) {
+		return session.selectOne("User.getOneProductByCategoryDetail", categoryDetail);
+	}
 }

@@ -24,6 +24,7 @@ import databean.ChatDataBean;
 import databean.ImageInfoDataBean;
 import databean.OrderListDataBean;
 import databean.ProductDataBean;
+import databean.RecDataBean;
 import db.BasketDao;
 import databean.ReviewDataBean;
 import databean.UserDataBean;
@@ -31,6 +32,7 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import db.RecDao;
 import db.UserDao;
 import etc.HandlerHelper;
 
@@ -48,6 +50,8 @@ public class UserViewHandler {
 	private ChatDao chatDao;
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private RecDao recDao;
 
 	// Main
 	@RequestMapping("/main")
@@ -62,14 +66,48 @@ public class UserViewHandler {
 		
 		String id = (String) request.getSession().getAttribute("id");
 		
-		int everOrdered;
-		
+		int everOrdered;	
 		if(id==null) {
 			everOrdered=0;
 		} else {
-			everOrdered=orderDao.getDistinctOrderCountById(id);
+			everOrdered=recDao.getClusterCount(id);
 		}
+		
+		if(everOrdered==0) {
+			List<Integer> ref = productDao.getBestProduct();
+			List<ProductDataBean> bpList = new ArrayList<ProductDataBean>();
+			int num = ref.size();
+			if (ref.size() > 12) {
+				num = 12;
+			}
+			for (int i = 0; i < num; i++) {
+				bpList.addAll(productDao.getBestList(ref.get(i)));
+			}
+			
+			request.setAttribute("bpCount", num);
+			request.setAttribute("bpList", bpList);					
+			
+		} else {
+			List<RecDataBean> recCategories=recDao.getRecCategories(id);
+			
+			int recCount=recCategories.size();
+			
+			List<ProductDataBean> recList=new ArrayList<ProductDataBean>();
+			for(RecDataBean recCategory:recCategories) {
+				ProductDataBean product=productDao.getBestProductByCategoryDetail(recCategory.getCategoryDetail());
 				
+				if(product==null) {
+					product=productDao.getOneProductByCategoryDetail(recCategory.getCategoryDetail());
+					recList.add(product);
+				} else {
+					recList.add(product);
+				}
+			}
+			
+			request.setAttribute("recCount", recCount);
+			request.setAttribute("recList", recList);
+		}
+		
 		request.setAttribute("everOrdered", everOrdered);
 		request.setAttribute("productList", productList);
 		request.setAttribute("productCount", count);
@@ -557,25 +595,5 @@ public class UserViewHandler {
 		request.setAttribute("productCount", count);
 		request.setAttribute("productList", productList);
 		return new ModelAndView("user/view/userBestProductList");
-	}
-	
-	@RequestMapping("/bestProdInsert")
-	public ModelAndView bestProdInsert(HttpServletRequest request, HttpServletResponse response) {
-		int bpCount = productDao.getProdCount();
-		new HandlerHelper().makeCount(bpCount, request);
-		
-		List<Integer> ref = productDao.getBestProduct();
-		List<ProductDataBean> productList = new ArrayList<ProductDataBean>();
-		int num = ref.size();
-		if (ref.size() > 12) {
-			num = 12;
-		}
-		for (int i = 0; i < num; i++) {
-			productList.addAll(productDao.getBestList(ref.get(i)));
-		}
-		
-		request.setAttribute("bpCount", bpCount);
-		request.setAttribute("bpList", productList);
-		return new ModelAndView("user/view/bestProdInsert");
 	}
 }

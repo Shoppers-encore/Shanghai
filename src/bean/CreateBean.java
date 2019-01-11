@@ -11,6 +11,7 @@ import db.BoardDao;
 import db.ChatDao;
 import db.OrderDao;
 import db.ProductDao;
+import db.RecDao;
 import db.TagDao;
 import db.UserDao;
 
@@ -43,6 +44,11 @@ public class CreateBean {
 	@Bean
 	public UserDao userDao() {
 		return new UserDao();
+	}
+	
+	@Bean
+	public RecDao recDao() {
+		return new RecDao();
 	}
 	
 	@Bean

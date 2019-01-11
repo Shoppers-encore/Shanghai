@@ -8,7 +8,7 @@
 <c:if test="${result eq 0}">
 	<script>
 		//<!--
-			alert('탈퇴가 진행되지 않았습니다. 나중에 다시 시도 부탁드립니다.');
+			alert('탈퇴가 진행되지 않았습니다. 나중에 다시 시도해 주세요.');
 			location.href="main.jk";
 		//-->
 	</script>
@@ -16,7 +16,7 @@
 <c:if test="${result eq 1}">
 	<script>
 		//<!--
-			alert('그동안 사용해주셔서 감사합니다.');
+			alert('그동안 이용해주셔서 감사합니다.');
 			location.href="main.jk";
 		//-->
 	</script>
