@@ -75,7 +75,7 @@ public class AdminProHandler {
 		MultipartRequest multi = null;
 		new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
 		if(-1 < request.getContentType().indexOf("multipart/form-data")) 
-			multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+			multi = new MultipartRequest( request, path, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy() );
 		int ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 		String thumbnail = null;
 		String systemName = null;
@@ -165,7 +165,8 @@ public class AdminProHandler {
 			productDto.setProductName( product_name ); 
 			productDto.setProductContent( good_content );
 			productDto.setProductPrice( price );
-			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
+//			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
+			productDto.setProductRegDate(new Timestamp(Long.parseLong("1544799600120")));
 			productDto.setProductCategory( category );
 			productDto.setProductQuantity( quantity );
 			productDto.setThumbnail( thumbnail );   
@@ -189,7 +190,7 @@ public class AdminProHandler {
 	    MultipartRequest multi = null;
 	    new File( path ).mkdir();      // IF folder already exist -> Don't create / IF folder does not exist -> create
 	    if(-1 < request.getContentType().indexOf("multipart/form-data")) 
-	    	multi = new MultipartRequest( request, path, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy() );
+	    	multi = new MultipartRequest( request, path, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy() );
 	    int ref = Integer.parseInt( multi.getParameter( "product_code" ) );
 	    String[] deleteFiles = multi.getParameterValues("delImg");
 	    if(deleteFiles!=null) {
@@ -350,6 +351,8 @@ public class AdminProHandler {
 			return new ModelAndView("adm/form/tagInputForm");
 		} else {
 			int result = tagDao.insertTag(newTag);
+			String sql = "INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, "+newTag+");";
+			hh.fileWriter(sql);
 			request.setAttribute( "result", result );
 			return new ModelAndView("adm/pro/tagInputPro");
 		}
