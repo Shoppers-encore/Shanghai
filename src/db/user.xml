@@ -32,12 +32,12 @@
 	<select id="getProductColorSearchCount" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM jk_product WHERE ref IN (SELECT MAX(ref) FROM jk_product
 		WHERE productName LIKE '%'||#{searchWord}||'%' <include refid="colorSearch"></include> AND productLevel=1
-		GROUP BY ref) AND productCode=TO_CHAR(ref)
+		GROUP BY ref) AND productCode=TO_CHAR(ref) AND productLevel=1
 	</select>
 	<select id="getProductColorSearchList" parameterType="java.util.Map" resultType="databean.ProductDataBean">
 		SELECT tmp.*, r FROM (SELECT tmp2.*, rownum r FROM (SELECT * FROM jk_product WHERE ref in 
 		(SELECT MAX(ref) FROM jk_product WHERE productName LIKE '%'||#{searchWord}||'%'
-		<include refid="colorSearch"></include> AND productLevel=1 GROUP BY ref) AND productCode=TO_CHAR(ref)) tmp2)
+		<include refid="colorSearch"></include> AND productLevel=1 GROUP BY ref) AND productCode=TO_CHAR(ref) AND productLevel=1) tmp2)
 		tmp WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end})
 	</select>
 	<select id="getProductName" parameterType="String" resultType="String">
