@@ -21,17 +21,17 @@
 					</div>
 					<hr class="mt-0">
 					<div class="d-flex">
-						<div class="border col-1">
+						<div class="col-1">
 							<a class="carousel-control-prev" href="#bestCarousel" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true">
 								</span>
 							</a>
 						</div>
 						<div id="bestCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 mx-auto border">
+							<div class="carousel-inner row w-100 mx-auto">
 							  	<c:forEach var="product" items="${bpList}">
-							  		<div class="carousel-item bg-white col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-										<div class="card border-0 mt-4 mb-4">
+							  		<div class="carousel-item bg-white">
+										<div class="card border-0 mt-2 mb-2 ml-2 mr-2">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
 													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
@@ -61,7 +61,7 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="border col-1">
+						<div class="col-1">
 							<a class="carousel-control-next" href="#bestCarousel" role="button" data-slide="next">
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
@@ -84,17 +84,17 @@
 					</div>
 					<hr class="mt-0">
 					<div class="d-flex">
-						<div class="border col-1">
+						<div class="col-1">
 							<a class="carousel-control-prev" href="#recCarousel" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true">
 								</span>
 							</a>
 						</div>
 						<div id="recCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 mx-auto border">
+							<div class="carousel-inner row w-100 mx-auto">
 							  	<c:forEach var="product" items="${recList}">
-							  		<div class="carousel-item bg-white col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-										<div class="card border-0 mt-4 mb-4">
+							  		<div class="carousel-item bg-white">
+										<div class="card border-0 mt-2 mb-2 ml-2 mr-2">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
 													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
@@ -124,7 +124,7 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="border col-1">
+						<div class="col-1">
 							<a class="carousel-control-next" href="#recCarousel" role="button" data-slide="next">
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
@@ -219,9 +219,39 @@
 			$(document).ready(
 				function(){
 					$('.carousel-item').first().addClass('active');
-										
- 					$(".carousel").on(
-						"slide.bs.carousel", 
+					
+					$('.carousel').carousel({
+						interval: 9000
+					})
+								
+ 					$('.carousel-item').each(
+						function(){
+							var next = $(this).next();
+							if (!next.length) {
+								next = $(this).siblings(':first');
+							}
+							next.children(':first-child').clone().appendTo($(this));
+							
+							var itemsPerSlide=1; //"1" displays 3 items per slide
+							
+							for (var i=0;i<itemsPerSlide;i++) {
+								next=next.next();
+								if (!next.length) {
+									next = $(this).siblings(':first');
+								}
+								next.children(':first-child').clone().appendTo($(this));
+							}
+						}
+					);
+					
+					$('window').resize(
+						function(event) {
+							
+						}		
+					);
+ 										
+/*  					$('.carousel').on(
+						'slide.bs.carousel', 
 						function(e) {
 							var $e = $(e.relatedTarget);
 							var idx = $e.index();
@@ -235,21 +265,21 @@
 									itemsPerSlide=2;
 								}
 								
-							var totalItems = $(".carousel-item").length;
+							var totalItems = $('.carousel-item').length;
 
 							if (idx >= totalItems - (itemsPerSlide - 1)) {
 								var it = itemsPerSlide - (totalItems - idx);
 								for (var i = 0; i < it; i++) {
 						        	// append slides to end
-									if (e.direction == "left") {
-										$(".carousel-item").eq(i).appendTo(".carousel-inner");
+									if (e.direction == 'left') {
+										$('.carousel-item').eq(i).appendTo('.carousel-inner');
 									} else {
-										$(".carousel-item").eq(0).appendTo($(this).find(".carousel-inner"));
+										$('.carousel-item').eq(0).appendTo($(this).find('.carousel-inner'));
 									}
 								}
 							}
 						}
-					);
+					); */
 
 					
 		  			var cartDiv = document.getElementById( 'cart' );
