@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
+<%@ include file="../../setting.jsp"%>
 
 <html>
-	<head>
-		<title>${head_userOrderList}</title>
-	</head>
+	<%@include file="../view/userHead.jsp"%>
 	<body>
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
 		
 		<!-- When logged in -->
 		<c:if test="${id ne null}">
@@ -16,7 +14,7 @@
 				<div class="mt-3"><h5>${str_myOrderList}${count}${str_orderUnit}</h5></div>
 
 				<c:if test="${count eq 0}">
-					<div class="row font-weight-bold text-center pt-5">
+					<div class="row font-weight-bold text-center mt-5 mb-5 pt-5 pb-5">
 						${msg_emptyOrderList}
 					</div>
 				</c:if>
@@ -120,5 +118,8 @@
 				</div>
 			</div>
 		</c:if>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
+
 </html>

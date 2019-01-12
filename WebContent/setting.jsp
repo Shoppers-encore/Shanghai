@@ -155,6 +155,7 @@
 <c:set var="str_bank" value="엔코아"/>
 <c:set var="str_recommendations" value="님을 위한 맞춤 추천"/>
 <c:set var="str_recDescription" value="회원님의 구매 이력을 바탕으로 추천해 드리는 상품입니다."/>
+<c:set var="str_leaveComment" value="회원님의 소중한 리뷰를 항상 기다리고 있어요 :)"/>
 
 <!-- color -->
 <c:set var="msg_color_wht" value="WHITE, IVORY" />

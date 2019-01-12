@@ -1,27 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="../../setting.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="../../setting.jsp"%>
+
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-		<title>${head_orderInputForm}</title>
-	</head>
-	<style>
-	   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-	 * {
-	   font-family: 'Nanum Gothic'sans-serif;
-	 }
-	</style>
-	<link rel="stylesheet" href="${project}shanghai_style.css">
-	<body class="registration">
-	    <img class="iconMargin" src="images/shanghai_icon.png" alt="logo" width="350" height="150">
-	    <hr>	 
+	<%@include file="../view/userHead.jsp"%>
+	<body>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
 		
-		<div class="container-fluid col-lg-10 justify-content-center">
+		<div class="container col-10 justify-content-center">
 			<div class="mt-3"><h5>${head_orderInputForm}</h5></div>
 			
 			<!-- When logged in -->
@@ -58,7 +45,7 @@
 							<div class="col-lg-2">
 								<img class="w-50" src="/urPresent/save/${product.thumbnail}" alt="Product Img">
 							</div>
-							<div class="col-lg-4 pt-5">
+							<div class="col-lg-4 pt-4">
 								${product.productName}<br>
 								<small id="discount_${basket.productCode}"></small>
 								<script type="text/javascript">
@@ -67,27 +54,27 @@
 									}
 								</script>
 							</div>
-							<div class="col-lg-1 pt-5" id="color">
+							<div class="col-lg-1 pt-4" id="color">
 								<script type="text/javascript">
 									var prodCode='${basket.productCode}';
 									color=prodCode.substring(0,2);
 									$('#color').text(color);
 								</script>
 							</div>
-							<div class="col-lg-1 pt-5" id="size">
+							<div class="col-lg-1 pt-4" id="size">
 								<script type="text/javascript">
 									size=prodCode.substring(prodCode.length-2,prodCode.length);
 									$('#size').text(size);
 								</script>
 							</div>
-							<div class="col-lg-1 pt-5">
+							<div class="col-lg-1 pt-4">
 								${basket.basketQuantity}
 								<script type="text/javascript">
 									var qty='${basket.basketQuantity}';
 								</script>
 								<input type="hidden" name="orderQuantity" value="${basket.basketQuantity}">
 							</div>
-							<div class="col-lg-1 pt-5" id="productPrice"></div>
+							<div class="col-lg-1 pt-4" id="productPrice"></div>
 							<script type="text/javascript">
 								var discount=(100-'${product.discount}')/100;
 								var unitPrice='${product.productPrice}'
@@ -101,7 +88,7 @@
 								);
 							</script>
 							<input type="hidden" id="orderPrice" name="orderPrice"/>
-							<div class="col-lg-2 pt-5">
+							<div class="col-lg-2 pt-4">
 								<button type="button" class="btn" id="saveToBasket">${btn_save}</button>
 								<script type="text/javascript">
 									$('#saveToBasket').on(
@@ -232,7 +219,7 @@
 								<div class="col-lg-2">
 									<img class="w-50" src="/urPresent/save/${basket.thumbnail}" alt="Product Img">
 								</div>
-								<div class="col-lg-4 pt-5">
+								<div class="col-lg-4 pt-4">
 									${basket.productName}<br>
 									<small id="discount_${basket.productCode}"></small>
 									<script type="text/javascript">
@@ -241,25 +228,25 @@
 										}
 									</script>
 								</div>
-								<div class="col-lg-1 pt-5" id="color_${basket.productCode}"></div>
+								<div class="col-lg-1 pt-4" id="color_${basket.productCode}"></div>
 									<script type="text/javascript">
 										var prodCode='${basket.productCode}';
 										color=prodCode.substring(0,2);
 										$('#color_${basket.productCode}').text(color);
 									</script>
 								
-								<div class="col-lg-2 pt-5" id="size_${basket.productCode}"></div>					
+								<div class="col-lg-2 pt-4" id="size_${basket.productCode}"></div>					
 									<script type="text/javascript">
 										size=prodCode.substring(prodCode.length-2,prodCode.length);
 										$('#size_${basket.productCode}').text(size);
 									</script>
 								
-								<div class="col-lg-1 pt-5">${basket.basketQuantity}</div>
+								<div class="col-lg-1 pt-4">${basket.basketQuantity}</div>
 									<script type="text/javascript">
 										var qty='${basket.basketQuantity}';
 									</script>
 								
-								<div class="col-lg-2 pt-5">
+								<div class="col-lg-2 pt-4">
 									<div class="productPrice" id="productPrice_${basket.productCode}"></div>
 									<script type="text/javascript">
 										var unitPrice='${basket.productPrice}';
@@ -366,6 +353,8 @@
 					</script>
 				</c:if>
 			</c:if>
-		</div> <!-- container -->
+		</div>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
 </html>
