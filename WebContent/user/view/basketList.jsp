@@ -15,7 +15,7 @@
 				
 				<!-- If Basket is empty -->
 				<c:if test="${basketCount eq 0}">
-					<div class="row font-weight-bold text-center pt-5">
+					<div class="row font-weight-bold text-center mt-5 mb-5 pt-5 pb-5">
 						${msg_emptyBasket}
 					</div>
 				</c:if>
@@ -406,6 +406,7 @@
 				</c:if>
 			</div>
 		</c:if>
+		<%@include file="../view/userCompanyInfo.jsp"%>
 		<%@include file="../view/userFooter.jsp"%>
 	</body>
 </html>

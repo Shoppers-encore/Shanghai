@@ -1,19 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
+<%@ include file="../../setting.jsp"%>
+
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${str_review}</title>
-</head>
-<body class="container">
-	<!-- User Header -->
-<%@ include file="../../user/view/userTopNavbar.jsp" %>
-	<!-- Review Board List -->
-	<article><br><br>
-	    	<h4>${str_review}</h4>
+	<%@include file="../view/userHead.jsp"%>
+	<body>
+		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
+	
+		<div class="container col-10 text-center mt-3 mb-5">
+	    	<h4 class="mb-3">${str_review}</h4>
 	    	<table class="table table-striped">
 	   			<thead>
 	   				<tr>
@@ -100,6 +96,8 @@
 			   <input type="submit" value="검색">
 			</form>
 			</div>
-	    </article>
-</body>
+		</div>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
+	</body>
 </html>

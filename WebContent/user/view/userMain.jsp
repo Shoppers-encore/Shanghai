@@ -28,10 +28,10 @@
 							</a>
 						</div>
 						<div id="bestCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 mx-auto">
+							<div class="carousel-inner row w-100 h-100 mx-auto">
 							  	<c:forEach var="product" items="${bpList}">
 							  		<div class="carousel-item bg-white">
-										<div class="card border-0 mt-2 mb-2 ml-2 mr-2">
+										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
 													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
@@ -91,10 +91,10 @@
 							</a>
 						</div>
 						<div id="recCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 mx-auto">
+							<div class="carousel-inner row w-100 h-100 mx-auto">
 							  	<c:forEach var="product" items="${recList}">
 							  		<div class="carousel-item bg-white">
-										<div class="card border-0 mt-2 mb-2 ml-2 mr-2">
+										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
 													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
@@ -243,44 +243,6 @@
 							}
 						}
 					);
-					
-					$('window').resize(
-						function(event) {
-							
-						}		
-					);
- 										
-/*  					$('.carousel').on(
-						'slide.bs.carousel', 
-						function(e) {
-							var $e = $(e.relatedTarget);
-							var idx = $e.index();
-							var itemsPerSlide = 3;
-							var vpWidth=$(window).width();
-								if (vpWidth<576) {
-									itemsPerSlide=1;
-								} else if (vpWidth>=576 && vpWidth<768) {
-									itemsPerSlide=1;
-								} else if(vpWidth>=768 && vpWidth<992) {
-									itemsPerSlide=2;
-								}
-								
-							var totalItems = $('.carousel-item').length;
-
-							if (idx >= totalItems - (itemsPerSlide - 1)) {
-								var it = itemsPerSlide - (totalItems - idx);
-								for (var i = 0; i < it; i++) {
-						        	// append slides to end
-									if (e.direction == 'left') {
-										$('.carousel-item').eq(i).appendTo('.carousel-inner');
-									} else {
-										$('.carousel-item').eq(0).appendTo($(this).find('.carousel-inner'));
-									}
-								}
-							}
-						}
-					); */
-
 					
 		  			var cartDiv = document.getElementById( 'cart' );
 		  			$(document).on(
