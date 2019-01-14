@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
+<%@ include file="../../setting.jsp"%>
+
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${str_writeReview}</title>
+	<%@include file="../view/userHead.jsp"%>
 
 <style>
 
@@ -48,17 +45,17 @@
     cursor: pointer;
 }
   </style>
-</head>
-<body class="container">
-	<!-- User Header -->
+
+<body>
 	<%@ include file="../../user/view/userTopNavbar.jsp" %>
-	<!-- Review Write Form -->
-	<article><br><br>
+	<%@ include file="../../user/view/userSideNavbar.jsp" %>
+		
+	<div class="container col-10 text-center">
 	    <div id="writeForm">
 			<form method="post" encType="multipart/form-data" action="reviewWritePro.jk" name="writeform" onsubmit="return checkReviewWrite()">
 				<table class="table" >
 					<tr>
-						<th colspan="4">${str_writeReview}</th>
+						<th colspan="4"><h5 class="mt-3 mb-3">${str_writeReview}</h5></th>
 					</tr>			
 					<tr>
 						<th> ${str_writer} </th>
@@ -104,6 +101,8 @@
 				</table>		
 			</form>
 		 </div>
-	</article>
+	</div>
+	<%@include file="../view/userCompanyInfo.jsp"%>
+	<%@include file="../view/userFooter.jsp"%>
 </body>
 </html>

@@ -103,6 +103,8 @@
 		            <button class="btn btn_cancel" type="reset">취소</button>
 	      	    </div>			
 			</form>
-		</div> <!-- container -->
+		</div>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
 </html>

@@ -77,7 +77,7 @@
 		</small>
 		<small class="companyInfoCol">
 			<strong class="spaceAdded">WEB MASTER</strong>
-			<span class="wrappableContent rightMarginAdded">${str_webMaster} (heeyun.y.614@gmail.com)</span>
+			<span class="wrappableContent rightMarginAdded">${str_webMaster}</span>
 		</small>
 	</div>
 </div>
