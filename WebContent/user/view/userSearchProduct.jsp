@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ include file ="../../setting.jsp" %>
 <html>   
+<%@include file="../view/userHead.jsp"%>
 <head>
 	<c:if test="${ searchWord eq null }">
 		<title> 상품 검색 페이지 </title>
@@ -307,43 +308,53 @@
 						</c:if>
 					</p>
 				</c:if>
-				<div class="row">
+				<div class="container col-10">
 					<c:forEach var="product" items="${productList}">
-						<div class="col-md-3"  align="center"><br>
-							<img src="/urPresent/save/${product.thumbnail}" name="thumb"><br>
+							<div class="card cardItem d-inline-flex border-0 mt-4 mb-4"  align="center"><br>
+								<div onclick="location='userProductDetail.jk?ref=${product.ref}'">
+								<img src="/urPresent/save/${product.thumbnail}" name="thumb" class="card-img-top img-fluid"><br>
 							<!-- How to get image names from image_info DataBean -->
-							<a class="goodName" href="userProductDetail.jk?ref=${product.ref}">${product.productName}<br>
 							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.discount eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
 							<c:if test="${product.discount ne 0}">
 											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
 										</c:if></a><br>
+								</div><br>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
 		    </c:if>
 		    <br>
 		    <!-- pageBlock 12로 설정필!! -->
-		    <div align="center">
+		    <div class="text-center">
 			    <c:if test="${count gt 0}">
 					<c:if test="${currentPage ne 1}">
-						<a href="userSearchProduct.jk?searchWord=${searchWord}&color=${color}">[◀◀]</a>
+						<a href="userSearchProduct.jk?searchWord=${searchWord}&color=${color}">
+							<img src="/urPresent/images/rewind.png" class="rewindAndFastForward">
+						</a>
 					<c:if test="${startPage gt pageBlock}">
-						<a href="userSearchProduct.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">[◀]</a>
+						<a href="userSearchProduct.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">
+							<img src="/urPresent/images/return.png" class="returnAndForward">
+						</a>
 						</c:if>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<c:if test="${i eq currentPage}">
-						<span>[${i}]</span>
+							<span><strong>${i}</strong></span>
 						</c:if>
 						<c:if test="${i ne currentPage}">
-						<a href="userSearchProduct.jk?pageNum=${i}&searchWord=${searchWord}">[${i}]</a>
+							<a href="userSearchProduct.jk?pageNum=${i}&searchWord=${searchWord}"><strong>${i}</strong></a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne pageCount}">
 						<c:if test="${pageCount>endPage}">
-						<a href="userSearchProduct.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">[▶]</a>
+						<a href="userSearchProduct.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">
+							<img src="/urPresent/images/forward.png" class="returnAndForward">
+						</a>
 						</c:if>
-						<a href="userSearchProduct.jk?pageNum=${pageCount}&searchWord=${searchWord}">[▶▶]</a>
+						<a href="userSearchProduct.jk?pageNum=${pageCount}&searchWord=${searchWord}">
+							<img src="/urPresent/images/fastForward.png" class="rewindAndFastForward">
+						</a>
 					</c:if>
 				</c:if>
 			</div>
@@ -351,12 +362,8 @@
 	  </div>
 	  <footer style="color: lightgray">
 	  <br><br>
-	  	<div class="container">
-	  		<div class="row">
-	  			<div class="col-sm-12" style="text-align: center;">
-	  			<p>Copyright &copy; 2018 삼김일정(3Kim1Jeong)</p></div>
-	  		</div>
-	  	</div>
 	  </footer>
+	  <%@include file="../view/userCompanyInfo.jsp"%>
+	  <%@include file="../view/userFooter.jsp"%>
 	</body>
 </html>

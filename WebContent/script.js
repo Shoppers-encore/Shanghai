@@ -46,7 +46,7 @@ var noCategorySelected = "카테고리를 선택해 주세요";
 var noTagChecked = "태그를 선택해 주세요.";
 var noColorChecked = "색상을 선택해 주세요.";
 var noProductName = "상품명을 입력해 주세요.";
-var noProuctPrice = "상품 가격을 입력해 주세요.";
+var noProductPrice = "상품 가격을 입력해 주세요.";
 var noProductQuantity = "상품 초기 수량을 입력해 주세요.";
 var noProductContent = "상품 소개를 입력해 주세요.";
 
@@ -516,10 +516,9 @@ function productInputCheck() {
     	return false;
     } else if(colorCheck != 1) {
     	alert( noColorChecked );
-    	alert(price);
     	return false;
     } else if( price == "" || price == null ) {
-    	alert( noProuctPrice );
+    	alert( noProductPrice );
     	return false;
     } else if( content == "" || content == null ) {
     	alert( noProductContent );
