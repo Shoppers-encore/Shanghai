@@ -290,9 +290,9 @@ public class UserViewHandler {
 		int count = 0;
 		String searchWord = request.getParameter("searchWord");
 		if (searchWord == null || "".equals(searchWord))
-			searchWord = " ";
+			searchWord = "None";
 		String[] selectedColors_temp = request.getParameterValues("color");
-		String selectedColors = "";
+		String selectedColors = "None";
 		if (selectedColors_temp != null)
 			for (int i = 0; i < selectedColors_temp.length; i++) {
 				selectedColors += selectedColors_temp[i] + " ";

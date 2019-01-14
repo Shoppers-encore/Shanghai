@@ -361,10 +361,10 @@
 		SELECT DISTINCT ref FROM jk_product
 	</select>
 	<select id="getBestProduct"  resultType="int">
-		SELECT p.ref, SUM(orderQuantity) sum FROM jk_product p, jk_orderList o WHERE p.productCode=o.productCode GROUP BY p.ref ORDER BY sum desc
+		SELECT p.ref, SUM(orderQuantity) sum FROM jk_product p, jk_orderList o WHERE p.productCode=o.productCode AND p.productLevel=1 GROUP BY p.ref ORDER BY sum desc
 	</select>
 	<select id="getBestList" parameterType="int" resultType="databean.ProductDataBean">
-		SELECT DISTINCT(ref), productName, productPrice, thumbnail FROM jk_product WHERE ref =#{ref}
+		SELECT DISTINCT(ref), productName, productPrice, thumbnail FROM jk_product WHERE ref =#{ref} AND productLevel=1
 	</select>
 	
 	<!-- Main: Product Recommendations -->
