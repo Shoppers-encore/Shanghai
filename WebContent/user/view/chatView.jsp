@@ -15,7 +15,7 @@
 			<textarea id="content" class="ml-1 mr-1 mt-1 col-12" style="height: 400px" readonly></textarea> 
 			<form class="form-row mt-1 mb-1" name="msgInputForm" onsubmit="return enterChat()"> 
 				<input type="text" class="form-control ml-1 mr-1 col-9" id="message" name="message">
-				<input type="submit" class="btn btn-gray form-control mr-1 col-3" value="${btn_send}">
+				<input type="submit" class="btn btn-default" value="${btn_send}">
 			</form>
 		</div>
 	</body>

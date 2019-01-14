@@ -35,10 +35,10 @@
 	<body>
 		<div class="container-fluid">
 		    <div class="centered col-*-4 border" id="admlogin">
-					<p>
-			      	<br> ${msg_admLogin} <br>
-					</p>
-					<form name="loginform" method="post" action="admLoginPro.jk">
+				<p>
+			    <br> ${msg_admLogin} <br>
+				</p>
+				<form name="loginform" method="post" action="admLoginPro.jk">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend" >
 								<span class="input-group-text" >${str_id}</span>
@@ -53,7 +53,7 @@
 						</div>
 						<input class="btn btn-primary" type="submit" value="${btn_login}" onclick="location='admMain.jk'">
 						<input class="btn btn-secondary" type="button" value="${btn_gotoUserMain}" onclick="location='main.jk'">
-					</form>
+				</form>
 			 </div>
 		</div>
 	</body>
