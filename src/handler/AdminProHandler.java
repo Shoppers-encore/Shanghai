@@ -79,10 +79,19 @@ public class AdminProHandler {
 		int ref = Integer.parseInt( multi.getParameter( "product_code" ) ); 
 		String thumbnail = null;
 		String systemName = null;
+		List<String> imageList = new ArrayList<String>();
 		Enumeration<?> e = multi.getFileNames();
 		while( e.hasMoreElements() ) {
 			String inputName = (String) e.nextElement();
 			systemName = multi.getFilesystemName( inputName );
+			if(systemName==null) {
+				for(int i = 0 ; i<imageList.size();i++) {
+					File f = new File(imageList.get(i));
+					if(f.exists()) f.delete();
+				}
+				request.setAttribute("result", -99);
+				return new ModelAndView("adm/pro/productInputPro");
+			}
 			String sname = path + "\\" + systemName;
 			String tname = null;
 			new File(path+"\\"+ref).mkdir();
@@ -95,7 +104,7 @@ public class AdminProHandler {
 			}
 			File f = new File(sname);
 			boolean a = f.renameTo(new File(path+"/"+tname));
-			System.out.println(a);
+			imageList.add(path+"/"+systemName);
 			if(inputName.equals("thumb")) {
 				thumbnail = tname;
 			}else {
@@ -139,7 +148,7 @@ public class AdminProHandler {
 				int tagId = tags[i];
 				int result1 = tagDao.insertProdTag(productTagDto);
 				if( result1 == 1 ) {
-					String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES "+ ref + ", " + tagId + ");";
+					String sql = "INSERT INTO jk_ProductTag (ref, tagId) VALUES ("+ ref + ", " + tagId + ");";
 					hh.fileWriter(sql);
 				}
 			}
@@ -176,7 +185,7 @@ public class AdminProHandler {
 			int result2 = productDao.input( productDto );
 			productDao.getProdCount();
 			if( result2 >= 1 ) {
-				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, productLevel,categoryDetail) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", sysdate, " + quantity + ", '" + thumbnail + "', " + category + ", 1, "+productDto.getCategoryDetail()+");";
+				String sql = "INSERT INTO jk_product (ref, productCode, productName, productContent, discount, productPrice, productRegDate, productQuantity, thumbnail, productCategory, productLevel,categoryDetail) "+ "VALUES (" + ref + ", '" + product_codes[i] +"', '" + product_name + "', '" + good_content + "', " + sale + ", " + price +  ", '"+productDto.getProductRegDate()+"', " + quantity + ", '" + thumbnail + "', " + category + ", 1, "+productDto.getCategoryDetail()+");";
 				hh.fileWriter(sql);
 			}
 			request.setAttribute( "result", result2 );
