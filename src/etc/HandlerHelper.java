@@ -242,7 +242,4 @@ public class HandlerHelper {
 		}
 		return categoryDetail;
 	}
-	public void logWriter(String page1, String page2, String exer) {
-		
-	}
 }
