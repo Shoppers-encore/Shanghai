@@ -1,15 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
+<%@ include file="../../setting.jsp"%>
 
 <html>
-	<head>
-		<title>${head_userOrderDetail}</title>
-	</head>
+	<%@include file="../view/userHead.jsp"%>
 	<body>
-
 		<%@ include file="../../user/view/userTopNavbar.jsp" %>
+		<%@ include file="../../user/view/userSideNavbar.jsp" %>
 		
 		<c:forEach var="orderedItem" items="${orderListByOrderCode}">
 			<c:set var="orderAddress1" value="${orderedItem.orderAddress1}"/>		
@@ -109,5 +106,7 @@
 				</c:forEach>
 			</div>
 		</c:if>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
 	</body>
 </html>

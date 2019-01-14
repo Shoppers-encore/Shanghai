@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../../setting.jsp" %>
+<%@ include file="../../setting.jsp"%>
+
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>${str_review}</title>
+	<%@include file="../view/userHead.jsp"%>
 	<style>
 	.slidecontainer {
 	   width: 100%;
@@ -46,14 +43,18 @@
 	    cursor: pointer;
 	}
 	</style>
-</head>
-<body class="container" onload="commentList(${reviewDto.reviewNo})">
-	<article class="centered">
+
+<body>
+	<%@ include file="../../user/view/userTopNavbar.jsp" %>
+	<%@ include file="../../user/view/userSideNavbar.jsp" %>
+	
+	<div class="container col-10 text-center" onload="commentList(${reviewDto.reviewNo})">
+
 	<br><br>
 		    <div id="view">
 					<table class="table" >
 						<tr>
-							<th colspan="4">${str_review}</th>	
+							<th colspan="4"><h5>${str_review}</h5></th>	
 						</tr>		
 						<tr>
 							<th>${str_writer}</th>
@@ -136,6 +137,8 @@
 						</tr>
 					</table>
 			 </div>
-		</article>
-</body>
+		</div>
+		<%@include file="../view/userCompanyInfo.jsp"%>
+		<%@include file="../view/userFooter.jsp"%>
+	</body>
 </html>

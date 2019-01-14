@@ -9,7 +9,7 @@
 		<%@ include file="../../user/view/userSideNavbar.jsp" %>		
 
 		<div class="jumbotron col-12 bg-white text-center productCategoryJumbotron mb-0 h-100">
-			<h5>${category}</h5>		
+			<h5>OUTER</h5>		
 			<small><a class="col-3 text-secondary" href="userProductOuterList.jk">${str_cat_OUTER_ALL}</a></small>
 			<small><a class="col-3 text-secondary" href="userProductOuterList.jk?category=JKnJP">${str_cat_JKnJP}</a></small>
 			<small><a class="col-3 text-secondary" href="userProductOuterList.jk?category=COAT">${str_cat_COAT}</a></small>
