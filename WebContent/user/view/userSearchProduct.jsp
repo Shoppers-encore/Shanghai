@@ -314,10 +314,18 @@
 								<div onclick="location='userProductDetail.jk?ref=${product.ref}'">
 								<img src="/urPresent/save/${product.thumbnail}" name="thumb" class="card-img-top img-fluid"><br>
 							<!-- How to get image names from image_info DataBean -->
-							<input type="hidden" name="" value="${product.ref}"> ${str_price} : <c:if test="${product.discount eq null or product.discount eq 0}"><fmt:formatNumber value="${product.productPrice}"/></c:if>
-							<c:if test="${product.discount ne 0}">
-											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" type="currency" currencySymbol="￦"/>
-										</c:if></a><br>
+								<div class="mt-1 mb-1">
+									<small>
+										<span>${product.productName}</span>
+										<br>
+										<c:if test="${product.discount eq null or product.discount eq 0}">
+											<fmt:formatNumber value="${product.productPrice}" type="currency" currencySymbol="￦"/>
+										</c:if> 
+										<c:if test="${product.discount ne 0}">
+											<fmt:formatNumber value="${product.productPrice-(product.productPrice*product.discount/100)}" 
+											type="currency" currencySymbol="￦"/>
+										</c:if>
+									</small>
 								</div><br>
 							</div>
 						</div>
