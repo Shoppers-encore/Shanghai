@@ -289,14 +289,19 @@ public class UserViewHandler {
 		}
 		int count = 0;
 		String searchWord = request.getParameter("searchWord");
-		if (searchWord == null || "".equals(searchWord))
-			searchWord = "None";
 		String[] selectedColors_temp = request.getParameterValues("color");
-		String selectedColors = "None";
-		if (selectedColors_temp != null)
-			for (int i = 0; i < selectedColors_temp.length; i++) {
-				selectedColors += selectedColors_temp[i] + " ";
+		String selectedColors = "";
+		if((searchWord == null || "".equals(searchWord)) && selectedColors_temp==null) {
+			searchWord ="None";
+			selectedColors = "None";
+		}else {
+			if (searchWord == null || "".equals(searchWord))
+				searchWord = "";
+			if (selectedColors_temp != null)
+				for (int i = 0; i < selectedColors_temp.length; i++) {
+					selectedColors += selectedColors_temp[i] + " ";
 			}
+		}
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchWord", searchWord);
 		map.put("selectedColors", selectedColors);
