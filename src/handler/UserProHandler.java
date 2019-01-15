@@ -800,7 +800,7 @@ public class UserProHandler {
 		chatDao.chatInput(chat);
 	}
 	private void orderLog(String path, String log, Calendar cal) {
-		File file = new File(path+"/order-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		File file = new File(path+"/orderList-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH))+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
