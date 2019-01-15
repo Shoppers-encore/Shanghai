@@ -79,9 +79,7 @@
 		.checkmark#skyblue {
 		   background-color : #6EE3F7;
 		}
-		.checkmark#etc {
-		   background: url('../images/rainbow.jpg') center/32px no-repeat; 
-		}
+
 		
 		/* 체크박스 마킹 시 이미지 뜨게 설정 */
 		.checkmark:after {
@@ -164,9 +162,6 @@
 		#colorcontainer .tooltiptext#skyblue {
 		    background-color: #6EE3F7;
 		}
-		#colorcontainer .tooltiptext#etc {
-		   background: url('../images/rainbow.jpg') left/120px no-repeat; 
-		}
 		#colorcontainer:hover .tooltiptext {
 		    visibility: visible;
 		    opacity: 0.7;
@@ -197,7 +192,7 @@
 			</c:if>
 			<form name="searchForm" action="userSearchProduct.jk" method="post" style="text-align:center">
 				<div class="input-group col-md-5 container-fluid">
-				    <input type="text" class="form-control" name="searchWord" style="width:80%" autofocus placeholder="${msg_searchWithWord}">
+				    <input type="text" class="form-control" name="searchWord" style="width:80%" autofocus placeholder="${msg_searchWithWord}" required>
 				    <input type="submit" class="form-control btn btn-danger" value="${btn_search}" style="width:20%">
 			  	</div>
 			  	<br>
@@ -312,7 +307,7 @@
 					<c:forEach var="product" items="${productList}">
 							<div class="card cardItem d-inline-flex border-0 mt-4 mb-4"  align="center"><br>
 								<div onclick="location='userProductDetail.jk?ref=${product.ref}'">
-								<img src="/urPresent/save/${product.thumbnail}" name="thumb" class="card-img-top img-fluid"><br>
+								<img src="/urPresent/save/${product.thumbnail}" name="thumb" class="card-img-top img-fluid cardImage"><br>
 							<!-- How to get image names from image_info DataBean -->
 								<div class="mt-1 mb-1">
 									<small>

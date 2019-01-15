@@ -65,7 +65,7 @@
 						<div class="col-md-3"  align="center"><br>
 					  		<form name="${product.ref}">
 					  			<a class="goodName" href="admProductDetail.jk?ref=${product.ref}">
-									<img src="/urPresent/save/${product.thumbnail}" id="thumb" name="${product.ref}"><br>
+									<img src="/urPresent/save/${product.thumbnail}" id="thumb" name="${product.ref}" style="height:360px;"><br>
 						     		${product.productName}<br>
 							    	<input type="hidden" name="id" value="${sessionScope.id}">
 							    	<input type="hidden" name="productCode" value="${product.ref}">
