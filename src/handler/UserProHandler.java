@@ -647,9 +647,9 @@ public class UserProHandler {
 			Calendar cal = GregorianCalendar.getInstance();
 			ProductDataBean product = productDao.getProductDetailsByProductCode(order.getProductCode());
 			String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice();
-			String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
+			//String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
 			orderLog(path,orderList, cal);
-			productLog(path,productList, cal);
+			//productLog(path,productList, cal);
 			request.setAttribute("orderListInsertResult", orderListInsertResult);
 			// request.setAttribute("basketDeleteResult", basketDeleteResult);
 			request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
