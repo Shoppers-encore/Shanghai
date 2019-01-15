@@ -138,7 +138,6 @@ public class UserViewHandler {
 			mav.setViewName("redirect:/userLoginForm.jk");
 			return mav;
 		}
-
 		/* Get items from jk_basket using id */
 		List<BasketDataBean> basketList = basketDao.getBasketList(id);
 
@@ -291,6 +290,9 @@ public class UserViewHandler {
 		String searchWord = request.getParameter("searchWord");
 		String[] selectedColors_temp = request.getParameterValues("color");
 		String selectedColors = "";
+		if(selectedColors_temp.length==1)
+			selectedColors_temp = selectedColors_temp[0].split(" ");
+		
 		if((searchWord == null || "".equals(searchWord)) && selectedColors_temp==null) {
 			searchWord ="None";
 			selectedColors = "None";
