@@ -405,7 +405,7 @@ public class UserProHandler {
 		if (count > 0) {
 			reviewNo = boardDao.getMaxReview() + 1;
 		}
-		String path = request.getSession().getServletContext().getRealPath("/save");
+		String path = request.getSession().getServletContext().getRealPath("\\save");
 		MultipartRequest multi = null;
 		if (-1 < request.getContentType().indexOf("multipart/form-data"))
 			multi = new MultipartRequest(request, path, 1024 * 1024 * 5, "UTF-8", new DefaultFileRenamePolicy());
