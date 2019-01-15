@@ -174,8 +174,8 @@ public class AdminProHandler {
 			productDto.setProductName( product_name ); 
 			productDto.setProductContent( good_content );
 			productDto.setProductPrice( price );
-//			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
-			productDto.setProductRegDate(new Timestamp(Long.parseLong("1544799600120")));
+			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
+//			productDto.setProductRegDate(new Timestamp(Long.parseLong("1544799600120")));
 			productDto.setProductCategory( category );
 			productDto.setProductQuantity( quantity );
 			productDto.setThumbnail( thumbnail );   
@@ -360,7 +360,7 @@ public class AdminProHandler {
 			return new ModelAndView("adm/form/tagInputForm");
 		} else {
 			int result = tagDao.insertTag(newTag);
-			String sql = "INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, "+newTag+");";
+			String sql = "INSERT INTO jk_tag VALUES (tagIdSeq.NEXTVAL, '"+newTag+"');";
 			hh.fileWriter(sql);
 			request.setAttribute( "result", result );
 			return new ModelAndView("adm/pro/tagInputPro");

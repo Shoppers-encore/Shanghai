@@ -577,7 +577,7 @@ a, a:link, a:visited, a:hover, a:active{
 	}
 }
 
-@media only screen and (min-width: 1025px) and (max-width: 1600px) {
+@media only screen and (min-width: 1025px) {
 	.brandLogo {
 		width: 28.8rem;
 	}	

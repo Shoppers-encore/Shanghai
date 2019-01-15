@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file ="../setting.jsp" %>
-	ERROR 페이지입니다.
+	잘못된 페이지 경로입니다.
 	<c:forEach var="list" items="${lists}"> 
 		${list.name}
 	</c:forEach>

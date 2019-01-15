@@ -41,6 +41,7 @@ import databean.BasketDataBean;
 import databean.ChatDataBean;
 import databean.ReviewDataBean;
 import db.UserDao;
+import etc.HandlerHelper;
 import etc.SendMail;
 import db.BasketDao;
 import db.BoardDao;
@@ -117,6 +118,8 @@ public class UserProHandler {
 
 		// insertUser
 		int result = userDao.insertUser(userDto);
+		String sql = "insert into jk_user values('"+userDto.getId()+"', '"+userDto.getPassword()+"', '"+userDto.getName()+"', '"+userDto.getBirthday()+"', '"+userDto.getTel()+"','"+userDto.getEmail()+"', "+userDto.getGender()+", 1, "+userDto.getHeight()+", "+userDto.getWeight()+", '"+userDto.getAddress()+"', '"+userDto.getAddressDetail()+"', '"+userDto.getZipcode()+"');";
+		new HandlerHelper().fileWriter(sql);
 		request.setAttribute("result", result);
 		request.setAttribute("userDto", userDto);
 
@@ -394,6 +397,14 @@ public class UserProHandler {
 			e.printStackTrace();
 		}
 		ReviewDataBean reviewDto = new ReviewDataBean();
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("searchType", request.getParameter("searchType"));
+		search.put("searchWord", request.getParameter("searchWord"));
+		int count = boardDao.getReviewCount(search);
+		int reviewNo = 1;
+		if (count > 0) {
+			reviewNo = boardDao.getMaxReview() + 1;
+		}
 		String path = request.getSession().getServletContext().getRealPath("/save");
 		MultipartRequest multi = null;
 		if (-1 < request.getContentType().indexOf("multipart/form-data"))
@@ -407,30 +418,20 @@ public class UserProHandler {
 			systemName = multi.getFilesystemName(inputName);
 			if (systemName != null) {
 				String sname = path + "\\" + systemName;
-				RenderedOp op = JAI.create("fileload", sname);
-				BufferedImage sbuffer = op.getAsBufferedImage();
-				int SIZE = 3;
-				int width = sbuffer.getWidth() / SIZE;
-				int height = sbuffer.getHeight() / SIZE;
-				BufferedImage tbuffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-				Graphics g = tbuffer.getGraphics();
-				g.drawImage(sbuffer, 0, 0, width, height, null);
-
-				photos[i] = systemName;
+				String tname = null;
+				new File(path+"\\review-"+reviewNo).mkdir();
+				tname = "review-"+reviewNo+"\\"+reviewNo+"-"+i+"-"+systemName;
+				File f = new File(sname);
+				boolean a = f.renameTo(new File(path+"/"+tname));
+				photos[i] = tname;
 				i++;
 			}
 		}
 		reviewDto.setPhoto1(photos[0]);
 		reviewDto.setPhoto2(photos[1]);
 
-		Map<String, String> search = new HashMap<String, String>();
-		search.put("searchType", request.getParameter("searchType"));
-		search.put("searchWord", request.getParameter("searchWord"));
-		int count = boardDao.getReviewCount(search);
-		int reviewNo = 1;
-		if (count > 0) {
-			reviewNo = boardDao.getMaxReview() + 1;
-		}
+		
+		
 		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setTitle(multi.getParameter("title"));
 		reviewDto.setReviewContent(multi.getParameter("reviewContent"));
@@ -523,6 +524,8 @@ public class UserProHandler {
 				for(int i = 0 ; i<fileName.length;i++) {
 					String path =  request.getSession().getServletContext().getRealPath( "/save" );
 					File f = new File(path+fileName[i]);
+					if(f.exists()) f.delete();
+					f = new File(path);
 					if(f.exists()) f.delete();
 				}
 				int result = boardDao.delete(num);
