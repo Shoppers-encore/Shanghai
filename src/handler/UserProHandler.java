@@ -405,7 +405,7 @@ public class UserProHandler {
 		if (count > 0) {
 			reviewNo = boardDao.getMaxReview() + 1;
 		}
-		String path = request.getSession().getServletContext().getRealPath("\save");
+		String path = request.getSession().getServletContext().getRealPath("/save");
 		MultipartRequest multi = null;
 		if (-1 < request.getContentType().indexOf("multipart/form-data"))
 			multi = new MultipartRequest(request, path, 1024 * 1024 * 5, "UTF-8", new DefaultFileRenamePolicy());
@@ -419,8 +419,8 @@ public class UserProHandler {
 			if (systemName != null) {
 				String sname = path + "\\" + systemName;
 				String tname = null;
-				new File(path+"\review-"+reviewNo).mkdir();
-				tname = "review-"+reviewNo+"\\"+reviewNo+"-"+i+"-"+systemName;
+				new File(path).mkdir();
+				tname = systemName;
 				File f = new File(sname);
 				boolean a = f.renameTo(new File(path+"/"+tname));
 				photos[i] = tname;
