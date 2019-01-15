@@ -115,6 +115,10 @@ a, a:link, a:visited, a:hover, a:active{
 }
 
 /* ====userMain==== */
+.cardImage {
+	height: calc(100px + 23vw) !important;
+}
+
 .cardItem {
 	cursor: pointer;
 	font-size: calc(12px + 0.2vw);

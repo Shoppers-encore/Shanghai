@@ -28,13 +28,13 @@
 							</a>
 						</div>
 						<div id="bestCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 h-100 mx-auto">
+							<div class="carousel-inner row w-100">
 							  	<c:forEach var="product" items="${bpList}">
 							  		<div class="carousel-item bg-white">
 										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
-													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid" style="height:350px;">
+													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid cardImage">
 													<div class="mt-1 mb-1">
 														<small>
 															<span>${product.productName}</span>
@@ -91,13 +91,13 @@
 							</a>
 						</div>
 						<div id="recCarousel" class="carousel slide col-10" data-ride="carousel">
-							<div class="carousel-inner row w-100 h-100 mx-auto">
+							<div class="carousel-inner row w-100">
 							  	<c:forEach var="product" items="${recList}">
 							  		<div class="carousel-item bg-white">
 										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
-									  				<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
+									  				<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid cardImage">
 													<div class="mt-1 mb-1">
 														<small>
 															<span>${product.productName}</span>
@@ -151,7 +151,7 @@
 					<div class="card cardItem d-inline-flex border-0 mt-4 mb-4">
 						<form name="${product.ref}">
 							<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
-								<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
+								<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid cardImage">
 								<div class="mt-1 mb-1">
 									<small>
 										<span>${product.productName}</span>
