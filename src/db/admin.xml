@@ -36,11 +36,11 @@
 <!-- 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, r FROM(
 		SELECT orderCode, productCode, id, orderZipcode, orderAddress1, orderAddress2, orderDate, orderStatus, orderQuantity, orderPrice, rownum r FROM 
 		(SELECT * FROM jk_orderList ORDER BY orderCode desc)) WHERE r &gt;= TO_NUMBER(#{start}) AND r &lt;= TO_NUMBER(#{end}) -->
-		SELECT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate
-		FROM (SELECT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate, rownum r 
-		FROM (SELECT DISTINCT orderCode, id, orderStatus, orderAddress1, orderAddress2, orderZipcode, orderDate 
-		FROM jk_orderList ORDER BY orderDate DESC)
-		) WHERE r between #{start} and #{end}
+		SELECT tmp.*, r 
+		FROM (SELECT list.*, rownum r 
+      	FROM (SELECT * 
+      	FROM jk_orderList ORDER BY orderCode desc) list ORDER BY orderCode desc) 
+      	tmp WHERE r &gt;=TO_NUMBER(#{start}) AND r &lt;=TO_NUMBER(#{end})
 	</select>
 	<select id="getSumOfItemsOrdered" parameterType="int" resultType="int">
 		SELECT SUM(orderPrice) FROM jk_orderList WHERE orderCode=#{orderCode} GROUP BY orderCode

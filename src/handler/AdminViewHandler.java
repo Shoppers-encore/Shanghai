@@ -303,17 +303,18 @@ public class AdminViewHandler {
 		
 		OrderDao orderDao = new OrderDao();
 		int count = orderDao.getOrderCount();
-				
 		Map<String, String> map = new HandlerHelper().makeCount(count, request);
 		List<OrderListDataBean> orders = orderDao.getOrderList(map);
+
 		/* Set Maps for OrderSum */
 		Map<String, String> orderSumMap = new HashMap<String, String>();
-
 		for (OrderListDataBean order : orders) {
 			String orderCode = String.valueOf(order.getOrderCode());
 			String orderSum = String.valueOf(orderDao.getSumOfItemsOrdered(order.getOrderCode()));
 			orderSumMap.put(orderCode, orderSum);
+		
 		}
+		
 		String orderSumJson = new Gson().toJson(orderSumMap);
 		request.setAttribute("orderSum", orderSumJson);
 		

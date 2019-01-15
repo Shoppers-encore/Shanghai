@@ -31,9 +31,7 @@ public class OrderDao {
 	}
 	
 	public List<OrderListDataBean> getOrderList(Map<String, String> map){
-		List<OrderListDataBean> orderList = null;
-		orderList = session.selectList("Admin.getOrderList", map);
-			return orderList;
+		return session.selectList("Admin.getOrderList", map);
 	}
 
 	public OrderListDataBean getOrder(String id) {
