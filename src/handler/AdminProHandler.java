@@ -174,8 +174,8 @@ public class AdminProHandler {
 			productDto.setProductName( product_name ); 
 			productDto.setProductContent( good_content );
 			productDto.setProductPrice( price );
-//			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
-			productDto.setProductRegDate(new Timestamp(Long.parseLong("1544799600120")));
+			productDto.setProductRegDate( new Timestamp( System.currentTimeMillis() ) );
+//			productDto.setProductRegDate(new Timestamp(Long.parseLong("1544799600120")));
 			productDto.setProductCategory( category );
 			productDto.setProductQuantity( quantity );
 			productDto.setThumbnail( thumbnail );   
