@@ -337,11 +337,11 @@
 		    <div class="text-center">
 			    <c:if test="${count gt 0}">
 					<c:if test="${currentPage ne 1}">
-						<a href="userSearchProduct.jk?searchWord=${searchWord}&color=${color}">
+						<a href="userSearchProduct.jk?searchWord=${searchWord}&color=${selectedColors}">
 							<img src="/urPresent/images/rewind.png" class="rewindAndFastForward">
 						</a>
 					<c:if test="${startPage gt pageBlock}">
-						<a href="userSearchProduct.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}">
+						<a href="userSearchProduct.jk?pageNum=${startPage-pageBlock}&searchWord=${searchWord}&color=${selectedColors}">
 							<img src="/urPresent/images/return.png" class="returnAndForward">
 						</a>
 						</c:if>
@@ -351,16 +351,16 @@
 							<span><strong>${i}</strong></span>
 						</c:if>
 						<c:if test="${i ne currentPage}">
-							<a href="userSearchProduct.jk?pageNum=${i}&searchWord=${searchWord}"><strong>${i}</strong></a>
+							<a href="userSearchProduct.jk?pageNum=${i}&searchWord=${searchWord}&color=${selectedColors}"><strong>${i}</strong></a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne pageCount}">
 						<c:if test="${pageCount>endPage}">
-						<a href="userSearchProduct.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}">
+						<a href="userSearchProduct.jk?pageNum=${startPage+pageBlock}&searchWord=${searchWord}&color=${selectedColors}">
 							<img src="/urPresent/images/forward.png" class="returnAndForward">
 						</a>
 						</c:if>
-						<a href="userSearchProduct.jk?pageNum=${pageCount}&searchWord=${searchWord}">
+						<a href="userSearchProduct.jk?pageNum=${pageCount}&searchWord=${searchWord}&color=${selectedColors}">
 							<img src="/urPresent/images/fastForward.png" class="rewindAndFastForward">
 						</a>
 					</c:if>
