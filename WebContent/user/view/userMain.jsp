@@ -34,7 +34,7 @@
 										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
-													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
+													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid" style="height:350px;">
 													<div class="mt-1 mb-1">
 														<small>
 															<span>${product.productName}</span>
@@ -97,7 +97,7 @@
 										<div class="card cardItem border-0 mt-2 mb-2 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
 									  		<form name="${product.ref}">
 									  			<div onclick="location='userProductDetail.jk?ref=${product.ref}'"> 
-													<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
+									  				<img src="/urPresent/save/${product.thumbnail}" name="${product.ref}" class="card-img-top img-fluid">
 													<div class="mt-1 mb-1">
 														<small>
 															<span>${product.productName}</span>
