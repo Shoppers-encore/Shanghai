@@ -230,6 +230,16 @@ function scoring() {
 	   }
 	}
 
+//Delete review
+function checkDelReview() {
+	var r = confirm(delCheck);
+    if (r == true) {
+    	href='reviewDeletePro.jk';
+    } else {
+       return false;
+    }
+}
+
 ///<Review Comment>
 function commentInsert(){
 	var insertData = $('[name=commentInsertForm]').serialize();
