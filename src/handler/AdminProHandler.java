@@ -92,15 +92,15 @@ public class AdminProHandler {
 				request.setAttribute("result", -99);
 				return new ModelAndView("adm/pro/productInputPro");
 			}
-			String sname = path + "\\" + systemName;
+			String sname = path + "/" + systemName;
 			String tname = null;
-			new File(path+"\\"+ref).mkdir();
+			new File(path+"/"+ref).mkdir();
 			int imageNo = 0;
 			if(inputName.equals("thumb")) {
-				tname = ref+"\\thumbnail"+ref+"-"+systemName;
+				tname = ref+"/thumbnail"+ref+"-"+systemName;
 			}else {
 				imageNo = productDao.getImgNo()+1;
-				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
+				tname = ref+"/"+ref+"-"+imageNo+"-"+systemName;
 			}
 			File f = new File(sname);
 			boolean a = f.renameTo(new File(path+"/"+tname));
@@ -218,15 +218,15 @@ public class AdminProHandler {
 		while( e.hasMoreElements() ) {
 			String inputName = (String) e.nextElement();
 			systemName = multi.getFilesystemName( inputName );
-			String sname = path + "\\" + systemName;
+			String sname = path + "/" + systemName;
 			String tname = null;
-			new File(path+"\\"+ref).mkdir();
+			new File(path+"/"+ref).mkdir();
 			int imageNo = 0;
 			if(inputName.equals("thumb")) {
-				tname = ref+"\\thumbnail-"+ref+"-"+systemName;
+				tname = ref+"/thumbnail-"+ref+"-"+systemName;
 			}else {
 				imageNo = productDao.getImgNo()+1;
-				tname = ref+"\\"+ref+"-"+imageNo+"-"+systemName;
+				tname = ref+"/"+ref+"-"+imageNo+"-"+systemName;
 			}
 			File f = new File(sname);
 			f.renameTo(new File(path+"/"+tname));
