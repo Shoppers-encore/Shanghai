@@ -28,5 +28,4 @@ public class TagDao {
 	public List<Integer> getProductTagId(int ref) {
 		return session.selectList("Admin.getProductTagId", ref);
 	}
-	
 }

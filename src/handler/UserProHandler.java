@@ -646,7 +646,7 @@ public class UserProHandler {
 			String path =  request.getSession().getServletContext().getRealPath( "/data" );
 			Calendar cal = GregorianCalendar.getInstance();
 			ProductDataBean product = productDao.getProductDetailsByProductCode(order.getProductCode());
-			String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice();
+			String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice()+"\n";
 			//String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
 			orderLog(path,orderList, cal);
 			//productLog(path,productList, cal);
@@ -705,10 +705,10 @@ public class UserProHandler {
 						String path =  request.getSession().getServletContext().getRealPath( "/data" );
 						Calendar cal = GregorianCalendar.getInstance();
 						ProductDataBean product = productDao.getProductDetailsByProductCode(order.getProductCode());
-						String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice();
-						String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
+						String orderList = order.getOrderCode()+"#"+order.getProductCode()+"#"+order.getRef()+"#"+order.getId()+"#"+order.getOrderZipcode()+"#"+order.getOrderAddress1()+"#"+order.getOrderAddress2()+"#"+order.getOrderDate()+"#"+order.getOrderStatus()+"#"+order.getOrderQuantity()+"#"+order.getOrderPrice()+"\n";
+						//String productList = product.getRef()+"#"+product.getProductCode()+"#"+product.getProductName()+"#"+product.getProductCategory()+"#"+product.getProductContent()+"#"+product.getDiscount()+"#"+product.getProductPrice()+"#"+product.getProductRegDate();
 						orderLog(path,orderList, cal);
-						productLog(path,productList, cal);
+						//productLog(path,productList, cal);
 						request.setAttribute("orderListInsertResult", orderListInsertResult);
 						request.setAttribute("basketDeleteResult", basketDeleteResult);
 						request.setAttribute("productQuantityUpdateResult", productQuantityUpdateResult);
@@ -800,7 +800,7 @@ public class UserProHandler {
 		chatDao.chatInput(chat);
 	}
 	private void orderLog(String path, String log, Calendar cal) {
-		File file = new File(path+"/orderList-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH))+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+		File file = new File(path+"/orderList-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH))+".txt");
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			fw.write(log);
@@ -811,17 +811,17 @@ public class UserProHandler {
 		}
 		
 	}
-	private void productLog(String path, String log, Calendar cal) {
-		File file = new File(path+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
-		try {
-			FileWriter fw = new FileWriter(file, true);
-			fw.write(log);
-			fw.flush();
-			if(fw!=null) fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	private void productLog(String path, String log, Calendar cal) {
+//		File file = new File(path+"/product-"+cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)+".txt");
+//		try {
+//			FileWriter fw = new FileWriter(file, true);
+//			fw.write(log);
+//			fw.flush();
+//			if(fw!=null) fw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	//findId & find Password
 	@RequestMapping("/findIdPro")
 	@ResponseBody
